@@ -1,0 +1,19 @@
+{
+    "name": "gamemoney/gamemoney-sdk",
+    "type": "library",
+    "keywords": ["gamemoney", "gamemoney-sdk"],
+    "license": "MIT",
+    "description": "gamemoney",
+    "require": {
+        "php": ">=5.4",
+        "ext-openssl": "*",
+        "symfony/validator": "*",
+        "guzzlehttp/guzzle": ">=4.1.4 <7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {"Gamemoney\\": "src/"}
+    }
+}
