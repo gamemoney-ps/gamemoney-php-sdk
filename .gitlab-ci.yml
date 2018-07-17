@@ -55,7 +55,7 @@ code_quality:
         DOCKER_DRIVER: overlay2
     script:
         - echo "Logging to GitLab Container Registry with CI credentials..."
-        - docker login -u gitlab-ci-token -p $TOKEN registry.gitlab.com
+        - docker login -u gitlab-ci-token -p yDxot6zvJYbYzggNRxj2 registry.gitlab.com
         - docker run --env SOURCE_CODE="$PWD/src" \
             --volume "$PWD":/code \
             --volume /var/run/docker.sock:/var/run/docker.sock \
