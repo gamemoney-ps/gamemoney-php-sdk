@@ -41,9 +41,8 @@ cache:
 test-7.2:
     stage: test
     image: php:7.2
-    before_script:
-        - php_prepare
     script:
+        - php_prepare
         - composer install -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
@@ -64,21 +63,21 @@ code_quality:
 
 # ---------------------------------------------------------------------------
 
-.functions: &functions |
-  export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
-  function code_quality() {
+.help_scripts:
+    export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    function code_quality() {
     docker run --env SOURCE_CODE="$PWD" \
                --volume "$PWD":/code \
                --volume /var/run/docker.sock:/var/run/docker.sock \
                "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
-  }
+    }
 
-  function php_prepare() {
+    function php_prepare() {
     apt-get update && apt-get install -qqy --no-install-recommends git unzip \
         &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
         && pecl install xdebug-2.5.5 \
         && docker-php-ext-enable xdebug
-  }
+    }
 
 before_script:
-  - *functions
+  - *help_scripts
