@@ -11,7 +11,8 @@
         "guzzlehttp/guzzle": ">=4.1.4 <7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "phpunit/php-code-coverage": "*"
     },
     "autoload": {
         "psr-4": {"Gamemoney\\": "src/"}
