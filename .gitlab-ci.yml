@@ -1,0 +1,30 @@
+stages:
+    - test
+
+cache:
+    paths:
+        - vendor/
+
+before_script:
+    - wget https://getcomposer.org/installer  -O - -q | php && mv composer.phar /usr/local/bin/composer \
+
+test-5.6:
+    stage: test
+    script:
+        ./vendor/bin/phpunit --coverage-text --colors=never
+
+code_quality:
+    stage: test
+    allow_failure: true
+    image: docker:stable
+    services:
+        - docker:stable-dind
+    variables:
+    DOCKER_DRIVER: overlay2
+    script:
+        - echo "Logging to GitLab Container Registry with CI credentials..."
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+        - docker run --env SOURCE_CODE="$PWD/src" \
+            --volume "$PWD":/code \
+            --volume /var/run/docker.sock:/var/run/docker.sock \
+            "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
