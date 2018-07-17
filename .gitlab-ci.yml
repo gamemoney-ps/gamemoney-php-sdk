@@ -9,12 +9,15 @@ test-5.6:
     stage: test
     image: php:5.6
     before_script:
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        - apt-get update && apt-get install -qqy --no-install-recommends git unzip
+        - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     script:
         - composer install -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 code_quality:
+    variables:
+      TOKEN: $CI_GITLAB_TOKEN
     stage: test
     allow_failure: true
     image: docker:stable
@@ -24,7 +27,7 @@ code_quality:
         DOCKER_DRIVER: overlay2
     script:
         - echo "Logging to GitLab Container Registry with CI credentials..."
-        - docker login -u gitlab-ci-token -p $CI_GITLAB_TOKEN registry.gitlab.com
+        - docker login -u gitlab-ci-token -p $TOKEN registry.gitlab.com
         - docker run --env SOURCE_CODE="$PWD/src" \
             --volume "$PWD":/code \
             --volume /var/run/docker.sock:/var/run/docker.sock \
