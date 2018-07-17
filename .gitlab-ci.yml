@@ -51,8 +51,8 @@ code_quality:
         - code_quality
     artifacts:
         paths: [gl-code-quality-report.json]
-    only:
-        - master
+    # only:
+    #     - master
 
 # ---------------------------------------------------------------------------
 .help_scripts: &help_scripts |
