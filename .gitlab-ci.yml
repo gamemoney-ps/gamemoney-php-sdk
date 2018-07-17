@@ -5,6 +5,8 @@ cache:
     paths:
         - vendor/
 
+
+
 # test-5.6:
 #     stage: test
 #     image: php:5.6
@@ -54,9 +56,35 @@ code_quality:
     variables:
         DOCKER_DRIVER: overlay2
     script:
+        - setup_docker
+        - code_quality
+    artifacts:
+        paths: [gl-code-quality-report.json]
+    script:
         - echo "Logging to GitLab Container Registry with CI credentials..."
-        - docker login -u gitlab-ci-token -p yDxot6zvJYbYzggNRxj2 registry.gitlab.com
+        - docker login -u gitlab-ci-token -p $TOKEN registry.gitlab.com
         - docker run --env SOURCE_CODE="$PWD/src" \
             --volume "$PWD":/code \
             --volume /var/run/docker.sock:/var/run/docker.sock \
             "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+
+
+# ---------------------------------------------------------------------------
+
+.functions: &functions |
+  export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+  function code_quality() {
+    docker run --env SOURCE_CODE="$PWD" \
+               --volume "$PWD":/code \
+               --volume /var/run/docker.sock:/var/run/docker.sock \
+               "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  }
+  function setup_docker() {
+    if ! docker info &>/dev/null; then
+      export DOCKER_HOST='tcp://localhost:2375'
+    fi
+  }
+
+
+before_script:
+  - *functions
