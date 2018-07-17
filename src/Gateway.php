@@ -14,11 +14,11 @@ class Gateway
 {
     const API_URL = 'https://paygate.gamemoney.com';
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
+    /** @var  ValidatorResolverInterface */
     private $validatorResolver;
+    /** @var  SenderInterface */
     private $sender;
 
     public function __construct($config)
@@ -28,7 +28,7 @@ class Gateway
         }
 
         if(empty($config['id'])) {
-            throw new ConfigException('rsaKey is not set');
+            throw new ConfigException('Project id is not set');
         }
 
         $signerResolver = new SignerResolver($config);
@@ -53,37 +53,28 @@ class Gateway
         return $this;
     }
 
-    public function getInvoiceStatus($array)
+    public function send(RequestInterface $request)
     {
-        $request = new Request(
-            RequestInterface::INVOICE_STATUS_ACTION,
-            $this->modifyRequestData($array)
-        );
-
-        return $this->send($request);
-    }
-
-    private function send(RequestInterface $request)
-    {
-        $validationStrategy = $this->validatorResolver->resolve($request->getAction());
-        if (!$validationStrategy->validate($request->getData())) {
-            throw new ValidateException();
-        }
+        $this->modifyRequestData($request);
+        $validator = $this->validatorResolver->resolve($request->getAction());
+        $validator->validate($request->getData());
 
         return $this->sender->send($request);
     }
 
     /**
      * Add project Id and rand param
-     * @param  array  $data [description]
+     * @param  RequestInterface $request [description]
      * @return array
      */
-    private function modifyRequestData(array $data)
+    private function modifyRequestData(RequestInterface $request)
     {
+        $data = $request->getData();
         if (empty($data['rand'])) {
             $data['rand'] = bin2hex(openssl_random_pseudo_bytes((10)));
         }
 
-        return array_merge($data, ['project' => $this->id]);
+        $data['project'] = $this->id;
+        $request->setData($data);
     }
 }

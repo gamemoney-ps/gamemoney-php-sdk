@@ -4,7 +4,7 @@ namespace Gamemoney\Sign\Signer;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Exception\ConfigException;
 
-final class HmacSigner extends BaseSigner
+final class HmacSigner extends BaseSigner implements SignerInterface
 {
     private $hmacKey;
 

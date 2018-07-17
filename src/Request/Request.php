@@ -1,12 +1,12 @@
 <?php
 namespace Gamemoney\Request;
 
-final class Request implements RequestInterface
+class Request
 {
-    private $action;
-    private $data;
+    protected $action;
+    protected $data = [];
 
-    public function __construct($action, array $data)
+    public function __construct($action, array $data = [])
     {
         $this->action = $action;
         $this->data = $data;
@@ -21,4 +21,11 @@ final class Request implements RequestInterface
     {
         return $this->data;
     }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
+
 }

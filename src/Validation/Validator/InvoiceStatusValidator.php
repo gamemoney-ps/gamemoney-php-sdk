@@ -3,19 +3,27 @@
 namespace Gamemoney\Validation\Validator;
 
 use Gamemoney\Validation\ValidatorInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 
-final class InvoiceStatusValidator implements ValidatorInterface
+final class InvoiceStatusValidator extends BaseValidator implements ValidatorInterface
 {
-
-    private function rules()
+    protected function rules()
     {
         return [
-
+            'project' => [
+                new NotBlank(),
+                new GreaterThan(0)
+            ],
+            'rand' => [
+                new NotBlank(),
+                new Length(['min' => 20])
+            ],
+            'invoice' => [
+                new NotBlank(),
+                new GreaterThan(0)
+            ],
         ];
-    }
-
-    public function validate(array $array)
-    {
-        return true;
     }
 }
