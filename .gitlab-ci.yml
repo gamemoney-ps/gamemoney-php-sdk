@@ -1,40 +1,32 @@
 stages:
     - test
 
-cache:
-    key: "cache-$(md5 composer.lock | awk '{print $4}')"
-    paths:
-        - vendor/
-
-
+# cache:
+#     key: "cache-$(md5 composer.lock | awk '{print $4}')"
+#     paths:
+#         - vendor/
 
 # test-5.6:
 #     stage: test
 #     image: php:5.6
-#     before_script:
-#         - apt-get update && apt-get install -qqy --no-install-recommends git unzip
-#         - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 #     script:
+#         - php_prepare
 #         - composer install -vv -o
 #         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 # test-7.0:
 #     stage: test
 #     image: php:7.0
-#     before_script:
-#         - apt-get update && apt-get install -qqy --no-install-recommends git unzip
-#         - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 #     script:
+#         - php_prepare
 #         - composer install -vv -o
 #         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 # test-7.1:
 #     stage: test
 #     image: php:7.1
-#     before_script:
-#         - apt-get update && apt-get install -qqy --no-install-recommends git unzip
-#         - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 #     script:
+#         - php_prepare
 #         - composer install -vv -o
 #         - ./vendor/bin/phpunit --coverage-text --colors=never
 
@@ -59,6 +51,8 @@ code_quality:
         - code_quality
     artifacts:
         paths: [gl-code-quality-report.json]
+    only:
+        - master
 
 # ---------------------------------------------------------------------------
 .help_scripts: &help_scripts |
@@ -79,7 +73,7 @@ code_quality:
     }
 
     function docker_login() {
-        docker login -u gitlab-ci-token -p yDxot6zvJYbYzggNRxj2 registry.gitlab.com
+        docker login -u gitlab-ci-token -p ${GITLAB_REGISTRY_TOKEN} registry.gitlab.com
     }
 
 before_script:
