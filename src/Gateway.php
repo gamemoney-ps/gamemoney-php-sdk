@@ -34,7 +34,22 @@ class Gateway
             throw new ConfigException('Project id is not set');
         }
 
-        $signerResolver = new SignerResolver($config);
+        if(empty($config['hmacKey'])) {
+            throw new ConfigException('Project id is not set');
+        }
+
+        $hmacKey = $config['hmacKey'];
+
+        if(empty($config['privateKey'])) {
+            throw new ConfigException('privateKey id is not set');
+        }
+
+        $privateKey = $config['privateKey'];
+        if(!is_resource($privateKey)) {
+            throw new ConfigException('privateKey must be resourse (openssl_pkey_get_private)');
+        }
+
+        $signerResolver = new SignerResolver($hmacKey, $privateKey);
         $sender = new Sender($config, $signerResolver);
 
         $this->project = $config['project'];

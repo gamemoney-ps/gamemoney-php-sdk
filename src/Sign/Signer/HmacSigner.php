@@ -10,10 +10,6 @@ final class HmacSigner extends BaseSigner implements SignerInterface
 
     public function __construct($hmacKey)
     {
-        if (empty($hmacKey)) {
-            throw new ConfigException('hmacKey is not set');
-        }
-
         $this->hmacKey = $hmacKey;
     }
 

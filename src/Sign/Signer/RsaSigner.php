@@ -2,21 +2,14 @@
 namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Exception\ConfigException;
 
 final class RsaSigner extends BaseSigner implements SignerInterface
 {
-    private $rsaKey;
-    private $passphrase;
+    private $privateKey;
 
-    public function __construct($rsaKey, $passphrase = '')
+    public function __construct($privateKey)
     {
-        if (empty($rsaKey)) {
-            throw new ConfigException('rsaKey is not set');
-        }
-
-        $this->rsaKey = $rsaKey;
-        $this->passphrase = $passphrase;
+        $this->privateKey = $privateKey;
     }
 
     /**
@@ -27,7 +20,7 @@ final class RsaSigner extends BaseSigner implements SignerInterface
         openssl_sign(
             $this->arrayToString($data),
             $signature,
-            openssl_pkey_get_private($this->rsaKey, $this->passphrase),
+            $this->privateKey,
             "sha256"
         );
 
