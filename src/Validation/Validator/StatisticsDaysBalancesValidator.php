@@ -6,8 +6,9 @@ use Gamemoney\Validation\ValidatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Date;
 
-final class InvoiceStatusValidator extends BaseValidator implements ValidatorInterface
+final class StatisticsDaysBalancesValidator extends BaseValidator implements ValidatorInterface
 {
     protected function rules()
     {
@@ -20,8 +21,17 @@ final class InvoiceStatusValidator extends BaseValidator implements ValidatorInt
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'invoice' => [
+            'currency' => [
+                new Type('string'),
+                new Length(['max' => 3])
+            ],
+            'start' => [
                 new NotBlank(),
+                new Date(),
+            ],
+            'finish' => [
+                new NotBlank(),
+                new Date(),
             ],
         ];
     }

@@ -2,7 +2,6 @@
 namespace Gamemoney;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Request\Request;
 use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
@@ -15,7 +14,7 @@ class Gateway
     const API_URL = 'https://paygate.gamemoney.com';
 
     /** @var int */
-    private $id;
+    private $project;
     /** @var  ValidatorResolverInterface */
     private $validatorResolver;
     /** @var  SenderInterface */
@@ -27,18 +26,17 @@ class Gateway
             $config['apiUrl'] = self::API_URL;
         }
 
-        if(empty($config['id'])) {
+        if(empty($config['project'])) {
             throw new ConfigException('Project id is not set');
         }
 
         $signerResolver = new SignerResolver($config);
         $sender = new Sender($config, $signerResolver);
 
-        $this->id = $config['id'];
+        $this->project = $config['project'];
         $this
             ->setValidatorResolver(new ValidatorResolver)
             ->setSender($sender);
-
     }
 
     public function setValidatorResolver(ValidatorResolverInterface $validatorResolver)
@@ -55,26 +53,10 @@ class Gateway
 
     public function send(RequestInterface $request)
     {
-        $this->modifyRequestData($request);
+        $request->setField('project', $this->project);
         $validator = $this->validatorResolver->resolve($request->getAction());
         $validator->validate($request->getData());
 
         return $this->sender->send($request);
-    }
-
-    /**
-     * Add project Id and rand param
-     * @param  RequestInterface $request [description]
-     * @return array
-     */
-    private function modifyRequestData(RequestInterface $request)
-    {
-        $data = $request->getData();
-        if (empty($data['rand'])) {
-            $data['rand'] = bin2hex(openssl_random_pseudo_bytes((10)));
-        }
-
-        $data['project'] = $this->id;
-        $request->setData($data);
     }
 }

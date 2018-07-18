@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class InvoiceStatusValidator extends BaseValidator implements ValidatorInterface
+final class CardAddValidator extends BaseValidator implements ValidatorInterface
 {
     protected function rules()
     {
@@ -20,8 +20,13 @@ final class InvoiceStatusValidator extends BaseValidator implements ValidatorInt
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'invoice' => [
+            'user' => [
                 new NotBlank(),
+                new Type('numeric')
+            ],
+            'redirect' => [
+                new NotBlank(),
+                new Type('string')
             ],
         ];
     }
