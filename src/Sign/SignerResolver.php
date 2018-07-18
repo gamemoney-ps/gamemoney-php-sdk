@@ -16,14 +16,15 @@ class SignerResolver implements SignerResolverInterface
     }
 
     /**
-     * @param  string
+     * @param string $action
      * @return SignerInterface
+     * @throws ConfigException
      */
     public function resolve($action)
     {
         $config = $this->config;
 
-        if ($action === RequestInterface::CHECKOUT_INSERT_ACTION) {
+        if ($action === RequestInterface::CHECKOUT_CREATE_ACTION) {
 
             if(empty($config['rsaKey'])) {
                 throw new ConfigException('rsaKey is not set');

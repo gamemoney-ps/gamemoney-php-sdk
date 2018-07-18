@@ -9,7 +9,10 @@ use Gamemoney\Exception\RequestException;
 
 final class Sender implements SenderInterface
 {
+    /** @var  string */
     private $apiUrl;
+    /** @var Client */
+    private $client;
 
     /**
      * @var SignerResolverInterface
@@ -18,7 +21,6 @@ final class Sender implements SenderInterface
 
     public function __construct($config, SignerResolverInterface $signerResolver)
     {
-        $this->projectId = $config['id'];
         $this->apiUrl = $config['apiUrl'];
         $this->signerResolver = $signerResolver;
 
@@ -29,14 +31,14 @@ final class Sender implements SenderInterface
         $this->client = $this->getClient($config['clientConfig']);
     }
 
+    /**
+     * @param RequestInterface $request
+     * @return array()
+     * @throws RequestException
+     */
     public function send(RequestInterface $request)
     {
         $data = $request->getData();
-        $data['project'] = $this->projectId;
-
-        if (empty($data['rand'])) {
-            $data['rand'] = $this->getRandString();
-        }
 
         $signer = $this->signerResolver->resolve($request->getAction());
         $data['signature'] = $signer->getSignature($request->getData());
@@ -46,7 +48,7 @@ final class Sender implements SenderInterface
                 $request->getAction(),
                 ['form_params' => $data]
             );
-        } catch (\GuzzleException $e) {
+        } catch (GuzzleException $e) {
             throw new RequestException($e->getMessage());
         }
 

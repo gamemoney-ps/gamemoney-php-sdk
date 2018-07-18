@@ -4,9 +4,9 @@ namespace Gamemoney\Sign\Signer;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Exception\ConfigException;
 
-final class RsaSigner extends BaseSigner
+final class RsaSigner extends BaseSigner implements SignerInterface
 {
-    private $key;
+    private $rsaKey;
     private $passphrase;
 
     public function __construct($rsaKey, $passphrase = '')

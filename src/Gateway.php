@@ -2,23 +2,26 @@
 namespace Gamemoney;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Request\Request;
 use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Validation\ValidatorResolver;
-use Gamemoney\Validation\ValidatorResolverInterface;
+use Gamemoney\Validation\Validator;
+use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesResolver;
+use Gamemoney\Validation\RulesResolverInterface;
 use Gamemoney\Sign\SignerResolver;
 
 class Gateway
 {
     const API_URL = 'https://paygate.gamemoney.com';
 
-    /**
-     * @var int
-     */
-    private $id;
-    private $validatorResolver;
+    /** @var int */
+    private $project;
+    /** @var  ValidatorInterface */
+    private $validator;
+    /** @var  RulesResolverInterface */
+    private $rulesResolver;
+    /** @var  SenderInterface */
     private $sender;
 
     public function __construct($config)
@@ -27,23 +30,29 @@ class Gateway
             $config['apiUrl'] = self::API_URL;
         }
 
-        if(empty($config['id'])) {
-            throw new ConfigException('rsaKey is not set');
+        if(empty($config['project'])) {
+            throw new ConfigException('Project id is not set');
         }
 
         $signerResolver = new SignerResolver($config);
         $sender = new Sender($config, $signerResolver);
 
-        $this->id = $config['id'];
+        $this->project = $config['project'];
         $this
-            ->setValidatorResolver(new ValidatorResolver)
+            ->setValidator(new Validator)
+            ->setRulesResolver(new RulesResolver)
             ->setSender($sender);
-
     }
 
-    public function setValidatorResolver(ValidatorResolverInterface $validatorResolver)
+    public function setValidator(ValidatorInterface $validator)
     {
-        $this->validatorResolver = $validatorResolver;
+        $this->validator = $validator;
+        return $this;
+    }
+
+    public function setRulesResolver(RulesResolverInterface $rulesResolver)
+    {
+        $this->rulesResolver = $rulesResolver;
         return $this;
     }
 
@@ -53,37 +62,12 @@ class Gateway
         return $this;
     }
 
-    public function getInvoiceStatus($array)
+    public function send(RequestInterface $request)
     {
-        $request = new Request(
-            RequestInterface::INVOICE_STATUS_ACTION,
-            $this->modifyRequestData($array)
-        );
-
-        return $this->send($request);
-    }
-
-    private function send(RequestInterface $request)
-    {
-        $validationStrategy = $this->validatorResolver->resolve($request->getAction());
-        if (!$validationStrategy->validate($request->getData())) {
-            throw new ValidateException();
-        }
+        $request->setField('project', $this->project);
+        $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
+        $this->validator->validate($rules, $request->getData());
 
         return $this->sender->send($request);
-    }
-
-    /**
-     * Add project Id and rand param
-     * @param  array  $data [description]
-     * @return array
-     */
-    private function modifyRequestData(array $data)
-    {
-        if (empty($data['rand'])) {
-            $data['rand'] = bin2hex(openssl_random_pseudo_bytes((10)));
-        }
-
-        return array_merge($data, ['project' => $this->id]);
     }
 }

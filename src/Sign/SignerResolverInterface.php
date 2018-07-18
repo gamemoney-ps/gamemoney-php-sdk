@@ -4,5 +4,9 @@ namespace Gamemoney\Sign;
 
 interface SignerResolverInterface
 {
-    public function resolve($type);
+    /**
+     * @param string $action
+     * @return SignerInterface
+     */
+    public function resolve($action);
 }
