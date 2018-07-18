@@ -1,0 +1,86 @@
+stages:
+    - test
+
+cache:
+    key: "cache-$(md5 composer.lock | awk '{print $4}')"
+    paths:
+        - vendor/
+
+test-5.6:
+    stage: test
+    image: php:5.6
+    script:
+        - php56_prepare
+        - composer install -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
+test-7.0:
+    stage: test
+    image: php:7.0
+    script:
+        - php_prepare
+        - composer install -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
+test-7.1:
+    stage: test
+    image: php:7.1
+    script:
+        - php_prepare
+        - composer install -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
+test-7.2:
+    stage: test
+    image: php:7.2
+    script:
+        - php_prepare
+        - composer install -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
+code_quality:
+    stage: test
+    allow_failure: true
+    image: docker:stable
+    services:
+        - docker:stable-dind
+    variables:
+        DOCKER_DRIVER: overlay2
+    script:
+        - docker_login
+        - code_quality
+    artifacts:
+        paths: [gl-code-quality-report.json]
+    when: manual
+
+# ---------------------------------------------------------------------------
+.help_scripts: &help_scripts |
+    export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+
+    function code_quality() {
+        docker run --env SOURCE_CODE="$PWD" \
+               --volume "$PWD":/code \
+               --volume /var/run/docker.sock:/var/run/docker.sock \
+               "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+    }
+
+    function php_prepare() {
+        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
+        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && pecl install xdebug-2.6.0 \
+        && docker-php-ext-enable xdebug
+    }
+
+    function php56_prepare() {
+        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
+        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && pecl install xdebug-2.4.0 \
+        && docker-php-ext-enable xdebug
+    }
+
+    function docker_login() {
+        docker login -u gitlab-ci-token -p ${GITLAB_REGISTRY_TOKEN} registry.gitlab.com
+    }
+
+before_script:
+  - *help_scripts

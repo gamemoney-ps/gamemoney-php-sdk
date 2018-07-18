@@ -10,4 +10,3 @@ $config = [
 
 $GamemoneyGateway = new \Gamemoney\Gateway($config);
 $response = $GamemoneyGateway->getInvoiceStatus(['invoice' => 123]);
-var_dump($response);
