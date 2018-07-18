@@ -1,16 +1,16 @@
 <?php
 
-namespace Gamemoney\Validation\Validator;
+namespace Gamemoney\Validation\Rules;
 
-use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Ip;
 
-final class InvoiceCreateValidator extends BaseValidator implements ValidatorInterface
+final class CheckoutCreateRules implements RulesInterface
 {
-    protected function rules()
+    public function getRules()
     {
         return [
             'project' => [
@@ -21,6 +21,10 @@ final class InvoiceCreateValidator extends BaseValidator implements ValidatorInt
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
+            'projectId' => [
+                new NotBlank(),
+                new Type('scalar')
+            ],
             'user' => [
                 new NotBlank(),
                 new Type('numeric'),
@@ -28,6 +32,12 @@ final class InvoiceCreateValidator extends BaseValidator implements ValidatorInt
             'amount' => [
                 new NotBlank(),
                 new Type('numeric'),
+            ],
+            'wallet' => [
+                new Type('string')
+            ],
+            'description' => [
+                new Type('string')
             ],
             'type' => [
                 new NotBlank(),
@@ -37,16 +47,9 @@ final class InvoiceCreateValidator extends BaseValidator implements ValidatorInt
                 new Type('string'),
                 new Length(['max' => 3])
             ],
-            'user_currency' => [
+            'userCurrency' => [
                 new Type('string'),
                 new Length(['max' => 3])
-            ],
-            'language' => [
-                new Type('string'),
-                new Length(['max' => 2])
-            ],
-            'project_invoice' => [
-                new Type('scalar')
             ],
             'ip' => [
                 new Ip()

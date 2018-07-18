@@ -5,8 +5,10 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Validation\ValidatorResolver;
-use Gamemoney\Validation\ValidatorResolverInterface;
+use Gamemoney\Validation\Validator;
+use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesResolver;
+use Gamemoney\Validation\RulesResolverInterface;
 use Gamemoney\Sign\SignerResolver;
 
 class Gateway
@@ -15,8 +17,10 @@ class Gateway
 
     /** @var int */
     private $project;
-    /** @var  ValidatorResolverInterface */
-    private $validatorResolver;
+    /** @var  ValidatorInterface */
+    private $validator;
+    /** @var  RulesResolverInterface */
+    private $rulesResolver;
     /** @var  SenderInterface */
     private $sender;
 
@@ -35,13 +39,20 @@ class Gateway
 
         $this->project = $config['project'];
         $this
-            ->setValidatorResolver(new ValidatorResolver)
+            ->setValidator(new Validator)
+            ->setRulesResolver(new RulesResolver)
             ->setSender($sender);
     }
 
-    public function setValidatorResolver(ValidatorResolverInterface $validatorResolver)
+    public function setValidator(ValidatorInterface $validator)
     {
-        $this->validatorResolver = $validatorResolver;
+        $this->validator = $validator;
+        return $this;
+    }
+
+    public function setRulesResolver(RulesResolverInterface $rulesResolver)
+    {
+        $this->rulesResolver = $rulesResolver;
         return $this;
     }
 
@@ -54,8 +65,8 @@ class Gateway
     public function send(RequestInterface $request)
     {
         $request->setField('project', $this->project);
-        $validator = $this->validatorResolver->resolve($request->getAction());
-        $validator->validate($request->getData());
+        $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
+        $this->validator->validate($rules, $request->getData());
 
         return $this->sender->send($request);
     }

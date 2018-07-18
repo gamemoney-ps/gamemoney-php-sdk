@@ -1,17 +1,14 @@
 <?php
-namespace Gamemoney\Validation\Validator;
+namespace Gamemoney\Validation;
 
 use Symfony\Component\Validator\Validation;
 use Gamemoney\Exception\ValidationException;
 
-abstract class BaseValidator
+final class Validator implements ValidatorInterface
 {
-    abstract protected function rules();
-
-    public function validate(array $data)
+    public function validate(array $rules, array $data)
     {
         $validator = Validation::createValidator();
-        $rules = $this->rules();
         $errors = [];
         foreach($rules as $field => $rule) {
             $value = isset($data[$field]) ? $data[$field] : null;

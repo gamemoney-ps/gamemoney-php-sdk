@@ -1,15 +1,15 @@
 <?php
 
-namespace Gamemoney\Validation\Validator;
+namespace Gamemoney\Validation\Rules;
 
-use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class ExchangeFastConvertValidator extends BaseValidator implements ValidatorInterface
+final class ExchangeFastConvertRules implements RulesInterface
 {
-    protected function rules()
+    public function getRules()
     {
         return [
             'project' => [

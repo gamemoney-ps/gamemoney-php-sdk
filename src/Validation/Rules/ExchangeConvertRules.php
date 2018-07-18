@@ -1,15 +1,15 @@
 <?php
 
-namespace Gamemoney\Validation\Validator;
+namespace Gamemoney\Validation\Rules;
 
-use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class InvoiceStatusValidator extends BaseValidator implements ValidatorInterface
+final class ExchangeConvertRules implements RulesInterface
 {
-    protected function rules()
+    public function getRules()
     {
         return [
             'project' => [
@@ -20,8 +20,13 @@ final class InvoiceStatusValidator extends BaseValidator implements ValidatorInt
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'invoice' => [
+            'id' => [
                 new NotBlank(),
+                new Type('numeric')
+            ],
+            'amount' => [
+                new NotBlank(),
+                new Type('numeric')
             ],
         ];
     }

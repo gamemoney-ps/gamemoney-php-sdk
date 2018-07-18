@@ -2,11 +2,11 @@
 
 namespace Gamemoney\Validation;
 
-interface ValidatorResolverInterface
+interface RulesResolverInterface
 {
     /**
      * @param string $type
-     * @return ValidatorInterface
+     * @return RulesInterface
      */
     public function resolve($type);
 }

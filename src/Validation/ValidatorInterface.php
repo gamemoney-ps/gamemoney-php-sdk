@@ -4,5 +4,5 @@ namespace Gamemoney\Validation;
 
 interface ValidatorInterface
 {
-    public function validate(array $data);
+    public function validate(array $rules, array $data);
 }

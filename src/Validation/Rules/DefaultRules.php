@@ -1,15 +1,15 @@
 <?php
 
-namespace Gamemoney\Validation\Validator;
+namespace Gamemoney\Validation\Rules;
 
-use Gamemoney\Validation\ValidatorInterface;
+use Gamemoney\Validation\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class CardListValidator extends BaseValidator implements ValidatorInterface
+final class DefaultRules implements RulesInterface
 {
-    protected function rules()
+    public function getRules()
     {
         return [
             'project' => [
@@ -19,10 +19,6 @@ final class CardListValidator extends BaseValidator implements ValidatorInterfac
             'rand' => [
                 new NotBlank(),
                 new Length(['min' => 20])
-            ],
-            'user' => [
-                new NotBlank(),
-                new Type('numeric')
             ],
         ];
     }
