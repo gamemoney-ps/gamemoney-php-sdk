@@ -45,11 +45,11 @@ class GatewayTest extends TestCase
 
     /**
      * @dataProvider configDataProvider
+     * @param $config
      */
     public function testConstructConfigWrong($config)
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessageRegExp('*not set*');
         $gateway = new Gateway($config);
     }
 
