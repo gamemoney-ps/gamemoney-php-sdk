@@ -1,9 +1,7 @@
 <?php
 namespace Gamemoney\Sign\Signer;
 
-use Gamemoney\Sign\SignerInterface;
-
-final class RsaSigner extends BaseSigner implements SignerInterface
+final class RsaSigner extends BaseSigner
 {
     private $privateKey;
 

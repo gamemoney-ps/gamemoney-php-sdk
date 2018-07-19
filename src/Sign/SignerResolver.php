@@ -19,7 +19,6 @@ class SignerResolver implements SignerResolverInterface
     {
         $this->hmacKey = $hmacKey;
         $this->privateKey = $privateKey;
-        $this->passphrase = $passphrase;
     }
 
     /**

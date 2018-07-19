@@ -19,16 +19,11 @@ final class Sender implements SenderInterface
      */
     private $signerResolver;
 
-    public function __construct($config, SignerResolverInterface $signerResolver)
+    public function __construct($apiUrl, SignerResolverInterface $signerResolver, $clientConfig)
     {
-        $this->apiUrl = $config['apiUrl'];
+        $this->apiUrl = $apiUrl;
         $this->signerResolver = $signerResolver;
-
-        if (empty($config['clientConfig']) || is_array($config['clientConfig'])) {
-            $config['clientConfig'] = [];
-        }
-
-        $this->client = $this->getClient($config['clientConfig']);
+        $this->client = $this->getClient($clientConfig);
     }
 
     /**
@@ -49,19 +44,19 @@ final class Sender implements SenderInterface
                 ['form_params' => $data]
             );
         } catch (GuzzleException $e) {
-            throw new RequestException($e->getMessage());
+            throw new RequestException('Request Send Error', 0, $e);
         }
 
         $body = (string) $response->getBody();
         return json_decode($body, true);
     }
 
-    private function getClient(array $clientConfig = [])
+    private function getClient(array $clientConfig)
     {
-        $config = [
+        $defaultConfig = [
             'base_uri' => $this->apiUrl
         ];
 
-        return new Client(array_merge($config, $clientConfig));
+        return new Client(array_merge($defaultConfig, $clientConfig));
     }
 }

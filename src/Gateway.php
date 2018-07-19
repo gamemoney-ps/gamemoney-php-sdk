@@ -50,7 +50,12 @@ class Gateway
         }
 
         $signerResolver = new SignerResolver($hmacKey, $privateKey);
-        $sender = new Sender($config, $signerResolver);
+
+        if(empty($config['clientConfig'])) {
+            $config['clientConfig'] = [];
+        }
+
+        $sender = new Sender($config['apiUrl'], $signerResolver, $config['clientConfig']);
 
         $this->project = $config['project'];
         $this
@@ -82,7 +87,6 @@ class Gateway
         $request->setField('project', $this->project);
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
         $this->validator->validate($rules, $request->getData());
-
         return $this->sender->send($request);
     }
 }
