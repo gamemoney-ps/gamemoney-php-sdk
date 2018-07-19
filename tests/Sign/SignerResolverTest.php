@@ -13,22 +13,24 @@ class SignerResolverTest extends TestCase {
 
     private $hmacKey;
     private $privateKey;
+    private $passphrase;
 
     protected function setUp()
     {
         $this->hmacKey = '123';
         $this->privateKey = '--1233--';
+        $this->passphrase = '123';
     }
 
     public function testInterface()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey);
+        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
         $this->isInstanceOf($resolver, SignerResolverInterface::class);
     }
 
     public function testHmacResolve()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey);
+        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
         $signer = $resolver->resolve('');
         $this->isInstanceOf($signer, SignerInterface::class);
         $this->isInstanceOf($signer, HmacSigner::class);
@@ -36,7 +38,7 @@ class SignerResolverTest extends TestCase {
 
     public function testRsaResolve()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey);
+        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
         $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
         $this->isInstanceOf($signer, SignerInterface::class);
         $this->isInstanceOf($signer, RsaSigner::class);

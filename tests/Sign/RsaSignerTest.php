@@ -8,28 +8,29 @@ use Gamemoney\Sign\Signer\RsaSigner;
 class RsaSignerTest extends TestCase {
 
     private $privateKey;
+    private $passphrase;
 
     protected function setUp()
     {
         $this->privateKey = $this->getPrivateKey();
+        $this->passphrase = 123;
     }
 
     public function testInterface() {
-        $Signer = new RsaSigner($this->privateKey);
+        $Signer = new RsaSigner($this->privateKey, $this->passphrase);
         $this->isInstanceOf($Signer, SignerInterface::class);
     }
 
     public function testRsaGetSignature() {
         $fixture = 'wWImA3n2RkUMZyQJL9CH86htz20ykU7NLLJT2sMYHcZgFu7CZriLpcdeQXL9IuikrpweogEuBrobmKezxn3++8aik6PDX4m21cYv50yxKRmPwrVN3t8IrHNchXNS6yDEFlhxqrJMXyBMOV/Dr2f0EoBpJCCe8NXxWlzrDo0H0YnfbBA4OhzGnSbX3Kzd0tcqLI/v8UllmwGYxAoryV3mpHAx5XsTLW3ws1imx5u97AL5UP+3V/iOOqeAj/+Yp/GnWpV3f/OdwSeddGRBvyGnMW8xhuIJgR451MrMqyNA0qb3V0MqEpu1Ifoenuc7itHGjGrA3Bq0VLzuen3t6YsBDw==';
-        $Signer = new RsaSigner($this->privateKey);
+        $Signer = new RsaSigner($this->privateKey, $this->passphrase);
         $signature = $Signer->getSignature(['data' => ['test' => 1]]);
         $this->assertEquals($fixture, $signature);
     }
 
     private function getPrivateKey()
     {
-        return openssl_get_privatekey(
-            "-----BEGIN ENCRYPTED PRIVATE KEY-----
+        return "-----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFHDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQIzzRTosJxOcACAggA
 MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECNZf7ll0MSbvBIIEyP0oM89tBDS2
 1WeNGpYpUsq3JsRVzR+KyBVNJFltp59SYcmsa0r0RKGbtDE2GUUie2ouhpNOS0Tn
@@ -58,21 +59,6 @@ KDafKuzJdX+e0qFKsJIzaUVuHpqM38CPblPrwgzOlzJcXfkLb2lqBy1CaOvLP7Dm
 YeFbEXEATLLPlbluLHZtBtXX5kAQO0mKZyNhoNtzyKmyVqHsq28z4hEMROjrb51C
 OnE3PqWxBcZHMepM4wXMbucsTQTf6vgDpefmhWvSUJTQhXeowOY2zkswREixwBtQ
 +/xWL3a5ZfEBecnoqYv7TQ==
------END ENCRYPTED PRIVATE KEY-----",
-            123
-        );
-    }
-
-    private function getPublicKey()
-    {
-        return openssl_get_publickey("-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5B70y7kaFJ8yte7dsdt
-vuPYNfN2j1hJSChPuOM4oWY8uUmmGl6f33CJQ69IClWle9I3HIUm81yT3QCVnD7l
-r/JYse6cI2vILIaIdvmqu6VcDaiv+O+sUbPoRxq9lxfY5GnHFSrzUBy1yDugCuAE
-TM2iRnHpYHbbILDrVs9csfLEeaJ56zn5kan9qJM4ecPKPXv6OabGHK9JkROxQyya
-YJPk0mrA98jGvh9/ZrZxQuvH/Kvh61SXC3cpidKkIsCyw2vr0x6A5RnGU8q9fLdW
-Ua4nSr1picTSmbryCb/zVGtH4ZgNXFYl7peQu7qNOeohyQFgwAtaYeg/NEDz90nu
-sQIDAQAB
------END PUBLIC KEY-----");
+-----END ENCRYPTED PRIVATE KEY-----";
     }
 }

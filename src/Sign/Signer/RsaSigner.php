@@ -4,10 +4,12 @@ namespace Gamemoney\Sign\Signer;
 final class RsaSigner extends BaseSigner
 {
     private $privateKey;
+    private $passphrase;
 
-    public function __construct($privateKey)
+    public function __construct($privateKey, $passphrase)
     {
         $this->privateKey = $privateKey;
+        $this->passphrase = $passphrase;
     }
 
     /**
@@ -18,7 +20,7 @@ final class RsaSigner extends BaseSigner
         openssl_sign(
             $this->arrayToString($data),
             $signature,
-            $this->privateKey,
+            openssl_get_privatekey($this->privateKey, $this->passphrase),
             "sha256"
         );
 

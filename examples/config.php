@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'privateKey' => openssl_get_privatekey(
+    'privateKey' =>
         "-----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFHDBOBgkqhkiG9w0BBQ0wQTApBgkqhkiG9w0BBQwwHAQIzzRTosJxOcACAggA
 MAwGCCqGSIb3DQIJBQAwFAYIKoZIhvcNAwcECNZf7ll0MSbvBIIEyP0oM89tBDS2
@@ -32,8 +32,6 @@ YeFbEXEATLLPlbluLHZtBtXX5kAQO0mKZyNhoNtzyKmyVqHsq28z4hEMROjrb51C
 OnE3PqWxBcZHMepM4wXMbucsTQTf6vgDpefmhWvSUJTQhXeowOY2zkswREixwBtQ
 +/xWL3a5ZfEBecnoqYv7TQ==
 -----END ENCRYPTED PRIVATE KEY-----",
-        123
-    ),
     'hmacKey' => 'test',
     'project' => 1,
 ];

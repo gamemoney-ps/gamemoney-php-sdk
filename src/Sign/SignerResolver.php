@@ -9,16 +9,18 @@ class SignerResolver implements SignerResolverInterface
 {
     private $hmacKey;
     private $privateKey;
+    private $passphrase;
 
     /**
      * SignerResolver constructor.
      * @param string $hmacKey
      * @param resource $privateKey
      */
-    public function __construct($hmacKey, $privateKey)
+    public function __construct($hmacKey, $privateKey, $passphrase)
     {
         $this->hmacKey = $hmacKey;
         $this->privateKey = $privateKey;
+        $this->passphrase = $passphrase;
     }
 
     /**
@@ -27,7 +29,7 @@ class SignerResolver implements SignerResolverInterface
     public function resolve($action)
     {
         if ($action === RequestInterface::CHECKOUT_CREATE_ACTION) {
-            return new RsaSigner($this->privateKey);
+            return new RsaSigner($this->privateKey, $this->passphrase);
         }
 
         return new HmacSigner($this->hmacKey);
