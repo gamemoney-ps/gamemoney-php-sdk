@@ -25,7 +25,5 @@ final class Validator implements ValidatorInterface
 
             throw $exception;
         }
-
-        return true;
     }
 }

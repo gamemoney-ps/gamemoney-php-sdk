@@ -68,7 +68,7 @@ class ValidatorTest extends TestCase
     public function testSuccessValidate($rules, $data)
     {
         $validator = new Validator;
-        $this->assertTrue($validator->validate($rules, $data));
+        $this->assertNull($validator->validate($rules, $data));
     }
 
     public function failValidateProvider()
