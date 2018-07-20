@@ -61,7 +61,7 @@ class SenderTest extends TestCase
     {
         $mockSigner = $this
             ->getMockBuilder(SignerInterface::class)
-            ->setMethods(['getSignature'])
+            ->setMethods(['getSignature', 'arrayToString'])
             ->getMock();
         $mockSigner
             ->expects($this->once())
