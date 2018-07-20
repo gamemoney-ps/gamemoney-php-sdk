@@ -21,11 +21,37 @@ class RsaSignerTest extends TestCase {
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
-    public function testRsaGetSignature() {
-        $fixture = 'wWImA3n2RkUMZyQJL9CH86htz20ykU7NLLJT2sMYHcZgFu7CZriLpcdeQXL9IuikrpweogEuBrobmKezxn3++8aik6PDX4m21cYv50yxKRmPwrVN3t8IrHNchXNS6yDEFlhxqrJMXyBMOV/Dr2f0EoBpJCCe8NXxWlzrDo0H0YnfbBA4OhzGnSbX3Kzd0tcqLI/v8UllmwGYxAoryV3mpHAx5XsTLW3ws1imx5u97AL5UP+3V/iOOqeAj/+Yp/GnWpV3f/OdwSeddGRBvyGnMW8xhuIJgR451MrMqyNA0qb3V0MqEpu1Ifoenuc7itHGjGrA3Bq0VLzuen3t6YsBDw==';
-        $Signer = new RsaSigner($this->privateKey, $this->passphrase);
-        $signature = $Signer->getSignature(['data' => ['test' => 1]]);
+    public function getSignatureDataProvider()
+    {
+        return [
+            [
+                ['data' => ['test' => 1]],
+                'wWImA3n2RkUMZyQJL9CH86htz20ykU7NLLJT2sMYHcZgFu7CZriLpcdeQXL9IuikrpweogEuBrobmKezxn3++8aik6PDX4m21cYv50yxKRmPwrVN3t8IrHNchXNS6yDEFlhxqrJMXyBMOV/Dr2f0EoBpJCCe8NXxWlzrDo0H0YnfbBA4OhzGnSbX3Kzd0tcqLI/v8UllmwGYxAoryV3mpHAx5XsTLW3ws1imx5u97AL5UP+3V/iOOqeAj/+Yp/GnWpV3f/OdwSeddGRBvyGnMW8xhuIJgR451MrMqyNA0qb3V0MqEpu1Ifoenuc7itHGjGrA3Bq0VLzuen3t6YsBDw=='
+            ],
+            [
+                [],
+                's1GWi/DHYst+lwhma6xxuIldmy5TY/z4y60uB/FcjWvuap23yxpjH2GXZEjS6RWuZxiCvdI7aLPIGnyqHYo9atTSR2td+bzePjsAzOZ2Dj1YU31oIGVZTACQUjMgrt7OLvaH92OGdff/S1A85VitHts1hTIggb8BfjI/fNfMceQjyZ9ymIRaMPUtiNAdy69g9iEXfsmH90/GhRLOCSlykXNKp0bEWtzQdTBaCUHey9OGkurbw5C6/QCB+9qvOWbbyym16bIsL0GRD18pVsS3DDrQbnvA1y/ANxeS5hNheEbozS2qud45OWzdpGSy9nDxpYpDGaqkyve4VYZ0D5s5ww=='
+            ]
+        ];
+    }
+
+    /**
+     * @param mixed $data
+     * @param  $signature
+     * @dataProvider getSignatureDataProvider
+     */
+    public function testRsaGetSignature($data, $fixture) {
+        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testRsaGetSignatureForEmptyString() {
+        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $signer->getSignature('');
     }
 
     private function getPrivateKey()

@@ -6,7 +6,7 @@ final class RsaSigner extends BaseSigner
     private $privateKey;
     private $passphrase;
 
-    public function __construct($privateKey, $passphrase)
+    public function __construct($privateKey, $passphrase = '')
     {
         $this->privateKey = $privateKey;
         $this->passphrase = $passphrase;

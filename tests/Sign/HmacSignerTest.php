@@ -19,10 +19,36 @@ class HmacSignerTest extends TestCase {
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
-    public function testHmacGetSignature() {
-        $fixture = 'f85babd083b7436d63540ca7229ad7257518c148cae52d3d7143d86c215d1b60';
-        $Signer = new HmacSigner($this->key);
-        $signature = $Signer->getSignature(['data' => ['test' => 1]]);
+    public function getSignatureDataProvider()
+    {
+        return [
+            [
+                ['data' => ['test' => 1]],
+                'f85babd083b7436d63540ca7229ad7257518c148cae52d3d7143d86c215d1b60'
+            ],
+            [
+                [],
+                'f85babd083b7436d63540ca7229ad7257518c148cae52d3d7143d86c215d1b60'
+            ]
+        ];
+    }
+
+    /**
+     * @param mixed $data
+     * @param  $signature
+     * @dataProvider getSignatureDataProvider
+     */
+    public function testHmacGetSignature($data, $fixture) {
+        $signer = new HmacSigner($this->key);
+        $signature = $signer->getSignature(['data' => ['test' => 1]]);
         $this->assertEquals($fixture, $signature);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testHmacGetSignatureForEmptyString() {
+        $signer = new HmacSigner($this->key);
+        $signer->getSignature('');
     }
 }
