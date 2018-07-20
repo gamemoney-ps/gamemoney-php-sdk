@@ -35,7 +35,7 @@ class Gateway
         }
 
         if(empty($config['hmacKey'])) {
-            throw new ConfigException('Project id is not set');
+            throw new ConfigException('hmacKeyis not set');
         }
 
         if(empty($config['privateKey'])) {

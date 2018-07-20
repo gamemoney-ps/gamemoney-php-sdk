@@ -81,7 +81,8 @@ class GatewayTest extends TestCase
         $mockSender
             ->expects($this->once())
             ->method('send')
-            ->with($mockRequest);
+            ->with($mockRequest)
+            ->willReturn(['success' => 'true']);
 
         $mockValidator = $this
             ->getMockBuilder(ValidatorInterface::class)
@@ -101,6 +102,7 @@ class GatewayTest extends TestCase
             ->setRulesResolver($mockRulesResolver);
 
         $response = $gateway->send($mockRequest);
+        $this->assertEquals(['success' => 'true'], $response);
     }
 
     private function getRequestMock()
@@ -116,5 +118,26 @@ class GatewayTest extends TestCase
             ->willReturn(['data' => ['test' => 1]]);
 
         return $mockRequest;
+    }
+
+    public function testConstuctMethod()
+    {
+        $gateway = $this->createMock(Gateway::class, ['setValidator', 'setRulesResolver', 'setSender']);
+        $gateway
+            ->expects($this->once())
+            ->method('setValidator')
+            ->with($this->isInstanceOf(ValidatorInterface::class))
+            ->will($this->returnSelf());
+        $gateway
+            ->expects($this->once())
+            ->method('setRulesResolver')
+            ->with($this->isInstanceOf(RulesResolverInterface::class))
+            ->will($this->returnSelf());
+        $gateway
+            ->expects($this->once())
+            ->method('setSender')
+            ->with($this->isInstanceOf(SenderInterface::class))
+            ->will($this->returnSelf());
+        $gateway->__construct($this->config);
     }
 }
