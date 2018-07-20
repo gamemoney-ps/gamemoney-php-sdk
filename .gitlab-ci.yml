@@ -1,11 +1,6 @@
 stages:
     - test
 
-cache:
-    key: "cache-$(md5 composer.lock | awk '{print $4}')"
-    paths:
-        - vendor/
-
 test-5.6:
     stage: test
     image: php:5.6
