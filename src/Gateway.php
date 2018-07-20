@@ -24,6 +24,11 @@ class Gateway
     /** @var  SenderInterface */
     private $sender;
 
+    /**
+     * Gateway constructor.
+     * @param array $config
+     * @throws ConfigException
+     */
     public function __construct($config)
     {
         if(empty($config['apiUrl'])) {

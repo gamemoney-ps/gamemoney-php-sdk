@@ -30,7 +30,7 @@ class RequestFactoryTest extends TestCase
     public function testMethods($method, $arg, $action, $expectedData)
     {
         $request = call_user_func_array([RequestFactory::class, $method], [$arg]);
-        $this->isInstanceOf($request, requestRequestInterface::class);
+        $this->assertInstanceOf(RequestInterface::class, $request);
         $this->assertEquals($request->getAction(), $action);
         $requestData = $request->getData();
         unset($requestData['rand']);

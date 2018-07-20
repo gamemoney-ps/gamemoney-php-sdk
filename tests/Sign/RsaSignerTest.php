@@ -17,8 +17,8 @@ class RsaSignerTest extends TestCase {
     }
 
     public function testInterface() {
-        $Signer = new RsaSigner($this->privateKey, $this->passphrase);
-        $this->isInstanceOf($Signer, SignerInterface::class);
+        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
     public function testRsaGetSignature() {

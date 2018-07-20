@@ -15,8 +15,8 @@ class HmacSignerTest extends TestCase {
     }
 
     public function testInterface() {
-        $Signer = new HmacSigner($this->key);
-        $this->isInstanceOf($Signer, SignerInterface::class);
+        $signer = new HmacSigner($this->key);
+        $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
     public function testHmacGetSignature() {

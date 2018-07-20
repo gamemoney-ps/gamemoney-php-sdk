@@ -24,7 +24,7 @@ class SenderTest extends TestCase
     {
         $mockResolver = $this->createMock(SignerResolverInterface::class);
         $sender = new Sender('url', $mockResolver, []);
-        $this->isInstanceOf($sender, SenderInterface::class);
+        $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
     public function testSend()

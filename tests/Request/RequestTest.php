@@ -27,9 +27,9 @@ class RequestTest extends TestCase
     public function testSetData()
     {
         $request = new Request('/test');
-        $this->isInstanceOf(
-            $request->setData(['data' => 1, 'rand' => 'test']),
-            RequestInterface::class
+        $this->assertInstanceOf(
+            RequestInterface::class,
+            $request->setData(['data' => 1, 'rand' => 'test'])
         );
         $this->assertEquals($request->getData(), ['data' => 1, 'rand' => 'test']);
     }
@@ -37,9 +37,9 @@ class RequestTest extends TestCase
     public function testField()
     {
         $request = new Request('/test');
-        $this->isInstanceOf(
-            $request->setField('data', 1),
-            RequestInterface::class
+        $this->assertInstanceOf(
+            RequestInterface::class,
+            $request->setField('data', 1)
         );
         $this->assertEquals($request->getField('data'), 1);
     }
