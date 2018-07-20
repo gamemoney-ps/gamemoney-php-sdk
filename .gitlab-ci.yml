@@ -6,7 +6,7 @@ test-5.6:
     image: php:5.6
     script:
         - php56_prepare
-        - composer install -vv -o
+        - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 test-7.0:
@@ -14,7 +14,7 @@ test-7.0:
     image: php:7.0
     script:
         - php_prepare
-        - composer install -vv -o
+        - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 test-7.1:
@@ -22,7 +22,7 @@ test-7.1:
     image: php:7.1
     script:
         - php_prepare
-        - composer install -vv -o
+        - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 test-7.2:
@@ -30,7 +30,7 @@ test-7.2:
     image: php:7.2
     script:
         - php_prepare
-        - composer install -vv -o
+        - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 code_quality:
