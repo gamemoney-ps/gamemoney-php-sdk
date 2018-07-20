@@ -43,12 +43,4 @@ class HmacSignerTest extends TestCase {
         $signature = $signer->getSignature(['data' => ['test' => 1]]);
         $this->assertEquals($fixture, $signature);
     }
-
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
-    public function testHmacGetSignatureForEmptyString() {
-        $signer = new HmacSigner($this->key);
-        $signer->getSignature('');
-    }
 }

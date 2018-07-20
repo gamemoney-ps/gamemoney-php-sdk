@@ -46,14 +46,6 @@ class RsaSignerTest extends TestCase {
         $this->assertEquals($fixture, $signature);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error
-     */
-    public function testRsaGetSignatureForEmptyString() {
-        $signer = new RsaSigner($this->privateKey, $this->passphrase);
-        $signer->getSignature('');
-    }
-
     private function getPrivateKey()
     {
         return "-----BEGIN ENCRYPTED PRIVATE KEY-----
