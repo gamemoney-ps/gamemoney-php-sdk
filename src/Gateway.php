@@ -24,6 +24,11 @@ class Gateway
     /** @var  SenderInterface */
     private $sender;
 
+    /**
+     * Gateway constructor.
+     * @param array $config
+     * @throws ConfigException
+     */
     public function __construct($config)
     {
         if(empty($config['apiUrl'])) {
@@ -34,8 +39,29 @@ class Gateway
             throw new ConfigException('Project id is not set');
         }
 
-        $signerResolver = new SignerResolver($config);
-        $sender = new Sender($config, $signerResolver);
+        if(empty($config['hmacKey'])) {
+            throw new ConfigException('hmacKeyis not set');
+        }
+
+        if(empty($config['privateKey'])) {
+            throw new ConfigException('privateKey id is not set');
+        }
+
+        if(empty($config['passphrase'])) {
+            $config['passphrase'] = '';
+        }
+
+        $signerResolver = new SignerResolver(
+            $config['hmacKey'],
+            $config['privateKey'],
+            $config['passphrase']
+        );
+
+        if(empty($config['clientConfig'])) {
+            $config['clientConfig'] = [];
+        }
+
+        $sender = new Sender($config['apiUrl'], $signerResolver, $config['clientConfig']);
 
         $this->project = $config['project'];
         $this
@@ -67,7 +93,6 @@ class Gateway
         $request->setField('project', $this->project);
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
         $this->validator->validate($rules, $request->getData());
-
         return $this->sender->send($request);
     }
 }

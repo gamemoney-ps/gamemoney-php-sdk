@@ -2,45 +2,36 @@
 namespace Gamemoney\Sign;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Sign\Signer\HmacSigner;
 
 class SignerResolver implements SignerResolverInterface
 {
-    private $config;
+    private $hmacKey;
+    private $privateKey;
+    private $passphrase;
 
-    public function __construct(array $config)
+    /**
+     * SignerResolver constructor.
+     * @param string $hmacKey
+     * @param resource $privateKey
+     */
+    public function __construct($hmacKey, $privateKey, $passphrase)
     {
-        $this->config = $config;
+        $this->hmacKey = $hmacKey;
+        $this->privateKey = $privateKey;
+        $this->passphrase = $passphrase;
     }
 
     /**
-     * @param string $action
-     * @return SignerInterface
-     * @throws ConfigException
+     * @inheritdoc
      */
     public function resolve($action)
     {
-        $config = $this->config;
-
         if ($action === RequestInterface::CHECKOUT_CREATE_ACTION) {
-
-            if(empty($config['rsaKey'])) {
-                throw new ConfigException('rsaKey is not set');
-            }
-
-            if(empty($config['passphrase'])) {
-                $config['passphrase'] = '';
-            }
-
-            return new RsaSigner($config['rsaKey'], $config['passphrase']);
+            return new RsaSigner($this->privateKey, $this->passphrase);
         }
 
-        if(empty($config['hmacKey'])) {
-            throw new ConfigException('hmacKey is not set');
-        }
-
-        return new HmacSigner($config['hmacKey']);
+        return new HmacSigner($this->hmacKey);
     }
 }
