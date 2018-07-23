@@ -8,7 +8,7 @@ abstract class BaseSigner implements SignerInterface
     /**
      * @inheritdoc
      */
-    public function arrayToString(array $data)
+    protected function arrayToString(array $data)
     {
         $text = "";
         ksort($data);
