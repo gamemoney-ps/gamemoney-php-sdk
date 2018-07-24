@@ -9,10 +9,4 @@ interface SignerInterface
      * @return String
      */
     public function getSignature(array $data);
-
-    /**
-     * @param array $data
-     * @return string
-     */
-    public  function arrayToString(array $data);
 }

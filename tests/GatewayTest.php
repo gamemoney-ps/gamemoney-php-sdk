@@ -2,6 +2,7 @@
 namespace tests;
 
 use Gamemoney\Validation\Rules\DefaultRules;
+use Gamemoney\Validation\RulesInterface;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Gateway;
 use Gamemoney\Request\RequestInterface;
@@ -58,10 +59,27 @@ class GatewayTest extends TestCase
     {
         $mockRequest = $this->getRequestMock();
 
+        $data = ['data' => ['test' => 1]];
+        $mockRequest
+            ->expects($this->once())
+            ->method('getData')
+            ->willReturn($data);
+
         $mockRequest
             ->expects($this->once())
             ->method('setField')
-            ->with('project', 1);
+            ->with('project', $this->config['project']);
+
+        $mockRules = $this
+            ->getMockBuilder(RulesInterface::class)
+            ->setMethods(['getRules'])
+            ->getMock();
+
+        $rules = ['some rules'];
+        $mockRules
+            ->expects($this->once())
+            ->method('getRules')
+            ->willReturn($rules);
 
         $mockRulesResolver = $this
             ->getMockBuilder(RulesResolverInterface::class)
@@ -71,18 +89,19 @@ class GatewayTest extends TestCase
         $mockRulesResolver
             ->expects($this->once())
             ->method('resolve')
-            ->willReturn(new DefaultRules());
+            ->willReturn($mockRules);
 
         $mockSender = $this
             ->getMockBuilder(SenderInterface::class)
             ->setMethods(['send'])
             ->getMock();
 
+        $senderResult = ['success' => 'true'];
         $mockSender
             ->expects($this->once())
             ->method('send')
             ->with($mockRequest)
-            ->willReturn(['success' => 'true']);
+            ->willReturn($senderResult);
 
         $mockValidator = $this
             ->getMockBuilder(ValidatorInterface::class)
@@ -92,9 +111,8 @@ class GatewayTest extends TestCase
         $mockValidator
             ->expects($this->once())
             ->method('validate')
+            ->with($rules, $data)
             ->willReturn(null);
-
-
 
         $gateway = (new Gateway($this->config))
             ->setSender($mockSender)
@@ -102,7 +120,7 @@ class GatewayTest extends TestCase
             ->setRulesResolver($mockRulesResolver);
 
         $response = $gateway->send($mockRequest);
-        $this->assertEquals(['success' => 'true'], $response);
+        $this->assertEquals($senderResult, $response);
     }
 
     private function getRequestMock()
@@ -112,10 +130,6 @@ class GatewayTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['getData', 'getAction', 'setData', 'setAction', 'getField', 'setField'])
             ->getMock();
-
-        $mockRequest
-            ->method('getData')
-            ->willReturn(['data' => ['test' => 1]]);
 
         return $mockRequest;
     }

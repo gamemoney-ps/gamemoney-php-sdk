@@ -25,6 +25,17 @@ class RsaSignerTest extends TestCase {
     {
         return [
             [
+                ['data' => ''],
+                'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ=='
+            ],
+            [
+                [
+                    'c' => ['test' => 1],
+                    'a' => ['b' => 2, 'a' => 1]
+                ],
+                'vEwmskNtI8Nnsvzxh/i6HCNH0tuQLmXzd4wGPKyoO+4QyRCDNP4PDYmwnGntp84JHoRXXdaontsYZE52ZV2PeJ+qXk3oupWSs+pPQ+hBeZYC2tZ11qPtHr/qarmZokWML2o5adVSvDbUI7c9EMR0ktLDyjGfGAVXF0KSk9z7BgcRn2ucpCvA50PWlToCMM8m5Hr72UHYGI7sr0om3SGxweIpnTE8TsqlgyHt9nrqcDAD2XVPGmKV7uQ0TIWWiChVe70ryAE8t49WI0gmEWS20Mc5VfIbOB84fmy3eyiuAWJNISjF6xXF5phti6Ze4Xz0k3sgDS+pWYmCuHNL5sde1A=='
+            ],
+            [
                 ['data' => ['test' => 1]],
                 'wWImA3n2RkUMZyQJL9CH86htz20ykU7NLLJT2sMYHcZgFu7CZriLpcdeQXL9IuikrpweogEuBrobmKezxn3++8aik6PDX4m21cYv50yxKRmPwrVN3t8IrHNchXNS6yDEFlhxqrJMXyBMOV/Dr2f0EoBpJCCe8NXxWlzrDo0H0YnfbBA4OhzGnSbX3Kzd0tcqLI/v8UllmwGYxAoryV3mpHAx5XsTLW3ws1imx5u97AL5UP+3V/iOOqeAj/+Yp/GnWpV3f/OdwSeddGRBvyGnMW8xhuIJgR451MrMqyNA0qb3V0MqEpu1Ifoenuc7itHGjGrA3Bq0VLzuen3t6YsBDw=='
             ],
@@ -37,7 +48,7 @@ class RsaSignerTest extends TestCase {
 
     /**
      * @param mixed $data
-     * @param  $signature
+     * @param  $fixture
      * @dataProvider getSignatureDataProvider
      */
     public function testRsaGetSignature($data, $fixture) {
