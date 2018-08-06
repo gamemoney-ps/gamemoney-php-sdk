@@ -1,12 +1,7 @@
 Gamemoney PHP SDK
 ==========================
 
-v0.2 under development
-------------------------
-
-- Enh #3 CI тесты для всех версий php, codequality
-
-v0.1 16.07.2018
+v1.0 under development
 ------------------------
 
 - Enh #1 Init

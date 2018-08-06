@@ -19,31 +19,37 @@ or add
 ## How-To
 
 ```php
+<?php
+require_once __DIR__ . '../../../vendor/autoload.php';
+
 $config = [
-  'rsaKey' => 'you_rsa_private_key',
-  'hmacKey' => 'you_hmac_key',
-  'id' => 123456 // project id
+  'privateKey' =>
+      "-----BEGIN ENCRYPTED PRIVATE KEY-----
+...w
+-----END ENCRYPTED PRIVATE KEY-----",
+  'hmacKey' => 'test',
+  'project' => 1,
 ];
 
-$GamemoneyGateway = new \Gamemoney\Gateway($config);
-$response = $GamemoneyGateway->getInvoiceStatus(['invoice' => 2343840]);
-var_dump($resonse);
-/*
-array(7) {
-  'success' =>
-  string(4) "true"
-  'project' =>
-  int(123456)
-  'invoice' =>
-  int(2343840)
-  'status' =>
-  string(4) "Paid"
-  'time' =>
-  int(1472620176)
-  'rand' =>
-  string(20) "kd93yhdeuiw38ujHG67s"
-  'signature' => "..."
-  string(335)
+try {
+    $gateway = new \Gamemoney\Gateway($config);
+    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $request = $requestFactory->createInvoice([
+        'user' => 2,
+        'amount' => 200.50,
+        'type' => 'qiwi',
+        'wallet' => '89253642685',
+        'project_invoice' => time(),
+        'ip' => '195.23.43.12',
+        'add_some_field' => 'some value'
+    ]);
+    $response = $gateway->send($request);
+
+    var_dump($response);
+} catch(\Gamemoney\Exception\ValidationException $e) {
+    var_dump($e->getMessage(), $e->getErrors());
+} catch(\Gamemoney\Exception\RequestException $e) {
+    var_dump($e->getMessage());
 }
 */
 ```
