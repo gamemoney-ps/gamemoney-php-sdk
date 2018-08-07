@@ -38,7 +38,12 @@ class GatewayTest extends TestCase
             [
                 [
                     'project' => 1,
-                    'hmacKey' => 'test',
+                    'privateKey' => 'test',
+                ]
+            ],
+            [
+                [
+                    'privateKey' => 'test',
                 ]
             ],
         ];
