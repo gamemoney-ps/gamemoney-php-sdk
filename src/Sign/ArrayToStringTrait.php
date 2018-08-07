@@ -1,13 +1,8 @@
 <?php
-namespace Gamemoney\Sign\Signer;
+namespace Gamemoney\Sign;
 
-use Gamemoney\Sign\SignerInterface;
-
-abstract class BaseSigner implements SignerInterface
+trait ArrayToStringTrait
 {
-    /**
-     * @inheritdoc
-     */
     protected function arrayToString(array $data)
     {
         $text = "";

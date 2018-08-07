@@ -1,13 +1,13 @@
 <?php
 
-namespace Gamemoney\Validation\Rules;
+namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class CheckoutCheckRules implements RulesInterface
+final class InvoiceStatusRules implements RulesInterface
 {
     public function getRules()
     {
@@ -20,17 +20,8 @@ final class CheckoutCheckRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'user' => [
+            'invoice' => [
                 new NotBlank(),
-                new Type('numeric')
-            ],
-            'type' => [
-                new NotBlank(),
-                new Type('string')
-            ],
-            'wallet' => [
-                new NotBlank(),
-                new Type('string')
             ],
         ];
     }

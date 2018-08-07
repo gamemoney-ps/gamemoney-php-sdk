@@ -1,13 +1,13 @@
 <?php
 
-namespace Gamemoney\Validation\Rules;
+namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class ExchangeFastConvertRules implements RulesInterface
+final class CardDeleteRules  implements RulesInterface
 {
     public function getRules()
     {
@@ -20,19 +20,9 @@ final class ExchangeFastConvertRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'from' => [
+            'pan' => [
                 new NotBlank(),
-                new Type('string'),
-                new Length(['max' => 3])
-            ],
-            'to' => [
-                new NotBlank(),
-                new Type('string'),
-                new Length(['max' => 3])
-            ],
-            'amount' => [
-                new NotBlank(),
-                new Type('numeric')
+                new Type('string')
             ],
         ];
     }

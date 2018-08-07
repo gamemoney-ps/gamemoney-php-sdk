@@ -2,9 +2,13 @@
 namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Exception\ConfigException;
+use Gamemoney\Sign\ArrayToStringTrait;
+use Gamemoney\Sign\SignerInterface;
 
-final class RsaSigner extends BaseSigner
+final class RsaSigner implements SignerInterface
 {
+    use ArrayToStringTrait;
+
     private $privateKey;
     private $passphrase;
 

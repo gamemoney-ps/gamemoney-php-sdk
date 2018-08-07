@@ -1,8 +1,13 @@
 <?php
 namespace Gamemoney\Sign\Signer;
 
-final class HmacSigner extends BaseSigner
+use Gamemoney\Sign\ArrayToStringTrait;
+use Gamemoney\Sign\SignerInterface;
+
+final class HmacSigner implements SignerInterface
 {
+    use ArrayToStringTrait;
+
     private $hmacKey;
 
     public function __construct($hmacKey)

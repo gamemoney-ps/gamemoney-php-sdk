@@ -1,15 +1,16 @@
 <?php
 namespace tests;
 
-use Gamemoney\Validation\Rules\DefaultRules;
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Validation\Request\Rules\DefaultRules;
+use Gamemoney\Validation\Request\RulesInterface;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Gateway;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Validation\ValidatorInterface;
-use Gamemoney\Validation\RulesResolverInterface;
+use Gamemoney\Validation\Request\RequestValidatorInterface;
+use Gamemoney\Validation\Request\RulesResolverInterface;
 
 class GatewayTest extends TestCase
 {
@@ -21,6 +22,7 @@ class GatewayTest extends TestCase
             'privateKey' => "123",
             'hmacKey' => 'test',
             'project' => 1,
+            'apiPublicKey' => '123'
         ];
     }
 
@@ -96,12 +98,12 @@ class GatewayTest extends TestCase
 
         $data = ['data' => ['test' => 1]];
         $mockRequest
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('getData')
             ->willReturn($data);
 
         $mockRequest
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('setField')
             ->with('project', $this->config['project']);
 
@@ -138,20 +140,32 @@ class GatewayTest extends TestCase
             ->with($mockRequest)
             ->willReturn($senderResult);
 
-        $mockValidator = $this
-            ->getMockBuilder(ValidatorInterface::class)
+        $mockRequestValidator = $this
+            ->getMockBuilder(RequestValidatorInterface::class)
             ->setMethods(['validate'])
             ->getMock();
 
-        $mockValidator
+        $mockRequestValidator
             ->expects($this->once())
             ->method('validate')
             ->with($rules, $data)
             ->willReturn(null);
 
+        $mockResponseValidator = $this
+            ->getMockBuilder(ResponseValidatorInterface::class)
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockResponseValidator
+            ->expects($this->once())
+            ->method('validate')
+            ->with($senderResult, $data)
+            ->willReturn(null);
+
         $gateway = (new Gateway($this->config))
             ->setSender($mockSender)
-            ->setValidator($mockValidator)
+            ->setRequestValidator($mockRequestValidator)
+            ->setResponseValidator($mockResponseValidator)
             ->setRulesResolver($mockRulesResolver);
 
         $response = $gateway->send($mockRequest);
@@ -171,11 +185,16 @@ class GatewayTest extends TestCase
 
     public function testConstuctMethod()
     {
-        $gateway = $this->createMock(Gateway::class, ['setValidator', 'setRulesResolver', 'setSender']);
+        $gateway = $this->createPartialMock(Gateway::class, ['setRequestValidator', 'setResponseValidator', 'setRulesResolver', 'setSender']);
         $gateway
             ->expects($this->once())
-            ->method('setValidator')
-            ->with($this->isInstanceOf(ValidatorInterface::class))
+            ->method('setRequestValidator')
+            ->with($this->isInstanceOf(RequestValidatorInterface::class))
+            ->will($this->returnSelf());
+        $gateway
+            ->expects($this->once())
+            ->method('setResponseValidator')
+            ->with($this->isInstanceOf(ResponseValidatorInterface::class))
             ->will($this->returnSelf());
         $gateway
             ->expects($this->once())

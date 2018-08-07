@@ -1,10 +1,10 @@
 <?php
-namespace Gamemoney\Validation;
+namespace Gamemoney\Validation\Request;
 
 use Symfony\Component\Validator\Validation;
-use Gamemoney\Exception\ValidationException;
+use Gamemoney\Exception\RequestValidationException;
 
-final class Validator implements ValidatorInterface
+final class RequestValidator implements RequestValidatorInterface
 {
     public function validate(array $rules, array $data)
     {
@@ -20,7 +20,7 @@ final class Validator implements ValidatorInterface
         }
 
         if(!empty($errors)) {
-            $exception = new ValidationException('Bad request parameters');
+            $exception = new RequestValidationException('Bad request parameters');
             $exception->setErrors($errors);
 
             throw $exception;

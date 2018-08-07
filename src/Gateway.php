@@ -5,10 +5,13 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Validation\Validator;
-use Gamemoney\Validation\ValidatorInterface;
-use Gamemoney\Validation\RulesResolver;
-use Gamemoney\Validation\RulesResolverInterface;
+use Gamemoney\Sign\SignatureVerifier;
+use Gamemoney\Validation\Request\RequestValidator;
+use Gamemoney\Validation\Request\RequestValidatorInterface;
+use Gamemoney\Validation\Response\ResponseValidator;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
+use Gamemoney\Validation\Request\RulesResolver;
+use Gamemoney\Validation\Request\RulesResolverInterface;
 use Gamemoney\Sign\SignerResolver;
 
 class Gateway
@@ -17,8 +20,10 @@ class Gateway
 
     /** @var int */
     private $project;
-    /** @var  ValidatorInterface */
-    private $validator;
+    /** @var  RequestValidatorInterface */
+    private $requestValidator;
+    /** @var  ResponseValidatorInterface */
+    private $responseValidator;
     /** @var  RulesResolverInterface */
     private $rulesResolver;
     /** @var  SenderInterface */
@@ -40,11 +45,15 @@ class Gateway
         }
 
         if(empty($config['hmacKey'])) {
-            throw new ConfigException('hmacKeyis not set');
+            throw new ConfigException('hmacKey is not set');
         }
 
         if(empty($config['privateKey'])) {
             $config['privateKey'] = null;
+        }
+
+        if(empty($config['apiPublicKey'])) {
+            throw new ConfigException('apiPublicKey is not set');
         }
 
         if(empty($config['passphrase'])) {
@@ -65,14 +74,21 @@ class Gateway
 
         $this->project = $config['project'];
         $this
-            ->setValidator(new Validator)
+            ->setRequestValidator(new RequestValidator)
+            ->setResponseValidator(new ResponseValidator(new SignatureVerifier($config['apiPublicKey'])))
             ->setRulesResolver(new RulesResolver)
             ->setSender($sender);
     }
 
-    public function setValidator(ValidatorInterface $validator)
+    public function setRequestValidator(RequestValidatorInterface $validator)
     {
-        $this->validator = $validator;
+        $this->requestValidator = $validator;
+        return $this;
+    }
+
+    public function setResponseValidator(ResponseValidatorInterface $validator)
+    {
+        $this->responseValidator = $validator;
         return $this;
     }
 
@@ -92,7 +108,9 @@ class Gateway
     {
         $request->setField('project', $this->project);
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
-        $this->validator->validate($rules, $request->getData());
-        return $this->sender->send($request);
+        $this->requestValidator->validate($rules, $request->getData());
+        $response = $this->sender->send($request);
+        $this->responseValidator->validate($response, $request->getData());
+        return $response;
     }
 }
