@@ -1,6 +1,8 @@
 <?php
 namespace Gamemoney\Sign\Signer;
 
+use Gamemoney\Exception\ConfigException;
+
 final class RsaSigner extends BaseSigner
 {
     private $privateKey;
@@ -8,6 +10,10 @@ final class RsaSigner extends BaseSigner
 
     public function __construct($privateKey, $passphrase = '')
     {
+        if (empty($privateKey)) {
+            throw new ConfigException('privateKey is not set in config');
+        }
+
         $this->privateKey = $privateKey;
         $this->passphrase = $passphrase;
     }
