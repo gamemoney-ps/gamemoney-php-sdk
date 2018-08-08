@@ -22,8 +22,7 @@ class SenderTest extends TestCase
     }
     public function testInterface()
     {
-        $mockResolver = $this->createMock(SignerResolverInterface::class);
-        $sender = new Sender('url', $mockResolver, []);
+        $sender = new Sender('url', []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
@@ -36,7 +35,7 @@ class SenderTest extends TestCase
         ]);
 
         $handler = HandlerStack::create($mock);
-        $sender = $this->getSenderMock($handler);
+        $sender = new Sender($this->url, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
         $this->assertTrue(is_array($response));
@@ -53,33 +52,8 @@ class SenderTest extends TestCase
         ]);
 
         $handler = HandlerStack::create($mock);
-        $sender = $this->getSenderMock($handler);
+        $sender = new Sender($this->url, ['handler' => $handler]);
         $sender->send($mockRequest);
-    }
-
-    private function getSenderMock($handler)
-    {
-        $mockSigner = $this
-            ->getMockBuilder(SignerInterface::class)
-            ->setMethods(['getSignature', 'arrayToString'])
-            ->getMock();
-        $mockSigner
-            ->expects($this->once())
-            ->method('getSignature')
-            ->willReturn('signature');
-
-        $mockResolver = $this
-            ->getMockBuilder(SignerResolverInterface::class)
-            ->setMethods(['resolve'])
-            ->getMock();
-
-        $mockResolver
-            ->method('resolve')
-            ->willReturn($mockSigner);
-
-        $sender = new Sender($this->url, $mockResolver, ['handler' => $handler]);
-
-        return $sender;
     }
 
     private function getRequestMock()

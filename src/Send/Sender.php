@@ -4,7 +4,6 @@ namespace Gamemoney\Send;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Sign\SignerResolverInterface;
 use Gamemoney\Exception\RequestException;
 
 final class Sender implements SenderInterface
@@ -14,15 +13,9 @@ final class Sender implements SenderInterface
     /** @var Client */
     private $client;
 
-    /**
-     * @var SignerResolverInterface
-     */
-    private $signerResolver;
-
-    public function __construct($apiUrl, SignerResolverInterface $signerResolver, $clientConfig)
+    public function __construct($apiUrl, $clientConfig)
     {
         $this->apiUrl = $apiUrl;
-        $this->signerResolver = $signerResolver;
         $this->client = $this->getClient($clientConfig);
     }
 
@@ -33,15 +26,10 @@ final class Sender implements SenderInterface
      */
     public function send(RequestInterface $request)
     {
-        $data = $request->getData();
-
-        $signer = $this->signerResolver->resolve($request->getAction());
-        $data['signature'] = $signer->getSignature($request->getData());
-
         try {
             $response = $this->client->post(
                 $request->getAction(),
-                ['form_params' => $data]
+                ['form_params' => $request->getData()]
             );
         } catch (GuzzleException $e) {
             throw new RequestException('Request Send Error', 0, $e);

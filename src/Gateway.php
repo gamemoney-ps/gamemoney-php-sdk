@@ -6,6 +6,7 @@ use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignatureVerifier;
+use Gamemoney\Sign\SignerResolverInterface;
 use Gamemoney\Validation\Request\RequestValidator;
 use Gamemoney\Validation\Request\RequestValidatorInterface;
 use Gamemoney\Validation\Response\ResponseValidator;
@@ -28,6 +29,8 @@ class Gateway
     private $rulesResolver;
     /** @var  SenderInterface */
     private $sender;
+    /** @var  SignerResolverInterface */
+    private $signerResolver;
 
     /**
      * Gateway constructor.
@@ -70,13 +73,14 @@ class Gateway
             $config['clientConfig'] = [];
         }
 
-        $sender = new Sender($config['apiUrl'], $signerResolver, $config['clientConfig']);
+        $sender = new Sender($config['apiUrl'], $config['clientConfig']);
 
         $this->project = $config['project'];
         $this
             ->setRequestValidator(new RequestValidator)
             ->setResponseValidator(new ResponseValidator(new SignatureVerifier($config['apiPublicKey'])))
             ->setRulesResolver(new RulesResolver)
+            ->setSignerResolver($signerResolver)
             ->setSender($sender);
     }
 
@@ -103,12 +107,21 @@ class Gateway
         $this->sender = $sender;
         return $this;
     }
+    public function setSignerResolver(SignerResolverInterface $signerResolver)
+    {
+        $this->signerResolver = $signerResolver;
+        return $this;
+    }
 
     public function send(RequestInterface $request)
     {
         $request->setField('project', $this->project);
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
+
+        $signer = $this->signerResolver->resolve($request->getAction());
+        $request->setField('signature', $signer->getSignature($request->getData()));
+
         $response = $this->sender->send($request);
         $this->responseValidator->validate($response, $request->getData());
         return $response;
