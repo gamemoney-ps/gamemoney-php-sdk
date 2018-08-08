@@ -40,7 +40,7 @@ class Gateway
         }
 
         if(empty($config['hmacKey'])) {
-            throw new ConfigException('hmacKeyis not set');
+            throw new ConfigException('hmacKey is not set');
         }
 
         if(empty($config['privateKey'])) {
