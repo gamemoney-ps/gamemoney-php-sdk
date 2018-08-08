@@ -214,7 +214,7 @@ class GatewayTest extends TestCase
         return $mockRequest;
     }
 
-    public function testConstuctMethod()
+    public function testConstructMethod()
     {
         $gateway = $this->createPartialMock(Gateway::class, [
             'setRequestValidator',
