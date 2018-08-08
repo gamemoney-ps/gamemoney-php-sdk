@@ -13,8 +13,9 @@ class SignerResolver implements SignerResolverInterface
 
     /**
      * SignerResolver constructor.
-     * @param string $hmacKey
-     * @param resource $privateKey
+     * @param $hmacKey
+     * @param $privateKey
+     * @param $passphrase
      */
     public function __construct($hmacKey, $privateKey, $passphrase)
     {

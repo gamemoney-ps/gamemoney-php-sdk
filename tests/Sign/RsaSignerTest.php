@@ -4,6 +4,7 @@ namespace tests\Sign;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\RsaSigner;
+use Gamemoney\Exception\ConfigException;
 
 class RsaSignerTest extends TestCase {
 
@@ -19,6 +20,11 @@ class RsaSignerTest extends TestCase {
     public function testInterface() {
         $signer = new RsaSigner($this->privateKey, $this->passphrase);
         $this->assertInstanceOf(SignerInterface::class, $signer);
+    }
+
+    public function testConstruct() {
+        $this->expectException(ConfigException::class);
+        new RsaSigner(null, $this->passphrase);
     }
 
     public function getSignatureDataProvider()

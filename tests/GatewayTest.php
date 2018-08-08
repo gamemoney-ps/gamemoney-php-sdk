@@ -38,7 +38,12 @@ class GatewayTest extends TestCase
             [
                 [
                     'project' => 1,
-                    'hmacKey' => 'test',
+                    'privateKey' => 'test',
+                ]
+            ],
+            [
+                [
+                    'privateKey' => 'test',
                 ]
             ],
         ];
@@ -52,6 +57,36 @@ class GatewayTest extends TestCase
     {
         $this->expectException(ConfigException::class);
         $gateway = new Gateway($config);
+
+    }
+
+    public function successConfigDataProvider()
+    {
+        return [
+            [
+                [
+                    'project' => 1,
+                    'hmacKey' => 'test',
+                ]
+            ],
+            [
+                [
+                    'project' => 1,
+                    'hmacKey' => 'test',
+                    'privateKey' => 'test',
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider successConfigDataProvider
+     * @param $config
+     */
+    public function testConstructConfigSuccess($config)
+    {
+        $gateway = new Gateway($config);
+        $this->assertInstanceOf(Gateway::class, $gateway);
     }
 
 

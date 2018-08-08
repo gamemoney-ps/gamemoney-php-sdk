@@ -44,7 +44,7 @@ class Gateway
         }
 
         if(empty($config['privateKey'])) {
-            throw new ConfigException('privateKey id is not set');
+            $config['privateKey'] = null;
         }
 
         if(empty($config['passphrase'])) {
