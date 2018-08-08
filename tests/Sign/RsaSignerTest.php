@@ -24,8 +24,7 @@ class RsaSignerTest extends TestCase {
 
     public function testConstruct() {
         $this->expectException(ConfigException::class);
-        $this->privateKey = null;
-        new RsaSigner($this->privateKey, $this->passphrase);
+        new RsaSigner(null, $this->passphrase);
     }
 
     public function getSignatureDataProvider()
