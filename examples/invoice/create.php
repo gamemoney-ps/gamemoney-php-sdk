@@ -12,7 +12,7 @@ try {
         'amount' => 200.50,
         'type' => 'qiwi',
         'wallet' => '89253642685',
-        'project_invoice' => time(),
+        'project_invoice' => uniqid(),
         'ip' => '195.23.43.12',
         'add_some_field' => 'some value'
     ]);
