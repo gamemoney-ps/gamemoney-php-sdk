@@ -1,22 +1,22 @@
 <?php
-namespace Gamemoney\Validation;
+namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Validation\Rules\InvoiceCreateRules;
-use Gamemoney\Validation\Rules\InvoiceStatusRules;
-use Gamemoney\Validation\Rules\CheckoutCreateRules;
-use Gamemoney\Validation\Rules\CheckoutDefaultRules;
-use Gamemoney\Validation\Rules\CheckoutCheckRules;
-use Gamemoney\Validation\Rules\CardAddRules;
-use Gamemoney\Validation\Rules\CardListRules;
-use Gamemoney\Validation\Rules\CardDeleteRules;
-use Gamemoney\Validation\Rules\ExchangeConvertRules;
-use Gamemoney\Validation\Rules\ExchangeFastConvertRules;
-use Gamemoney\Validation\Rules\ExchangePrepareRules;
-use Gamemoney\Validation\Rules\ExchangeStatusRules;
-use Gamemoney\Validation\Rules\StatisticsBalancesRules;
-use Gamemoney\Validation\Rules\StatisticsDaysBalancesRules;
-use Gamemoney\Validation\Rules\DefaultRules;
+use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
+use Gamemoney\Validation\Request\Rules\CheckoutCreateRules;
+use Gamemoney\Validation\Request\Rules\CheckoutDefaultRules;
+use Gamemoney\Validation\Request\Rules\CheckoutCheckRules;
+use Gamemoney\Validation\Request\Rules\CardAddRules;
+use Gamemoney\Validation\Request\Rules\CardListRules;
+use Gamemoney\Validation\Request\Rules\CardDeleteRules;
+use Gamemoney\Validation\Request\Rules\ExchangeConvertRules;
+use Gamemoney\Validation\Request\Rules\ExchangeFastConvertRules;
+use Gamemoney\Validation\Request\Rules\ExchangePrepareRules;
+use Gamemoney\Validation\Request\Rules\ExchangeStatusRules;
+use Gamemoney\Validation\Request\Rules\StatisticsBalancesRules;
+use Gamemoney\Validation\Request\Rules\StatisticsDaysBalancesRules;
+use Gamemoney\Validation\Request\Rules\DefaultRules;
 
 final class RulesResolver implements RulesResolverInterface
 {

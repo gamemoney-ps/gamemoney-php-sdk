@@ -1,13 +1,13 @@
 <?php
 
-namespace Gamemoney\Validation\Rules;
+namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class DefaultRules implements RulesInterface
+final class ExchangeStatusRules implements RulesInterface
 {
     public function getRules()
     {
@@ -19,6 +19,10 @@ final class DefaultRules implements RulesInterface
             'rand' => [
                 new NotBlank(),
                 new Length(['min' => 20])
+            ],
+            'id' => [
+                new NotBlank(),
+                new Type('numeric')
             ],
         ];
     }

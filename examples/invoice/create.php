@@ -19,8 +19,8 @@ try {
     $response = $gateway->send($request);
 
     var_dump($response);
-} catch(\Gamemoney\Exception\ValidationException $e) {
+} catch(\Gamemoney\Exception\RequestValidationException $e) {
     var_dump($e->getMessage(), $e->getErrors());
-} catch(\Gamemoney\Exception\RequestException $e) {
+} catch(\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
     var_dump($e->getMessage());
 }

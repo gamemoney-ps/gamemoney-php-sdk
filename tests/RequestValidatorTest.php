@@ -1,15 +1,15 @@
 <?php
 namespace tests;
 
-use Gamemoney\Exception\ValidationException;
+use Gamemoney\Exception\RequestValidationException;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Validation\Validator;
+use Gamemoney\Validation\Request\RequestValidator;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 
-class ValidatorTest extends TestCase
+class RequestValidatorTest extends TestCase
 {
     public function successValidateProvider()
     {
@@ -67,7 +67,7 @@ class ValidatorTest extends TestCase
      */
     public function testSuccessValidate($rules, $data)
     {
-        $validator = new Validator;
+        $validator = new RequestValidator;
         $this->assertNull($validator->validate($rules, $data));
     }
 
@@ -95,8 +95,8 @@ class ValidatorTest extends TestCase
      */
     public function testFailValidate($rules, $data)
     {
-        $validator = new Validator;
-        $this->expectException(ValidationException::class);
+        $validator = new RequestValidator;
+        $this->expectException(RequestValidationException::class);
         $validator->validate($rules, $data);
     }
 }

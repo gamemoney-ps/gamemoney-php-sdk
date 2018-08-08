@@ -1,14 +1,14 @@
 <?php
 
-namespace Gamemoney\Validation\Rules;
+namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Ip;
 
-final class CheckoutCreateRules implements RulesInterface
+final class InvoiceCreateRules implements RulesInterface
 {
     public function getRules()
     {
@@ -21,10 +21,6 @@ final class CheckoutCreateRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'projectId' => [
-                new NotBlank(),
-                new Type('scalar')
-            ],
             'user' => [
                 new NotBlank(),
                 new Type('numeric'),
@@ -32,12 +28,6 @@ final class CheckoutCreateRules implements RulesInterface
             'amount' => [
                 new NotBlank(),
                 new Type('numeric'),
-            ],
-            'wallet' => [
-                new Type('string')
-            ],
-            'description' => [
-                new Type('string')
             ],
             'type' => [
                 new NotBlank(),
@@ -47,9 +37,16 @@ final class CheckoutCreateRules implements RulesInterface
                 new Type('string'),
                 new Length(['max' => 3])
             ],
-            'userCurrency' => [
+            'user_currency' => [
                 new Type('string'),
                 new Length(['max' => 3])
+            ],
+            'language' => [
+                new Type('string'),
+                new Length(['max' => 2])
+            ],
+            'project_invoice' => [
+                new Type('scalar')
             ],
             'ip' => [
                 new Ip()

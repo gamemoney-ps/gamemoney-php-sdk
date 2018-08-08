@@ -1,7 +1,7 @@
 <?php
 namespace Gamemoney\Exception;
 
-class ValidationException extends \Exception implements GamemoneyExceptionInterface
+class RequestValidationException extends \Exception implements GamemoneyExceptionInterface
 {
     private $errors = [];
 

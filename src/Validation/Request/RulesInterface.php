@@ -1,6 +1,6 @@
 <?php
 
-namespace Gamemoney\Validation;
+namespace Gamemoney\Validation\Request;
 
 interface RulesInterface
 {

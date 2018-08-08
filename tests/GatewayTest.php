@@ -1,15 +1,18 @@
 <?php
 namespace tests;
 
-use Gamemoney\Validation\Rules\DefaultRules;
-use Gamemoney\Validation\RulesInterface;
+use Gamemoney\Sign\SignerInterface;
+use Gamemoney\Sign\SignerResolverInterface;
+use Gamemoney\Validation\Request\Rules\DefaultRules;
+use Gamemoney\Validation\Request\RulesInterface;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Gateway;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Validation\ValidatorInterface;
-use Gamemoney\Validation\RulesResolverInterface;
+use Gamemoney\Validation\Request\RequestValidatorInterface;
+use Gamemoney\Validation\Request\RulesResolverInterface;
 
 class GatewayTest extends TestCase
 {
@@ -21,6 +24,7 @@ class GatewayTest extends TestCase
             'privateKey' => "123",
             'hmacKey' => 'test',
             'project' => 1,
+            'apiPublicKey' => '123'
         ];
     }
 
@@ -32,18 +36,20 @@ class GatewayTest extends TestCase
             ],
             [
                 [
-                    'project' => 1
+                    'project' => 1,
+                    'hmacKey' => 'test',
                 ]
             ],
             [
                 [
                     'project' => 1,
-                    'privateKey' => 'test',
+                    'apiPublicKey' => 'testPublicKey'
                 ]
             ],
             [
                 [
-                    'privateKey' => 'test',
+                    'hmacKey' => 'test',
+                    'apiPublicKey' => 'testPublicKey'
                 ]
             ],
         ];
@@ -67,6 +73,7 @@ class GatewayTest extends TestCase
                 [
                     'project' => 1,
                     'hmacKey' => 'test',
+                    'apiPublicKey' => 'testPublicKey'
                 ]
             ],
             [
@@ -74,6 +81,7 @@ class GatewayTest extends TestCase
                     'project' => 1,
                     'hmacKey' => 'test',
                     'privateKey' => 'test',
+                    'apiPublicKey' => 'testPublicKey'
                 ]
             ],
         ];
@@ -95,15 +103,20 @@ class GatewayTest extends TestCase
         $mockRequest = $this->getRequestMock();
 
         $data = ['data' => ['test' => 1]];
+        $signature = 'testSignature';
+
         $mockRequest
-            ->expects($this->once())
+            ->expects($this->atLeastOnce())
             ->method('getData')
             ->willReturn($data);
 
         $mockRequest
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('setField')
-            ->with('project', $this->config['project']);
+            ->withConsecutive(
+                ['project', $this->config['project']],
+                ['signature', $signature]
+            );
 
         $mockRules = $this
             ->getMockBuilder(RulesInterface::class)
@@ -138,20 +151,52 @@ class GatewayTest extends TestCase
             ->with($mockRequest)
             ->willReturn($senderResult);
 
-        $mockValidator = $this
-            ->getMockBuilder(ValidatorInterface::class)
+        $mockRequestValidator = $this
+            ->getMockBuilder(RequestValidatorInterface::class)
             ->setMethods(['validate'])
             ->getMock();
 
-        $mockValidator
+        $mockRequestValidator
             ->expects($this->once())
             ->method('validate')
             ->with($rules, $data)
             ->willReturn(null);
 
+        $mockResponseValidator = $this
+            ->getMockBuilder(ResponseValidatorInterface::class)
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $mockResponseValidator
+            ->expects($this->once())
+            ->method('validate')
+            ->with($senderResult, $data)
+            ->willReturn(null);
+
+        $mockSigner = $this
+            ->getMockBuilder(SignerInterface::class)
+            ->setMethods(['getSignature'])
+            ->getMock();
+        $mockSigner
+            ->expects($this->once())
+            ->method('getSignature')
+            ->willReturn($signature);
+
+        $mockSignerResolver = $this
+            ->getMockBuilder(SignerResolverInterface::class)
+            ->setMethods(['resolve'])
+            ->getMock();
+
+        $mockSignerResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->willReturn($mockSigner);
+
         $gateway = (new Gateway($this->config))
             ->setSender($mockSender)
-            ->setValidator($mockValidator)
+            ->setRequestValidator($mockRequestValidator)
+            ->setResponseValidator($mockResponseValidator)
+            ->setSignerResolver($mockSignerResolver)
             ->setRulesResolver($mockRulesResolver);
 
         $response = $gateway->send($mockRequest);
@@ -171,11 +216,23 @@ class GatewayTest extends TestCase
 
     public function testConstuctMethod()
     {
-        $gateway = $this->createMock(Gateway::class, ['setValidator', 'setRulesResolver', 'setSender']);
+        $gateway = $this->createPartialMock(Gateway::class, [
+            'setRequestValidator',
+            'setSignerResolver',
+            'setResponseValidator',
+            'setRulesResolver',
+            'setSender'
+        ]);
+
         $gateway
             ->expects($this->once())
-            ->method('setValidator')
-            ->with($this->isInstanceOf(ValidatorInterface::class))
+            ->method('setRequestValidator')
+            ->with($this->isInstanceOf(RequestValidatorInterface::class))
+            ->will($this->returnSelf());
+        $gateway
+            ->expects($this->once())
+            ->method('setResponseValidator')
+            ->with($this->isInstanceOf(ResponseValidatorInterface::class))
             ->will($this->returnSelf());
         $gateway
             ->expects($this->once())
@@ -186,6 +243,11 @@ class GatewayTest extends TestCase
             ->expects($this->once())
             ->method('setSender')
             ->with($this->isInstanceOf(SenderInterface::class))
+            ->will($this->returnSelf());
+        $gateway
+            ->expects($this->once())
+            ->method('setSignerResolver')
+            ->with($this->isInstanceOf(SignerResolverInterface::class))
             ->will($this->returnSelf());
         $gateway->__construct($this->config);
     }

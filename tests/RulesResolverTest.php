@@ -1,9 +1,9 @@
 <?php
 namespace tests;
 
-use Gamemoney\Validation\Rules\DefaultRules;
-use Gamemoney\Validation\RulesInterface;
-use Gamemoney\Validation\RulesResolver;
+use Gamemoney\Validation\Request\Rules\DefaultRules;
+use Gamemoney\Validation\Request\RulesInterface;
+use Gamemoney\Validation\Request\RulesResolver;
 use Gamemoney\Request\RequestInterface;
 use PHPUnit\Framework\TestCase;
 
