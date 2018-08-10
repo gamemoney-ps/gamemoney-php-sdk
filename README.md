@@ -94,7 +94,7 @@ $config = [
 ```php
 <?php
 $pathToPrivateKeyFile = 'file::///keys/gamemoney/project1/priv.key';
-$pathToPublicKeyFile = 'file::///keys/gamemoney/project1//pub.pem';
+$pathToPublicKeyFile = 'file::///keys/gamemoney/project1/pub.pem';
 
 $config = [
     'privateKey' => $pathToPrivateKeyFile,
