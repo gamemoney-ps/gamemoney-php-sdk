@@ -5,8 +5,8 @@
 * [Installation](#installation)
 * [How-To](#how-to)
 * [Config examples](#config-examples)
-    * [Use keys stored in file](#use-keys-stored-in-file)
-    * [Use keys as string](#use-keys-as-string)
+    * [Using keys stored in file](#using-keys-stored-in-file)
+    * [Using keys as string](#using-keys-as-string)
 * [Full Documentation](#full-documentation)
 
 ## Installation
@@ -14,7 +14,7 @@
 Either run
 
 ```sh
-php composer.phar gamemoney/php-gamemoney-sdk "*"
+php composer gamemoney/php-gamemoney-sdk "*"
 ```
 
 or add
@@ -68,24 +68,43 @@ try {
 ```
 ## Config examples
 
-### Use keys stored in file
+### Using keys stored in file
+
+#### Using `file_get_content` to get key from file
 ```php
 <?php
 
-$path_to_private_key_file = '/keys/gamemoney/project1/priv.key';
-$path_to_public_key_file = '/keys/gamemoney/api/pub.pem';
+$pathToPrivateKeyFile = '/keys/gamemoney/project1/priv.key';
+$pathToPublicKeyFile = '/keys/gamemoney/api/pub.pem';
 
 $config = [
-    'privateKey' => file_get_content($path_to_private_key_file),
+    'privateKey' => file_get_content($pathToPrivateKeyFile),
     // passphrase for private key
     'passphrase' => '123',
     // for verification of the answer signature
-    'apiPublicKey' => file_get_content($path_to_public_key_file),
+    'apiPublicKey' => file_get_content($pathToPublicKeyFile),
     'hmacKey' => 'test',
     'project' => 1,
 ];
 ```
-### Use keys as string
+#### Using path in format `file://`
+
+`keys/gamemoney/project1/priv.key` -- full path to key
+
+```php
+<?php
+$pathToPrivateKeyFile = 'file::///keys/gamemoney/project1/priv.key';
+$pathToPublicKeyFile = 'file::///keys/gamemoney/project1//pub.pem';
+
+$config = [
+    'privateKey' => $pathToPrivateKeyFile,
+        'apiPublicKey' => $pathToPublicKeyFile,
+        'hmacKey' => 'test',
+        'project' => 1,
+];
+```
+
+### Using keys as string
 ```php
 <?php
 
