@@ -107,10 +107,6 @@ $config = [
 ### Using keys as string
 ```php
 <?php
-
-$path_to_private_key_file = '/keys/gamemoney/project1/priv.key';
-$path_to_public_key_file = '/keys/gamemoney/api/pub.pem';
-
 $config = [
     'privateKey' => '-----BEGIN PRIVATE KEY-----
 ...
