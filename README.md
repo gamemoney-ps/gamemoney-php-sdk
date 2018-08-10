@@ -89,7 +89,7 @@ $config = [
 ```
 #### Using path in format `file://`
 
-`keys/gamemoney/project1/priv.key` -- full path to key
+`/keys/gamemoney/project1/priv.key` -- full path to key
 
 ```php
 <?php
