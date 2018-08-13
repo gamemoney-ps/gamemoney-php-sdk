@@ -5,6 +5,10 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Sign\Signer\HmacSigner;
 
+/**
+ * Class SignerResolver
+ * @package Gamemoney\Sign
+ */
 class SignerResolver implements SignerResolverInterface
 {
     private $hmacKey;
@@ -13,9 +17,9 @@ class SignerResolver implements SignerResolverInterface
 
     /**
      * SignerResolver constructor.
-     * @param $hmacKey
-     * @param $privateKey
-     * @param $passphrase
+     * @param string $hmacKey
+     * @param resource|string $privateKey
+     * @param string $passphrase
      */
     public function __construct($hmacKey, $privateKey, $passphrase)
     {

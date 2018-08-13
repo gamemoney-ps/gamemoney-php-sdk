@@ -1,6 +1,10 @@
 <?php
 namespace Gamemoney\Sign;
 
+/**
+ * Interface SignerInterface
+ * @package Gamemoney\Sign
+ */
 interface SignerInterface
 {
     /**

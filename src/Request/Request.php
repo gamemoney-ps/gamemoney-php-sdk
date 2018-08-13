@@ -1,11 +1,27 @@
 <?php
 namespace Gamemoney\Request;
 
+/**
+ * Class Request
+ * @package Gamemoney\Request
+ */
 final class Request implements RequestInterface
 {
+    /**
+     * @var string
+     */
     protected $action;
+
+    /**
+     * @var array
+     */
     protected $data = [];
 
+    /**
+     * Request constructor.
+     * @param $action URI
+     * @param array $data request data array
+     */
     public function __construct($action, array $data = [])
     {
         if (empty($data['rand'])) {
@@ -16,19 +32,24 @@ final class Request implements RequestInterface
         $this->data = $data;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getAction()
     {
         return $this->action;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getData()
     {
         return $this->data;
     }
 
     /**
-     * @param array $data
-     * @return $this
+     * @inheritdoc
      */
     public function setData(array $data)
     {
@@ -37,9 +58,7 @@ final class Request implements RequestInterface
     }
 
     /**
-     * @param string $field
-     * @param $value
-     * @return $this
+     * @inheritdoc
      */
     public function setField($field, $value)
     {
@@ -48,8 +67,7 @@ final class Request implements RequestInterface
     }
 
     /**
-     * @param string $field
-     * @return mixed
+     * @inheritdoc
      */
     public function getField($field)
     {

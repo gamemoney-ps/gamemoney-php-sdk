@@ -22,12 +22,12 @@ interface RequestInterface
     const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
 
     /**
-     * @return string
+     * @return string response uri
      */
     public function getAction();
 
     /**
-     * @return array
+     * @return array response data fields
      */
     public function getData();
 

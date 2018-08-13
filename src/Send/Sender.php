@@ -6,6 +6,10 @@ use GuzzleHttp\Exception\GuzzleException;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
 
+/**
+ * Class Sender
+ * @package Gamemoney\Send
+ */
 final class Sender implements SenderInterface
 {
     /** @var  string */
@@ -13,6 +17,11 @@ final class Sender implements SenderInterface
     /** @var Client */
     private $client;
 
+    /**
+     * Sender constructor.
+     * @param string $apiUrl
+     * @param array $clientConfig
+     */
     public function __construct($apiUrl, $clientConfig)
     {
         $this->apiUrl = $apiUrl;
@@ -20,9 +29,7 @@ final class Sender implements SenderInterface
     }
 
     /**
-     * @param RequestInterface $request
-     * @return array()
-     * @throws RequestException
+     * @inheritdoc
      */
     public function send(RequestInterface $request)
     {
@@ -39,6 +46,10 @@ final class Sender implements SenderInterface
         return json_decode($body, true);
     }
 
+    /**
+     * @param array $clientConfig
+     * @return Client
+     */
     private function getClient(array $clientConfig)
     {
         $defaultConfig = [

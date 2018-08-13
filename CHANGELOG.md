@@ -1,7 +1,7 @@
 Gamemoney PHP SDK
 ==========================
 
-v1.0 under development
+v1.0 13.08.2018
 ------------------------
 
-- Enh #1 Init
+- Init

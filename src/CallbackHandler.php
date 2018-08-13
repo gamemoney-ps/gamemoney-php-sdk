@@ -5,6 +5,11 @@ use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
 
+/**
+ * Class CallbackHandler
+ * See basic usage example in examples/invoice/callback.php
+ * @package Gamemoney
+ */
 class CallbackHandler
 {
     /**

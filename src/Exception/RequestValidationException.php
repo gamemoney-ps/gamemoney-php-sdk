@@ -1,6 +1,11 @@
 <?php
 namespace Gamemoney\Exception;
 
+/**
+ * Class RequestValidationException
+ * RequestValidationException represents an exception caused by a validation error of request data
+ * @package Gamemoney\Exception
+ */
 class RequestValidationException extends \Exception implements GamemoneyExceptionInterface
 {
     private $errors = [];

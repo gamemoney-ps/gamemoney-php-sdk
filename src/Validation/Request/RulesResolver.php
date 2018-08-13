@@ -18,6 +18,10 @@ use Gamemoney\Validation\Request\Rules\StatisticsBalancesRules;
 use Gamemoney\Validation\Request\Rules\StatisticsDaysBalancesRules;
 use Gamemoney\Validation\Request\Rules\DefaultRules;
 
+/**
+ * Class RulesResolver
+ * @package Gamemoney\Validation\Request
+ */
 final class RulesResolver implements RulesResolverInterface
 {
     /**
