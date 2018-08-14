@@ -1,8 +1,15 @@
 <?php
 namespace Gamemoney\Sign;
 
+/**
+ * @package Gamemoney\Sign
+ */
 trait ArrayToStringTrait
 {
+    /**
+     * @param array $data
+     * @return string
+     */
     protected function arrayToString(array $data)
     {
         $text = "";

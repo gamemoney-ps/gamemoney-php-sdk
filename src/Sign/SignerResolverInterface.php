@@ -1,7 +1,10 @@
 <?php
-
 namespace Gamemoney\Sign;
 
+/**
+ * Interface SignerResolverInterface
+ * @package Gamemoney\Sign
+ */
 interface SignerResolverInterface
 {
     /**

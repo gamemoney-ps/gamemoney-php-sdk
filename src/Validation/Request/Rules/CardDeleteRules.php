@@ -7,8 +7,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
+/**
+ * Class CardDeleteRules
+ * @package Gamemoney\Validation\Request\Rules
+ */
 final class CardDeleteRules  implements RulesInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function getRules()
     {
         return [

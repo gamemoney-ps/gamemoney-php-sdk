@@ -8,8 +8,15 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Ip;
 
+/**
+ * Class InvoiceCreateRules
+ * @package Gamemoney\Validation\Request\Rules
+ */
 final class InvoiceCreateRules implements RulesInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function getRules()
     {
         return [

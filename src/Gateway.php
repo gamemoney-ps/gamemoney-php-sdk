@@ -15,6 +15,11 @@ use Gamemoney\Validation\Request\RulesResolver;
 use Gamemoney\Validation\Request\RulesResolverInterface;
 use Gamemoney\Sign\SignerResolver;
 
+/**
+ * Class Gateway
+ * See using examples in examples folder
+ * @package Gamemoney
+ */
 class Gateway
 {
     const API_URL = 'https://paygate.gamemoney.com';
@@ -84,35 +89,62 @@ class Gateway
             ->setSender($sender);
     }
 
+    /**
+     * @param RequestValidatorInterface $validator
+     * @return $this
+     */
     public function setRequestValidator(RequestValidatorInterface $validator)
     {
         $this->requestValidator = $validator;
         return $this;
     }
 
+    /**
+     * @param ResponseValidatorInterface $validator
+     * @return $this
+     */
     public function setResponseValidator(ResponseValidatorInterface $validator)
     {
         $this->responseValidator = $validator;
         return $this;
     }
 
+    /**
+     * @param RulesResolverInterface $rulesResolver
+     * @return $this
+     */
     public function setRulesResolver(RulesResolverInterface $rulesResolver)
     {
         $this->rulesResolver = $rulesResolver;
         return $this;
     }
 
+    /**
+     * @param SenderInterface $sender
+     * @return $this
+     */
     public function setSender(SenderInterface $sender)
     {
         $this->sender = $sender;
         return $this;
     }
+
+    /**
+     * @param SignerResolverInterface $signerResolver
+     * @return $this
+     */
     public function setSignerResolver(SignerResolverInterface $signerResolver)
     {
         $this->signerResolver = $signerResolver;
         return $this;
     }
 
+    /**
+     * @param RequestInterface $request
+     * @return array
+     * @throws Exception\RequestException
+     * @throws Exception\ResponseValidationException
+     */
     public function send(RequestInterface $request)
     {
         $request->setField('project', $this->project);

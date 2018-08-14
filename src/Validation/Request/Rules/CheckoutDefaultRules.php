@@ -7,8 +7,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
+/**
+ * Class CheckoutDefaultRules
+ * @package Gamemoney\Validation\Request\Rules
+ */
 final class CheckoutDefaultRules implements RulesInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function getRules()
     {
         return [

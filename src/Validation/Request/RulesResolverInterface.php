@@ -1,7 +1,10 @@
 <?php
-
 namespace Gamemoney\Validation\Request;
 
+/**
+ * Interface RulesResolverInterface
+ * @package Gamemoney\Validation\Request
+ */
 interface RulesResolverInterface
 {
     /**

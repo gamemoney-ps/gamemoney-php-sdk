@@ -8,8 +8,15 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Date;
 
+/**
+ * Class StatisticsDaysBalancesRules
+ * @package Gamemoney\Validation\Request\Rules
+ */
 final class StatisticsDaysBalancesRules implements RulesInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function getRules()
     {
         return [

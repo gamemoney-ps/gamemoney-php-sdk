@@ -4,6 +4,10 @@ namespace Gamemoney\Validation\Response;
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
 
+/**
+ * Class ResponseValidator
+ * @package Gamemoney\Validation\Response
+ */
 class ResponseValidator implements ResponseValidatorInterface
 {
     /** @var SignatureVerifierInterface */
@@ -15,9 +19,7 @@ class ResponseValidator implements ResponseValidatorInterface
     }
 
     /**
-     * @param $response
-     * @param $request
-     * @throws ResponseValidationException
+     * @inheritdoc
      */
     public function validate($response, $request)
     {
