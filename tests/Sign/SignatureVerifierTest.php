@@ -75,6 +75,6 @@ sQIDAQAB
     public function testVerify($data, $key, $result)
     {
         $verifier = new SignatureVerifier($key);
-        $this->assertEquals($result, $verifier->verify($data));
+        $this->assertSame($result, $verifier->verify($data));
     }
 }
