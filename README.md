@@ -120,4 +120,4 @@ $config = [
 ```
 ## Full Documentation
 
-http://cp.gamemoney.com/apidoc.php
+https://cp.gamemoney.com/apidoc
