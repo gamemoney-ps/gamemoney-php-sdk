@@ -5,13 +5,13 @@
     "license": "MIT",
     "description": "gamemoney",
     "require": {
-        "php": ">=5.4",
+        "php": ">=5.6",
         "ext-openssl": "*",
         "symfony/validator": "*",
         "guzzlehttp/guzzle": ">=4.1.4 <7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "^5",
         "phpunit/php-code-coverage": "*"
     },
     "autoload": {
