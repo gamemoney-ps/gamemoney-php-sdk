@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7704a052c76d68e7a2a7c3d394717a12",
+    "content-hash": "bf83982a45a2a40c82cee393bad34b65",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -279,7 +279,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -1833,7 +1833,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4",
+        "php": ">=5.6",
         "ext-openssl": "*"
     },
     "platform-dev": []
