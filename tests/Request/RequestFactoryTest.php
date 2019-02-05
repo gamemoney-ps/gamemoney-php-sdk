@@ -75,16 +75,6 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
-                'checkCheckout',
-                [
-                    ['amount' => 100]
-                ],
-                RequestInterface::CHECKOUT_CHECK_ACTION,
-                [
-                    'amount' => 100
-                ],
-            ],
-            [
                 'addCard',
                 [
                     ['user' => 1]

@@ -78,16 +78,6 @@ class RequestFactory
     }
 
     /**
-     * Check exists wallet in pay system for some systems
-     * @param array $data
-     * @return Request
-     */
-    public  function checkCheckout(array $data = [])
-    {
-        return new Request(RequestInterface::CHECKOUT_CHECK_ACTION, $data);
-    }
-
-    /**
      * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc.php#card_add)
      * @param array $data
      * @return Request

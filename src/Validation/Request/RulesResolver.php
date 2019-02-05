@@ -42,8 +42,6 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::CHECKOUT_CANCEL_ACTION:
             case RequestInterface::CHECKOUT_STATUS_ACTION:
                 return new CheckoutDefaultRules;
-            case RequestInterface::CHECKOUT_CHECK_ACTION:
-                return new CheckoutCheckRules;
             case RequestInterface::CARD_ADD_ACTION:
                 return new CardAddRules;
             case RequestInterface::CARD_LIST_ACTION:

@@ -9,7 +9,6 @@ interface RequestInterface
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
-    const CHECKOUT_CHECK_ACTION = '/checkout/check';
     const CARD_ADD_ACTION = '/card/add';
     const CARD_LIST_ACTION = '/card/list';
     const CARD_DELETE_ACTION = '/card/delete';
