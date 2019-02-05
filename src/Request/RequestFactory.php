@@ -78,6 +78,23 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc#checkout_list)
+     * @param $start \DateTimeInterface
+     * @param $finish \DateTimeInterface
+     * @return Request
+     */
+    public function getCheckoutList($start, $finish)
+    {
+        return new Request(
+            RequestInterface::CHECKOUT_LIST_ACTION,
+            [
+                'start' => $start->format(Gateway::DATETIME_FORMAT),
+                'finish' => $finish->format(Gateway::DATETIME_FORMAT),
+            ]
+        );
+    }
+
+    /**
      * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc.php#card_add)
      * @param array $data
      * @return Request

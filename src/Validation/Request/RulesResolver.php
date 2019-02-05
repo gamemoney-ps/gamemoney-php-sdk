@@ -2,6 +2,7 @@
 namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
 use Gamemoney\Validation\Request\Rules\InvoiceListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
@@ -42,6 +43,8 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::CHECKOUT_CANCEL_ACTION:
             case RequestInterface::CHECKOUT_STATUS_ACTION:
                 return new CheckoutDefaultRules;
+            case RequestInterface::CHECKOUT_LIST_ACTION:
+                return new CheckoutListRules();
             case RequestInterface::CARD_ADD_ACTION:
                 return new CardAddRules;
             case RequestInterface::CARD_LIST_ACTION:

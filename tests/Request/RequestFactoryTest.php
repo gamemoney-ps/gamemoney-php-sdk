@@ -75,6 +75,18 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getCheckoutList',
+                [
+                    new DateTimeImmutable('2018-10-01 12:10:05'),
+                    new DateTimeImmutable('2018-10-30 12:00:00')
+                ],
+                RequestInterface::CHECKOUT_LIST_ACTION,
+                [
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
+                ],
+            ],
+            [
                 'addCard',
                 [
                     ['user' => 1]

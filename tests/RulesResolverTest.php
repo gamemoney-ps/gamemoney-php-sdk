@@ -19,6 +19,7 @@ class RulesResolverTest extends TestCase
             ['action' => RequestInterface::CHECKOUT_CANCEL_ACTION],
             ['action' => RequestInterface::CHECKOUT_CREATE_ACTION],
             ['action' => RequestInterface::CHECKOUT_STATUS_ACTION],
+            ['action' => RequestInterface::CHECKOUT_LIST_ACTION],
             ['action' => RequestInterface::EXCHANGE_CONVERT_ACTION],
             ['action' => RequestInterface::EXCHANGE_FAST_CONVERT_ACTION],
             ['action' => RequestInterface::EXCHANGE_INFO_ACTION],
