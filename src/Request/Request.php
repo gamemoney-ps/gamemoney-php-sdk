@@ -7,19 +7,15 @@ namespace Gamemoney\Request;
  */
 final class Request implements RequestInterface
 {
-    /**
-     * @var string
-     */
-    protected $action;
+    /** @var string */
+    private $action;
 
-    /**
-     * @var array
-     */
-    protected $data = [];
+    /** @var array */
+    private $data;
 
     /**
      * Request constructor.
-     * @param $action URI
+     * @param string $action
      * @param array $data request data array
      */
     public function __construct($action, array $data = [])
