@@ -3,6 +3,7 @@ namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
 use Gamemoney\Validation\Request\Rules\CheckoutCreateRules;
 use Gamemoney\Validation\Request\Rules\CheckoutDefaultRules;
@@ -34,6 +35,8 @@ final class RulesResolver implements RulesResolverInterface
                 return new InvoiceCreateRules;
             case RequestInterface::INVOICE_STATUS_ACTION:
                 return new InvoiceStatusRules;
+            case RequestInterface::INVOICE_LIST_ACTION:
+                return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
                 return new CheckoutCreateRules;
             case RequestInterface::CHECKOUT_CANCEL_ACTION:

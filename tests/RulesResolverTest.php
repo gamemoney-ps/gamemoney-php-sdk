@@ -15,6 +15,7 @@ class RulesResolverTest extends TestCase
         return [
             ['action' => RequestInterface::INVOICE_CREATE_ACTION],
             ['action' => RequestInterface::INVOICE_STATUS_ACTION],
+            ['action' => RequestInterface::INVOICE_LIST_ACTION],
             ['action' => RequestInterface::CHECKOUT_CANCEL_ACTION],
             ['action' => RequestInterface::CHECKOUT_CHECK_ACTION],
             ['action' => RequestInterface::CHECKOUT_CREATE_ACTION],

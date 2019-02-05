@@ -1,6 +1,8 @@
 <?php
 namespace Gamemoney\Request;
 
+use Gamemoney\Gateway;
+
 /**
  * Class RequestFactory
  * Create Request object with needed params
@@ -26,6 +28,23 @@ class RequestFactory
     public function getInvoiceStatus($id)
     {
         return new Request(RequestInterface::INVOICE_STATUS_ACTION, ['invoice' => $id]);
+    }
+
+    /**
+     * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc#invoice_list)
+     * @param $start \DateTimeInterface
+     * @param $finish \DateTimeInterface
+     * @return Request
+     */
+    public function getInvoiceList($start, $finish)
+    {
+        return new Request(
+            RequestInterface::INVOICE_LIST_ACTION,
+            [
+                'start' => $start->format(Gateway::DATETIME_FORMAT),
+                'finish' => $finish->format(Gateway::DATETIME_FORMAT),
+            ]
+        );
     }
 
     /**

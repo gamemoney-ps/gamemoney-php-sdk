@@ -2,8 +2,10 @@
 namespace tests;
 
 use Gamemoney\Exception\RequestValidationException;
+use Gamemoney\Gateway;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Validation\Request\RequestValidator;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -57,6 +59,14 @@ class RequestValidatorTest extends TestCase
                     'param4' => 4.1,
                 ]
             ],
+            [
+                'rules' => [
+                    'param' => [new DateTime(['format' => Gateway::DATETIME_FORMAT])],
+                ],
+                'data' => [
+                    'param' => '2018-10-01 12:10:05',
+                ]
+            ],
         ];
     }
 
@@ -85,6 +95,12 @@ class RequestValidatorTest extends TestCase
             ['rules' => ['param' => [new NotBlank()]], 'data' => ['param' => null]],
             ['rules' => ['param' => [new NotBlank()]], 'data' => ['param' => false]],
             ['rules' => ['param' => [new NotBlank()]], 'data' => []],
+            [
+                'rules' => [
+                    'param' => [new DateTime(['format' => Gateway::DATETIME_FORMAT])]
+                ],
+                'data' => ['param' => '2018-10-01']
+            ],
         ];
     }
 

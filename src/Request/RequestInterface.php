@@ -5,6 +5,7 @@ interface RequestInterface
 {
     const INVOICE_CREATE_ACTION = '/invoice';
     const INVOICE_STATUS_ACTION = '/invoice/status';
+    const INVOICE_LIST_ACTION = '/invoice/list';
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
