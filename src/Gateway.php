@@ -142,8 +142,9 @@ class Gateway
     /**
      * @param RequestInterface $request
      * @return array
-     * @throws Exception\RequestException
-     * @throws Exception\ResponseValidationException
+     * @throws \Gamemoney\Exception\RequestException
+     * @throws \Gamemoney\Exception\RequestValidationException
+     * @throws \Gamemoney\Exception\ResponseValidationException
      */
     public function send(RequestInterface $request)
     {
