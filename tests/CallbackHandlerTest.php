@@ -52,4 +52,39 @@ class CallbackHandlerTest extends TestCase
         $handler->setSignatureVerifier($mockVerifier);
         $this->assertEquals($result, $handler->check($data));
     }
+
+    public function testSuccessAnswer()
+    {
+        $result = '{"success":"true"}';
+
+        $handler = new InvoiceCallbackHandler($this->config);
+        $this->assertEquals($result, $handler->successAnswer());
+    }
+
+    public function errorDataProvider()
+    {
+        return [
+            [
+                'error' => null,
+                'output' => '{"success":"error"}'
+            ],
+            [
+                'error' => 'message',
+                'output' => '{"success":"error","error":"message"}'
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider errorDataProvider
+     * @param string|null $error
+     * @param string $output
+     */
+    public function testErrorAnswer($error, $output)
+    {
+        $handler = new InvoiceCallbackHandler($this->config);
+        $this->assertEquals($output, $handler->errorAnswer($error));
+    }
+
+
 }

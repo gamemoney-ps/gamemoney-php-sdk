@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = require(__DIR__.'/../config.php');
+$config = require __DIR__.'/../config.php';
 
 try {
     $response = $_POST;
@@ -11,7 +11,9 @@ try {
 
         // your invoice processing
 
-        echo json_encode(['success' => true]);
+        echo $handler->successAnswer();
+    } else {
+        echo $handler->errorAnswer();
     }
 
 } catch(\Gamemoney\Exception\GamemoneyExceptionInterface $e) {

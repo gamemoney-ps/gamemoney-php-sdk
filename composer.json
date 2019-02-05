@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.6",
         "ext-openssl": "*",
+        "ext-json": "*",
         "symfony/validator": "*",
         "guzzlehttp/guzzle": ">=4.1.4 <7.0"
     },
