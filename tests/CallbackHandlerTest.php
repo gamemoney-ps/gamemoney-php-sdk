@@ -1,7 +1,7 @@
 <?php
 namespace tests;
 
-use Gamemoney\CallbackHandler;
+use Gamemoney\CallbackHandler\InvoiceCallbackHandler;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +14,7 @@ class CallbackHandlerTest extends TestCase
 
     public function testConstruct()
     {
-        $handler = $this->createPartialMock(CallbackHandler::class, [
+        $handler = $this->createPartialMock(InvoiceCallbackHandler::class, [
             'setSignatureVerifier',
         ]);
 
@@ -30,7 +30,7 @@ class CallbackHandlerTest extends TestCase
     public function testConstructConfigWrong()
     {
         $this->expectException(ConfigException::class);
-        new CallbackHandler([]);
+        new InvoiceCallbackHandler([]);
     }
 
     public function testCheck()
@@ -48,7 +48,7 @@ class CallbackHandlerTest extends TestCase
             ->with($data)
             ->willReturn($result);
 
-        $handler = new CallbackHandler($this->config);
+        $handler = new InvoiceCallbackHandler($this->config);
         $handler->setSignatureVerifier($mockVerifier);
         $this->assertEquals($result, $handler->check($data));
     }
