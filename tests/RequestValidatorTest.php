@@ -61,7 +61,7 @@ class RequestValidatorTest extends TestCase
             ],
             [
                 'rules' => [
-                    'param' => [new DateTime(['format' => Gateway::DATETIME_FORMAT])],
+                    'param' => [new DateTime()],
                 ],
                 'data' => [
                     'param' => '2018-10-01 12:10:05',
@@ -97,7 +97,7 @@ class RequestValidatorTest extends TestCase
             ['rules' => ['param' => [new NotBlank()]], 'data' => []],
             [
                 'rules' => [
-                    'param' => [new DateTime(['format' => Gateway::DATETIME_FORMAT])]
+                    'param' => [new DateTime()]
                 ],
                 'data' => ['param' => '2018-10-01']
             ],

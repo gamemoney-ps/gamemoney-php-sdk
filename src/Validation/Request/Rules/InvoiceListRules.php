@@ -31,11 +31,11 @@ final class InvoiceListRules implements RulesInterface
             ],
             'start' => [
                 new NotBlank(),
-                new DateTime(['format' => Gateway::DATETIME_FORMAT])
+                new DateTime()
             ],
             'finish' => [
                 new NotBlank(),
-                new DateTime(['format' => Gateway::DATETIME_FORMAT])
+                new DateTime()
             ],
         ];
     }

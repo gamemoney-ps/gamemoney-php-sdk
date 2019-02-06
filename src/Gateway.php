@@ -23,7 +23,6 @@ use Gamemoney\Sign\SignerResolver;
 class Gateway
 {
     const API_URL = 'https://paygate.gamemoney.com';
-    const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /** @var int */
     private $project;
