@@ -2,10 +2,15 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = require __DIR__ . '/../config.php';
+$project = 1;
+$hmacKey = 'test';
+$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----';
 
 try {
     $response = $_POST;
+    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
     if ($handler->check($response)) {
 

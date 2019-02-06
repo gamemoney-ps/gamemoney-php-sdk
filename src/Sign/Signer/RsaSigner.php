@@ -2,6 +2,7 @@
 namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Exception\ConfigException;
+use Gamemoney\Exception\PrivateKeyException;
 use Gamemoney\Sign\ArrayToStringTrait;
 use Gamemoney\Sign\SignerInterface;
 
@@ -25,7 +26,7 @@ final class RsaSigner implements SignerInterface
     private $privateKey;
 
     /**
-     * @var string 
+     * @var string
      */
     private $passphrase;
 
@@ -44,12 +45,13 @@ final class RsaSigner implements SignerInterface
      */
     public function getSignature(array $data)
     {
-        openssl_sign(
-            $this->arrayToString($data),
-            $signature,
-            openssl_get_privatekey($this->privateKey, $this->passphrase),
-            "sha256"
-        );
+        $privateKey = openssl_pkey_get_private($this->privateKey, $this->passphrase);
+
+        if ($privateKey === false) {
+            throw new PrivateKeyException(openssl_error_string());
+        }
+
+        openssl_sign($this->arrayToString($data), $signature, $privateKey, "sha256");
 
         return base64_encode($signature);
     }

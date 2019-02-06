@@ -2,9 +2,14 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = require __DIR__.'/../config.php';
+$project = 1;
+$hmacKey = 'test';
+$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----';
 
 try {
+    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->getCheckoutList([

@@ -1,7 +1,7 @@
 <?php
 namespace Gamemoney\CallbackHandler;
 
-use Gamemoney\Exception\ConfigException;
+use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
 
@@ -18,15 +18,11 @@ class BaseCallbackHandler
     protected $signatureVerifier;
 
     /**
-     * @param array $config
+     * @param Config $config
      */
     public function __construct($config)
     {
-        if(empty($config['apiPublicKey'])) {
-            throw new ConfigException('apiPublicKey is not set');
-        }
-
-        $this->setSignatureVerifier(new SignatureVerifier($config['apiPublicKey']));
+        $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
     }
 
     /**
