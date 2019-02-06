@@ -38,13 +38,16 @@ class SignerResolverTest extends TestCase {
                 RequestInterface::INVOICE_STATUS_ACTION
             ],
             [
-                RequestInterface::CHECKOUT_CANCEL_ACTION
+                RequestInterface::INVOICE_LIST_ACTION
             ],
             [
                 RequestInterface::CHECKOUT_CANCEL_ACTION
             ],
             [
-                RequestInterface::CHECKOUT_CHECK_ACTION
+                RequestInterface::CHECKOUT_STATUS_ACTION
+            ],
+            [
+                RequestInterface::CHECKOUT_LIST_ACTION
             ],
             [
                 RequestInterface::CARD_ADD_ACTION

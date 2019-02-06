@@ -29,6 +29,16 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_list)
+     * @param array $data
+     * @return Request
+     */
+    public function getInvoiceList(array $data = [])
+    {
+        return new Request(RequestInterface::INVOICE_LIST_ACTION, $data);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_insert)
      * @param array $data
      * @return Request
@@ -59,13 +69,13 @@ class RequestFactory
     }
 
     /**
-     * Check exists wallet in pay system for some systems
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_list)
      * @param array $data
      * @return Request
      */
-    public  function checkCheckout(array $data = [])
+    public function getCheckoutList(array $data = [])
     {
-        return new Request(RequestInterface::CHECKOUT_CHECK_ACTION, $data);
+        return new Request(RequestInterface::CHECKOUT_LIST_ACTION, $data);
     }
 
     /**
