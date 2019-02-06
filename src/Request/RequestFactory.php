@@ -1,8 +1,6 @@
 <?php
 namespace Gamemoney\Request;
 
-use Gamemoney\Gateway;
-
 /**
  * Class RequestFactory
  * Create Request object with needed params
@@ -32,19 +30,12 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc#invoice_list)
-     * @param $start \DateTimeInterface
-     * @param $finish \DateTimeInterface
+     * @param array $data
      * @return Request
      */
-    public function getInvoiceList($start, $finish)
+    public function getInvoiceList(array $data = [])
     {
-        return new Request(
-            RequestInterface::INVOICE_LIST_ACTION,
-            [
-                'start' => $start->format(Gateway::DATETIME_FORMAT),
-                'finish' => $finish->format(Gateway::DATETIME_FORMAT),
-            ]
-        );
+        return new Request(RequestInterface::INVOICE_LIST_ACTION, $data);
     }
 
     /**
@@ -79,19 +70,12 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](http://cp.gamemoney.com/apidoc#checkout_list)
-     * @param $start \DateTimeInterface
-     * @param $finish \DateTimeInterface
+     * @param array $data
      * @return Request
      */
-    public function getCheckoutList($start, $finish)
+    public function getCheckoutList(array $data = [])
     {
-        return new Request(
-            RequestInterface::CHECKOUT_LIST_ACTION,
-            [
-                'start' => $start->format(Gateway::DATETIME_FORMAT),
-                'finish' => $finish->format(Gateway::DATETIME_FORMAT),
-            ]
-        );
+        return new Request(RequestInterface::CHECKOUT_LIST_ACTION, $data);
     }
 
     /**

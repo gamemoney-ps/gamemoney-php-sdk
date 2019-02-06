@@ -2,7 +2,6 @@
 
 namespace tests\Request;
 
-use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Request\RequestFactory;
@@ -35,8 +34,10 @@ class RequestFactoryTest extends TestCase
             [
                 'getInvoiceList',
                 [
-                    new DateTimeImmutable('2018-10-01 12:10:05'),
-                    new DateTimeImmutable('2018-10-30 12:00:00')
+                    [
+                        'start' => '2018-10-01 12:10:05',
+                        'finish' => '2018-10-30 12:00:00'
+                    ]
                 ],
                 RequestInterface::INVOICE_LIST_ACTION,
                 [
@@ -77,8 +78,10 @@ class RequestFactoryTest extends TestCase
             [
                 'getCheckoutList',
                 [
-                    new DateTimeImmutable('2018-10-01 12:10:05'),
-                    new DateTimeImmutable('2018-10-30 12:00:00')
+                    [
+                        'start' => '2018-10-01 12:10:05',
+                        'finish' => '2018-10-30 12:00:00'
+                    ]
                 ],
                 RequestInterface::CHECKOUT_LIST_ACTION,
                 [
@@ -179,11 +182,17 @@ class RequestFactoryTest extends TestCase
             [
                 'getDaysBalanceStatistics',
                 [
-                    ['currency' => 'RUB']
+                    [
+                        'currency' => 'RUB',
+                        'start' => '2018-10-01 12:10:05',
+                        'finish' => '2018-10-30 12:00:00'
+                    ]
                 ],
                 RequestInterface::STATISTICS_DAYS_BALANCE_ACTION,
                 [
-                    'currency' => 'RUB'
+                    'currency' => 'RUB',
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
                 ],
             ],
             [

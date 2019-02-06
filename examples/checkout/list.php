@@ -7,10 +7,10 @@ $config = require __DIR__.'/../config.php';
 try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->getCheckoutList(
-        new DateTimeImmutable('2018-10-09 23:00:00'),
-        new DateTimeImmutable('now')
-    );
+    $request = $requestFactory->getCheckoutList([
+        'start' => '2018-10-01 12:10:05',
+        'finish' => '2018-10-30 12:00:00'
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);
