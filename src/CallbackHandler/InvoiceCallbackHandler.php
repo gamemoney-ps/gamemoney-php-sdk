@@ -44,4 +44,26 @@ class InvoiceCallbackHandler
     {
         return $this->signatureVerifier->verify($data);
     }
+
+    /**
+     * @return string
+     */
+    public function successAnswer()
+    {
+        return json_encode(['success' => 'true']);
+    }
+
+    /**
+     * @param string|null $error
+     * @return string
+     */
+    public function errorAnswer($error = null)
+    {
+        return json_encode(
+            array_merge(
+                ['success' => 'error'],
+                $error ? ['error' => $error] : []
+            )
+        );
+    }
 }
