@@ -2,15 +2,24 @@
 namespace tests;
 
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
+use Gamemoney\Config;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use PHPUnit\Framework\TestCase;
 
 class CallbackHandlerTest extends TestCase
 {
-    private $config = [
-        'apiPublicKey' => '123'
-    ];
+    /** @var Config */
+    private $config;
+
+    protected function setUp()
+    {
+        $project = 1;
+        $hmacKey = 'test';
+        $privateKey = '123';
+
+        $this->config = new Config($project, $hmacKey, $privateKey);
+    }
 
     public function testConstruct()
     {
@@ -25,12 +34,6 @@ class CallbackHandlerTest extends TestCase
             ->will($this->returnSelf());
 
         $handler->__construct($this->config);
-    }
-
-    public function testConstructConfigWrong()
-    {
-        $this->expectException(ConfigException::class);
-        new BaseCallbackHandler([]);
     }
 
     public function testCheck()
