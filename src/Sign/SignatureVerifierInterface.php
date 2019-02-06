@@ -5,7 +5,7 @@ interface SignatureVerifierInterface
 {
     /**
      * @param array $data
-     * @return mixed
+     * @return bool
      */
     public function verify(array $data);
 }
