@@ -184,15 +184,15 @@ class RequestFactoryTest extends TestCase
                 [
                     [
                         'currency' => 'RUB',
-                        'start' => '2018-10-01 12:10:05',
-                        'finish' => '2018-10-30 12:00:00'
+                        'start' => '2018-10-01',
+                        'finish' => '2018-10-30'
                     ]
                 ],
                 RequestInterface::STATISTICS_DAYS_BALANCE_ACTION,
                 [
                     'currency' => 'RUB',
-                    'start' => '2018-10-01 12:10:05',
-                    'finish' => '2018-10-30 12:00:00'
+                    'start' => '2018-10-01',
+                    'finish' => '2018-10-30'
                 ],
             ],
             [

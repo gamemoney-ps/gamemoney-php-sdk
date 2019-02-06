@@ -2,9 +2,8 @@
 
 namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Gateway;
 use Gamemoney\Validation\Request\RulesInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
@@ -35,11 +34,11 @@ final class StatisticsDaysBalancesRules implements RulesInterface
             ],
             'start' => [
                 new NotBlank(),
-                new DateTime(['format' => Gateway::DATETIME_FORMAT]),
+                new Date(),
             ],
             'finish' => [
                 new NotBlank(),
-                new DateTime(['format' => Gateway::DATETIME_FORMAT]),
+                new Date(),
             ],
         ];
     }
