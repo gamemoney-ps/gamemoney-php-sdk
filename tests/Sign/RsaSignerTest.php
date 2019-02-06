@@ -1,6 +1,7 @@
 <?php
 namespace tests\Sign;
 
+use Gamemoney\Exception\PrivateKeyException;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\RsaSigner;
@@ -61,6 +62,53 @@ class RsaSignerTest extends TestCase {
         $signer = new RsaSigner($this->privateKey, $this->passphrase);
         $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
+    }
+
+    public function testReadPrivateKeyFromString()
+    {
+        $data = ['data' => ''];
+        $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
+
+        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $this->assertEquals($signature, $signer->getSignature($data));
+    }
+
+    public function testReadPrivateKeyFromFile()
+    {
+        $data = ['data' => ''];
+        $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
+        $privateKeyPath = __DIR__ . '/../_data/private_key';
+
+        $signer = new RsaSigner($privateKeyPath, $this->passphrase);
+        $this->assertEquals($signature, $signer->getSignature($data));
+    }
+
+    public function testReadPrivateKeyFromStream()
+    {
+        $data = ['data' => ''];
+        $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
+        $privateKeyStream = 'file://' . __DIR__ . '/../_data/private_key';
+
+        $signer = new RsaSigner($privateKeyStream, $this->passphrase);
+        $this->assertEquals($signature, $signer->getSignature($data));
+    }
+
+    public function testWrongPrivateKeyFormat()
+    {
+        $signer = new RsaSigner(strrev($this->privateKey), $this->passphrase);
+
+        $this->expectException(PrivateKeyException::class);
+
+        $signer->getSignature([]);
+    }
+
+    public function testWrongPrivateKeyPassphrase()
+    {
+        $signer = new RsaSigner($this->privateKey, strrev($this->passphrase));
+
+        $this->expectException(PrivateKeyException::class);
+
+        $signer->getSignature([]);
     }
 
     private function getPrivateKey()

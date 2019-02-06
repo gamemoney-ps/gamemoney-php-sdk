@@ -2,6 +2,7 @@
 namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Exception\ConfigException;
+use Gamemoney\Exception\PrivateKeyException;
 use Gamemoney\Sign\ArrayToStringTrait;
 use Gamemoney\Sign\SignerInterface;
 
@@ -25,7 +26,7 @@ final class RsaSigner implements SignerInterface
     private $privateKey;
 
     /**
-     * @var string 
+     * @var string
      */
     private $passphrase;
 
@@ -35,7 +36,7 @@ final class RsaSigner implements SignerInterface
             throw new ConfigException('privateKey is not set in config');
         }
 
-        $this->privateKey = $privateKey;
+        $this->setPrivateKey($privateKey);
         $this->passphrase = $passphrase;
     }
 
@@ -44,13 +45,34 @@ final class RsaSigner implements SignerInterface
      */
     public function getSignature(array $data)
     {
-        openssl_sign(
-            $this->arrayToString($data),
-            $signature,
-            openssl_get_privatekey($this->privateKey, $this->passphrase),
-            "sha256"
-        );
+        $privateKey = openssl_pkey_get_private($this->privateKey, $this->passphrase);
+
+        if ($privateKey === false) {
+            throw new PrivateKeyException(openssl_error_string());
+        }
+
+        openssl_sign($this->arrayToString($data), $signature, $privateKey, "sha256");
 
         return base64_encode($signature);
+    }
+
+    /**
+     * @param string $privateKey
+     */
+    private function setPrivateKey($privateKey)
+    {
+        if (stripos($privateKey, 'BEGIN ENCRYPTED PRIVATE KEY') !== false) {
+            $this->privateKey = $privateKey;
+
+            return;
+        }
+
+        if (strpos($privateKey, 'file://') === false) {
+            $this->privateKey = 'file://' . $privateKey;
+
+            return;
+        }
+
+        $this->privateKey = $privateKey;
     }
 }

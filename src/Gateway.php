@@ -22,10 +22,8 @@ use Gamemoney\Sign\SignerResolver;
  */
 class Gateway
 {
-    const API_URL = 'https://paygate.gamemoney.com';
-
-    /** @var int */
-    private $project;
+    /** @var Config */
+    private $config;
     /** @var  RequestValidatorInterface */
     private $requestValidator;
     /** @var  ResponseValidatorInterface */
@@ -39,51 +37,25 @@ class Gateway
 
     /**
      * Gateway constructor.
-     * @param array $config
+     * @param Config $gatewayConfig
+     * @param array $clientConfig
      * @throws ConfigException
      */
-    public function __construct($config)
+    public function __construct($gatewayConfig, $clientConfig = [])
     {
-        if(empty($config['apiUrl'])) {
-            $config['apiUrl'] = self::API_URL;
-        }
-
-        if(empty($config['project'])) {
-            throw new ConfigException('Project id is not set');
-        }
-
-        if(empty($config['hmacKey'])) {
-            throw new ConfigException('hmacKey is not set');
-        }
-
-        if(empty($config['privateKey'])) {
-            $config['privateKey'] = null;
-        }
-
-        if(empty($config['apiPublicKey'])) {
-            throw new ConfigException('apiPublicKey is not set');
-        }
-
-        if(empty($config['passphrase'])) {
-            $config['passphrase'] = '';
-        }
+        $this->config = $gatewayConfig;
 
         $signerResolver = new SignerResolver(
-            $config['hmacKey'],
-            $config['privateKey'],
-            $config['passphrase']
+            $this->config->project(),
+            $this->config->privateKey(),
+            $this->config->privateKeyPassword()
         );
 
-        if(empty($config['clientConfig'])) {
-            $config['clientConfig'] = [];
-        }
+        $sender = new Sender($this->config->apiUrl(), $clientConfig);
 
-        $sender = new Sender($config['apiUrl'], $config['clientConfig']);
-
-        $this->project = $config['project'];
         $this
             ->setRequestValidator(new RequestValidator)
-            ->setResponseValidator(new ResponseValidator(new SignatureVerifier($config['apiPublicKey'])))
+            ->setResponseValidator(new ResponseValidator(new SignatureVerifier($this->config->gmCertificate())))
             ->setRulesResolver(new RulesResolver)
             ->setSignerResolver($signerResolver)
             ->setSender($sender);
@@ -147,7 +119,7 @@ class Gateway
      */
     public function send(RequestInterface $request)
     {
-        $request->setField('project', $this->project);
+        $request->setField('project', $this->config->project());
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
 

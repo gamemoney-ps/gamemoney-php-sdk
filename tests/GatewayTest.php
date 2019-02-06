@@ -1,102 +1,32 @@
 <?php
 namespace tests;
 
+use Gamemoney\Config;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Validation\Request\Rules\DefaultRules;
 use Gamemoney\Validation\Request\RulesInterface;
 use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Gateway;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\SenderInterface;
-use Gamemoney\Exception\ConfigException;
 use Gamemoney\Validation\Request\RequestValidatorInterface;
 use Gamemoney\Validation\Request\RulesResolverInterface;
 
 class GatewayTest extends TestCase
 {
+    /** @var Config */
     private $config;
 
     protected function setUp()
     {
-        $this->config = [
-            'privateKey' => "123",
-            'hmacKey' => 'test',
-            'project' => 1,
-            'apiPublicKey' => '123'
-        ];
+        $project = 1;
+        $hmacKey = 'test';
+        $privateKey = '123';
+        $privateKeyPassword = '123';
+
+        $this->config = new Config($project, $hmacKey, $privateKey, $privateKeyPassword);
     }
-
-    public function configDataProvider()
-    {
-        return [
-            [
-                []
-            ],
-            [
-                [
-                    'project' => 1,
-                    'hmacKey' => 'test',
-                ]
-            ],
-            [
-                [
-                    'project' => 1,
-                    'apiPublicKey' => 'testPublicKey'
-                ]
-            ],
-            [
-                [
-                    'hmacKey' => 'test',
-                    'apiPublicKey' => 'testPublicKey'
-                ]
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider configDataProvider
-     * @param $config
-     */
-    public function testConstructConfigWrong($config)
-    {
-        $this->expectException(ConfigException::class);
-        $gateway = new Gateway($config);
-
-    }
-
-    public function successConfigDataProvider()
-    {
-        return [
-            [
-                [
-                    'project' => 1,
-                    'hmacKey' => 'test',
-                    'apiPublicKey' => 'testPublicKey'
-                ]
-            ],
-            [
-                [
-                    'project' => 1,
-                    'hmacKey' => 'test',
-                    'privateKey' => 'test',
-                    'apiPublicKey' => 'testPublicKey'
-                ]
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider successConfigDataProvider
-     * @param $config
-     */
-    public function testConstructConfigSuccess($config)
-    {
-        $gateway = new Gateway($config);
-        $this->assertInstanceOf(Gateway::class, $gateway);
-    }
-
 
     public function testSend()
     {
@@ -114,7 +44,7 @@ class GatewayTest extends TestCase
             ->expects($this->exactly(2))
             ->method('setField')
             ->withConsecutive(
-                ['project', $this->config['project']],
+                ['project', $this->config->project()],
                 ['signature', $signature]
             );
 
