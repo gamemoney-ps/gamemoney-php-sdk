@@ -1,7 +1,5 @@
 # Gamemoney PHP SDK
 
-[![pipeline status](https://git.onmoon.ru/gamemoney/gamemoney-sdk/badges/master/pipeline.svg)](https://git.onmoon.ru/gamemoney/gamemoney-sdk/commits/master) [![coverage report](https://git.onmoon.ru/gamemoney/gamemoney-sdk/badges/master/coverage.svg)](https://git.onmoon.ru/gamemoney/gamemoney-sdk/commits/master)
-
 * [Installation](#installation)
 * [How-To](#how-to)
 * [Config examples](#config-examples)

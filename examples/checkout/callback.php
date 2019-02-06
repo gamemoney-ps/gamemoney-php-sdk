@@ -6,7 +6,7 @@ $config = require __DIR__ . '/../config.php';
 
 try {
     $response = $_POST;
-    $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
+    $handler = new \Gamemoney\CallbackHandler\CheckoutCallbackHandler($config);
     if ($handler->check($response)) {
 
         // your invoice processing
