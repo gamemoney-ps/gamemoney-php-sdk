@@ -11,7 +11,7 @@ $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 try {
     $response = $_POST;
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
-    $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
+    $handler = new \Gamemoney\CallbackHandler\CheckoutCallbackHandler($config);
     if ($handler->check($response)) {
 
         // your invoice processing

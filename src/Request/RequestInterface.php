@@ -5,10 +5,11 @@ interface RequestInterface
 {
     const INVOICE_CREATE_ACTION = '/invoice';
     const INVOICE_STATUS_ACTION = '/invoice/status';
+    const INVOICE_LIST_ACTION = '/invoice/list';
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
-    const CHECKOUT_CHECK_ACTION = '/checkout/check';
+    const CHECKOUT_LIST_ACTION = '/checkout/list';
     const CARD_ADD_ACTION = '/card/add';
     const CARD_LIST_ACTION = '/card/list';
     const CARD_DELETE_ACTION = '/card/delete';
