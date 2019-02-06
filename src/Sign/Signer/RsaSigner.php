@@ -36,7 +36,7 @@ final class RsaSigner implements SignerInterface
             throw new ConfigException('privateKey is not set in config');
         }
 
-        $this->setPrivateKey($privateKey);
+        $this->privateKey = $privateKey;
         $this->passphrase = $passphrase;
     }
 
@@ -54,25 +54,5 @@ final class RsaSigner implements SignerInterface
         openssl_sign($this->arrayToString($data), $signature, $privateKey, "sha256");
 
         return base64_encode($signature);
-    }
-
-    /**
-     * @param string $privateKey
-     */
-    private function setPrivateKey($privateKey)
-    {
-        if (stripos($privateKey, 'BEGIN ENCRYPTED PRIVATE KEY') !== false) {
-            $this->privateKey = $privateKey;
-
-            return;
-        }
-
-        if (strpos($privateKey, 'file://') === false) {
-            $this->privateKey = 'file://' . $privateKey;
-
-            return;
-        }
-
-        $this->privateKey = $privateKey;
     }
 }
