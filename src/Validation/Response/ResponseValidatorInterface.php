@@ -1,5 +1,6 @@
 <?php
 namespace Gamemoney\Validation\Response;
+
 use Gamemoney\Exception\ResponseValidationException;
 
 /**
@@ -9,9 +10,9 @@ use Gamemoney\Exception\ResponseValidationException;
 interface ResponseValidatorInterface
 {
     /**
-     * @param $response
-     * @param $request
+     * @param array $response
+     * @param array $request
      * @throws ResponseValidationException
      */
-    public function validate($response, $request);
+    public function validate(array $response, array $request);
 }

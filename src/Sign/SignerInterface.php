@@ -8,9 +8,9 @@ namespace Gamemoney\Sign;
 interface SignerInterface
 {
     /**
-     * Sygn sending data
-     * @param  array  $data
-     * @return String
+     * Sign sending data
+     * @param array $data
+     * @return string
      */
     public function getSignature(array $data);
 }

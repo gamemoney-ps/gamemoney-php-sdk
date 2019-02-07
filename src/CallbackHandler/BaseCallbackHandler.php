@@ -12,32 +12,31 @@ use Gamemoney\Sign\SignatureVerifierInterface;
  */
 class BaseCallbackHandler
 {
-    /**
-     * @var SignatureVerifierInterface
-     */
+    /** @var SignatureVerifierInterface */
     protected $signatureVerifier;
 
     /**
      * @param Config $config
      */
-    public function __construct($config)
+    public function __construct(Config $config)
     {
         $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
     }
 
     /**
      * @param SignatureVerifierInterface $signatureVerifier
-     * @return $this
+     * @return self
      */
     public function setSignatureVerifier(SignatureVerifierInterface $signatureVerifier)
     {
         $this->signatureVerifier = $signatureVerifier;
+
         return $this;
     }
 
     /**
      * @param array $data
-     * @return mixed
+     * @return bool
      */
     public function check(array $data)
     {

@@ -8,7 +8,6 @@ use Gamemoney\Validation\Request\Rules\InvoiceListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
 use Gamemoney\Validation\Request\Rules\CheckoutCreateRules;
 use Gamemoney\Validation\Request\Rules\CheckoutDefaultRules;
-use Gamemoney\Validation\Request\Rules\CheckoutCheckRules;
 use Gamemoney\Validation\Request\Rules\CardAddRules;
 use Gamemoney\Validation\Request\Rules\CardListRules;
 use Gamemoney\Validation\Request\Rules\CardDeleteRules;

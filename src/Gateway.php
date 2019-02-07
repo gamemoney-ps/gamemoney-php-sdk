@@ -24,15 +24,20 @@ class Gateway
 {
     /** @var Config */
     private $config;
-    /** @var  RequestValidatorInterface */
+
+    /** @var RequestValidatorInterface */
     private $requestValidator;
-    /** @var  ResponseValidatorInterface */
+
+    /** @var ResponseValidatorInterface */
     private $responseValidator;
-    /** @var  RulesResolverInterface */
+
+    /** @var RulesResolverInterface */
     private $rulesResolver;
-    /** @var  SenderInterface */
+
+    /** @var SenderInterface */
     private $sender;
-    /** @var  SignerResolverInterface */
+
+    /** @var SignerResolverInterface */
     private $signerResolver;
 
     /**
@@ -41,7 +46,7 @@ class Gateway
      * @param array $clientConfig
      * @throws ConfigException
      */
-    public function __construct($gatewayConfig, $clientConfig = [])
+    public function __construct(Config $gatewayConfig, array $clientConfig = [])
     {
         $this->config = $gatewayConfig;
 
@@ -63,7 +68,7 @@ class Gateway
 
     /**
      * @param RequestValidatorInterface $validator
-     * @return $this
+     * @return self
      */
     public function setRequestValidator(RequestValidatorInterface $validator)
     {
@@ -73,7 +78,7 @@ class Gateway
 
     /**
      * @param ResponseValidatorInterface $validator
-     * @return $this
+     * @return self
      */
     public function setResponseValidator(ResponseValidatorInterface $validator)
     {
@@ -83,7 +88,7 @@ class Gateway
 
     /**
      * @param RulesResolverInterface $rulesResolver
-     * @return $this
+     * @return self
      */
     public function setRulesResolver(RulesResolverInterface $rulesResolver)
     {
@@ -93,7 +98,7 @@ class Gateway
 
     /**
      * @param SenderInterface $sender
-     * @return $this
+     * @return self
      */
     public function setSender(SenderInterface $sender)
     {
@@ -103,7 +108,7 @@ class Gateway
 
     /**
      * @param SignerResolverInterface $signerResolver
-     * @return $this
+     * @return self
      */
     public function setSignerResolver(SignerResolverInterface $signerResolver)
     {
@@ -114,8 +119,9 @@ class Gateway
     /**
      * @param RequestInterface $request
      * @return array
-     * @throws Exception\RequestException
-     * @throws Exception\ResponseValidationException
+     * @throws \Gamemoney\Exception\RequestException
+     * @throws \Gamemoney\Exception\ResponseValidationException
+     * @throws \Gamemoney\Exception\RequestValidationException
      */
     public function send(RequestInterface $request)
     {
@@ -128,6 +134,7 @@ class Gateway
 
         $response = $this->sender->send($request);
         $this->responseValidator->validate($response, $request->getData());
+
         return $response;
     }
 }

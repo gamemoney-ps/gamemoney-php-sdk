@@ -12,8 +12,9 @@ use Gamemoney\Exception\RequestException;
  */
 final class Sender implements SenderInterface
 {
-    /** @var  string */
+    /** @var string */
     private $apiUrl;
+
     /** @var Client */
     private $client;
 
@@ -22,7 +23,7 @@ final class Sender implements SenderInterface
      * @param string $apiUrl
      * @param array $clientConfig
      */
-    public function __construct($apiUrl, $clientConfig)
+    public function __construct($apiUrl, array $clientConfig)
     {
         $this->apiUrl = $apiUrl;
         $this->client = $this->getClient($clientConfig);
@@ -43,6 +44,7 @@ final class Sender implements SenderInterface
         }
 
         $body = (string) $response->getBody();
+
         return json_decode($body, true);
     }
 

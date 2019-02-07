@@ -3,7 +3,6 @@ namespace tests;
 
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
 use Gamemoney\Config;
-use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -64,6 +63,9 @@ class CallbackHandlerTest extends TestCase
         $this->assertEquals($result, $handler->successAnswer());
     }
 
+    /**
+     * @return array
+     */
     public function errorDataProvider()
     {
         return [
@@ -88,6 +90,4 @@ class CallbackHandlerTest extends TestCase
         $handler = new BaseCallbackHandler($this->config);
         $this->assertEquals($output, $handler->errorAnswer($error));
     }
-
-
 }

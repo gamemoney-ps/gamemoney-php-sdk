@@ -38,14 +38,14 @@ interface RequestInterface
     public function setData(array $data);
 
     /**
-     * @param $field
-     * @param $value
-     * @return mixed
+     * @param string $field
+     * @param mixed $value
+     * @return self
      */
     public function setField($field, $value);
 
     /**
-     * @param $field
+     * @param string $field
      * @return mixed
      */
     public function getField($field);
