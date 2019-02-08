@@ -15,8 +15,7 @@ trait ArrayToStringTrait
         $text = '';
         ksort($data);
 
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $value = $this->arrayToString($value);
             }

@@ -13,14 +13,11 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
     if ($handler->check($response)) {
-
         // your invoice processing
-
         echo $handler->successAnswer();
     } else {
         echo $handler->errorAnswer();
     }
-
-} catch(\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
+} catch (\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
     var_dump($e->getMessage());
 }

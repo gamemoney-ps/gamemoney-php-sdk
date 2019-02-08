@@ -30,7 +30,7 @@ final class RulesResolver implements RulesResolverInterface
      */
     public function resolve($action)
     {
-        switch($action) {
+        switch ($action) {
             case RequestInterface::INVOICE_CREATE_ACTION:
                 return new InvoiceCreateRules;
             case RequestInterface::INVOICE_STATUS_ACTION:

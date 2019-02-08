@@ -33,6 +33,9 @@ class RsaSignerTest extends TestCase
         new RsaSigner(null, $this->passphrase);
     }
 
+    /**
+     * phpcs:disable Generic.Files.LineLength.TooLong
+     */
     public function getSignatureDataProvider()
     {
         return [
@@ -63,7 +66,8 @@ class RsaSignerTest extends TestCase
      * @param string $fixture
      * @dataProvider getSignatureDataProvider
      */
-    public function testRsaGetSignature(array $data, $fixture) {
+    public function testRsaGetSignature(array $data, $fixture)
+    {
         $signer = new RsaSigner($this->privateKey, $this->passphrase);
         $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
