@@ -2,7 +2,6 @@
 namespace tests;
 
 use Gamemoney\Exception\RequestValidationException;
-use Gamemoney\Gateway;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Validation\Request\RequestValidator;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -10,9 +9,11 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-
 class RequestValidatorTest extends TestCase
 {
+    /**
+     * @return array
+     */
     public function successValidateProvider()
     {
         return [
@@ -71,16 +72,19 @@ class RequestValidatorTest extends TestCase
     }
 
     /**
-     * @param $rules
-     * @param $data
+     * @param array $rules
+     * @param array $data
      * @dataProvider successValidateProvider
      */
-    public function testSuccessValidate($rules, $data)
+    public function testSuccessValidate(array $rules, array $data)
     {
-        $validator = new RequestValidator;
-        $this->assertNull($validator->validate($rules, $data));
+        $validator = new RequestValidator();
+        $validator->validate($rules, $data);
     }
 
+    /**
+     * @return array
+     */
     public function failValidateProvider()
     {
         return [
@@ -105,13 +109,13 @@ class RequestValidatorTest extends TestCase
     }
 
     /**
-     * @param $rules
-     * @param $data
+     * @param array $rules
+     * @param array $data
      * @dataProvider failValidateProvider
      */
-    public function testFailValidate($rules, $data)
+    public function testFailValidate(array $rules, array $data)
     {
-        $validator = new RequestValidator;
+        $validator = new RequestValidator();
         $this->expectException(RequestValidationException::class);
         $validator->validate($rules, $data);
     }

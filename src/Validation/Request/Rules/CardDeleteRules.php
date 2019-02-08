@@ -1,5 +1,4 @@
 <?php
-
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -11,7 +10,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * Class CardDeleteRules
  * @package Gamemoney\Validation\Request\Rules
  */
-final class CardDeleteRules  implements RulesInterface
+final class CardDeleteRules implements RulesInterface
 {
     /**
      * @inheritdoc

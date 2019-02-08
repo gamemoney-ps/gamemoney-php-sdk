@@ -11,14 +11,19 @@ use Gamemoney\Sign\Signer\HmacSigner;
  */
 class SignerResolver implements SignerResolverInterface
 {
+    /** @var string */
     private $hmacKey;
+
+    /** @var string */
     private $privateKey;
+
+    /** @var string */
     private $passphrase;
 
     /**
      * SignerResolver constructor.
      * @param string $hmacKey
-     * @param resource|string $privateKey
+     * @param string $privateKey
      * @param string $passphrase
      */
     public function __construct($hmacKey, $privateKey, $passphrase)

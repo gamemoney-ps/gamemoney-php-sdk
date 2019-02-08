@@ -1,5 +1,4 @@
 <?php
-
 namespace tests\Request;
 
 use PHPUnit\Framework\TestCase;
@@ -8,6 +7,9 @@ use Gamemoney\Request\RequestFactory;
 
 class RequestFactoryTest extends TestCase
 {
+    /**
+     * @return array
+     */
     public function methodDataProvider()
     {
         return [
@@ -205,13 +207,13 @@ class RequestFactoryTest extends TestCase
     }
 
     /**
-     * @param $method
-     * @param $args
-     * @param $action
-     * @param $expectedData
+     * @param string $method
+     * @param array $args
+     * @param string $action
+     * @param array $expectedData
      * @dataProvider methodDataProvider
      */
-    public function testMethods($method, $args, $action, $expectedData)
+    public function testMethods($method, array $args, $action, array $expectedData)
     {
         $request = call_user_func_array([RequestFactory::class, $method], $args);
         $this->assertInstanceOf(RequestInterface::class, $request);

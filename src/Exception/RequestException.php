@@ -6,4 +6,6 @@ namespace Gamemoney\Exception;
  * RequestException represents an exception caused by a request error
  * @package Gamemoney\Exception
  */
-class RequestException extends \Exception implements GamemoneyExceptionInterface {}
+class RequestException extends \Exception implements GamemoneyExceptionInterface
+{
+}

@@ -1,5 +1,4 @@
 <?php
-
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Gateway;

@@ -7,27 +7,35 @@ use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Exception\ConfigException;
 
-class RsaSignerTest extends TestCase {
-
+class RsaSignerTest extends TestCase
+{
+    /** @var string */
     private $privateKey;
+
+    /** @var string */
     private $passphrase;
 
     protected function setUp()
     {
         $this->privateKey = $this->getPrivateKey();
-        $this->passphrase = 123;
+        $this->passphrase = '123';
     }
 
-    public function testInterface() {
+    public function testInterface()
+    {
         $signer = new RsaSigner($this->privateKey, $this->passphrase);
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
-    public function testConstruct() {
+    public function testConstruct()
+    {
         $this->expectException(ConfigException::class);
         new RsaSigner(null, $this->passphrase);
     }
 
+    /**
+     * phpcs:disable Generic.Files.LineLength.TooLong
+     */
     public function getSignatureDataProvider()
     {
         return [
@@ -54,11 +62,12 @@ class RsaSignerTest extends TestCase {
     }
 
     /**
-     * @param mixed $data
-     * @param  $fixture
+     * @param array $data
+     * @param string $fixture
      * @dataProvider getSignatureDataProvider
      */
-    public function testRsaGetSignature($data, $fixture) {
+    public function testRsaGetSignature(array $data, $fixture)
+    {
         $signer = new RsaSigner($this->privateKey, $this->passphrase);
         $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
@@ -101,6 +110,9 @@ class RsaSignerTest extends TestCase {
         $signer->getSignature([]);
     }
 
+    /**
+     * @return string
+     */
     private function getPrivateKey()
     {
         return "-----BEGIN ENCRYPTED PRIVATE KEY-----
