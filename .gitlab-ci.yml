@@ -37,6 +37,8 @@ code_style:
     stage: test
     image: php:7.2
     script:
+        - php_prepare
+        - composer update -vv -o
         - ./vendor/bin/phpcs .
 
 code_quality:
