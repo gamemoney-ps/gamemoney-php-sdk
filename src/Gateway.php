@@ -51,7 +51,7 @@ class Gateway
         $this->config = $gatewayConfig;
 
         $signerResolver = new SignerResolver(
-            $this->config->project(),
+            $this->config->hmac(),
             $this->config->privateKey(),
             $this->config->privateKeyPassword()
         );

@@ -3,7 +3,7 @@ namespace Gamemoney\Request;
 
 interface RequestInterface
 {
-    const INVOICE_CREATE_ACTION = '/invoice';
+    const INVOICE_CREATE_ACTION = '/invoice/';
     const INVOICE_STATUS_ACTION = '/invoice/status';
     const INVOICE_LIST_ACTION = '/invoice/list';
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
