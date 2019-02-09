@@ -9,10 +9,15 @@ use Gamemoney\Sign\Signer\HmacSigner;
 use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Request\RequestInterface;
 
-class SignerResolverTest extends TestCase {
-
+class SignerResolverTest extends TestCase
+{
+    /** @var string */
     private $hmacKey;
+
+    /** @var string */
     private $privateKey;
+
+    /** @var string */
     private $passphrase;
 
     protected function setUp()
@@ -28,6 +33,9 @@ class SignerResolverTest extends TestCase {
         $this->assertInstanceOf(SignerResolverInterface::class, $resolver);
     }
 
+    /**
+     * @return array
+     */
     public function resolveDataProvider()
     {
         return [
@@ -38,13 +46,16 @@ class SignerResolverTest extends TestCase {
                 RequestInterface::INVOICE_STATUS_ACTION
             ],
             [
-                RequestInterface::CHECKOUT_CANCEL_ACTION
+                RequestInterface::INVOICE_LIST_ACTION
             ],
             [
                 RequestInterface::CHECKOUT_CANCEL_ACTION
             ],
             [
-                RequestInterface::CHECKOUT_CHECK_ACTION
+                RequestInterface::CHECKOUT_STATUS_ACTION
+            ],
+            [
+                RequestInterface::CHECKOUT_LIST_ACTION
             ],
             [
                 RequestInterface::CARD_ADD_ACTION

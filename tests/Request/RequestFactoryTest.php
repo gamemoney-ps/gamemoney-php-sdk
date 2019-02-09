@@ -1,5 +1,4 @@
 <?php
-
 namespace tests\Request;
 
 use PHPUnit\Framework\TestCase;
@@ -8,6 +7,9 @@ use Gamemoney\Request\RequestFactory;
 
 class RequestFactoryTest extends TestCase
 {
+    /**
+     * @return array
+     */
     public function methodDataProvider()
     {
         return [
@@ -29,6 +31,20 @@ class RequestFactoryTest extends TestCase
                 RequestInterface::INVOICE_STATUS_ACTION,
                 [
                     'invoice' => 1
+                ],
+            ],
+            [
+                'getInvoiceList',
+                [
+                    [
+                        'start' => '2018-10-01 12:10:05',
+                        'finish' => '2018-10-30 12:00:00'
+                    ]
+                ],
+                RequestInterface::INVOICE_LIST_ACTION,
+                [
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
                 ],
             ],
             [
@@ -62,13 +78,17 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
-                'checkCheckout',
+                'getCheckoutList',
                 [
-                    ['amount' => 100]
+                    [
+                        'start' => '2018-10-01 12:10:05',
+                        'finish' => '2018-10-30 12:00:00'
+                    ]
                 ],
-                RequestInterface::CHECKOUT_CHECK_ACTION,
+                RequestInterface::CHECKOUT_LIST_ACTION,
                 [
-                    'amount' => 100
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
                 ],
             ],
             [
@@ -164,11 +184,17 @@ class RequestFactoryTest extends TestCase
             [
                 'getDaysBalanceStatistics',
                 [
-                    ['currency' => 'RUB']
+                    [
+                        'currency' => 'RUB',
+                        'start' => '2018-10-01',
+                        'finish' => '2018-10-30'
+                    ]
                 ],
                 RequestInterface::STATISTICS_DAYS_BALANCE_ACTION,
                 [
-                    'currency' => 'RUB'
+                    'currency' => 'RUB',
+                    'start' => '2018-10-01',
+                    'finish' => '2018-10-30'
                 ],
             ],
             [
@@ -181,13 +207,13 @@ class RequestFactoryTest extends TestCase
     }
 
     /**
-     * @param $method
-     * @param $args
-     * @param $action
-     * @param $expectedData
+     * @param string $method
+     * @param array $args
+     * @param string $action
+     * @param array $expectedData
      * @dataProvider methodDataProvider
      */
-    public function testMethods($method, $args, $action, $expectedData)
+    public function testMethods($method, array $args, $action, array $expectedData)
     {
         $request = call_user_func_array([RequestFactory::class, $method], $args);
         $this->assertInstanceOf(RequestInterface::class, $request);

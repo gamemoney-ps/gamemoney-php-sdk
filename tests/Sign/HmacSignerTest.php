@@ -5,8 +5,9 @@ use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\HmacSigner;
 
-class HmacSignerTest extends TestCase {
-
+class HmacSignerTest extends TestCase
+{
+    /** @var string */
     protected $key;
 
     protected function setUp()
@@ -14,11 +15,15 @@ class HmacSignerTest extends TestCase {
         $this->key = 'hmac_key';
     }
 
-    public function testInterface() {
+    public function testInterface()
+    {
         $signer = new HmacSigner($this->key);
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
+    /**
+     * @return array
+     */
     public function getSignatureDataProvider()
     {
         return [
@@ -45,11 +50,11 @@ class HmacSignerTest extends TestCase {
     }
 
     /**
-     * @param mixed $data
-     * @param  $fixture
+     * @param array $data
+     * @param string $fixture
      * @dataProvider getSignatureDataProvider
      */
-    public function testHmacGetSignature($data, $fixture)
+    public function testHmacGetSignature(array $data, $fixture)
     {
         $signer = new HmacSigner($this->key);
         $signature = $signer->getSignature($data);

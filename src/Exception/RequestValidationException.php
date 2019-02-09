@@ -8,29 +8,29 @@ namespace Gamemoney\Exception;
  */
 class RequestValidationException extends \Exception implements GamemoneyExceptionInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $errors = [];
 
     /**
      * @param string $field
      * @param array $errors
-     * @return $this
+     * @return self
      */
-    public function addErrors($field, $errors)
+    public function addErrors($field, array $errors)
     {
         $this->errors[$field] = $errors;
+
         return $this;
     }
 
     /**
      * @param array $errors
-     * @return $this
+     * @return self
      */
-    public function setErrors($errors)
+    public function setErrors(array $errors)
     {
         $this->errors = $errors;
+
         return $this;
     }
 

@@ -1,19 +1,23 @@
 <?php
 
-require_once __DIR__ . '../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = require(__DIR__.'/../config.php');
+$project = 1;
+$hmacKey = 'test';
+$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----';
 
 try {
     $response = $_POST;
-    $handler = new \Gamemoney\CallbackHandler($config);
-    if($handler->check($response)) {
-
+    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
+    if ($handler->check($response)) {
         // your invoice processing
-
-        echo json_encode(['success' => true]);
+        echo $handler->successAnswer();
+    } else {
+        echo $handler->errorAnswer();
     }
-    
-} catch(\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
+} catch (\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
     var_dump($e->getMessage());
 }

@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 use Gamemoney\Request\Request;
 use Gamemoney\Request\RequestInterface;
 
-
 class RequestTest extends TestCase
 {
     public function testConstructor()
@@ -20,7 +19,7 @@ class RequestTest extends TestCase
         $request = new Request('/test', ['data' => 1]);
         $data = $request->getData();
         $this->assertArrayHasKey('rand', $data);
-        $this->assertTrue(is_string($data['rand']));
+        $this->assertInternalType('string', $data['rand']);
         $this->assertGreaterThanOrEqual(20, strlen($data['rand']));
     }
 

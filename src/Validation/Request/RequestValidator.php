@@ -17,16 +17,17 @@ final class RequestValidator implements RequestValidatorInterface
     {
         $validator = Validation::createValidator();
         $errors = [];
-        foreach($rules as $field => $rule) {
+
+        foreach ($rules as $field => $rule) {
             $value = isset($data[$field]) ? $data[$field] : null;
             $violations = $validator->validate($value, $rule);
 
-            foreach($violations as $violation) {
+            foreach ($violations as $violation) {
                 $errors[$field] = $violation->getMessage();
             }
         }
 
-        if(!empty($errors)) {
+        if (! empty($errors)) {
             $exception = new RequestValidationException('Bad request parameters');
             $exception->setErrors($errors);
 

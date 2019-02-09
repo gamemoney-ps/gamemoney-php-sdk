@@ -15,7 +15,7 @@ final class Request implements RequestInterface
 
     /**
      * Request constructor.
-     * @param string $action
+     * @param string $action URI
      * @param array $data request data array
      */
     public function __construct($action, array $data = [])
@@ -50,6 +50,7 @@ final class Request implements RequestInterface
     public function setData(array $data)
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -59,6 +60,7 @@ final class Request implements RequestInterface
     public function setField($field, $value)
     {
         $this->data[$field] = $value;
+
         return $this;
     }
 

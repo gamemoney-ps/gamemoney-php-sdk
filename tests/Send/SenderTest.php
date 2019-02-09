@@ -14,12 +14,14 @@ use GuzzleHttp\Psr7\Response;
 
 class SenderTest extends TestCase
 {
+    /** @var string */
     private $url;
 
     protected function setUp()
     {
         $this->url = 'url';
     }
+
     public function testInterface()
     {
         $sender = new Sender('url', []);
@@ -38,7 +40,7 @@ class SenderTest extends TestCase
         $sender = new Sender($this->url, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
-        $this->assertTrue(is_array($response));
+        $this->assertInternalType('array', $response);
         $this->assertEquals($response, ['1'=>'2']);
     }
 

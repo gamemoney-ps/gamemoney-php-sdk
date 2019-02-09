@@ -22,68 +22,45 @@ use Gamemoney\Sign\SignerResolver;
  */
 class Gateway
 {
-    const API_URL = 'https://paygate.gamemoney.com';
+    /** @var Config */
+    private $config;
 
-    /** @var int */
-    private $project;
-    /** @var  RequestValidatorInterface */
+    /** @var RequestValidatorInterface */
     private $requestValidator;
-    /** @var  ResponseValidatorInterface */
+
+    /** @var ResponseValidatorInterface */
     private $responseValidator;
-    /** @var  RulesResolverInterface */
+
+    /** @var RulesResolverInterface */
     private $rulesResolver;
-    /** @var  SenderInterface */
+
+    /** @var SenderInterface */
     private $sender;
-    /** @var  SignerResolverInterface */
+
+    /** @var SignerResolverInterface */
     private $signerResolver;
 
     /**
      * Gateway constructor.
-     * @param array $config
+     * @param Config $gatewayConfig
+     * @param array $clientConfig
      * @throws ConfigException
      */
-    public function __construct($config)
+    public function __construct(Config $gatewayConfig, array $clientConfig = [])
     {
-        if(empty($config['apiUrl'])) {
-            $config['apiUrl'] = self::API_URL;
-        }
-
-        if(empty($config['project'])) {
-            throw new ConfigException('Project id is not set');
-        }
-
-        if(empty($config['hmacKey'])) {
-            throw new ConfigException('hmacKey is not set');
-        }
-
-        if(empty($config['privateKey'])) {
-            $config['privateKey'] = null;
-        }
-
-        if(empty($config['apiPublicKey'])) {
-            throw new ConfigException('apiPublicKey is not set');
-        }
-
-        if(empty($config['passphrase'])) {
-            $config['passphrase'] = '';
-        }
+        $this->config = $gatewayConfig;
 
         $signerResolver = new SignerResolver(
-            $config['hmacKey'],
-            $config['privateKey'],
-            $config['passphrase']
+            $this->config->project(),
+            $this->config->privateKey(),
+            $this->config->privateKeyPassword()
         );
 
-        if(empty($config['clientConfig'])) {
-            $config['clientConfig'] = [];
-        }
+        $sender = new Sender($this->config->apiUrl(), $clientConfig);
 
-        $sender = new Sender($config['apiUrl'], $config['clientConfig']);
-
-        $this->project = $config['project'];
         $this
             ->setRequestValidator(new RequestValidator)
-            ->setResponseValidator(new ResponseValidator(new SignatureVerifier($config['apiPublicKey'])))
+            ->setResponseValidator(new ResponseValidator(new SignatureVerifier($this->config->gmCertificate())))
             ->setRulesResolver(new RulesResolver)
             ->setSignerResolver($signerResolver)
             ->setSender($sender);
@@ -91,7 +68,7 @@ class Gateway
 
     /**
      * @param RequestValidatorInterface $validator
-     * @return $this
+     * @return self
      */
     public function setRequestValidator(RequestValidatorInterface $validator)
     {
@@ -101,7 +78,7 @@ class Gateway
 
     /**
      * @param ResponseValidatorInterface $validator
-     * @return $this
+     * @return self
      */
     public function setResponseValidator(ResponseValidatorInterface $validator)
     {
@@ -111,7 +88,7 @@ class Gateway
 
     /**
      * @param RulesResolverInterface $rulesResolver
-     * @return $this
+     * @return self
      */
     public function setRulesResolver(RulesResolverInterface $rulesResolver)
     {
@@ -121,7 +98,7 @@ class Gateway
 
     /**
      * @param SenderInterface $sender
-     * @return $this
+     * @return self
      */
     public function setSender(SenderInterface $sender)
     {
@@ -131,7 +108,7 @@ class Gateway
 
     /**
      * @param SignerResolverInterface $signerResolver
-     * @return $this
+     * @return self
      */
     public function setSignerResolver(SignerResolverInterface $signerResolver)
     {
@@ -143,12 +120,12 @@ class Gateway
      * @param RequestInterface $request
      * @return array
      * @throws \Gamemoney\Exception\RequestException
-     * @throws \Gamemoney\Exception\RequestValidationException
      * @throws \Gamemoney\Exception\ResponseValidationException
+     * @throws \Gamemoney\Exception\RequestValidationException
      */
     public function send(RequestInterface $request)
     {
-        $request->setField('project', $this->project);
+        $request->setField('project', $this->config->project());
         $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
 
@@ -157,6 +134,7 @@ class Gateway
 
         $response = $this->sender->send($request);
         $this->responseValidator->validate($response, $request->getData());
+
         return $response;
     }
 }

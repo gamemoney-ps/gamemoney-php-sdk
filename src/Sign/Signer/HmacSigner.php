@@ -18,14 +18,12 @@ final class HmacSigner implements SignerInterface
 {
     use ArrayToStringTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $hmacKey;
 
     /**
      * HmacSigner constructor.
-     * @param $hmacKey
+     * @param string $hmacKey
      */
     public function __construct($hmacKey)
     {
@@ -37,6 +35,6 @@ final class HmacSigner implements SignerInterface
      */
     public function getSignature(array $data)
     {
-        return hash_hmac("sha256", $this->arrayToString($data), $this->hmacKey);
+        return hash_hmac('sha256', $this->arrayToString($data), $this->hmacKey);
     }
 }
