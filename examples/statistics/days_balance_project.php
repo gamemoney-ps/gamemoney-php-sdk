@@ -12,7 +12,10 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->getInvoiceStatus(1);
+    $request = $requestFactory->getDaysBalanceStatistics([
+        'start' => '2018-01-01',
+        'finish' => '2018-01-02'
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);

@@ -14,7 +14,7 @@ try {
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->getCheckoutList([
         'start' => '2018-10-01 12:10:05',
-        'finish' => '2018-10-30 12:00:00'
+        'finish' => '2019-02-08 16:24:00'
     ]);
     $response = $gateway->send($request);
 
