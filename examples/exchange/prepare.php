@@ -12,7 +12,14 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->getInvoiceStatus(1);
+    $request = $requestFactory->prepareExchange([
+        'externalId' => uniqid(),
+        'minAmount' => 1000,
+        'maxAmount' => 2000.50,
+        'from' => 'RUB',
+        'to' => 'USD',
+        'livetime' => '600'
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);

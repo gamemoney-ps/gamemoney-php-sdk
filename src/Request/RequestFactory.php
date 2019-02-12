@@ -165,7 +165,10 @@ class RequestFactory
      */
     public function getBalanceStatistics($currency = null)
     {
-        return new Request(RequestInterface::STATISTICS_BALANCE_ACTION, ['currency' => $currency]);
+        return new Request(
+            RequestInterface::STATISTICS_BALANCE_ACTION,
+            $currency ? ['currency' => $currency] : []
+        );
     }
 
     /**

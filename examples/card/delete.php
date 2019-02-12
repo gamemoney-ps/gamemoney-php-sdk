@@ -12,7 +12,10 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->getInvoiceStatus(1);
+    $request = $requestFactory->deleteCard([
+        'user' => 1,
+        'pan' => '111111******2222'
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);

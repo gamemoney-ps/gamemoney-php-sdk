@@ -12,7 +12,12 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->getInvoiceStatus(1);
+    $request = $requestFactory->fastConvertExchange([
+        'externalId' => uniqid(),
+        'amount' => 1000,
+        'from' => 'RUB',
+        'to' => 'USD'
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);
