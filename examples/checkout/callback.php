@@ -4,13 +4,10 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
-$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
-...
------END ENCRYPTED PRIVATE KEY-----';
 
 try {
     $response = $_POST;
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $handler = new \Gamemoney\CallbackHandler\CheckoutCallbackHandler($config);
     if ($handler->check($response)) {
         // your invoice processing

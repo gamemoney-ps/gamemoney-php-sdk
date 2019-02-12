@@ -29,27 +29,17 @@ to the require section of your `composer.json` file.
 
 ```php
 <?php
-require_once __DIR__ . 'vendor/autoload.php';
 
-$project = 1;
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$project = 123456;
 $hmacKey = 'test';
-$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
-...
------END ENCRYPTED PRIVATE KEY-----';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->createInvoice([
-        'user' => 1,
-        'amount' => 200.50,
-        'type' => 'qiwi',
-        'wallet' => '89253642685',
-        'project_invoice' => uniqid(),
-        'ip' => '195.23.43.12',
-        'add_some_field' => 'some value'
-    ]);
+    $request = $requestFactory->getInvoiceStatus(1);
     $response = $gateway->send($request);
 
     var_dump($response);
@@ -69,7 +59,7 @@ try {
 
 $pathToPrivateKeyFile = '/keys/gamemoney/project1/priv.key';
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
 $privateKey = file_get_contents($pathToPrivateKeyFile);
 $privateKeyPass = 'password';
@@ -83,7 +73,7 @@ $config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPass
 ```php
 <?php
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
 $pathToPrivateKeyFile = 'file:///keys/gamemoney/project1/priv.key';
 $privateKeyPass = 'password';
@@ -95,14 +85,14 @@ $config = new \Gamemoney\Config($project, $hmacKey, $pathToPrivateKeyFile, $priv
 ```php
 <?php
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
-$privateKey = '-----BEGIN PRIVATE KEY-----
+$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 ...
------END PRIVATE KEY-----';
+-----END ENCRYPTED PRIVATE KEY-----';
 $privateKeyPass = 'password';
 
-$config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPass);
+$config = new \Gamemoney\Config($project, $hmacKey);
 ```
 ## Full Documentation
 
