@@ -30,25 +30,16 @@ to the require section of your `composer.json` file.
 ```php
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
-$privateKey = 'YOUR PRIVATE KEY';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->createInvoice([
-        'user' => 1,
-        'amount' => 200.50,
-        'type' => 'qiwi',
-        'wallet' => '89123456789',
-        'project_invoice' => uniqid(),
-        'ip' => '72.14.192.0',
-        'add_some_field' => 'some value'
-    ]);
+    $request = $requestFactory->getInvoiceStatus(1);
     $response = $gateway->send($request);
 
     var_dump($response);
