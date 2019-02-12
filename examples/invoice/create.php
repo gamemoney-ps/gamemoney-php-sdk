@@ -16,9 +16,9 @@ try {
         'user' => 1,
         'amount' => 200.50,
         'type' => 'qiwi',
-        'wallet' => '89253642685',
+        'wallet' => '89123456789',
         'project_invoice' => uniqid(),
-        'ip' => '195.23.43.12',
+        'ip' => '72.14.192.0',
         'add_some_field' => 'some value'
     ]);
     $response = $gateway->send($request);
