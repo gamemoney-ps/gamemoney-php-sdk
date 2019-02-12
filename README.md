@@ -59,7 +59,7 @@ try {
 
 $pathToPrivateKeyFile = '/keys/gamemoney/project1/priv.key';
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
 $privateKey = file_get_contents($pathToPrivateKeyFile);
 $privateKeyPass = 'password';
