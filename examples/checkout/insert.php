@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
 $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 ...
@@ -15,12 +15,11 @@ try {
     $request = $requestFactory->createCheckout([
         'projectId' => uniqid(),
         'user' => 1,
-        'ip' => '195.23.43.12',
+        'ip' => '72.14.192.0',
         'amount' => 200.50,
-        'wallet' => '89253642685',
+        'wallet' => '89123456789',
         'type' => 'qiwi',
-        'project_invoice' => uniqid(),
-        'description' => 'Payout for user 250115125',
+        'description' => 'Payout for user account 250115125',
         'add_some_field' => 'some value'
     ]);
     $response = $gateway->send($request);

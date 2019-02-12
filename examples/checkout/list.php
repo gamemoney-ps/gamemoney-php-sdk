@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$project = 1;
+$project = 123456;
 $hmacKey = 'test';
 $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 ...
@@ -14,7 +14,7 @@ try {
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->getCheckoutList([
         'start' => '2018-10-01 12:10:05',
-        'finish' => '2019-02-08 16:24:00'
+        'finish' => '2019-10-02 16:24:00'
     ]);
     $response = $gateway->send($request);
 
