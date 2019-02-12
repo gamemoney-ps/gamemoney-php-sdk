@@ -4,12 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
-$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
-...
------END ENCRYPTED PRIVATE KEY-----';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->addCard([

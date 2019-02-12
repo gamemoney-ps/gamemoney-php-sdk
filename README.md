@@ -30,7 +30,7 @@ to the require section of your `composer.json` file.
 ```php
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
@@ -58,7 +58,51 @@ try {
     var_dump($e->getMessage());
 }
 ```
+## Configuration examples
 
+### Using key stored in file
+
+#### Using `file_get_contents` to get key from file
+```php
+<?php
+
+$pathToPrivateKeyFile = '/keys/gamemoney/project1/priv.key';
+
+$project = 1;
+$hmacKey = 'test';
+$privateKey = file_get_contents($pathToPrivateKeyFile);
+$privateKeyPass = 'password';
+
+$config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPass);
+```
+#### Using path in format `file://`
+
+`/keys/gamemoney/project1/priv.key` -- full path to key
+
+```php
+<?php
+
+$project = 123456;
+$hmacKey = 'test';
+$pathToPrivateKeyFile = 'file:///keys/gamemoney/project1/priv.key';
+$privateKeyPass = 'password';
+
+$config = new \Gamemoney\Config($project, $hmacKey, $pathToPrivateKeyFile, $privateKeyPass);
+```
+
+### Using key as string
+```php
+<?php
+
+$project = 123456;
+$hmacKey = 'test';
+$privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
+...
+-----END ENCRYPTED PRIVATE KEY-----';
+$privateKeyPass = 'password';
+
+$config = new \Gamemoney\Config($project, $hmacKey);
+```
 ## Full Documentation
 
 https://cp.gamemoney.com/apidoc
