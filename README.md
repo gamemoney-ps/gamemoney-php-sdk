@@ -14,7 +14,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```sh
-php composer gamemoney/php-gamemoney-sdk "*"
+composer require gamemoney/php-gamemoney-sdk
 ```
 
 or add
