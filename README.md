@@ -14,13 +14,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```sh
-composer require gamemoney/php-gamemoney-sdk
+composer require gamemoney/gamemoney-sdk
 ```
 
 or add
 
 ```
-"gamemoney/php-gamemoney-sdk": "*"
+"gamemoney/gamemoney-sdk": "*"
 ```
 
 to the require section of your `composer.json` file.
