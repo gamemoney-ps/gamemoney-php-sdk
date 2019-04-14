@@ -29,6 +29,16 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_status)
+     * @param string|int $id invoice id in project system
+     * @return Request
+     */
+    public function getInvoiceStatusByExternalId($id)
+    {
+        return new Request(RequestInterface::INVOICE_STATUS_ACTION, ['project_invoice' => $id]);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_list)
      * @param array $data
      * @return Request
