@@ -55,7 +55,7 @@ final class InvoiceCreateRules implements RulesInterface
                 new Type('scalar')
             ],
             'ip' => [
-                new Ip()
+                new Ip(['version' => Ip::ALL])
             ],
         ];
     }
