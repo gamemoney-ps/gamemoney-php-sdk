@@ -34,6 +34,16 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getInvoiceStatusByExternalId',
+                [
+                    'external_id'
+                ],
+                RequestInterface::INVOICE_STATUS_ACTION,
+                [
+                    'project_invoice' => 'external_id'
+                ],
+            ],
+            [
                 'getInvoiceList',
                 [
                     [
