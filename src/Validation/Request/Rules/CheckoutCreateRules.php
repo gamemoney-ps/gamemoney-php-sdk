@@ -58,7 +58,7 @@ final class CheckoutCreateRules implements RulesInterface
                 new Length(['max' => 3])
             ],
             'ip' => [
-                new Ip()
+                new Ip(['version' => Ip::ALL])
             ],
         ];
     }
