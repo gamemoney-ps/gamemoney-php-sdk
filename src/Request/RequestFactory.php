@@ -169,6 +169,16 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_status)
+     * @param string|int $id exchange id in project system
+     * @return Request
+     */
+    public function getExchangeStatusByExternalId($id)
+    {
+        return new Request(RequestInterface::EXCHANGE_STATUS_ACTION, ['externalId' => $id]);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#stat_balance)
      * @param string $currency
      * @return Request
