@@ -182,6 +182,16 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getExchangeStatusByExternalId',
+                [
+                    'external_id'
+                ],
+                RequestInterface::EXCHANGE_STATUS_ACTION,
+                [
+                    'externalId' => 'external_id'
+                ],
+            ],
+            [
                 'getBalanceStatistics',
                 [
                     'RUB'
