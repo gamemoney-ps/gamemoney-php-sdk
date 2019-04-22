@@ -17,7 +17,7 @@ Either run
 composer require gamemoney/gamemoney-sdk
 ```
 
-or add
+Or add
 
 ```
 "gamemoney/gamemoney-sdk": "*"
