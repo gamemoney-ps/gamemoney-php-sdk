@@ -126,7 +126,7 @@ class Gateway
     public function send(RequestInterface $request)
     {
         $request->setField('project', $this->config->project());
-        $rules = $this->rulesResolver->resolve($request->getAction())->getRules();
+        $rules = $this->rulesResolver->resolve($request->getAction(), $request->getData())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
 
         $signer = $this->signerResolver->resolve($request->getAction());

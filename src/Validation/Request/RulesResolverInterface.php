@@ -11,5 +11,5 @@ interface RulesResolverInterface
      * @param string $type
      * @return RulesInterface
      */
-    public function resolve($type);
+    public function resolve($type, $data);
 }
