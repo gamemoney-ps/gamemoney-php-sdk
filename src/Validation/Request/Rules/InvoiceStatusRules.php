@@ -27,9 +27,11 @@ final class InvoiceStatusRules implements RulesInterface
                 new Length(['min' => 20])
             ],
             'invoice' => [
+                new NotBlank(),
                 new Type('numeric')
             ],
             'project_invoice' => [
+                new NotBlank(),
                 new Type('string')
             ]
         ];
