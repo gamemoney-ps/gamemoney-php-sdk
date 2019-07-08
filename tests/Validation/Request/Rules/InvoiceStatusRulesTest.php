@@ -4,7 +4,6 @@ namespace tests\Validation\Request\Rules;
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
 use PHPUnit\Framework\TestCase;
 
-
 class InvoiceStatusRulesTest extends TestCase
 {
     /**
@@ -13,9 +12,22 @@ class InvoiceStatusRulesTest extends TestCase
     public function invoiceStatusProvider()
     {
         return [
-            ['checkField' => ['project', 'rand', 'invoice'], 'data' => ['project' => 123456, 'rand' => '56f97b6c07d66cde3d20', 'invoice' => 1]],
-            ['checkField' => ['project', 'rand', 'invoice'], 'data' => ['project' => 123456, 'rand' => '56f97b6c07d66cde3d20', 'invoice' => 1, 'project_invoice' => 'test']],
-            ['checkField' => ['project', 'rand', 'project_invoice'], 'data' => ['project' => 123456, 'rand' => '56f97b6c07d66cde3d20', 'project_invoice' => 'test']],
+            ['checkField' => ['project', 'rand', 'invoice'], 'data' => [
+                'project' => 123456,
+                'rand' => '56f97b6c07d66cde3d20',
+                'invoice' => 1]
+            ],
+            ['checkField' => ['project', 'rand', 'invoice'], 'data' => [
+                'project' => 123456,
+                'rand' => '56f97b6c07d66cde3d20',
+                'invoice' => 1,
+                'project_invoice' => 'test']
+            ],
+            ['checkField' => ['project', 'rand', 'project_invoice'], 'data' => [
+                'project' => 123456,
+                'rand' => '56f97b6c07d66cde3d20',
+                'project_invoice' => 'test']
+            ],
         ];
     }
 
