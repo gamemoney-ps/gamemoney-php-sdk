@@ -31,7 +31,7 @@ final class InvoiceStatusRules implements RulesInterface
      */
     public function getRules()
     {
-        $arrayRules = [
+        $rules = [
             'project' => [
                 new NotBlank(),
                 new Type('numeric')
@@ -43,17 +43,17 @@ final class InvoiceStatusRules implements RulesInterface
         ];
 
         if (isset($this->data['invoice'])) {
-            $arrayRules['invoice'] = [
+            $rules['invoice'] = [
                 new NotBlank(),
                 new Type('numeric')
             ];
         } elseif (isset($this->data['project_invoice'])) {
-            $arrayRules['project_invoice'] = [
+            $rules['project_invoice'] = [
                 new NotBlank(),
                 new Type('string')
             ];
         }
 
-        return $arrayRules;
+        return $rules;
     }
 }
