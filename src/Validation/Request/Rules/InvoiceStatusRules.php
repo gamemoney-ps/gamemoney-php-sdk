@@ -47,7 +47,7 @@ final class InvoiceStatusRules implements RulesInterface
                 new NotBlank(),
                 new Type('numeric')
             ];
-        } elseif(isset($this->data['project_invoice'])) {
+        } elseif (isset($this->data['project_invoice'])) {
             $arrayRules['project_invoice'] = [
                 new NotBlank(),
                 new Type('string')
