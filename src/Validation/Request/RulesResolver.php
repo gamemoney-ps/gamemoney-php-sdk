@@ -58,7 +58,7 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::EXCHANGE_FAST_CONVERT_ACTION:
                 return new ExchangeFastConvertRules;
             case RequestInterface::EXCHANGE_STATUS_ACTION:
-                return new ExchangeStatusRules;
+                return new ExchangeStatusRules($data);
             case RequestInterface::STATISTICS_BALANCE_ACTION:
                 return new StatisticsBalancesRules;
             case RequestInterface::STATISTICS_DAYS_BALANCE_ACTION:
