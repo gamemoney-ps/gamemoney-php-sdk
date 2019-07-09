@@ -13,11 +13,25 @@ use Symfony\Component\Validator\Constraints\Type;
 final class InvoiceStatusRules implements RulesInterface
 {
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * InvoiceStatusRules constructor.
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getRules()
     {
-        return [
+        $rules = [
             'project' => [
                 new NotBlank(),
                 new Type('numeric')
@@ -26,9 +40,20 @@ final class InvoiceStatusRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'invoice' => [
-                new NotBlank(),
-            ],
         ];
+
+        if (isset($this->data['invoice'])) {
+            $rules['invoice'] = [
+                new NotBlank(),
+                new Type('numeric')
+            ];
+        } elseif (isset($this->data['project_invoice'])) {
+            $rules['project_invoice'] = [
+                new NotBlank(),
+                new Type('string')
+            ];
+        }
+
+        return $rules;
     }
 }

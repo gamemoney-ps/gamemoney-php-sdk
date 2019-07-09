@@ -44,7 +44,8 @@ class RulesResolverTest extends TestCase
     public function testResolve($action)
     {
         $resolver = new RulesResolver();
-        $rules = $resolver->resolve($action);
+        $rules = $resolver->resolve($action, []);
+
         $this->assertInstanceOf(RulesInterface::class, $rules);
 
         $this->assertInternalType('array', $rules->getRules());
@@ -53,6 +54,6 @@ class RulesResolverTest extends TestCase
     public function testWrongActionResolve()
     {
         $resolver = new RulesResolver();
-        $this->assertInstanceOf(DefaultRules::class, $resolver->resolve('wrong action'));
+        $this->assertInstanceOf(DefaultRules::class, $resolver->resolve('wrong action', []));
     }
 }

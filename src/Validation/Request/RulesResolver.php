@@ -28,13 +28,13 @@ final class RulesResolver implements RulesResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve($action)
+    public function resolve($action, $data)
     {
         switch ($action) {
             case RequestInterface::INVOICE_CREATE_ACTION:
                 return new InvoiceCreateRules;
             case RequestInterface::INVOICE_STATUS_ACTION:
-                return new InvoiceStatusRules;
+                return new InvoiceStatusRules($data);
             case RequestInterface::INVOICE_LIST_ACTION:
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
