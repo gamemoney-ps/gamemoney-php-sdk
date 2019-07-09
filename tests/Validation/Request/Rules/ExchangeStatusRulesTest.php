@@ -50,9 +50,5 @@ class ExchangeStatusRulesTest extends TestCase
         $exchange = new ExchangeStatusRules($data);
 
         $this->assertEquals($checkField, array_keys($exchange->getRules()));
-
-        foreach ($checkField as $item) {
-            $this->assertArrayHasKey($item, $exchange->getRules());
-        }
     }
 }
