@@ -50,9 +50,5 @@ class InvoiceStatusRulesTest extends TestCase
         $invoice = new InvoiceStatusRules($data);
 
         $this->assertEquals($checkField, array_keys($invoice->getRules()));
-
-        foreach ($checkField as $item) {
-            $this->assertArrayHasKey($item, $invoice->getRules());
-        }
     }
 }
