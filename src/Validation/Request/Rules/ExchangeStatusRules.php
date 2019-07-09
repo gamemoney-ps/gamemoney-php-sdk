@@ -13,11 +13,25 @@ use Symfony\Component\Validator\Constraints\Type;
 final class ExchangeStatusRules implements RulesInterface
 {
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * ExchangeStatusRules constructor.
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getRules()
     {
-        return [
+        $rules = [
             'project' => [
                 new NotBlank(),
                 new Type('numeric')
@@ -26,10 +40,20 @@ final class ExchangeStatusRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20])
             ],
-            'id' => [
+        ];
+
+        if (isset($this->data['id'])) {
+            $rules['id'] = [
                 new NotBlank(),
                 new Type('numeric')
-            ],
-        ];
+            ];
+        } elseif (isset($this->data['externalId'])) {
+            $rules['externalId'] = [
+                new NotBlank(),
+                new Type('string')
+            ];
+        }
+
+        return $rules;
     }
 }
