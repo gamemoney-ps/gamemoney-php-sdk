@@ -33,6 +33,14 @@ test-7.2:
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
+test-7.3:
+    stage: test
+    image: php:7.3
+    script:
+        - php73_prepare
+        - composer update -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
 code_style:
     stage: test
     image: php:7.2
@@ -78,6 +86,13 @@ code_quality:
         apt-get update && apt-get install -qqy --no-install-recommends git unzip \
         &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
         && pecl install xdebug-2.4.0 \
+        && docker-php-ext-enable xdebug
+    }
+
+    function php73_prepare() {
+        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
+        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && pecl install xdebug-2.7.0 \
         && docker-php-ext-enable xdebug
     }
 
