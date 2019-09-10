@@ -6,6 +6,7 @@ static:
     image: php:7.3
     script:
         - php73_prepare
+        - composer require --dev phpstan/phpstan
         - composer update -vv -o
         - ./vendor/bin/phpstan analyze src -l 5
 
