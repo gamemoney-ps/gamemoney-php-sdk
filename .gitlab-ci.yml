@@ -1,6 +1,14 @@
 stages:
     - test
 
+dependencies:
+    stage: test
+    image: php:7.3
+    script:
+        - php73_prepare
+        - composer update -vv -o
+        - ./vendor/bin/security-checker security:check
+
 static:
     stage: test
     image: php:7.3
