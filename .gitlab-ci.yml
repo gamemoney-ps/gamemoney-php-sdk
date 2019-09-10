@@ -6,6 +6,7 @@ dependencies:
     image: php:7.3
     script:
         - php73_prepare
+        - composer require --dev sensiolabs/security-checker
         - composer update -vv -o
         - ./vendor/bin/security-checker security:check
 
