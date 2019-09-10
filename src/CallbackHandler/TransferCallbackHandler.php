@@ -14,7 +14,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
     private $invoiceNumber;
 
     /**
-     * @param string $invoiceNumber
+     * @param int|null $invoiceNumber
      */
     public function setInvoiceNumber($invoiceNumber)
     {

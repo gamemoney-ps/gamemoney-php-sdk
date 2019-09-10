@@ -1,6 +1,14 @@
 stages:
     - test
 
+static:
+    stage: test
+    image: php:7.3
+    script:
+        - php73_prepare
+        - composer update -vv -o
+        - ./vendor/bin/phpstan analyze src -l 5
+
 test-5.6:
     stage: test
     image: php:5.6
