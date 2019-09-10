@@ -6,7 +6,7 @@ $project = 123456;
 $hmacKey = 'test';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey);
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->getCheckoutStatus('5c5d911f916b1');

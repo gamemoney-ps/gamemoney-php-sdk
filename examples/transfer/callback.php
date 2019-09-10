@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
-
+$invoiceNumber = 123456;
 try {
     $response = $_POST;
     $config = new \Gamemoney\Config($project, $hmacKey);

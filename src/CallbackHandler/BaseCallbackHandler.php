@@ -8,7 +8,6 @@ use Gamemoney\Sign\SignatureVerifierInterface;
 /**
  * Class BaseCallbackHandler
  * @package Gamemoney
- * @internal
  */
 class BaseCallbackHandler
 {
