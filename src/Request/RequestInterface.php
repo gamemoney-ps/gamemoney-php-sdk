@@ -21,6 +21,7 @@ interface RequestInterface
     const STATISTICS_BALANCE_ACTION = '/statistics/balance';
     const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
     const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
+    const TERMINAL_CREATE_ACTION = '/terminal/create';
 
     /**
      * @return string request uri
