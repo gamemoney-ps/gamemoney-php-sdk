@@ -209,4 +209,14 @@ class RequestFactory
     {
         return new Request(RequestInterface::STATISTICS_PAY_TYPES_ACTION);
     }
+
+    /**
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_api_terminal)
+     * @param array $data
+     * @return Request
+     */
+    public function createTerminal(array $data = [])
+    {
+        return new Request(RequestInterface::TERMINAL_CREATE_ACTION, $data);
+    }
 }

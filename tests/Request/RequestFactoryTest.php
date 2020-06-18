@@ -223,6 +223,22 @@ class RequestFactoryTest extends TestCase
                 RequestInterface::STATISTICS_PAY_TYPES_ACTION,
                 [],
             ],
+            [
+                'createTerminal',
+                [
+                    [
+                        'user' => 1,
+                        'ip' => '72.14.192.0',
+                        'add_some_field' => 'some value',
+                    ],
+                ],
+                RequestInterface::TERMINAL_CREATE_ACTION,
+                [
+                    'user' => 1,
+                    'ip' => '72.14.192.0',
+                    'add_some_field' => 'some value',
+                ],
+            ],
         ];
     }
 
