@@ -132,6 +132,16 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'addtokenCard',
+                [
+                    ['user' => 1]
+                ],
+                RequestInterface::CARD_ADDTOKEN_ACTION,
+                [
+                    'user' => 1
+                ],
+            ],
+            [
                 'prepareExchange',
                 [
                     ['amount' => 100]

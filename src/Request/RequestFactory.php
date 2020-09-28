@@ -109,13 +109,23 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_list)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_delete)
      * @param array $data
      * @return Request
      */
     public function deleteCard(array $data = [])
     {
         return new Request(RequestInterface::CARD_DELETE_ACTION, $data);
+    }
+
+    /**
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_add_token)
+     * @param array $data
+     * @return Request
+     */
+    public function addtokenCard(array $data = [])
+    {
+        return new Request(RequestInterface::CARD_ADDTOKEN_ACTION, $data);
     }
 
     /**
