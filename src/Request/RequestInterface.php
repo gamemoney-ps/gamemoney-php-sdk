@@ -13,6 +13,7 @@ interface RequestInterface
     const CARD_ADD_ACTION = '/card/add';
     const CARD_LIST_ACTION = '/card/list';
     const CARD_DELETE_ACTION = '/card/delete';
+    const CARD_ADDTOKEN_ACTION = '/card/addtoken';
     const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
     const EXCHANGE_CONVERT_ACTION = '/exchange/convert';
     const EXCHANGE_FAST_CONVERT_ACTION = '/exchange/fastconvert';
