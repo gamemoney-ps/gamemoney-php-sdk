@@ -15,7 +15,7 @@ class BaseCallbackHandler
     protected $signatureVerifier;
 
     /**
-     * @param $config
+     * @param Config $config
      */
     public function __construct(Config $config)
     {

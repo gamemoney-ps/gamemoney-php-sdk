@@ -142,24 +142,6 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
-                'transferCard',
-                [
-                    [
-                        'card_number' => '4000000000000002',
-                        'cardholder' => 'max payne',
-                        'cc_exp_month' => '07',
-                        'cc_exp_year' => '25',
-                    ]
-                ],
-                RequestInterface::CARD_TRANSFER,
-                [
-                    'card_number' => '4000000000000002',
-                    'cardholder' => 'max payne',
-                    'cc_exp_month' => '07',
-                    'cc_exp_year' => '25',
-                ],
-            ],
-            [
                 'prepareExchange',
                 [
                     ['amount' => 100]
@@ -285,5 +267,26 @@ class RequestFactoryTest extends TestCase
         $requestData = $request->getData();
         unset($requestData['rand']);
         $this->assertEquals($requestData, $expectedData);
+    }
+
+    public function transferCardTest()
+    {
+        $sessionToken = 'testToken';
+        $url = '/v1/sessions/' . $sessionToken . '/input';
+
+        $data = [
+            'card_number' => '4000000000000002',
+            'cardholder' => 'max payne',
+            'cc_exp_month' => '07',
+            'cc_exp_year' => '25',
+        ];
+
+        $request = (new RequestFactory())->transferCard($sessionToken, $data);
+
+        $this->assertInstanceOf(RequestInterface::class, $request);
+        $this->assertEquals($request->getAction(), $url);
+
+        $requestData = $request->getData();
+        $this->assertEquals($requestData, $data);
     }
 }

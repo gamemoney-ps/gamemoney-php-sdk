@@ -82,6 +82,6 @@ class Config
      */
     public function gmCertificate()
     {
-        return 'file://' . __DIR__ . '/../crt/gm.crt';
+        return 'file://' . __DIR__ . '/../../../crt/gm.crt';
     }
 }
