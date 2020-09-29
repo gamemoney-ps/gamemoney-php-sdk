@@ -1,7 +1,7 @@
 <?php
 namespace Gamemoney\CallbackHandler;
 
-use Gamemoney\Config;
+use Gamemoney\Config\Paygate\Config;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
 
@@ -15,7 +15,7 @@ class BaseCallbackHandler
     protected $signatureVerifier;
 
     /**
-     * @param Config $config
+     * @param $config
      */
     public function __construct(Config $config)
     {

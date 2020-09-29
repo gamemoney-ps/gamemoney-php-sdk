@@ -129,6 +129,19 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#card_send_card_data)
+     * @param string $sessionToken
+     * @param array $data
+     * @return Request
+     */
+    public function transferCard($sessionToken, array $data = [])
+    {
+        $url = sprintf(RequestInterface::CARD_TRANSFER, $sessionToken);
+
+        return new Request($url, $data);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_prepare)
      * @param array $data
      * @return Request

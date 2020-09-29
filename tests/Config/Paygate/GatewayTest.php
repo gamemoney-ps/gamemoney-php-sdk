@@ -1,13 +1,13 @@
 <?php
 namespace tests;
 
-use Gamemoney\Config;
+use Gamemoney\Config\Paygate\Config;
+use Gamemoney\Config\Paygate\Gateway;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\SignerResolverInterface;
 use Gamemoney\Validation\Request\RulesInterface;
 use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Gateway;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Validation\Request\RequestValidatorInterface;

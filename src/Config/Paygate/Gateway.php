@@ -1,5 +1,6 @@
 <?php
-namespace Gamemoney;
+
+namespace Gamemoney\Config\Paygate;
 
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\Sender;
