@@ -2,13 +2,13 @@
 namespace tests;
 
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
-use Gamemoney\Config;
+use Gamemoney\Config\Paygate\Config;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use PHPUnit\Framework\TestCase;
 
 class CallbackHandlerTest extends TestCase
 {
-    /** @var Config */
+    /** @var Config*/
     private $config;
 
     protected function setUp()

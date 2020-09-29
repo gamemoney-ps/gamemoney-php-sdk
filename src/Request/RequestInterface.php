@@ -11,9 +11,10 @@ interface RequestInterface
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
     const CHECKOUT_LIST_ACTION = '/checkout/list';
     const CARD_ADD_ACTION = '/card/add';
+    const CARD_ADDTOKEN_ACTION = '/card/addtoken';
+    const CARD_TRANSFER = '/v1/sessions/%s/input';
     const CARD_LIST_ACTION = '/card/list';
     const CARD_DELETE_ACTION = '/card/delete';
-    const CARD_ADDTOKEN_ACTION = '/card/addtoken';
     const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
     const EXCHANGE_CONVERT_ACTION = '/exchange/convert';
     const EXCHANGE_FAST_CONVERT_ACTION = '/exchange/fastconvert';

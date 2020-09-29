@@ -7,7 +7,7 @@ $hmacKey = 'test';
 $invoiceNumber = 123456;
 try {
     $response = $_POST;
-    $config = new \Gamemoney\Config($project, $hmacKey);
+    $config = new \Gamemoney\Config\Paygate\Config($project, $hmacKey);
     $handler = new \Gamemoney\CallbackHandler\TransferCallbackHandler($config);
     if ($handler->check($response)) {
         // create invoice and get back an invoice number $invoiceNumber

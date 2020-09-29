@@ -142,6 +142,24 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'transferCard',
+                [
+                    [
+                        'card_number' => '4000000000000002',
+                        'cardholder' => 'max payne',
+                        'cc_exp_month' => '07',
+                        'cc_exp_year' => '25',
+                    ]
+                ],
+                RequestInterface::CARD_TRANSFER,
+                [
+                    'card_number' => '4000000000000002',
+                    'cardholder' => 'max payne',
+                    'cc_exp_month' => '07',
+                    'cc_exp_year' => '25',
+                ],
+            ],
+            [
                 'prepareExchange',
                 [
                     ['amount' => 100]

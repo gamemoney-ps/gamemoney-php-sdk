@@ -6,8 +6,8 @@ $project = 123456;
 $hmacKey = 'test';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey);
-    $gateway = new \Gamemoney\Gateway($config);
+    $config = new \Gamemoney\Config\Paygate\Config($project, $hmacKey);
+    $gateway = new \Gamemoney\Config\Paygate\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->deleteCard([
         'user' => 1,

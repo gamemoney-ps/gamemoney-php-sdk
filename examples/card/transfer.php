@@ -2,14 +2,23 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$project = 123456;
-$hmacKey = 'test';
+$sessionToken = 'testToken';
 
 try {
-    $config = new \Gamemoney\Config\Paygate\Config($project, $hmacKey);
-    $gateway = new \Gamemoney\Config\Paygate\Gateway($config);
+    $config = new \Gamemoney\Config\Secure\Config();
+    $gateway = new \Gamemoney\Config\Secure\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
-    $request = $requestFactory->cancelCheckout('5c5d911f916b1');
+
+    $request = $requestFactory->transferCard(
+        $sessionToken,
+        [
+            'card_number' => '4000000000000002',
+            'cardholder' => 'max payne',
+            'cc_exp_month' => '07',
+            'cc_exp_year' => '25',
+        ]
+    );
+
     $response = $gateway->send($request);
 
     var_dump($response);

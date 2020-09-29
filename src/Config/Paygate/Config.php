@@ -1,5 +1,5 @@
 <?php
-namespace Gamemoney;
+namespace Gamemoney\Config\Paygate;
 
 /**
  * Class Config
