@@ -5,8 +5,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $sessionToken = 'testToken';
 
 try {
-    $config = new \Gamemoney\Config\Secure\Config();
-    $gateway = new \Gamemoney\Config\Secure\Gateway($config);
+    $config = new \Gamemoney\Config();
+    $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
 
     $request = $requestFactory->transferCard(
