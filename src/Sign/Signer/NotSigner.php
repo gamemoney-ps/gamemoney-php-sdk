@@ -3,8 +3,9 @@
 namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Sign\SignerInterface;
 
-class NotSigner
+final class NotSigner implements SignerInterface
 {
     /**
      * @param RequestInterface $request

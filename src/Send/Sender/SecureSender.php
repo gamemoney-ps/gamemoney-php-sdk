@@ -22,12 +22,12 @@ final class SecureSender implements SenderInterface
 
     /**
      * Sender constructor.
-     * @param string $apiUrl
+     * @param string $secureUrl
      * @param array $clientConfig
      */
-    public function __construct($apiUrl)
+    public function __construct($secureUrl)
     {
-        $this->apiUrl = $apiUrl;
+        $this->secureUrl = $secureUrl;
         $this->client = $this->getClient();
     }
 
