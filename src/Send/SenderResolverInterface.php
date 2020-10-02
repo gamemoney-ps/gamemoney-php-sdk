@@ -2,8 +2,6 @@
 
 namespace Gamemoney\Send;
 
-use Gamemoney\Config;
-
 /**
  * Interface SenderResolverInterface
  * @package Gamemoney\Send

@@ -2,8 +2,6 @@
 namespace Gamemoney;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Send\Sender;
-use Gamemoney\Send\SenderInterface;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Send\SenderResolver;
 use Gamemoney\Send\SenderResolverInterface;
@@ -11,8 +9,6 @@ use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignerResolverInterface;
 use Gamemoney\Validation\Request\RequestValidator;
 use Gamemoney\Validation\Request\RequestValidatorInterface;
-use Gamemoney\Validation\Response\ResponseValidator;
-use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use Gamemoney\Validation\Request\RulesResolver;
 use Gamemoney\Validation\Request\RulesResolverInterface;
 use Gamemoney\Sign\SignerResolver;
