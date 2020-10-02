@@ -1,6 +1,8 @@
 <?php
 namespace Gamemoney\Sign;
 
+use Gamemoney\Request\RequestInterface;
+
 /**
  * Interface SignerInterface
  * @package Gamemoney\Sign
@@ -8,9 +10,8 @@ namespace Gamemoney\Sign;
 interface SignerInterface
 {
     /**
-     * Sign sending data
-     * @param array $data
-     * @return string
+     * @param RequestInterface $request
+     * @return RequestInterface $request
      */
-    public function getSignature(array $data);
+    public function sign(RequestInterface $request);
 }

@@ -1,6 +1,7 @@
 <?php
-namespace Gamemoney\Send;
+namespace Gamemoney\Send\Sender;
 
+use Gamemoney\Send\SenderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Gamemoney\Request\RequestInterface;
@@ -8,7 +9,7 @@ use Gamemoney\Exception\RequestException;
 
 /**
  * Class Sender
- * @package Gamemoney\Send
+ * @package Gamemoney\Send\Sender
  */
 final class Sender implements SenderInterface
 {
