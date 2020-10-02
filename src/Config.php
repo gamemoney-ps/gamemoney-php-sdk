@@ -1,5 +1,5 @@
 <?php
-namespace Gamemoney\Config\Paygate;
+namespace Gamemoney;
 
 /**
  * Class Config
@@ -82,6 +82,6 @@ class Config
      */
     public function gmCertificate()
     {
-        return 'file://' . __DIR__ . '/../../../crt/gm.crt';
+        return 'file://' . __DIR__ . '/../crt/gm.crt';
     }
 }

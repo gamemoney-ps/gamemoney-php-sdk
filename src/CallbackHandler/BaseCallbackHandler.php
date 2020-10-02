@@ -1,7 +1,7 @@
 <?php
 namespace Gamemoney\CallbackHandler;
 
-use Gamemoney\Config\Paygate\Config;
+use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
 
