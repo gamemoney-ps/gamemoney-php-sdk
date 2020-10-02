@@ -10,8 +10,8 @@ $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 $privateKeyPassword = 'keypassword';
 
 try {
-    $config = new \Gamemoney\Config\Paygate\Config($project, $hmacKey, $privateKey, $privateKeyPassword);
-    $gateway = new \Gamemoney\Config\Paygate\Gateway($config);
+    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPassword);
+    $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->createCheckout([
         'projectId' => uniqid(),

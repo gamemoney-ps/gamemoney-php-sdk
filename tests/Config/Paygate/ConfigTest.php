@@ -1,7 +1,7 @@
 <?php
 namespace tests;
 
-use Gamemoney\Config\Paygate\Config;
+use Gamemoney\Config;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
