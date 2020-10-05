@@ -61,7 +61,7 @@ final class RsaSigner implements SignerInterface
     /**
      * @inheritdoc
      */
-    private function getSignature(array $data)
+    public function getSignature(array $data)
     {
         $privateKey = openssl_pkey_get_private($this->privateKey, $this->passphrase);
 

@@ -1,6 +1,7 @@
 <?php
 namespace tests\Sign;
 
+use Gamemoney\Sign\Signer\NotSigner;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerResolver;
 use Gamemoney\Sign\SignerResolverInterface;
@@ -61,6 +62,9 @@ class SignerResolverTest extends TestCase
                 RequestInterface::CARD_ADD_ACTION
             ],
             [
+                RequestInterface::CARD_ADDTOKEN_ACTION
+            ],
+            [
                 RequestInterface::CARD_LIST_ACTION
             ],
             [
@@ -88,6 +92,12 @@ class SignerResolverTest extends TestCase
                 RequestInterface::STATISTICS_DAYS_BALANCE_ACTION
             ],
             [
+                RequestInterface::STATISTICS_PAY_TYPES_ACTION
+            ],
+            [
+                RequestInterface::TERMINAL_CREATE_ACTION
+            ],
+            [
                 'any other action'
             ]
         ];
@@ -110,5 +120,13 @@ class SignerResolverTest extends TestCase
         $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(RsaSigner::class, $signer);
+    }
+
+    public function testNotSignerResolve()
+    {
+        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
+        $signer = $resolver->resolve(RequestInterface::CARD_TRANSFER);
+        $this->assertInstanceOf(SignerInterface::class, $signer);
+        $this->assertInstanceOf(NotSigner::class, $signer);
     }
 }
