@@ -127,11 +127,11 @@ class GatewayTest extends TestCase
 
         $mockSigner = $this
             ->getMockBuilder(SignerInterface::class)
-            ->setMethods(['getSignature'])
+            ->setMethods(['sign'])
             ->getMock();
         $mockSigner
             ->expects($this->once())
-            ->method('getSignature')
+            ->method('sign')
             ->willReturn($signature);
 
         $mockSignerResolver = $this
