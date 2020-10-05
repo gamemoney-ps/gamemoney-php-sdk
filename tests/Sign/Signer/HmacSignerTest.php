@@ -1,5 +1,5 @@
 <?php
-namespace tests\Sign;
+namespace tests\Sign\Signer;
 
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;

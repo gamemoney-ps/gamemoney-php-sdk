@@ -34,7 +34,7 @@ class SenderResolver implements SenderResolverInterface
     public function resolve($action)
     {
         if ($action == RequestInterface::CARD_TRANSFER) {
-            return new SecureSender($this->secureUrl);
+            return new SecureSender($this->secureUrl, $this->clientConfig);
         }
 
         return new Sender($this->apiUrl, $this->clientConfig);
