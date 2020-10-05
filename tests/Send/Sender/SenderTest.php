@@ -1,11 +1,9 @@
 <?php
 namespace tests\Send;
 
+use Gamemoney\Send\Sender\Sender;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
-use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;

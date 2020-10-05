@@ -23,7 +23,6 @@ final class SecureSender implements SenderInterface
     /**
      * Sender constructor.
      * @param string $secureUrl
-     * @param array $clientConfig
      */
     public function __construct($secureUrl)
     {
