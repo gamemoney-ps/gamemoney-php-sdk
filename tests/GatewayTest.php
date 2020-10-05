@@ -147,7 +147,7 @@ class GatewayTest extends TestCase
         $gateway = (new Gateway($this->config))
             ->setSenderResolver($mockSenderResolver)
             ->setRequestValidator($mockRequestValidator)
-            ->setResponseValidatorResolver($mockResponseValidator)
+            ->setResponseValidatorResolver($mockResponseValidatorResolver)
             ->setSignerResolver($mockSignerResolver)
             ->setRulesResolver($mockRulesResolver);
 
