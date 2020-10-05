@@ -23,11 +23,12 @@ final class SecureSender implements SenderInterface
     /**
      * Sender constructor.
      * @param string $secureUrl
+     * @param array $clientConfig
      */
-    public function __construct($secureUrl)
+    public function __construct($secureUrl, array $clientConfig)
     {
         $this->secureUrl = $secureUrl;
-        $this->client = $this->getClient();
+        $this->client = $this->getClient($clientConfig);
     }
 
     /**
@@ -55,14 +56,15 @@ final class SecureSender implements SenderInterface
     }
 
     /**
+     * @param array $clientConfig
      * @return Client
      */
-    private function getClient()
+    private function getClient(array $clientConfig)
     {
         $defaultConfig = [
             'base_uri' => $this->secureUrl
         ];
 
-        return new Client($defaultConfig);
+        return new Client(array_merge($defaultConfig, $clientConfig));
     }
 }

@@ -22,7 +22,7 @@ class SenderTest extends TestCase
 
     public function testInterface()
     {
-        $sender = new Sender('url', []);
+        $sender = new Sender($this->url, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
