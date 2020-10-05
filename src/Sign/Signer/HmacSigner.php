@@ -48,7 +48,7 @@ final class HmacSigner implements SignerInterface
     /**
      * @inheritdoc
      */
-    private function getSignature(array $data)
+    public function getSignature(array $data)
     {
         return hash_hmac('sha256', $this->arrayToString($data), $this->hmacKey);
     }
