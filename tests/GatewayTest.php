@@ -43,11 +43,10 @@ class GatewayTest extends TestCase
             ->willReturn($data);
 
         $mockRequest
-            ->expects($this->exactly(2))
+            ->expects($this->once())
             ->method('setField')
             ->withConsecutive(
-                ['project', $this->config->project()],
-                ['signature', $signature]
+                ['project', $this->config->project()]
             );
 
         $mockRules = $this
@@ -131,7 +130,7 @@ class GatewayTest extends TestCase
         $mockSigner
             ->expects($this->once())
             ->method('sign')
-            ->willReturn($signature);
+            ->willReturn($mockRequest);
 
         $mockSignerResolver = $this
             ->getMockBuilder(SignerResolverInterface::class)
