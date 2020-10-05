@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace tests\Validation\Request;
 
 use Gamemoney\Exception\RequestValidationException;
 use PHPUnit\Framework\TestCase;
