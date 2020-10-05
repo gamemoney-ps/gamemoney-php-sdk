@@ -80,7 +80,6 @@ class GatewayTest extends TestCase
         $mockSender
             ->expects($this->once())
             ->method('send')
-            ->with($mockRequest)
             ->willReturn($senderResult);
 
         $mockSenderResolver = $this
