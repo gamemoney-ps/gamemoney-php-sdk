@@ -5,7 +5,6 @@ namespace tests\Send\Sender;
 use Gamemoney\Exception\RequestException;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\Sender\SecureSender;
-use Gamemoney\Send\Sender\Sender;
 use Gamemoney\Send\SenderInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -24,7 +23,7 @@ class SecureSenderTest extends TestCase
 
     public function testInterface()
     {
-        $sender = new SecureSender($this->url);
+        $sender = new SecureSender($this->url, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
@@ -51,7 +50,7 @@ class SecureSenderTest extends TestCase
         $mockRequest = $this->getRequestMock();
 
         $mock = new MockHandler([
-            new Response(200, [], '{"1":"2"}'),
+            new Response(404, [], ''),
         ]);
 
         $handler = HandlerStack::create($mock);
