@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace tests\Validation\Request;
 
 use Gamemoney\Validation\Request\Rules\DefaultRules;
 use Gamemoney\Validation\Request\RulesInterface;
