@@ -9,10 +9,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * Class SecureSender
+ * Class JsonSender
  * @package Gamemoney\Send\Sender
  */
-final class SecureSender implements SenderInterface
+final class JsonSender implements SenderInterface
 {
     /** @var string */
     private $secureUrl;
