@@ -3,7 +3,7 @@
 namespace Gamemoney\Send;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Send\Sender\SecureSender;
+use Gamemoney\Send\Sender\JsonSender;
 use Gamemoney\Send\Sender\Sender;
 
 /**
@@ -34,7 +34,7 @@ class SenderResolver implements SenderResolverInterface
     public function resolve($action)
     {
         if ($action == RequestInterface::CARD_TRANSFER) {
-            return new SecureSender($this->secureUrl, $this->clientConfig);
+            return new JsonSender($this->secureUrl, $this->clientConfig);
         }
 
         return new Sender($this->apiUrl, $this->clientConfig);

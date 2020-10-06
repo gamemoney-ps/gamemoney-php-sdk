@@ -3,7 +3,7 @@
 namespace tests\Send;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Send\Sender\SecureSender;
+use Gamemoney\Send\Sender\JsonSender;
 use Gamemoney\Send\Sender\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Send\SenderResolver;
@@ -122,6 +122,6 @@ class SenderResolverTest extends TestCase
         $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
         $sender = $resolver->resolve(RequestInterface::CARD_TRANSFER);
         $this->assertInstanceOf(SenderInterface::class, $sender);
-        $this->assertInstanceOf(SecureSender::class, $sender);
+        $this->assertInstanceOf(JsonSender::class, $sender);
     }
 }
