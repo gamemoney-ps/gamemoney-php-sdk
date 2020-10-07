@@ -134,9 +134,9 @@ class RequestFactory
      * @param array $data
      * @return Request
      */
-    public function transferCard($sessionToken, array $data = [])
+    public function schemaCard($sessionToken, array $data = [])
     {
-        $url = sprintf(RequestInterface::CARD_TRANSFER, $sessionToken);
+        $url = sprintf(RequestInterface::CARD_SCHEMA_ACTION, $sessionToken);
 
         return new Request($url, $data);
     }

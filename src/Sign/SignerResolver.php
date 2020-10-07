@@ -12,7 +12,7 @@ use Gamemoney\Sign\Signer\HmacSigner;
  */
 class SignerResolver implements SignerResolverInterface
 {
-    /** @var string|null */
+    /** @var string */
     private $hmacKey;
 
     /** @var string|null */
@@ -39,7 +39,7 @@ class SignerResolver implements SignerResolverInterface
      */
     public function resolve($action)
     {
-        if ($action == RequestInterface::CARD_TRANSFER) {
+        if ($action == RequestInterface::CARD_SCHEMA_ACTION) {
             return new EmptySigner();
         }
 

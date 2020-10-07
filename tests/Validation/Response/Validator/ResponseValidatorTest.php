@@ -1,5 +1,5 @@
 <?php
-namespace tests\Validation\Response;
+namespace tests\Validation\Response\Validator;
 
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;

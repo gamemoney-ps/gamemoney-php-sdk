@@ -25,7 +25,7 @@ class ResponseValidatorResolver implements ResponseValidatorResolverInterface
      */
     public function resolve($action)
     {
-        if ($action == RequestInterface::CARD_TRANSFER) {
+        if ($action == RequestInterface::CARD_SCHEMA_ACTION) {
             return new ResponseValidatorSecure();
         }
 

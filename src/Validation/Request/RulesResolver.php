@@ -3,7 +3,7 @@ namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
-use Gamemoney\Validation\Request\Rules\CardTransfer;
+use Gamemoney\Validation\Request\Rules\CardSchemaRules;
 use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
 use Gamemoney\Validation\Request\Rules\InvoiceListRules;
@@ -32,6 +32,10 @@ final class RulesResolver implements RulesResolverInterface
      */
     public function resolve($action, $data)
     {
+        if (preg_match('/^\/v1\/sessions\/[\w]+\/input$/', $action)) {
+            $action = RequestInterface::CARD_SCHEMA_ACTION;
+        }
+
         switch ($action) {
             case RequestInterface::INVOICE_CREATE_ACTION:
                 return new InvoiceCreateRules;
@@ -50,8 +54,8 @@ final class RulesResolver implements RulesResolverInterface
                 return new CardAddRules;
             case RequestInterface::CARD_ADDTOKEN_ACTION:
                 return new CardAddtokenRules;
-            case RequestInterface::CARD_TRANSFER:
-                return new CardTransfer;
+            case RequestInterface::CARD_SCHEMA_ACTION:
+                return new CardSchemaRules;
             case RequestInterface::CARD_LIST_ACTION:
                 return new CardListRules;
             case RequestInterface::CARD_DELETE_ACTION:
