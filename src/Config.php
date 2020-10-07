@@ -12,10 +12,10 @@ class Config
 
     const SECURE_URL = 'https://secure.gamemoney.com/api';
 
-    /** @var int|null */
+    /** @var int */
     private $project;
 
-    /** @var string|null */
+    /** @var string */
     private $hmac;
 
     /** @var string|null */
@@ -32,8 +32,8 @@ class Config
      * @param string|null $privateKeyPassword
      */
     public function __construct(
-        $project = null,
-        $hmac = null,
+        $project,
+        $hmac,
         $privateKey = null,
         $privateKeyPassword = null
     ) {
@@ -44,7 +44,7 @@ class Config
     }
 
     /**
-     * @return int|null
+     * @return int
      */
     public function project()
     {
@@ -52,7 +52,7 @@ class Config
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function hmac()
     {

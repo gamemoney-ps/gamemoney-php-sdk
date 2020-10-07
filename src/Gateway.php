@@ -136,9 +136,7 @@ class Gateway
         $rules = $this->rulesResolver->resolve($request->getAction(), $request->getData())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
 
-        if ($this->config->project()) {
-            $request->setField('project', $this->config->project());
-        }
+        $request->setField('project', $this->config->project());
 
         $request = $this
             ->signerResolver

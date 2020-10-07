@@ -2,14 +2,16 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$project = 123456;
+$hmacKey = 'test';
 $sessionToken = 'testToken';
 
 try {
-    $config = new \Gamemoney\Config();
+    $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
 
-    $request = $requestFactory->transferCard(
+    $request = $requestFactory->schemaCard(
         $sessionToken,
         [
             'card_number' => '4000000000000002',

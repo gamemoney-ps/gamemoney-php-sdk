@@ -1,37 +1,24 @@
 <?php
 
-namespace tests\Send;
+namespace tests\Validation\Response;
 
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Send\Sender\JsonSender;
-use Gamemoney\Send\Sender\Sender;
-use Gamemoney\Send\SenderInterface;
-use Gamemoney\Send\SenderResolver;
-use Gamemoney\Send\SenderResolverInterface;
+use Gamemoney\Sign\SignatureVerifierInterface;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
+use Gamemoney\Validation\Response\ResponseValidatorResolver;
+use Gamemoney\Validation\Response\ResponseValidatorResolverInterface;
+use Gamemoney\Validation\Response\Validator\ResponseValidator;
+use Gamemoney\Validation\Response\Validator\ResponseValidatorSecure;
 use PHPUnit\Framework\TestCase;
 
-class SenderResolverTest extends TestCase
+class ResponseValidatorResolverTest extends TestCase
 {
-    /** @var string */
-    private $apiUrl;
-
-    /** @var string */
-    private $secureUrl;
-
-    /** @var array */
-    private $clientConfig;
-
-    protected function setUp()
-    {
-        $this->apiUrl = 'testUrl';
-        $this->secureUrl = 'testSecure';
-        $this->clientConfig = ['test' => '123'];
-    }
-
     public function testInterface()
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
-        $this->assertInstanceOf(SenderResolverInterface::class, $resolver);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $this->assertInstanceOf(ResponseValidatorResolverInterface::class, $resolver);
     }
 
     /**
@@ -48,9 +35,6 @@ class SenderResolverTest extends TestCase
             ],
             [
                 RequestInterface::INVOICE_LIST_ACTION
-            ],
-            [
-                RequestInterface::CHECKOUT_CREATE_ACTION
             ],
             [
                 RequestInterface::CHECKOUT_CANCEL_ACTION
@@ -109,19 +93,30 @@ class SenderResolverTest extends TestCase
     /**
      * @dataProvider resolveDataProvider
      */
-    public function testSenderResolve($action)
+    public function testResolve($action)
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
-        $sender = $resolver->resolve($action);
-        $this->assertInstanceOf(SenderInterface::class, $sender);
-        $this->assertInstanceOf(Sender::class, $sender);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $validator = $resolver->resolve($action);
+        $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
+        $this->assertInstanceOf(ResponseValidator::class, $validator);
     }
 
-    public function testSenderSecureResolve()
+    public function testCardSchemaResolve()
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
-        $sender = $resolver->resolve(RequestInterface::CARD_SCHEMA_ACTION);
-        $this->assertInstanceOf(SenderInterface::class, $sender);
-        $this->assertInstanceOf(JsonSender::class, $sender);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $validator = $resolver->resolve(RequestInterface::CARD_SCHEMA_ACTION);
+        $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
+        $this->assertInstanceOf(ResponseValidatorSecure::class, $validator);
+    }
+
+    private function getSignatureMock()
+    {
+        return $this
+            ->getMockBuilder(SignatureVerifierInterface::class)
+            ->getMock();
     }
 }
