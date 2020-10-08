@@ -103,12 +103,12 @@ class ResponseValidatorResolverTest extends TestCase
         $this->assertInstanceOf(ResponseValidator::class, $validator);
     }
 
-    public function testCardSchemaResolve()
+    public function testStoreOnlyCardDataResolve()
     {
         $mockSignature = $this->getSignatureMock();
 
         $resolver = new ResponseValidatorResolver($mockSignature);
-        $validator = $resolver->resolve(RequestInterface::CARD_SCHEMA_ACTION);
+        $validator = $resolver->resolve('/v1/sessions/testToken/input');
         $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
         $this->assertInstanceOf(ResponseValidatorSecure::class, $validator);
     }

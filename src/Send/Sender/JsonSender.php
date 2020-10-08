@@ -40,9 +40,9 @@ final class JsonSender implements SenderInterface
             $response = $this->client->post(
                 $request->getAction(),
                 [
-                    'json' => json_encode($request->getData()),
+                    'json' => $request->getData(),
                     'headers' => [
-                        'Accept'     => 'application/json',
+                        'Accept' => 'application/json',
                     ],
                 ]
             );

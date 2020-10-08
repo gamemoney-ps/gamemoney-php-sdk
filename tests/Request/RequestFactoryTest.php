@@ -269,7 +269,7 @@ class RequestFactoryTest extends TestCase
         $this->assertEquals($requestData, $expectedData);
     }
 
-    public function schemaCardTest()
+    public function storeOnlyCardDataTest()
     {
         $sessionToken = 'testToken';
         $url = '/v1/sessions/' . $sessionToken . '/input';
@@ -281,7 +281,7 @@ class RequestFactoryTest extends TestCase
             'cc_exp_year' => '25',
         ];
 
-        $request = (new RequestFactory())->schemaCard($sessionToken, $data);
+        $request = (new RequestFactory())->storeOnlyCardData($sessionToken, $data);
 
         $this->assertInstanceOf(RequestInterface::class, $request);
         $this->assertEquals($request->getAction(), $url);

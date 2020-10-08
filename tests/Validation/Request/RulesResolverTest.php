@@ -30,11 +30,11 @@ class RulesResolverTest extends TestCase
             ['action' => RequestInterface::CARD_LIST_ACTION],
             ['action' => RequestInterface::CARD_ADD_ACTION],
             ['action' => RequestInterface::CARD_ADDTOKEN_ACTION],
-            ['action' => '/v1/sessions/testToken/input'],
             ['action' => RequestInterface::CARD_DELETE_ACTION],
             ['action' => RequestInterface::STATISTICS_BALANCE_ACTION],
             ['action' => RequestInterface::STATISTICS_DAYS_BALANCE_ACTION],
             ['action' => RequestInterface::STATISTICS_PAY_TYPES_ACTION],
+            ['action' => '/v1/sessions/testToken/input'],
             ['action' => 'wrong action'],
         ];
     }

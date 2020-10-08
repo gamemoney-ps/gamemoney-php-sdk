@@ -125,7 +125,7 @@ class SignerResolverTest extends TestCase
     public function testEmptySignerResolve()
     {
         $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve(RequestInterface::CARD_SCHEMA_ACTION);
+        $signer = $resolver->resolve('/v1/sessions/testToken/input');
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(EmptySigner::class, $signer);
     }

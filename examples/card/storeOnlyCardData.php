@@ -11,7 +11,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
 
-    $request = $requestFactory->schemaCard(
+    $request = $requestFactory->storeOnlyCardData(
         $sessionToken,
         [
             'card_number' => '4000000000000002',
