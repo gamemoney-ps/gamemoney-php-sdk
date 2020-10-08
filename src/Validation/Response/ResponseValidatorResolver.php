@@ -25,7 +25,7 @@ class ResponseValidatorResolver implements ResponseValidatorResolverInterface
      */
     public function resolve($action)
     {
-        if ($action == RequestInterface::CARD_SCHEMA_ACTION) {
+        if (preg_match('/^\/v1\/sessions\/[\w]+\/input$/', $action)) {
             return new ResponseValidatorSecure();
         }
 

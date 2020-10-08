@@ -9,10 +9,10 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Class CardSchemaRules
+ * Class StoreOnlyCardData
  * @package Gamemoney\Validation\Request\Rules
  */
-final class CardSchemaRules implements RulesInterface
+final class StoreOnlyCardData implements RulesInterface
 {
     /**
      * @inheritdoc
