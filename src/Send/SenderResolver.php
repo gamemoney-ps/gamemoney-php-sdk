@@ -33,7 +33,7 @@ class SenderResolver implements SenderResolverInterface
      */
     public function resolve($action)
     {
-        if (preg_match('/^\/v1\/sessions\/[\w]+\/input$/', $action)) {
+        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
             return new JsonSender($this->secureUrl, $this->clientConfig);
         }
 
