@@ -32,7 +32,7 @@ final class RulesResolver implements RulesResolverInterface
      */
     public function resolve($action, $data)
     {
-        if (preg_match('/^\/v1\/sessions\/[\w]+\/input$/', $action)) {
+        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
             $action = RequestInterface::STORE_ONLY_CARD_DATA;
         }
 
