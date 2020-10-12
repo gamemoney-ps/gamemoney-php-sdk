@@ -35,7 +35,6 @@ class GatewayTest extends TestCase
         $mockRequest = $this->getRequestMock();
 
         $data = ['data' => ['test' => 1]];
-        $signature = 'testSignature';
 
         $mockRequest
             ->expects($this->atLeastOnce())

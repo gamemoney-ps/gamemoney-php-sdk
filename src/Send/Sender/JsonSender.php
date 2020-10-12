@@ -36,11 +36,6 @@ final class JsonSender implements SenderInterface
      */
     public function send(RequestInterface $request)
     {
-        $data = $request->getData();
-        unset($data['rand']);
-        unset($data['project']);
-        $request->setData($data);
-
         try {
             $response = $this->client->post(
                 $request->getAction(),

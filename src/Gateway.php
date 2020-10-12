@@ -133,10 +133,16 @@ class Gateway
      */
     public function send(RequestInterface $request)
     {
+        if (!preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $request->getAction())) {
+            if (empty($request->getData()['rand'])) {
+                $request->setField('rand', bin2hex(openssl_random_pseudo_bytes(10)));
+            }
+
+            $request->setField('project', $this->config->project());
+        }
+
         $rules = $this->rulesResolver->resolve($request->getAction(), $request->getData())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
-
-        $request->setField('project', $this->config->project());
 
         $request = $this
             ->signerResolver
