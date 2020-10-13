@@ -23,8 +23,8 @@ interface RequestInterface
     const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
     const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
     const TERMINAL_CREATE_ACTION = '/terminal/create';
-    const STORE_ONLY_CARD_DATA = '/v1/sessions/%s/input';
-    const STORE_ONLY_CARD_DATA_REGEX = '/^\/v1\/sessions\/[\w]+\/input$/';
+    const STORE_ONLY_CARD_DATA = 'v1/sessions/%s/input';
+    const STORE_ONLY_CARD_DATA_REGEX = '/^v1\/sessions\/[\w]+\/input$/';
 
     /**
      * @return string request uri

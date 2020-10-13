@@ -272,7 +272,7 @@ class RequestFactoryTest extends TestCase
     public function storeOnlyCardDataTest()
     {
         $sessionToken = 'testToken';
-        $url = '/v1/sessions/' . $sessionToken . '/input';
+        $url = 'v1/sessions/' . $sessionToken . '/input';
 
         $data = [
             'card_number' => '4000000000000002',

@@ -108,7 +108,7 @@ class ResponseValidatorResolverTest extends TestCase
         $mockSignature = $this->getSignatureMock();
 
         $resolver = new ResponseValidatorResolver($mockSignature);
-        $validator = $resolver->resolve('/v1/sessions/testToken/input');
+        $validator = $resolver->resolve('v1/sessions/testToken/input');
         $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
         $this->assertInstanceOf(ResponseValidatorSecure::class, $validator);
     }

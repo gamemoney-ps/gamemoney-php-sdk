@@ -120,7 +120,7 @@ class SenderResolverTest extends TestCase
     public function testSenderSecureResolve()
     {
         $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
-        $sender = $resolver->resolve('/v1/sessions/testToken/input');
+        $sender = $resolver->resolve('v1/sessions/testToken/input');
         $this->assertInstanceOf(SenderInterface::class, $sender);
         $this->assertInstanceOf(JsonSender::class, $sender);
     }
