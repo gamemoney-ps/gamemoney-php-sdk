@@ -10,7 +10,7 @@ class Config
 {
     const API_URL = 'https://paygate.gamemoney.com';
 
-    const SECURE_URL = 'https://secure.gamemoney.com/api';
+    const SECURE_URL = 'https://secure.gamemoney.com/api/';
 
     /** @var int */
     private $project;
