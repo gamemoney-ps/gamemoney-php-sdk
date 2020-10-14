@@ -21,6 +21,20 @@ class ConfigTest extends TestCase
         $this->assertSame($privateKeyPassword, $config->privateKeyPassword());
     }
 
+    public function testSecureUrl()
+    {
+        $project = 1;
+        $hmacKey = 'test';
+        $url = Config::SECURE_URL;
+
+        $config = new Config($project, $hmacKey);
+
+        $result = $config->secureUrl();
+
+        $this->assertRegExp('/\/$/', $result);
+        $this->assertEquals($url, $result);
+    }
+
     public function testGmCertificate()
     {
         $project = 1;
