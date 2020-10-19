@@ -8,17 +8,11 @@ use PHPUnit\Framework\TestCase;
 
 class CallbackHandlerTest extends TestCase
 {
-    /** @var Config */
-    private $config;
+    const PROJECT = 1;
 
-    protected function setUp()
-    {
-        $project = 1;
-        $hmacKey = 'test';
-        $privateKey = '123';
+    const HMAC_KEY = 'test';
 
-        $this->config = new Config($project, $hmacKey, $privateKey);
-    }
+    const PRIVATE_KEY = '123';
 
     public function testConstruct()
     {
@@ -32,7 +26,7 @@ class CallbackHandlerTest extends TestCase
             ->with($this->isInstanceOf(SignatureVerifierInterface::class))
             ->will($this->returnSelf());
 
-        $handler->__construct($this->config);
+        $handler->__construct($this->getConfig());
     }
 
     public function testCheck()
@@ -50,7 +44,7 @@ class CallbackHandlerTest extends TestCase
             ->with($data)
             ->willReturn($result);
 
-        $handler = new BaseCallbackHandler($this->config);
+        $handler = new BaseCallbackHandler($this->getConfig());
         $handler->setSignatureVerifier($mockVerifier);
         $this->assertEquals($result, $handler->check($data));
     }
@@ -59,7 +53,7 @@ class CallbackHandlerTest extends TestCase
     {
         $result = '{"success":"true"}';
 
-        $handler = new BaseCallbackHandler($this->config);
+        $handler = new BaseCallbackHandler($this->getConfig());
         $this->assertEquals($result, $handler->successAnswer());
     }
 
@@ -87,7 +81,12 @@ class CallbackHandlerTest extends TestCase
      */
     public function testErrorAnswer($error, $output)
     {
-        $handler = new BaseCallbackHandler($this->config);
+        $handler = new BaseCallbackHandler($this->getConfig());
         $this->assertEquals($output, $handler->errorAnswer($error));
+    }
+
+    private function getConfig()
+    {
+        return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY);
     }
 }

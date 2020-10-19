@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":200:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:3:{s:42:"tests\Request\RequestTest::testConstructor";d:0.003;s:38:"tests\Request\RequestTest::testSetData";d:0;s:36:"tests\Request\RequestTest::testField";d:0;}}}

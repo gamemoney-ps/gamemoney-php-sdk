@@ -12,25 +12,15 @@ use Gamemoney\Request\RequestInterface;
 
 class SignerResolverTest extends TestCase
 {
-    /** @var string */
-    private $hmacKey;
+    const HMAC_KEY = '123';
 
-    /** @var string */
-    private $privateKey;
+    const PRIVATE_KEY = '--1233--';
 
-    /** @var string */
-    private $passphrase;
-
-    protected function setUp()
-    {
-        $this->hmacKey = '123';
-        $this->privateKey = '--1233--';
-        $this->passphrase = '123';
-    }
+    const PASSPHRASE = '123';
 
     public function testInterface()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
+        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $this->assertInstanceOf(SignerResolverInterface::class, $resolver);
     }
 
@@ -108,7 +98,7 @@ class SignerResolverTest extends TestCase
      */
     public function testHmacResolve($action)
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
+        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $signer = $resolver->resolve($action);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(HmacSigner::class, $signer);
@@ -116,7 +106,7 @@ class SignerResolverTest extends TestCase
 
     public function testRsaResolve()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
+        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(RsaSigner::class, $signer);

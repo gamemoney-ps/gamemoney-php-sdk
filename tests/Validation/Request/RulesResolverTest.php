@@ -50,7 +50,7 @@ class RulesResolverTest extends TestCase
 
         $this->assertInstanceOf(RulesInterface::class, $rules);
 
-        $this->assertInternalType('array', $rules->getRules());
+        $this->assertIsArray($rules->getRules());
     }
 
     public function testWrongActionResolve()
