@@ -3,6 +3,7 @@ namespace Gamemoney\Sign\Signer;
 
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Exception\PrivateKeyException;
+use Gamemoney\Request\RequestInterface;
 use Gamemoney\Sign\ArrayToStringTrait;
 use Gamemoney\Sign\SignerInterface;
 
@@ -30,6 +31,7 @@ final class RsaSigner implements SignerInterface
      * RsaSigner constructor.
      * @param string $privateKey
      * @param string $passphrase
+     * @throws ConfigException
      */
     public function __construct($privateKey, $passphrase = '')
     {
@@ -39,6 +41,21 @@ final class RsaSigner implements SignerInterface
 
         $this->privateKey = $privateKey;
         $this->passphrase = $passphrase;
+    }
+
+    /**
+     * Write signature
+     * @param RequestInterface $request
+     * @return RequestInterface $request
+     * @throws PrivateKeyException
+     */
+    public function sign(RequestInterface $request)
+    {
+        $signature = $this->getSignature($request->getData());
+
+        $request->setField('signature', $signature);
+
+        return $request;
     }
 
     /**

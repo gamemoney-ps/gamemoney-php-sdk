@@ -2,6 +2,7 @@
 namespace Gamemoney\Sign;
 
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Sign\Signer\EmptySigner;
 use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Sign\Signer\HmacSigner;
 
@@ -14,7 +15,7 @@ class SignerResolver implements SignerResolverInterface
     /** @var string */
     private $hmacKey;
 
-    /** @var string */
+    /** @var string|null */
     private $privateKey;
 
     /** @var string */
@@ -38,6 +39,10 @@ class SignerResolver implements SignerResolverInterface
      */
     public function resolve($action)
     {
+        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
+            return new EmptySigner();
+        }
+
         if ($action === RequestInterface::CHECKOUT_CREATE_ACTION) {
             return new RsaSigner($this->privateKey, $this->passphrase);
         }

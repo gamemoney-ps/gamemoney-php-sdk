@@ -1,18 +1,17 @@
 <?php
-namespace tests\Send;
 
-use PHPUnit\Framework\TestCase;
-use Gamemoney\Send\Sender;
-use Gamemoney\Send\SenderInterface;
-use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Request\RequestInterface;
+namespace tests\Send\Sender;
+
 use Gamemoney\Exception\RequestException;
+use Gamemoney\Request\RequestInterface;
+use Gamemoney\Send\Sender\JsonSender;
+use Gamemoney\Send\SenderInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
-class SenderTest extends TestCase
+class JsonSenderTest extends TestCase
 {
     /** @var string */
     private $url;
@@ -24,7 +23,7 @@ class SenderTest extends TestCase
 
     public function testInterface()
     {
-        $sender = new Sender('url', []);
+        $sender = new JsonSender($this->url, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
@@ -37,7 +36,8 @@ class SenderTest extends TestCase
         ]);
 
         $handler = HandlerStack::create($mock);
-        $sender = new Sender($this->url, ['handler' => $handler]);
+
+        $sender = new JsonSender($this->url, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
         $this->assertInternalType('array', $response);
@@ -54,7 +54,8 @@ class SenderTest extends TestCase
         ]);
 
         $handler = HandlerStack::create($mock);
-        $sender = new Sender($this->url, ['handler' => $handler]);
+
+        $sender = new JsonSender($this->url, ['handler' => $handler]);
         $sender->send($mockRequest);
     }
 

@@ -1,9 +1,9 @@
 <?php
-namespace tests;
+namespace tests\Validation\Response\Validator;
 
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
-use Gamemoney\Validation\Response\ResponseValidator;
+use Gamemoney\Validation\Response\Validator\ResponseValidator;
 use PHPUnit\Framework\TestCase;
 
 class ResponseValidatorTest extends TestCase

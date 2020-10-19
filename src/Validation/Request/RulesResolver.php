@@ -2,6 +2,8 @@
 namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
+use Gamemoney\Validation\Request\Rules\StoreOnlyCardData;
 use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
 use Gamemoney\Validation\Request\Rules\InvoiceListRules;
@@ -30,6 +32,10 @@ final class RulesResolver implements RulesResolverInterface
      */
     public function resolve($action, $data)
     {
+        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
+            $action = RequestInterface::STORE_ONLY_CARD_DATA;
+        }
+
         switch ($action) {
             case RequestInterface::INVOICE_CREATE_ACTION:
                 return new InvoiceCreateRules;
@@ -46,6 +52,10 @@ final class RulesResolver implements RulesResolverInterface
                 return new CheckoutListRules();
             case RequestInterface::CARD_ADD_ACTION:
                 return new CardAddRules;
+            case RequestInterface::CARD_ADDTOKEN_ACTION:
+                return new CardAddtokenRules;
+            case RequestInterface::STORE_ONLY_CARD_DATA:
+                return new StoreOnlyCardData;
             case RequestInterface::CARD_LIST_ACTION:
                 return new CardListRules;
             case RequestInterface::CARD_DELETE_ACTION:

@@ -1,5 +1,5 @@
 <?php
-namespace tests;
+namespace tests\CallbackHandler;
 
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
 use Gamemoney\Config;

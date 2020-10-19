@@ -20,10 +20,6 @@ final class Request implements RequestInterface
      */
     public function __construct($action, array $data = [])
     {
-        if (empty($data['rand'])) {
-            $data['rand'] = bin2hex(openssl_random_pseudo_bytes(10));
-        }
-
         $this->action = $action;
         $this->data = $data;
     }

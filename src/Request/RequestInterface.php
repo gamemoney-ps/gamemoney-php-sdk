@@ -11,6 +11,7 @@ interface RequestInterface
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
     const CHECKOUT_LIST_ACTION = '/checkout/list';
     const CARD_ADD_ACTION = '/card/add';
+    const CARD_ADDTOKEN_ACTION = '/card/addtoken';
     const CARD_LIST_ACTION = '/card/list';
     const CARD_DELETE_ACTION = '/card/delete';
     const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
@@ -22,6 +23,8 @@ interface RequestInterface
     const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
     const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
     const TERMINAL_CREATE_ACTION = '/terminal/create';
+    const STORE_ONLY_CARD_DATA = 'v1/sessions/%s/input';
+    const STORE_ONLY_CARD_DATA_REGEX = '/^v1\/sessions\/[\w]+\/input$/';
 
     /**
      * @return string request uri

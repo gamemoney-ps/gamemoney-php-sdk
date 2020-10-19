@@ -1,12 +1,13 @@
 <?php
-namespace Gamemoney\Validation\Response;
+namespace Gamemoney\Validation\Response\Validator;
 
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
 
 /**
  * Class ResponseValidator
- * @package Gamemoney\Validation\Response
+ * @package Gamemoney\Validation\Response\Validator
  */
 class ResponseValidator implements ResponseValidatorInterface
 {

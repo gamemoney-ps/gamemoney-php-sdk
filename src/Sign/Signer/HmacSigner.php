@@ -1,6 +1,7 @@
 <?php
 namespace Gamemoney\Sign\Signer;
 
+use Gamemoney\Request\RequestInterface;
 use Gamemoney\Sign\ArrayToStringTrait;
 use Gamemoney\Sign\SignerInterface;
 
@@ -28,6 +29,20 @@ final class HmacSigner implements SignerInterface
     public function __construct($hmacKey)
     {
         $this->hmacKey = $hmacKey;
+    }
+
+    /**
+     * Write signature
+     * @param RequestInterface $request
+     * @return RequestInterface $request
+     */
+    public function sign(RequestInterface $request)
+    {
+        $signature = $this->getSignature($request->getData());
+
+        $request->setField('signature', $signature);
+
+        return $request;
     }
 
     /**

@@ -14,15 +14,6 @@ class RequestTest extends TestCase
         $this->assertEquals($request->getData(), ['data' => 1, 'rand' => 'test']);
     }
 
-    public function testEmptyRandConstructor()
-    {
-        $request = new Request('/test', ['data' => 1]);
-        $data = $request->getData();
-        $this->assertArrayHasKey('rand', $data);
-        $this->assertInternalType('string', $data['rand']);
-        $this->assertGreaterThanOrEqual(20, strlen($data['rand']));
-    }
-
     public function testSetData()
     {
         $request = new Request('/test');

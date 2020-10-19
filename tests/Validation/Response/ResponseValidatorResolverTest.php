@@ -1,37 +1,24 @@
 <?php
-namespace tests\Sign;
 
-use Gamemoney\Sign\Signer\EmptySigner;
-use PHPUnit\Framework\TestCase;
-use Gamemoney\Sign\SignerResolver;
-use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Sign\Signer\HmacSigner;
-use Gamemoney\Sign\Signer\RsaSigner;
+namespace tests\Validation\Response;
+
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Sign\SignatureVerifierInterface;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
+use Gamemoney\Validation\Response\ResponseValidatorResolver;
+use Gamemoney\Validation\Response\ResponseValidatorResolverInterface;
+use Gamemoney\Validation\Response\Validator\ResponseValidator;
+use Gamemoney\Validation\Response\Validator\ResponseValidatorSecure;
+use PHPUnit\Framework\TestCase;
 
-class SignerResolverTest extends TestCase
+class ResponseValidatorResolverTest extends TestCase
 {
-    /** @var string */
-    private $hmacKey;
-
-    /** @var string */
-    private $privateKey;
-
-    /** @var string */
-    private $passphrase;
-
-    protected function setUp()
-    {
-        $this->hmacKey = '123';
-        $this->privateKey = '--1233--';
-        $this->passphrase = '123';
-    }
-
     public function testInterface()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $this->assertInstanceOf(SignerResolverInterface::class, $resolver);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $this->assertInstanceOf(ResponseValidatorResolverInterface::class, $resolver);
     }
 
     /**
@@ -106,27 +93,30 @@ class SignerResolverTest extends TestCase
     /**
      * @dataProvider resolveDataProvider
      */
-    public function testHmacResolve($action)
+    public function testResolve($action)
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve($action);
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(HmacSigner::class, $signer);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $validator = $resolver->resolve($action);
+        $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
+        $this->assertInstanceOf(ResponseValidator::class, $validator);
     }
 
-    public function testRsaResolve()
+    public function testStoreOnlyCardDataResolve()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(RsaSigner::class, $signer);
+        $mockSignature = $this->getSignatureMock();
+
+        $resolver = new ResponseValidatorResolver($mockSignature);
+        $validator = $resolver->resolve('v1/sessions/testToken/input');
+        $this->assertInstanceOf(ResponseValidatorInterface::class, $validator);
+        $this->assertInstanceOf(ResponseValidatorSecure::class, $validator);
     }
 
-    public function testEmptySignerResolve()
+    private function getSignatureMock()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve('v1/sessions/testToken/input');
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(EmptySigner::class, $signer);
+        return $this
+            ->getMockBuilder(SignatureVerifierInterface::class)
+            ->getMock();
     }
 }

@@ -1,37 +1,37 @@
 <?php
-namespace tests\Sign;
 
-use Gamemoney\Sign\Signer\EmptySigner;
-use PHPUnit\Framework\TestCase;
-use Gamemoney\Sign\SignerResolver;
-use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Sign\Signer\HmacSigner;
-use Gamemoney\Sign\Signer\RsaSigner;
+namespace tests\Send;
+
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Send\Sender\JsonSender;
+use Gamemoney\Send\Sender\Sender;
+use Gamemoney\Send\SenderInterface;
+use Gamemoney\Send\SenderResolver;
+use Gamemoney\Send\SenderResolverInterface;
+use PHPUnit\Framework\TestCase;
 
-class SignerResolverTest extends TestCase
+class SenderResolverTest extends TestCase
 {
     /** @var string */
-    private $hmacKey;
+    private $apiUrl;
 
     /** @var string */
-    private $privateKey;
+    private $secureUrl;
 
-    /** @var string */
-    private $passphrase;
+    /** @var array */
+    private $clientConfig;
 
     protected function setUp()
     {
-        $this->hmacKey = '123';
-        $this->privateKey = '--1233--';
-        $this->passphrase = '123';
+        $this->apiUrl = 'testUrl';
+        $this->secureUrl = 'testSecure';
+        $this->clientConfig = ['test' => '123'];
     }
 
     public function testInterface()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $this->assertInstanceOf(SignerResolverInterface::class, $resolver);
+        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $this->assertInstanceOf(SenderResolverInterface::class, $resolver);
     }
 
     /**
@@ -48,6 +48,9 @@ class SignerResolverTest extends TestCase
             ],
             [
                 RequestInterface::INVOICE_LIST_ACTION
+            ],
+            [
+                RequestInterface::CHECKOUT_CREATE_ACTION
             ],
             [
                 RequestInterface::CHECKOUT_CANCEL_ACTION
@@ -106,27 +109,19 @@ class SignerResolverTest extends TestCase
     /**
      * @dataProvider resolveDataProvider
      */
-    public function testHmacResolve($action)
+    public function testSenderResolve($action)
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve($action);
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(HmacSigner::class, $signer);
+        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $sender = $resolver->resolve($action);
+        $this->assertInstanceOf(SenderInterface::class, $sender);
+        $this->assertInstanceOf(Sender::class, $sender);
     }
 
-    public function testRsaResolve()
+    public function testSenderSecureResolve()
     {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(RsaSigner::class, $signer);
-    }
-
-    public function testEmptySignerResolve()
-    {
-        $resolver = new SignerResolver($this->hmacKey, $this->privateKey, $this->passphrase);
-        $signer = $resolver->resolve('v1/sessions/testToken/input');
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(EmptySigner::class, $signer);
+        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $sender = $resolver->resolve('v1/sessions/testToken/input');
+        $this->assertInstanceOf(SenderInterface::class, $sender);
+        $this->assertInstanceOf(JsonSender::class, $sender);
     }
 }
