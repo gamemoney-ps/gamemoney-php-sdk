@@ -70,6 +70,10 @@ class SenderTest extends TestCase
             ->method('getData')
             ->willReturn(['data' => ['test' => 1]]);
 
+        $mockRequest
+            ->method('getAction')
+            ->willReturn('testUrl');
+
         return $mockRequest;
     }
 }
