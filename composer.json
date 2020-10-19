@@ -9,7 +9,7 @@
         "ext-openssl": "*",
         "ext-json": "*",
         "symfony/validator": "*",
-        "guzzlehttp/guzzle": ">=4.1.4 <7.0"
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5",
