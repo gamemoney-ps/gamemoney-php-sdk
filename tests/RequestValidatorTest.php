@@ -79,7 +79,7 @@ class RequestValidatorTest extends TestCase
     public function testSuccessValidate(array $rules, array $data)
     {
         $validator = new RequestValidator();
-        $validator->validate($rules, $data);
+        $this->assertNull($validator->validate($rules, $data));
     }
 
     /**

@@ -19,7 +19,7 @@ class RequestTest extends TestCase
         $request = new Request('/test', ['data' => 1]);
         $data = $request->getData();
         $this->assertArrayHasKey('rand', $data);
-        $this->assertInternalType('string', $data['rand']);
+        $this->assertIsString($data['rand']);
         $this->assertGreaterThanOrEqual(20, strlen($data['rand']));
     }
 

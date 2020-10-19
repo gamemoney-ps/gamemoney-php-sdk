@@ -16,7 +16,7 @@ class RequestFactoryTest extends TestCase
             [
                 'createInvoice',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::INVOICE_CREATE_ACTION,
                 [
@@ -25,9 +25,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getInvoiceStatus',
-                [
-                    1
-                ],
+                1,
                 RequestInterface::INVOICE_STATUS_ACTION,
                 [
                     'invoice' => 1
@@ -35,9 +33,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getInvoiceStatusByExternalId',
-                [
-                    'external_id'
-                ],
+                'external_id',
                 RequestInterface::INVOICE_STATUS_ACTION,
                 [
                     'project_invoice' => 'external_id'
@@ -46,10 +42,8 @@ class RequestFactoryTest extends TestCase
             [
                 'getInvoiceList',
                 [
-                    [
-                        'start' => '2018-10-01 12:10:05',
-                        'finish' => '2018-10-30 12:00:00'
-                    ]
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
                 ],
                 RequestInterface::INVOICE_LIST_ACTION,
                 [
@@ -60,7 +54,7 @@ class RequestFactoryTest extends TestCase
             [
                 'createCheckout',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::CHECKOUT_CREATE_ACTION,
                 [
@@ -69,9 +63,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'cancelCheckout',
-                [
-                    1
-                ],
+                1,
                 RequestInterface::CHECKOUT_CANCEL_ACTION,
                 [
                     'projectId' => 1
@@ -79,9 +71,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getCheckoutStatus',
-                [
-                    1
-                ],
+                1,
                 RequestInterface::CHECKOUT_STATUS_ACTION,
                 [
                     'projectId' => 1
@@ -90,10 +80,8 @@ class RequestFactoryTest extends TestCase
             [
                 'getCheckoutList',
                 [
-                    [
-                        'start' => '2018-10-01 12:10:05',
-                        'finish' => '2018-10-30 12:00:00'
-                    ]
+                    'start' => '2018-10-01 12:10:05',
+                    'finish' => '2018-10-30 12:00:00'
                 ],
                 RequestInterface::CHECKOUT_LIST_ACTION,
                 [
@@ -104,7 +92,7 @@ class RequestFactoryTest extends TestCase
             [
                 'addCard',
                 [
-                    ['user' => 1]
+                    'user' => 1
                 ],
                 RequestInterface::CARD_ADD_ACTION,
                 [
@@ -113,9 +101,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getCardList',
-                [
-                    1
-                ],
+                1,
                 RequestInterface::CARD_LIST_ACTION,
                 [
                     'user' => 1
@@ -124,7 +110,7 @@ class RequestFactoryTest extends TestCase
             [
                 'deleteCard',
                 [
-                    ['pan' => '1111****3333']
+                    'pan' => '1111****3333'
                 ],
                 RequestInterface::CARD_DELETE_ACTION,
                 [
@@ -134,7 +120,7 @@ class RequestFactoryTest extends TestCase
             [
                 'prepareExchange',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::EXCHANGE_PREPARE_ACTION,
                 [
@@ -144,7 +130,7 @@ class RequestFactoryTest extends TestCase
             [
                 'convertExchange',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::EXCHANGE_CONVERT_ACTION,
                 [
@@ -154,7 +140,7 @@ class RequestFactoryTest extends TestCase
             [
                 'fastConvertExchange',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::EXCHANGE_FAST_CONVERT_ACTION,
                 [
@@ -164,7 +150,7 @@ class RequestFactoryTest extends TestCase
             [
                 'getExchangeInfo',
                 [
-                    ['amount' => 100]
+                    'amount' => 100
                 ],
                 RequestInterface::EXCHANGE_INFO_ACTION,
                 [
@@ -173,9 +159,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getExchangeStatus',
-                [
-                    1
-                ],
+                1,
                 RequestInterface::EXCHANGE_STATUS_ACTION,
                 [
                     'id' => 1
@@ -183,9 +167,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getExchangeStatusByExternalId',
-                [
-                    'external_id'
-                ],
+                'external_id',
                 RequestInterface::EXCHANGE_STATUS_ACTION,
                 [
                     'externalId' => 'external_id'
@@ -193,9 +175,7 @@ class RequestFactoryTest extends TestCase
             ],
             [
                 'getBalanceStatistics',
-                [
-                    'RUB'
-                ],
+                'RUB',
                 RequestInterface::STATISTICS_BALANCE_ACTION,
                 [
                     'currency' => 'RUB'
@@ -204,11 +184,9 @@ class RequestFactoryTest extends TestCase
             [
                 'getDaysBalanceStatistics',
                 [
-                    [
-                        'currency' => 'RUB',
-                        'start' => '2018-10-01',
-                        'finish' => '2018-10-30'
-                    ]
+                    'currency' => 'RUB',
+                    'start' => '2018-10-01',
+                    'finish' => '2018-10-30'
                 ],
                 RequestInterface::STATISTICS_DAYS_BALANCE_ACTION,
                 [
@@ -226,11 +204,9 @@ class RequestFactoryTest extends TestCase
             [
                 'createTerminal',
                 [
-                    [
-                        'user' => 1,
-                        'ip' => '72.14.192.0',
-                        'add_some_field' => 'some value',
-                    ],
+                    'user' => 1,
+                    'ip' => '72.14.192.0',
+                    'add_some_field' => 'some value',
                 ],
                 RequestInterface::TERMINAL_CREATE_ACTION,
                 [
@@ -244,14 +220,16 @@ class RequestFactoryTest extends TestCase
 
     /**
      * @param string $method
-     * @param array $args
+     * @param $args
      * @param string $action
      * @param array $expectedData
      * @dataProvider methodDataProvider
      */
-    public function testMethods($method, array $args, $action, array $expectedData)
+    public function testMethods($method, $args, $action, array $expectedData)
     {
-        $request = call_user_func_array([RequestFactory::class, $method], $args);
+        $requestFactory = new RequestFactory();
+        $request = $requestFactory->$method($args);
+        //$request = call_user_func_array([RequestFactory::class, $method], $args);
         $this->assertInstanceOf(RequestInterface::class, $request);
         $this->assertEquals($request->getAction(), $action);
         $requestData = $request->getData();

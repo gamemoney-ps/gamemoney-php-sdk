@@ -7,17 +7,11 @@ use Gamemoney\Sign\Signer\HmacSigner;
 
 class HmacSignerTest extends TestCase
 {
-    /** @var string */
-    protected $key;
-
-    protected function setUp()
-    {
-        $this->key = 'hmac_key';
-    }
+    const KEY = 'hmac_key';
 
     public function testInterface()
     {
-        $signer = new HmacSigner($this->key);
+        $signer = new HmacSigner($this::KEY);
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
@@ -56,7 +50,7 @@ class HmacSignerTest extends TestCase
      */
     public function testHmacGetSignature(array $data, $fixture)
     {
-        $signer = new HmacSigner($this->key);
+        $signer = new HmacSigner($this::KEY);
         $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
     }

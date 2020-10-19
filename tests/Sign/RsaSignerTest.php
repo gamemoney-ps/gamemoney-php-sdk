@@ -9,28 +9,18 @@ use Gamemoney\Exception\ConfigException;
 
 class RsaSignerTest extends TestCase
 {
-    /** @var string */
-    private $privateKey;
-
-    /** @var string */
-    private $passphrase;
-
-    protected function setUp()
-    {
-        $this->privateKey = $this->getPrivateKey();
-        $this->passphrase = '123';
-    }
+    const PASSPHRASE = '123';
 
     public function testInterface()
     {
-        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $signer = new RsaSigner($this->getPrivateKey(), $this::PASSPHRASE);
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
     public function testConstruct()
     {
         $this->expectException(ConfigException::class);
-        new RsaSigner(null, $this->passphrase);
+        new RsaSigner(null, $this::PASSPHRASE);
     }
 
     /**
@@ -68,7 +58,7 @@ class RsaSignerTest extends TestCase
      */
     public function testRsaGetSignature(array $data, $fixture)
     {
-        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $signer = new RsaSigner($this->getPrivateKey(), $this::PASSPHRASE);
         $signature = $signer->getSignature($data);
         $this->assertEquals($fixture, $signature);
     }
@@ -78,7 +68,7 @@ class RsaSignerTest extends TestCase
         $data = ['data' => ''];
         $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
 
-        $signer = new RsaSigner($this->privateKey, $this->passphrase);
+        $signer = new RsaSigner($this->getPrivateKey(), $this::PASSPHRASE);
         $this->assertEquals($signature, $signer->getSignature($data));
     }
 
@@ -88,13 +78,13 @@ class RsaSignerTest extends TestCase
         $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
         $privateKeyStream = 'file://' . __DIR__ . '/../_data/private_key';
 
-        $signer = new RsaSigner($privateKeyStream, $this->passphrase);
+        $signer = new RsaSigner($privateKeyStream, $this::PASSPHRASE);
         $this->assertEquals($signature, $signer->getSignature($data));
     }
 
     public function testWrongPrivateKeyFormat()
     {
-        $signer = new RsaSigner(strrev($this->privateKey), $this->passphrase);
+        $signer = new RsaSigner(strrev($this->getPrivateKey()), $this::PASSPHRASE);
 
         $this->expectException(PrivateKeyException::class);
 
@@ -103,7 +93,7 @@ class RsaSignerTest extends TestCase
 
     public function testWrongPrivateKeyPassphrase()
     {
-        $signer = new RsaSigner($this->privateKey, strrev($this->passphrase));
+        $signer = new RsaSigner($this->getPrivateKey(), strrev($this::PASSPHRASE));
 
         $this->expectException(PrivateKeyException::class);
 
