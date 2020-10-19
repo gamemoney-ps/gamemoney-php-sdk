@@ -9,7 +9,7 @@ namespace Gamemoney\Request;
 class RequestFactory
 {
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_insert_api)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_insert_api)
      * @param array $data
      * @return Request
      */
@@ -19,7 +19,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_status)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_status)
      * @param string|int $id invoice id in Gamemoney system
      * @return Request
      */
@@ -29,7 +29,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_status)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_status)
      * @param string|int $id invoice id in project system
      * @return Request
      */
@@ -39,7 +39,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_list)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_list)
      * @param array $data
      * @return Request
      */
@@ -49,7 +49,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_insert)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_insert)
      * @param array $data
      * @return Request
      */
@@ -59,7 +59,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_cancel)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_cancel)
      * @param string|int $id
      * @return Request
      */
@@ -69,7 +69,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_status)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_status)
      * @param string|int $id
      * @return Request
      */
@@ -79,7 +79,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#checkout_list)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_list)
      * @param array $data
      * @return Request
      */
@@ -89,7 +89,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#card_add)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_add)
      * @param array $data
      * @return Request
      */
@@ -99,7 +99,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#card_list)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_list)
      * @param string|int $userId user id in Gamemoney system
      * @return Request
      */
@@ -109,7 +109,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#card_list)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_list)
      * @param array $data
      * @return Request
      */
@@ -119,7 +119,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_prepare)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_prepare)
      * @param array $data
      * @return Request
      */
@@ -129,7 +129,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_convert)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_convert)
      * @param array $data
      * @return Request
      */
@@ -139,7 +139,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_fastconvert)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_fastconvert)
      * @param array $data
      * @return Request
      */
@@ -149,7 +149,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_info)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_info)
      * @param array $data
      * @return Request
      */
@@ -159,7 +159,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_status)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_status)
      * @param int $id exchange response id in Gamemoney system
      * @return Request
      */
@@ -169,7 +169,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#exchange_status)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_status)
      * @param string|int $id exchange id in project system
      * @return Request
      */
@@ -179,7 +179,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#stat_balance)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#stat_balance)
      * @param string $currency
      * @return Request
      */
@@ -192,7 +192,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#stat_days_balance)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#stat_days_balance)
      * @param array $data
      * @return Request
      */
@@ -202,7 +202,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#stat_paytypes)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#stat_paytypes)
      * @return Request
      */
     public function getPayTypesStatistics()
@@ -211,7 +211,7 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gamemoney.com/apidoc#invoice_api_terminal)
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_api_terminal)
      * @param array $data
      * @return Request
      */

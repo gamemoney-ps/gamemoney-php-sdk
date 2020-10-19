@@ -96,4 +96,4 @@ $config = new \Gamemoney\Config($project, $hmacKey);
 ```
 ## Full Documentation
 
-https://cp.gamemoney.com/apidoc
+https://cp.gmpays.com/apidoc
