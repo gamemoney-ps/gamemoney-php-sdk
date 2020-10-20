@@ -17,18 +17,13 @@ use Gamemoney\Validation\Request\RulesResolverInterface;
 
 class GatewayTest extends TestCase
 {
-    /** @var Config */
-    private $config;
+    const PROJECT = 1;
 
-    protected function setUp()
-    {
-        $project = 1;
-        $hmacKey = 'test';
-        $privateKey = '123';
-        $privateKeyPassword = '123';
+    const HMAC_KEY = 'test';
 
-        $this->config = new Config($project, $hmacKey, $privateKey, $privateKeyPassword);
-    }
+    const PRIVATE_KEY = '123';
+
+    const PRIVATE_KEY_PASSWORD = '123';
 
     public function testSend()
     {
@@ -45,7 +40,7 @@ class GatewayTest extends TestCase
             ->expects($this->once())
             ->method('setField')
             ->withConsecutive(
-                ['project', $this->config->project()]
+                ['project', $this->getConfig()->project()]
             );
 
         $mockRules = $this
@@ -141,7 +136,7 @@ class GatewayTest extends TestCase
             ->method('resolve')
             ->willReturn($mockSigner);
 
-        $gateway = (new Gateway($this->config))
+        $gateway = (new Gateway($this->getConfig()))
             ->setSenderResolver($mockSenderResolver)
             ->setRequestValidator($mockRequestValidator)
             ->setResponseValidatorResolver($mockResponseValidatorResolver)
@@ -198,6 +193,11 @@ class GatewayTest extends TestCase
             ->method('setSignerResolver')
             ->with($this->isInstanceOf(SignerResolverInterface::class))
             ->will($this->returnSelf());
-        $gateway->__construct($this->config);
+        $gateway->__construct($this->getConfig());
+    }
+
+    private function getConfig()
+    {
+        return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY, $this::PRIVATE_KEY_PASSWORD);
     }
 }
