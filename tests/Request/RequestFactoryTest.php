@@ -120,7 +120,7 @@ class RequestFactoryTest extends TestCase
             [
                 'addtokenCard',
                 [
-                    ['user' => 1]
+                    'user' => 1
                 ],
                 RequestInterface::CARD_ADDTOKEN_ACTION,
                 [

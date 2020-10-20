@@ -12,25 +12,15 @@ use PHPUnit\Framework\TestCase;
 
 class SenderResolverTest extends TestCase
 {
-    /** @var string */
-    private $apiUrl;
+    const API_URL = 'testUrl';
 
-    /** @var string */
-    private $secureUrl;
+    const SECURE_URL = 'testSecure';
 
-    /** @var array */
-    private $clientConfig;
-
-    protected function setUp()
-    {
-        $this->apiUrl = 'testUrl';
-        $this->secureUrl = 'testSecure';
-        $this->clientConfig = ['test' => '123'];
-    }
+    const CLIENT_CONFIG = ['test' => '123'];
 
     public function testInterface()
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $this->assertInstanceOf(SenderResolverInterface::class, $resolver);
     }
 
@@ -111,7 +101,7 @@ class SenderResolverTest extends TestCase
      */
     public function testSenderResolve($action)
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $sender = $resolver->resolve($action);
         $this->assertInstanceOf(SenderInterface::class, $sender);
         $this->assertInstanceOf(Sender::class, $sender);
@@ -119,7 +109,7 @@ class SenderResolverTest extends TestCase
 
     public function testSenderSecureResolve()
     {
-        $resolver = new SenderResolver($this->apiUrl, $this->secureUrl, $this->clientConfig);
+        $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $sender = $resolver->resolve('v1/sessions/testToken/input');
         $this->assertInstanceOf(SenderInterface::class, $sender);
         $this->assertInstanceOf(JsonSender::class, $sender);

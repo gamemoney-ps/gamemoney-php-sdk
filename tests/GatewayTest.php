@@ -40,7 +40,7 @@ class GatewayTest extends TestCase
             ->expects($this->once())
             ->method('setField')
             ->withConsecutive(
-                ['project', $this->config->project()]
+                ['project', $this->getConfig()->project()]
             );
 
         $mockRules = $this
@@ -136,7 +136,7 @@ class GatewayTest extends TestCase
             ->method('resolve')
             ->willReturn($mockSigner);
 
-        $gateway = (new Gateway($this->config))
+        $gateway = (new Gateway($this->getConfig()))
             ->setSenderResolver($mockSenderResolver)
             ->setRequestValidator($mockRequestValidator)
             ->setResponseValidatorResolver($mockResponseValidatorResolver)
