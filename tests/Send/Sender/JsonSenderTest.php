@@ -13,13 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class JsonSenderTest extends TestCase
 {
-    /** @var string */
-    private $url;
-
-    protected function setUp()
-    {
-        $this->url = 'url';
-    }
+    const URL = 'url';
 
     public function testInterface()
     {
@@ -37,10 +31,9 @@ class JsonSenderTest extends TestCase
 
         $handler = HandlerStack::create($mock);
 
-        $sender = new JsonSender($this->url, ['handler' => $handler]);
+        $sender = new JsonSender($this::URL, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
-        $this->assertInternalType('array', $response);
         $this->assertEquals($response, ['1'=>'2']);
     }
 
@@ -55,7 +48,7 @@ class JsonSenderTest extends TestCase
 
         $handler = HandlerStack::create($mock);
 
-        $sender = new JsonSender($this->url, ['handler' => $handler]);
+        $sender = new JsonSender($this::URL, ['handler' => $handler]);
         $sender->send($mockRequest);
     }
 
