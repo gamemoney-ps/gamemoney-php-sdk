@@ -32,6 +32,7 @@ class SenderTest extends TestCase
         $sender = new Sender($this::URL, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
+        $this->assertTrue(is_array($response));
         $this->assertEquals($response, ['1'=>'2']);
     }
 

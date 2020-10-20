@@ -34,6 +34,7 @@ class JsonSenderTest extends TestCase
         $sender = new JsonSender($this::URL, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
+        $this->assertTrue(is_array($response));
         $this->assertEquals($response, ['1'=>'2']);
     }
 
