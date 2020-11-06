@@ -108,6 +108,14 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getCardFulllist',
+                1,
+                RequestInterface::CARD_FULLLIST_ACTION,
+                [
+                    'user' => 1
+                ],
+            ],
+            [
                 'deleteCard',
                 [
                     'pan' => '1111****3333'

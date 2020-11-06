@@ -109,6 +109,16 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_fulllist)
+     * @param string|int $userId user id in Gamemoney system
+     * @return Request
+     */
+    public function getCardFulllist($userId)
+    {
+        return new Request(RequestInterface::CARD_FULLLIST_ACTION, ['user' => $userId]);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_delete)
      * @param array $data
      * @return Request
