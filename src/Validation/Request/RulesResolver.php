@@ -57,6 +57,7 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::STORE_ONLY_CARD_DATA:
                 return new StoreOnlyCardData;
             case RequestInterface::CARD_LIST_ACTION:
+            case RequestInterface::CARD_FULLLIST_ACTION:
                 return new CardListRules;
             case RequestInterface::CARD_DELETE_ACTION:
                 return new CardDeleteRules;
