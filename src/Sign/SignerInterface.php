@@ -14,4 +14,10 @@ interface SignerInterface
      * @return RequestInterface $request
      */
     public function sign(RequestInterface $request);
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    public function getSignature(array $data);
 }

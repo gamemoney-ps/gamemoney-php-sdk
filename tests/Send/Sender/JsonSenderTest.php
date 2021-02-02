@@ -17,7 +17,7 @@ class JsonSenderTest extends TestCase
 
     public function testInterface()
     {
-        $sender = new JsonSender($this->url, []);
+        $sender = new JsonSender($this::URL, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 

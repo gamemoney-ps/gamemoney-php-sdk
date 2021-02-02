@@ -32,10 +32,19 @@ class TransferCallbackHandler extends BaseCallbackHandler
             );
         }
 
-        return json_encode([
+        $data = [
             'state' => 'success',
             'invoice' => $this->invoiceNumber
-        ]);
+        ];
+
+        return json_encode(
+            array_merge(
+                $data,
+                [
+                    'signature' => $this->signerResolver->resolve()->getSignature($data)
+                ]
+            )
+        );
     }
 
     /**
