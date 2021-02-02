@@ -8,8 +8,8 @@ namespace Gamemoney\Sign;
 interface SignerResolverInterface
 {
     /**
-     * @param string $action
+     * @param string|null $action
      * @return SignerInterface
      */
-    public function resolve($action);
+    public function resolve($action = null);
 }

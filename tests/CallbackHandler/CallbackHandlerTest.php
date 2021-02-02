@@ -4,6 +4,7 @@ namespace tests\CallbackHandler;
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
 use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifierInterface;
+use Gamemoney\Sign\SignerResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 class CallbackHandlerTest extends TestCase
@@ -18,12 +19,19 @@ class CallbackHandlerTest extends TestCase
     {
         $handler = $this->createPartialMock(BaseCallbackHandler::class, [
             'setSignatureVerifier',
+            'setSignerResolver',
         ]);
 
         $handler
             ->expects($this->once())
             ->method('setSignatureVerifier')
             ->with($this->isInstanceOf(SignatureVerifierInterface::class))
+            ->will($this->returnSelf());
+
+        $handler
+            ->expects($this->once())
+            ->method('setSignerResolver')
+            ->with($this->isInstanceOf(SignerResolverInterface::class))
             ->will($this->returnSelf());
 
         $handler->__construct($this->getConfig());

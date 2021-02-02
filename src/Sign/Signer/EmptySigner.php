@@ -15,4 +15,12 @@ final class EmptySigner implements SignerInterface
     {
         return $request;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSignature(array $data)
+    {
+        return '';
+    }
 }

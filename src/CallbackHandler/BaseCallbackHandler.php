@@ -4,6 +4,8 @@ namespace Gamemoney\CallbackHandler;
 use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
+use Gamemoney\Sign\SignerResolver;
+use Gamemoney\Sign\SignerResolverInterface;
 
 /**
  * Class BaseCallbackHandler
@@ -13,6 +15,8 @@ class BaseCallbackHandler
 {
     /** @var SignatureVerifierInterface */
     protected $signatureVerifier;
+    /** @var SignerResolverInterface */
+    protected $signerResolver;
 
     /**
      * @param Config $config
@@ -20,6 +24,9 @@ class BaseCallbackHandler
     public function __construct(Config $config)
     {
         $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
+        $this->setSignerResolver(
+            new SignerResolver($config->hmac(), $config->privateKey(), $config->privateKeyPassword())
+        );
     }
 
     /**
@@ -29,6 +36,17 @@ class BaseCallbackHandler
     public function setSignatureVerifier(SignatureVerifierInterface $signatureVerifier)
     {
         $this->signatureVerifier = $signatureVerifier;
+
+        return $this;
+    }
+
+    /**
+     * @param SignerResolverInterface $signerResolver
+     * @return self
+     */
+    public function setSignerResolver(SignerResolverInterface $signerResolver)
+    {
+        $this->signerResolver = $signerResolver;
 
         return $this;
     }

@@ -16,7 +16,7 @@ class SenderTest extends TestCase
 
     public function testInterface()
     {
-        $sender = new Sender($this->url, []);
+        $sender = new Sender($this::URL, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 

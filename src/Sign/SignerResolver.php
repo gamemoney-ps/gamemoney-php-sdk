@@ -37,9 +37,9 @@ class SignerResolver implements SignerResolverInterface
     /**
      * @inheritdoc
      */
-    public function resolve($action)
+    public function resolve($action = null)
     {
-        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
+        if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, (string) $action)) {
             return new EmptySigner();
         }
 

@@ -3,6 +3,7 @@ stages:
 
 dependencies:
     stage: test
+    allow_failure: true
     image: php:7.3
     script:
         - php73_prepare
