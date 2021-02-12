@@ -8,12 +8,12 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->fastConvertExchange([
         'externalId' => uniqid(),
         'amount' => 1000,
         'from' => 'RUB',
-        'to' => 'USD'
+        'to' => 'USD',
     ]);
     $response = $gateway->send($request);
 

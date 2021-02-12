@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Sign;
 
 use Gamemoney\Exception\SignatureVerificationException;

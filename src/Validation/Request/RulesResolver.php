@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
@@ -38,44 +39,44 @@ final class RulesResolver implements RulesResolverInterface
 
         switch ($action) {
             case RequestInterface::INVOICE_CREATE_ACTION:
-                return new InvoiceCreateRules;
+                return new InvoiceCreateRules();
             case RequestInterface::INVOICE_STATUS_ACTION:
                 return new InvoiceStatusRules($data);
             case RequestInterface::INVOICE_LIST_ACTION:
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
-                return new CheckoutCreateRules;
+                return new CheckoutCreateRules();
             case RequestInterface::CHECKOUT_CANCEL_ACTION:
             case RequestInterface::CHECKOUT_STATUS_ACTION:
-                return new CheckoutDefaultRules;
+                return new CheckoutDefaultRules();
             case RequestInterface::CHECKOUT_LIST_ACTION:
                 return new CheckoutListRules();
             case RequestInterface::CARD_ADD_ACTION:
-                return new CardAddRules;
+                return new CardAddRules();
             case RequestInterface::CARD_ADDTOKEN_ACTION:
-                return new CardAddtokenRules;
+                return new CardAddtokenRules();
             case RequestInterface::STORE_ONLY_CARD_DATA:
-                return new StoreOnlyCardData;
+                return new StoreOnlyCardData();
             case RequestInterface::CARD_LIST_ACTION:
             case RequestInterface::CARD_FULLLIST_ACTION:
-                return new CardListRules;
+                return new CardListRules();
             case RequestInterface::CARD_DELETE_ACTION:
-                return new CardDeleteRules;
+                return new CardDeleteRules();
             case RequestInterface::EXCHANGE_PREPARE_ACTION:
             case RequestInterface::EXCHANGE_INFO_ACTION:
-                return new ExchangePrepareRules;
+                return new ExchangePrepareRules();
             case RequestInterface::EXCHANGE_CONVERT_ACTION:
-                return new ExchangeConvertRules;
+                return new ExchangeConvertRules();
             case RequestInterface::EXCHANGE_FAST_CONVERT_ACTION:
-                return new ExchangeFastConvertRules;
+                return new ExchangeFastConvertRules();
             case RequestInterface::EXCHANGE_STATUS_ACTION:
                 return new ExchangeStatusRules($data);
             case RequestInterface::STATISTICS_BALANCE_ACTION:
-                return new StatisticsBalancesRules;
+                return new StatisticsBalancesRules();
             case RequestInterface::STATISTICS_DAYS_BALANCE_ACTION:
-                return new StatisticsDaysBalancesRules;
+                return new StatisticsDaysBalancesRules();
             default:
-                return new DefaultRules;
+                return new DefaultRules();
         }
     }
 }

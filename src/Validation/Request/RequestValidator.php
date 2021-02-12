@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request;
 
 use Symfony\Component\Validator\Validation;
@@ -27,7 +28,7 @@ final class RequestValidator implements RequestValidatorInterface
             }
         }
 
-        if (! empty($errors)) {
+        if (!empty($errors)) {
             $exception = new RequestValidationException('Bad request parameters');
             $exception->setErrors($errors);
 

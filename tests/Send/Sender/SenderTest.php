@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Send;
 
 use Gamemoney\Send\Sender\Sender;
@@ -33,7 +34,7 @@ class SenderTest extends TestCase
 
         $response = $sender->send($mockRequest);
         $this->assertTrue(is_array($response));
-        $this->assertEquals($response, ['1'=>'2']);
+        $this->assertEquals($response, ['1' => '2']);
     }
 
     public function testSendException()

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Send\Sender;
 
 use Gamemoney\Send\SenderInterface;
@@ -56,7 +57,7 @@ final class Sender implements SenderInterface
     private function getClient(array $clientConfig)
     {
         $defaultConfig = [
-            'base_uri' => $this->apiUrl
+            'base_uri' => $this->apiUrl,
         ];
 
         return new Client(array_merge($defaultConfig, $clientConfig));

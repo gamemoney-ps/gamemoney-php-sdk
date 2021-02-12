@@ -8,10 +8,10 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->getCheckoutList([
         'start' => '2018-10-01 12:10:05',
-        'finish' => '2019-10-02 16:24:00'
+        'finish' => '2019-10-02 16:24:00',
     ]);
     $response = $gateway->send($request);
 

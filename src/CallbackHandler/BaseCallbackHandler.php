@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\CallbackHandler;
 
 use Gamemoney\Config;
@@ -15,6 +16,7 @@ class BaseCallbackHandler
 {
     /** @var SignatureVerifierInterface */
     protected $signatureVerifier;
+
     /** @var SignerResolverInterface */
     protected $signerResolver;
 

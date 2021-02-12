@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Sign;
 
 use Gamemoney\Sign\SignatureVerifier;
@@ -20,7 +21,7 @@ class SignatureVerifierTest extends TestCase
                     'signature' => 'QSqpJLZLwJTqEMzZ1Y7JXO3Xi9Fiymyn3j4c1r5Ip/dbsG3VIxp16eQU2IsVkmB97BAbfdSVW3k7Fgx0zM1Q
                     A8CikFBAr8nffEIMtOGulTJX2N4zWg4JcK5OwYoC5HodnW2/p8lUuLMZjmaogsqlRGuFUU+PRPg3S8fQDRZjNfabRT9CiPJfwx24
                     LUaxtXXyxMOXLYqhDco2SSyNwUSmETcJdxVKYjB9T40GcsoSCb1T7a95VZxPsOvcHOMMd7MFN5LqfU2YQqDy+gctvpXWSjIzUmHq
-                    Yfn8ljDBt0B0Oz+SB4xIDIIrfiFM/wPWfKFmTOHIo8PycTiyiJDw+M3krg=='
+                    Yfn8ljDBt0B0Oz+SB4xIDIIrfiFM/wPWfKFmTOHIo8PycTiyiJDw+M3krg==',
                 ],
                 'key' => '-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5B70y7kaFJ8yte7dsdt
@@ -41,7 +42,7 @@ sQIDAQAB
                     'signature' => 'QSqpJLZLwJTqEMzZ1Y7JXO3Xi9Fiymyn3j4c1r5Ip/dbsG3VIxp16eQU2IsVkmB97BAbfdSVW3k7Fgx0zM1Q
                     A8CikFBAr8nffEIMtOGulTJX2N4zWg4JcK5OwYoC5HodnW2/p8lUuLMZjmaogsqlRGuFUU+PRPg3S8fQDRZjNfabRT9CiPJfwx24
                     LUaxtXXyxMOXLYqhDco2SSyNwUSmETcJdxVKYjB9T40GcsoSCb1T7a95VZxPsOvcHOMMd7MFN5LqfU2YQqDy+gctvpXWSjIzUmHq
-                    Yfn8ljDBt0B0Oz+SB4xIDIIrfiFM/wPWfKFmTOHIo8PycTiyiJDw+M3krg=='
+                    Yfn8ljDBt0B0Oz+SB4xIDIIrfiFM/wPWfKFmTOHIo8PycTiyiJDw+M3krg==',
                 ],
                 'key' => '-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq/P7DCmQkzfJDs9014in

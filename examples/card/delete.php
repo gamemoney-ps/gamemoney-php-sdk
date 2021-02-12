@@ -8,10 +8,10 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->deleteCard([
         'user' => 1,
-        'pan' => '111111******2222'
+        'pan' => '111111******2222',
     ]);
     $response = $gateway->send($request);
 

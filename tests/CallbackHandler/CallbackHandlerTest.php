@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\CallbackHandler;
 
 use Gamemoney\CallbackHandler\BaseCallbackHandler;
@@ -73,11 +74,11 @@ class CallbackHandlerTest extends TestCase
         return [
             [
                 'error' => null,
-                'output' => '{"success":"error"}'
+                'output' => '{"success":"error"}',
             ],
             [
                 'error' => 'message',
-                'output' => '{"success":"error","error":"message"}'
+                'output' => '{"success":"error","error":"message"}',
             ],
         ];
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -20,19 +21,19 @@ final class ExchangeConvertRules implements RulesInterface
         return [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'id' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'amount' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
         ];
     }

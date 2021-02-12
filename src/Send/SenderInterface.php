@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Send;
 
 use Gamemoney\Request\RequestInterface;
