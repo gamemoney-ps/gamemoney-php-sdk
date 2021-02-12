@@ -25,7 +25,7 @@ final class StoreOnlyCardData implements RulesInterface
                 new Type('string'),
                 new Regex([
                         'pattern' => '/^[0-9\s]+$/',
-                ])
+                ]),
             ],
             'cardholder' => [
                 new NotBlank(),
@@ -33,21 +33,21 @@ final class StoreOnlyCardData implements RulesInterface
                 new Length(['max' => 50]),
                 new Regex([
                     'pattern' => '/^[\p{L}\s\-\'\'\.]+$/u',
-                ])
+                ]),
             ],
             'cc_exp_month' => [
                 new NotBlank(),
                 new Type('string'),
                 new Regex([
                     'pattern' => '/^(0[1-9]|1[0-2])$/',
-                ])
+                ]),
             ],
             'cc_exp_year' => [
                 new NotBlank(),
                 new Type('string'),
                 new Regex([
                     'pattern' => '/^([0-9]{2})$/',
-                ])
+                ]),
             ],
         ];
     }

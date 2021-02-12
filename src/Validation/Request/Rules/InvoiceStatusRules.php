@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -34,23 +35,23 @@ final class InvoiceStatusRules implements RulesInterface
         $rules = [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
         ];
 
         if (isset($this->data['invoice'])) {
             $rules['invoice'] = [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ];
         } elseif (isset($this->data['project_invoice'])) {
             $rules['project_invoice'] = [
                 new NotBlank(),
-                new Type('string')
+                new Type('string'),
             ];
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace tests;
 
 use Gamemoney\Config;
@@ -165,7 +166,7 @@ class GatewayTest extends TestCase
             'setSignerResolver',
             'setResponseValidatorResolver',
             'setRulesResolver',
-            'setSenderResolver'
+            'setSenderResolver',
         ]);
 
         $gateway

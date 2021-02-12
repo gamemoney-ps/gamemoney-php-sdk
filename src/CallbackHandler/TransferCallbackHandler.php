@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\CallbackHandler;
 
 use Gamemoney\Exception\ConfigException;
@@ -34,14 +35,14 @@ class TransferCallbackHandler extends BaseCallbackHandler
 
         $data = [
             'state' => 'success',
-            'invoice' => $this->invoiceNumber
+            'invoice' => $this->invoiceNumber,
         ];
 
         return json_encode(
             array_merge(
                 $data,
                 [
-                    'signature' => $this->signerResolver->resolve()->getSignature($data)
+                    'signature' => $this->signerResolver->resolve()->getSignature($data),
                 ]
             )
         );

@@ -21,15 +21,15 @@ final class CardAddtokenRules implements RulesInterface
         return [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
         ];
     }

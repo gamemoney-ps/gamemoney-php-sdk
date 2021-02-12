@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -25,7 +26,7 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'user' => [
                 new NotBlank(),
@@ -37,25 +38,25 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'type' => [
                 new NotBlank(),
-                new Type('string')
+                new Type('string'),
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 3])
+                new Length(['max' => 3]),
             ],
             'user_currency' => [
                 new Type('string'),
-                new Length(['max' => 3])
+                new Length(['max' => 3]),
             ],
             'language' => [
                 new Type('string'),
-                new Length(['max' => 2])
+                new Length(['max' => 2]),
             ],
             'project_invoice' => [
-                new Type('scalar')
+                new Type('scalar'),
             ],
             'ip' => [
-                new Ip(['version' => Ip::ALL])
+                new Ip(['version' => Ip::ALL]),
             ],
         ];
     }

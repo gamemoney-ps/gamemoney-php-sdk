@@ -9,7 +9,7 @@ $sessionToken = 'testToken';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
 
     $request = $requestFactory->storeOnlyCardData(
         $sessionToken,
