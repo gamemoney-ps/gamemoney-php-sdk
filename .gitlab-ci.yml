@@ -7,9 +7,9 @@ dependencies:
     image: php:7.3
     script:
         - php73_prepare
-        - composer require --dev sensiolabs/security-checker
-        - composer update -vv -o
-        - ./vendor/bin/security-checker security:check
+        - curl -sS https://get.symfony.com/cli/installer | bash
+        - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+        - symfony security:check
 
 static:
     stage: test
