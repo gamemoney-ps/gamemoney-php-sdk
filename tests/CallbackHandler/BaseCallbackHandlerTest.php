@@ -7,7 +7,7 @@ use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Sign\SignerResolverInterface;
 use PHPUnit\Framework\TestCase;
 
-class CallbackHandlerTest extends TestCase
+class BaseCallbackHandlerTest extends TestCase
 {
     const PROJECT = 1;
 
