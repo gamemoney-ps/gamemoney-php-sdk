@@ -68,6 +68,14 @@ test-7.4:
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
+test-8.0:
+    stage: test
+    image: php:8.0
+    script:
+        - php80_prepare
+        - composer update -vv -o
+        - ./vendor/bin/phpunit --coverage-text --colors=never
+
 code_style:
     stage: test
     image: php:7.2
@@ -105,6 +113,13 @@ code_style:
         apt-get update && apt-get install -qqy --no-install-recommends git unzip \
         &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
         && pecl install xdebug-2.9.0 \
+        && docker-php-ext-enable xdebug
+    }
+
+    function php80_prepare() {
+        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
+        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+        && pecl install xdebug-3.0.0 \
         && docker-php-ext-enable xdebug
     }
 
