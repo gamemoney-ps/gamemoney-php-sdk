@@ -76,31 +76,9 @@ code_style:
         - composer update -vv -o
         - ./vendor/bin/phpcs .
 
-code_quality:
-    stage: test
-    allow_failure: true
-    image: docker:stable
-    services:
-        - docker:stable-dind
-    variables:
-        DOCKER_DRIVER: overlay2
-    script:
-        - docker_login
-        - code_quality
-    artifacts:
-        paths: [gl-code-quality-report.json]
-    when: manual
-
 # ---------------------------------------------------------------------------
 .help_scripts: &help_scripts |
     export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
-
-    function code_quality() {
-        docker run --env SOURCE_CODE="$PWD" \
-               --volume "$PWD":/code \
-               --volume /var/run/docker.sock:/var/run/docker.sock \
-               "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
-    }
 
     function php_prepare() {
         apt-get update && apt-get install -qqy --no-install-recommends git unzip \
@@ -128,10 +106,6 @@ code_quality:
         &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
         && pecl install xdebug-2.9.0 \
         && docker-php-ext-enable xdebug
-    }
-
-    function docker_login() {
-        docker login -u gitlab-ci-token -p ${GITLAB_REGISTRY_TOKEN} registry.gitlab.com
     }
 
 before_script:
