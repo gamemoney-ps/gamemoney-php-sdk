@@ -33,7 +33,7 @@ class TransferCallbackHandlerTest extends TestCase
         $result = '{"state":"success","invoice":1,"signature":"testSign"}';
         $data = [
             'state' => 'success',
-            'invoice' => $invoiceNumber
+            'invoice' => $invoiceNumber,
         ];
 
         $mockSigner = $this->createPartialMock(SignerInterface::class, ['sign', 'getSignature']);
@@ -63,11 +63,11 @@ class TransferCallbackHandlerTest extends TestCase
         return [
             [
                 'error' => null,
-                'output' => '{"state":"error"}'
+                'output' => '{"state":"error"}',
             ],
             [
                 'error' => 'message',
-                'output' => '{"state":"error","error":"message"}'
+                'output' => '{"state":"error","error":"message"}',
             ],
         ];
     }
