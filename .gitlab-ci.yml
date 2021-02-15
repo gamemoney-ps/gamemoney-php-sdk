@@ -74,7 +74,7 @@ code_style:
     script:
         - php_prepare
         - composer update -vv -o
-        - ./vendor/bin/phpcs .
+        - ./vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
 # ---------------------------------------------------------------------------
 .help_scripts: &help_scripts |

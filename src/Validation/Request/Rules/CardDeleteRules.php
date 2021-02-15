@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -20,15 +21,15 @@ final class CardDeleteRules implements RulesInterface
         return [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'pan' => [
                 new NotBlank(),
-                new Type('string')
+                new Type('string'),
             ],
         ];
     }

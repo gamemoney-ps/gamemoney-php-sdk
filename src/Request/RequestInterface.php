@@ -1,30 +1,53 @@
 <?php
+
 namespace Gamemoney\Request;
 
 interface RequestInterface
 {
     const INVOICE_CREATE_ACTION = '/invoice/';
+
     const INVOICE_STATUS_ACTION = '/invoice/status';
+
     const INVOICE_LIST_ACTION = '/invoice/list';
+
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
+
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
+
     const CHECKOUT_STATUS_ACTION = '/checkout/status';
+
     const CHECKOUT_LIST_ACTION = '/checkout/list';
+
     const CARD_ADD_ACTION = '/card/add';
+
     const CARD_ADDTOKEN_ACTION = '/card/addtoken';
+
     const CARD_LIST_ACTION = '/card/list';
+
     const CARD_FULLLIST_ACTION = '/card/fulllist';
+
     const CARD_DELETE_ACTION = '/card/delete';
+
     const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
+
     const EXCHANGE_CONVERT_ACTION = '/exchange/convert';
+
     const EXCHANGE_FAST_CONVERT_ACTION = '/exchange/fastconvert';
+
     const EXCHANGE_STATUS_ACTION = '/exchange/status';
+
     const EXCHANGE_INFO_ACTION = '/exchange/info';
+
     const STATISTICS_BALANCE_ACTION = '/statistics/balance';
+
     const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
+
     const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
+
     const TERMINAL_CREATE_ACTION = '/terminal/create';
+
     const STORE_ONLY_CARD_DATA = 'v1/sessions/%s/input';
+
     const STORE_ONLY_CARD_DATA_REGEX = '/^v1\/sessions\/[\w]+\/input$/';
 
     /**

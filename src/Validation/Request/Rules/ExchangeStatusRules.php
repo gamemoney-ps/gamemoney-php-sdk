@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -34,23 +35,23 @@ final class ExchangeStatusRules implements RulesInterface
         $rules = [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
         ];
 
         if (isset($this->data['id'])) {
             $rules['id'] = [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ];
         } elseif (isset($this->data['externalId'])) {
             $rules['externalId'] = [
                 new NotBlank(),
-                new Type('string')
+                new Type('string'),
             ];
         }
 

@@ -8,10 +8,10 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->getDaysBalanceStatistics([
         'start' => '2018-01-01',
-        'finish' => '2018-01-02'
+        'finish' => '2018-01-02',
     ]);
     $response = $gateway->send($request);
 

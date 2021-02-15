@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Validation\Response\Validator;
 
 use Gamemoney\Exception\ResponseValidationException;
@@ -16,15 +17,15 @@ class ResponseValidatorTest extends TestCase
         return [
             [
                 'response' => [],
-                'request' => []
+                'request' => [],
             ],
             [
                 'response' => ['rand' => 'test', 'invoice' => 1, 'signature' => 'test signature'],
-                'request' => ['rand' => 'test']
+                'request' => ['rand' => 'test'],
             ],
             [
                 'response' => ['rand' => 'test', 'invoice' => 1, 'signature' => 'test signature'],
-                'request' => []
+                'request' => [],
             ],
         ];
     }

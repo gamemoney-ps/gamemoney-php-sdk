@@ -8,11 +8,11 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->createTerminal([
         'user' => 1,
         'ip' => '72.14.192.0',
-        'add_some_field' => 'some value'
+        'add_some_field' => 'some value',
     ]);
     $response = $gateway->send($request);
 

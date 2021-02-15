@@ -62,7 +62,7 @@ final class JsonSender implements SenderInterface
     private function getClient(array $clientConfig)
     {
         $defaultConfig = [
-            'base_uri' => $this->secureUrl
+            'base_uri' => $this->secureUrl,
         ];
 
         return new Client(array_merge($defaultConfig, $clientConfig));

@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney;
 
 use Gamemoney\Request\RequestInterface;
@@ -67,8 +68,8 @@ class Gateway
         );
 
         $this
-            ->setRequestValidator(new RequestValidator)
-            ->setRulesResolver(new RulesResolver)
+            ->setRequestValidator(new RequestValidator())
+            ->setRulesResolver(new RulesResolver())
             ->setSignerResolver($signerResolver)
             ->setSenderResolver($senderResolver)
             ->setResponseValidatorResolver($responseValidatorResolver);

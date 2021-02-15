@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Response\Validator;
 
 use Gamemoney\Exception\ResponseValidationException;
@@ -27,7 +28,7 @@ class ResponseValidator implements ResponseValidatorInterface
      */
     public function validate(array $response, array $request)
     {
-        if (! $this->signatureVerifier->verify($response)) {
+        if (!$this->signatureVerifier->verify($response)) {
             throw new ResponseValidationException('Signature mismatch');
         }
 

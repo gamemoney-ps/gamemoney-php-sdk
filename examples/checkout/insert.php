@@ -12,7 +12,7 @@ $privateKeyPassword = 'keypassword';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPassword);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->createCheckout([
         'projectId' => uniqid(),
         'user' => 1,
@@ -21,7 +21,7 @@ try {
         'wallet' => '89123456789',
         'type' => 'qiwi',
         'description' => 'Payout for user account 250115125',
-        'add_some_field' => 'some value'
+        'add_some_field' => 'some value',
     ]);
     $response = $gateway->send($request);
 

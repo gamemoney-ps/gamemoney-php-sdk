@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\Rules\ExchangeStatusRules;
@@ -17,8 +18,8 @@ class ExchangeStatusRulesTest extends TestCase
                 'data' => [
                     'project' => 123456,
                     'rand' => '56f97b6c07d66cde3d20',
-                    'id' => 1
-                ]
+                    'id' => 1,
+                ],
             ],
             [
                 'checkField' => ['project', 'rand', 'id'],
@@ -26,16 +27,16 @@ class ExchangeStatusRulesTest extends TestCase
                     'project' => 123456,
                     'rand' => '56f97b6c07d66cde3d20',
                     'id' => 1,
-                    'externalId' => 'test'
-                ]
+                    'externalId' => 'test',
+                ],
             ],
             [
                 'checkField' => ['project', 'rand', 'externalId'],
                 'data' => [
                     'project' => 123456,
                     'rand' => '56f97b6c07d66cde3d20',
-                    'externalId' => 'test'
-                ]
+                    'externalId' => 'test',
+                ],
             ],
         ];
     }

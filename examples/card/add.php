@@ -8,10 +8,10 @@ $hmacKey = 'test';
 try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
-    $requestFactory = new \Gamemoney\Request\RequestFactory;
+    $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->addCard([
         'user' => 1,
-        'redirect' => 'https://project/return'
+        'redirect' => 'https://project/return',
     ]);
     $response = $gateway->send($request);
 

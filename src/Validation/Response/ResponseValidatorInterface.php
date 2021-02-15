@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Response;
 
 use Gamemoney\Exception\ResponseValidationException;

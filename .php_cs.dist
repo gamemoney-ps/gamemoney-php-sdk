@@ -1,0 +1,48 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(['examples', 'src', 'tests']);
+
+return PhpCsFixer\Config::create()
+    ->setRules(
+    [
+        '@PSR2' => true,
+        'lowercase_static_reference' => true,
+        'semicolon_after_instruction' => true,
+        'standardize_not_equals' => true,
+        'binary_operator_spaces' => true,
+        'compact_nullable_typehint' => true,
+        'function_typehint_space' => true,
+        'new_with_braces' => true,
+        'no_whitespace_in_blank_line' => true,
+        'object_operator_without_whitespace' => true,
+        'single_quote' => true,
+        'no_trailing_comma_in_list_call' => true,
+        'no_whitespace_before_comma_in_array' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'single_blank_line_before_namespace' => true,
+        'global_namespace_import' => true,
+        'no_blank_lines_after_class_opening' => true,
+        'no_blank_lines_after_phpdoc' => true,
+        'no_spaces_around_offset' => true,
+        'no_empty_phpdoc' => true,
+        'no_unused_imports' => true,
+        'unary_operator_spaces' => true,
+        'linebreak_after_opening_tag' => true,
+        'native_function_casing' => true,
+        'no_empty_statement' => true,
+        'no_leading_namespace_whitespace' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_leading_import_slash' => true,
+        'class_attributes_separation' => true,
+        'array_syntax' =>
+        [
+            'syntax' => 'short'
+        ],
+        'concat_space' =>
+        [
+            'spacing' => 'one'
+        ],
+    ])
+    ->setFinder($finder)
+;

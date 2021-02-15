@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
@@ -25,11 +26,11 @@ final class CheckoutCreateRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'projectId' => [
                 new NotBlank(),
-                new Type('scalar')
+                new Type('scalar'),
             ],
             'user' => [
                 new NotBlank(),
@@ -40,25 +41,25 @@ final class CheckoutCreateRules implements RulesInterface
                 new Type('numeric'),
             ],
             'wallet' => [
-                new Type('string')
+                new Type('string'),
             ],
             'description' => [
-                new Type('string')
+                new Type('string'),
             ],
             'type' => [
                 new NotBlank(),
-                new Type('string')
+                new Type('string'),
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 3])
+                new Length(['max' => 3]),
             ],
             'userCurrency' => [
                 new Type('string'),
-                new Length(['max' => 3])
+                new Length(['max' => 3]),
             ],
             'ip' => [
-                new Ip(['version' => Ip::ALL])
+                new Ip(['version' => Ip::ALL]),
             ],
         ];
     }

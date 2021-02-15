@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Validation\Request;
 
 use Gamemoney\Exception\RequestValidationException;
@@ -27,8 +28,8 @@ class RequestValidatorTest extends TestCase
                 'data' => [
                     'param1' => 'test',
                     'param2' => '0',
-                    'param3' => 0
-                ]
+                    'param3' => 0,
+                ],
             ],
             [
                 'rules' => [
@@ -44,7 +45,7 @@ class RequestValidatorTest extends TestCase
                     'param3' => 'aaaaa',
                     'param4' => null,
                     'param5' => null,
-                ]
+                ],
             ],
             [
                 'rules' => [
@@ -58,7 +59,7 @@ class RequestValidatorTest extends TestCase
                     'param2' => 1,
                     'param3' => false,
                     'param4' => 4.1,
-                ]
+                ],
             ],
             [
                 'rules' => [
@@ -66,7 +67,7 @@ class RequestValidatorTest extends TestCase
                 ],
                 'data' => [
                     'param' => '2018-10-01 12:10:05',
-                ]
+                ],
             ],
         ];
     }
@@ -91,9 +92,9 @@ class RequestValidatorTest extends TestCase
             [
                 'rules' => [
                     'param1' => [new NotBlank()],
-                    'param2' => [new NotBlank()]
+                    'param2' => [new NotBlank()],
                 ],
-                'data' => ['param1' => 'test']
+                'data' => ['param1' => 'test'],
             ],
             ['rules' => ['param' => [new NotBlank()]], 'data' => ['param' => '']],
             ['rules' => ['param' => [new NotBlank()]], 'data' => ['param' => null]],
@@ -101,9 +102,9 @@ class RequestValidatorTest extends TestCase
             ['rules' => ['param' => [new NotBlank()]], 'data' => []],
             [
                 'rules' => [
-                    'param' => [new DateTime()]
+                    'param' => [new DateTime()],
                 ],
-                'data' => ['param' => '2018-10-01']
+                'data' => ['param' => '2018-10-01'],
             ],
         ];
     }

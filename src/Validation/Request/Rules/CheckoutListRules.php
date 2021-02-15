@@ -1,7 +1,7 @@
 <?php
+
 namespace Gamemoney\Validation\Request\Rules;
 
-use Gamemoney\Gateway;
 use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -22,19 +22,19 @@ final class CheckoutListRules implements RulesInterface
         return [
             'project' => [
                 new NotBlank(),
-                new Type('numeric')
+                new Type('numeric'),
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20])
+                new Length(['min' => 20]),
             ],
             'start' => [
                 new NotBlank(),
-                new DateTime()
+                new DateTime(),
             ],
             'finish' => [
                 new NotBlank(),
-                new DateTime()
+                new DateTime(),
             ],
         ];
     }
