@@ -29,7 +29,7 @@ final class StatisticsBalancesRules implements RulesInterface
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
         ];
     }

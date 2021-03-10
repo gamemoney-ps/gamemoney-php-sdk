@@ -42,11 +42,11 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'user_currency' => [
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'language' => [
                 new Type('string'),

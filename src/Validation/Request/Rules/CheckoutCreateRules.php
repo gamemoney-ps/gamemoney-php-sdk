@@ -52,11 +52,11 @@ final class CheckoutCreateRules implements RulesInterface
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'userCurrency' => [
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'ip' => [
                 new Ip(['version' => Ip::ALL]),

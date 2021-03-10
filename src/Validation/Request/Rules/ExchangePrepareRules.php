@@ -30,12 +30,12 @@ final class ExchangePrepareRules implements RulesInterface
             'from' => [
                 new NotBlank(),
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'to' => [
                 new NotBlank(),
                 new Type('string'),
-                new Length(['max' => 3]),
+                new Length(['max' => 4]),
             ],
             'minAmount' => [
                 new NotBlank(),
