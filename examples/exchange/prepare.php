@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->prepareExchange([
-        'externalId' => '1',
+        'externalId' => uniqid(),
         'minAmount' => 1000,
         'maxAmount' => 2000.50,
         'from' => 'RUB',

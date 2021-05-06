@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->fastConvertExchange([
-        'externalId' => '1',
+        'externalId' => uniqid(),
         'amount' => 1000,
         'from' => 'RUB',
         'to' => 'USD',

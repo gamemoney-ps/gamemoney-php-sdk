@@ -14,7 +14,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->createCheckout([
-        'projectId' => '1',
+        'projectId' => uniqid(),
         'user' => '1',
         'ip' => '72.14.192.0',
         'amount' => 200.50,
