@@ -27,6 +27,10 @@ final class CardDeleteRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20]),
             ],
+            'user' => [
+                new NotBlank(),
+                new Type('string'),
+            ],
             'pan' => [
                 new NotBlank(),
                 new Type('string'),

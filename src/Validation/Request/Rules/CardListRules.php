@@ -29,7 +29,7 @@ final class CardListRules implements RulesInterface
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric'),
+                new Type('string'),
             ],
         ];
     }

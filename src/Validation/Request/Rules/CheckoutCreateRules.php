@@ -30,11 +30,11 @@ final class CheckoutCreateRules implements RulesInterface
             ],
             'projectId' => [
                 new NotBlank(),
-                new Type('scalar'),
+                new Type('string'),
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric'),
+                new Type('string'),
             ],
             'amount' => [
                 new NotBlank(),

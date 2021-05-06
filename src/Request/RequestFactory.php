@@ -61,7 +61,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_cancel)
-     * @param string|int $id
+     * @param string $id
      * @return Request
      */
     public function cancelCheckout($id)
@@ -71,7 +71,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_status)
-     * @param string|int $id
+     * @param string $id
      * @return Request
      */
     public function getCheckoutStatus($id)
@@ -204,7 +204,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_status)
-     * @param string|int $id exchange id in project system
+     * @param string $id exchange id in project system
      * @return Request
      */
     public function getExchangeStatusByExternalId($id)

@@ -29,7 +29,7 @@ final class CheckoutDefaultRules implements RulesInterface
             ],
             'projectId' => [
                 new NotBlank(),
-                new Type('scalar'),
+                new Type('string'),
             ],
         ];
     }

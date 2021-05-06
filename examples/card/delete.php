@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->deleteCard([
-        'user' => 1,
+        'user' => '1',
         'pan' => '111111******2222',
     ]);
     $response = $gateway->send($request);

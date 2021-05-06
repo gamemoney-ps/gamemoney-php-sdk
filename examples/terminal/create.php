@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->createTerminal([
-        'user' => 1,
+        'user' => '1',
         'ip' => '72.14.192.0',
         'add_some_field' => 'some value',
     ]);

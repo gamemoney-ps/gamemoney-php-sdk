@@ -30,7 +30,7 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric'),
+                new Type('string'),
             ],
             'amount' => [
                 new NotBlank(),
@@ -53,7 +53,7 @@ final class InvoiceCreateRules implements RulesInterface
                 new Length(['max' => 2]),
             ],
             'project_invoice' => [
-                new Type('scalar'),
+                new Type('string'),
             ],
             'ip' => [
                 new Ip(['version' => Ip::ALL]),
