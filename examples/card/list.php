@@ -9,7 +9,7 @@ try {
     $config = new \Gamemoney\Config($project, $hmacKey);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
-    $request = $requestFactory->getCardList(1);
+    $request = $requestFactory->getCardList('1');
     $response = $gateway->send($request);
 
     var_dump($response);

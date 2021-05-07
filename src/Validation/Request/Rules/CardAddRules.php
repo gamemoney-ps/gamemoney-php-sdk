@@ -29,7 +29,7 @@ final class CardAddRules implements RulesInterface
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric'),
+                new Type('string'),
             ],
             'redirect' => [
                 new NotBlank(),

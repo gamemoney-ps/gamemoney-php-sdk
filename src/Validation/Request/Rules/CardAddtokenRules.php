@@ -29,7 +29,7 @@ final class CardAddtokenRules implements RulesInterface
             ],
             'user' => [
                 new NotBlank(),
-                new Type('numeric'),
+                new Type('string'),
             ],
         ];
     }

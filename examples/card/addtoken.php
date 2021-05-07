@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->addtokenCard([
-        'user' => 1,
+        'user' => '1',
     ]);
     $response = $gateway->send($request);
 

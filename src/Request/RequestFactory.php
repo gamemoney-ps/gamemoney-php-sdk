@@ -21,7 +21,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_status)
-     * @param string|int $id invoice id in Gamemoney system
+     * @param int $id invoice id in Gamemoney system
      * @return Request
      */
     public function getInvoiceStatus($id)
@@ -31,7 +31,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_status)
-     * @param string|int $id invoice id in project system
+     * @param string $id invoice id in project system
      * @return Request
      */
     public function getInvoiceStatusByExternalId($id)
@@ -61,7 +61,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_cancel)
-     * @param string|int $id
+     * @param string $id
      * @return Request
      */
     public function cancelCheckout($id)
@@ -71,7 +71,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_status)
-     * @param string|int $id
+     * @param string $id
      * @return Request
      */
     public function getCheckoutStatus($id)
@@ -101,7 +101,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_list)
-     * @param string|int $userId user id in Gamemoney system
+     * @param string $userId user id in Gamemoney system
      * @return Request
      */
     public function getCardList($userId)
@@ -111,7 +111,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_fulllist)
-     * @param string|int $userId user id in Gamemoney system
+     * @param string $userId user id in Gamemoney system
      * @return Request
      */
     public function getCardFulllist($userId)
@@ -204,7 +204,7 @@ class RequestFactory
 
     /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_status)
-     * @param string|int $id exchange id in project system
+     * @param string $id exchange id in project system
      * @return Request
      */
     public function getExchangeStatusByExternalId($id)

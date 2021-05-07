@@ -10,7 +10,7 @@ try {
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->createInvoice([
-        'user' => 1,
+        'user' => '1',
         'amount' => 200.50,
         'type' => 'qiwi',
         'wallet' => '89123456789',
