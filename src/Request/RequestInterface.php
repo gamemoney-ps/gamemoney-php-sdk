@@ -10,6 +10,8 @@ interface RequestInterface
 
     const INVOICE_LIST_ACTION = '/invoice/list';
 
+    const INVOICE_CARD_SESSION_STATUS_ACTION = '/invoice/cardsession/status';
+
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
 
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';

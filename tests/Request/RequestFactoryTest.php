@@ -53,6 +53,22 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getInvoiceCardSessionStatus',
+                1,
+                RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION,
+                [
+                    'invoice' => 1,
+                ],
+            ],
+            [
+                'getInvoiceCardSessionStatusByExternalId',
+                'external_id',
+                RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION,
+                [
+                    'project_invoice' => 'external_id',
+                ],
+            ],
+            [
                 'createCheckout',
                 [
                     'amount' => 100,

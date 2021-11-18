@@ -5,6 +5,7 @@ namespace Gamemoney\Validation\Request\Rules;
 use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Optional;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -49,6 +50,17 @@ final class StoreOnlyCardData implements RulesInterface
                     'pattern' => '/^([0-9]{2})$/',
                 ]),
             ],
+            'cvc' => new Optional([
+                new NotBlank(),
+                new Type('string'),
+                new Regex([
+                    'pattern' => '/^([0-9]{3,4})$/',
+                ]),
+            ]),
+            'email' => new Optional([
+                new NotBlank(),
+                new Type('string'),
+            ]),
         ];
     }
 }
