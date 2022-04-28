@@ -63,11 +63,11 @@ class TransferCallbackHandlerTest extends TestCase
         return [
             [
                 'error' => null,
-                'output' => '{"state":"error"}',
+                'output' => '{"state":"error","signature":"testSign"}',
             ],
             [
                 'error' => 'message',
-                'output' => '{"state":"error","error":"message"}',
+                'output' => '{"state":"error","error":"message","signature":"testSign"}',
             ],
         ];
     }
@@ -79,7 +79,23 @@ class TransferCallbackHandlerTest extends TestCase
      */
     public function testErrorAnswer($error, $output)
     {
+        $sign = 'testSign';
+
+        $mockSigner = $this->createPartialMock(SignerInterface::class, ['sign', 'getSignature']);
+        $mockSigner
+            ->expects($this->once())
+            ->method('getSignature')
+            ->willReturn($sign);
+
+        $mockResolver = $this->createPartialMock(SignerResolverInterface::class, ['resolve']);
+        $mockResolver
+            ->expects($this->once())
+            ->method('resolve')
+            ->willReturn($mockSigner);
+
         $handler = new TransferCallbackHandler($this->getConfig());
+        $handler->setSignerResolver($mockResolver);
+
         $this->assertEquals($output, $handler->errorAnswer($error));
     }
 

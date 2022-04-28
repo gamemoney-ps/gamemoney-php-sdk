@@ -54,10 +54,17 @@ class TransferCallbackHandler extends BaseCallbackHandler
      */
     public function errorAnswer($error = null)
     {
+        $data = array_merge(
+            ['state' => 'error'],
+            $error ? ['error' => $error] : []
+        );
+
         return json_encode(
             array_merge(
-                ['state' => 'error'],
-                $error ? ['error' => $error] : []
+                $data,
+                [
+                    'signature' => $this->signerResolver->resolve()->getSignature($data),
+                ]
             )
         );
     }
