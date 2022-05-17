@@ -37,6 +37,12 @@ class ResponseValidatorResolverTest extends TestCase
                 RequestInterface::INVOICE_LIST_ACTION,
             ],
             [
+                RequestInterface::CHECKOUT_CREATE_ACTION,
+            ],
+            [
+                RequestInterface::CHECKOUT_PREPARE_ACTION,
+            ],
+            [
                 RequestInterface::CHECKOUT_CANCEL_ACTION,
             ],
             [

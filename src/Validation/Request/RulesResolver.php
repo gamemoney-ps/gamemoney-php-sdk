@@ -4,6 +4,7 @@ namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
+use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
 use Gamemoney\Validation\Request\Rules\StoreOnlyCardData;
 use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
@@ -47,6 +48,8 @@ final class RulesResolver implements RulesResolverInterface
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
                 return new CheckoutCreateRules();
+            case RequestInterface::CHECKOUT_PREPARE_ACTION:
+                return new CheckoutPrepareRules();
             case RequestInterface::CHECKOUT_CANCEL_ACTION:
             case RequestInterface::CHECKOUT_STATUS_ACTION:
                 return new CheckoutDefaultRules();
