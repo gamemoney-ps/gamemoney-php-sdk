@@ -14,6 +14,8 @@ interface RequestInterface
 
     const CHECKOUT_CREATE_ACTION = '/checkout/insert';
 
+    const CHECKOUT_PREPARE_ACTION = '/checkout/prepare';
+
     const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
 
     const CHECKOUT_STATUS_ACTION = '/checkout/status';

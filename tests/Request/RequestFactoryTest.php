@@ -79,6 +79,16 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'prepareCheckout',
+                [
+                    'amount' => 100,
+                ],
+                RequestInterface::CHECKOUT_PREPARE_ACTION,
+                [
+                    'amount' => 100,
+                ],
+            ],
+            [
                 'cancelCheckout',
                 1,
                 RequestInterface::CHECKOUT_CANCEL_ACTION,
