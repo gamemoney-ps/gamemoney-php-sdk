@@ -28,6 +28,7 @@ class RulesResolverTest extends TestCase
             ['action' => RequestInterface::EXCHANGE_CONVERT_ACTION],
             ['action' => RequestInterface::EXCHANGE_FAST_CONVERT_ACTION],
             ['action' => RequestInterface::EXCHANGE_INFO_ACTION],
+            ['action' => RequestInterface::EXCHANGE_RATE_ACTION],
             ['action' => RequestInterface::EXCHANGE_PREPARE_ACTION],
             ['action' => RequestInterface::EXCHANGE_STATUS_ACTION],
             ['action' => RequestInterface::CARD_LIST_ACTION],

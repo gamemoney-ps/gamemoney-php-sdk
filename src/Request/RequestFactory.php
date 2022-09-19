@@ -213,13 +213,23 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_info)
      * @param array $data
      * @return Request
+     * @deprecated
      */
     public function getExchangeInfo(array $data = [])
     {
         return new Request(RequestInterface::EXCHANGE_INFO_ACTION, $data);
+    }
+
+    /**
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#exchange_rate)
+     * @param array $data
+     * @return Request
+     */
+    public function getExchangeRate(array $data = [])
+    {
+        return new Request(RequestInterface::EXCHANGE_RATE_ACTION, $data);
     }
 
     /**

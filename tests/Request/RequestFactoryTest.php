@@ -203,6 +203,18 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
+                'getExchangeRate',
+                [
+                    'from' => 'USD',
+                    'to' => 'RUB',
+                ],
+                RequestInterface::EXCHANGE_RATE_ACTION,
+                [
+                    'from' => 'USD',
+                    'to' => 'RUB',
+                ],
+            ],
+            [
                 'getExchangeStatus',
                 1,
                 RequestInterface::EXCHANGE_STATUS_ACTION,

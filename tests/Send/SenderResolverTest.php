@@ -70,6 +70,9 @@ class SenderResolverTest extends TestCase
                 RequestInterface::EXCHANGE_INFO_ACTION,
             ],
             [
+                RequestInterface::EXCHANGE_RATE_ACTION,
+            ],
+            [
                 RequestInterface::EXCHANGE_CONVERT_ACTION,
             ],
             [
