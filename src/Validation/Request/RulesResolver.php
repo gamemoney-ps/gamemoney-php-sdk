@@ -5,6 +5,7 @@ namespace Gamemoney\Validation\Request;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
 use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
+use Gamemoney\Validation\Request\Rules\ExchangeRateRules;
 use Gamemoney\Validation\Request\Rules\StoreOnlyCardData;
 use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
@@ -69,6 +70,8 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::EXCHANGE_PREPARE_ACTION:
             case RequestInterface::EXCHANGE_INFO_ACTION:
                 return new ExchangePrepareRules();
+            case RequestInterface::EXCHANGE_RATE_ACTION:
+                return new ExchangeRateRules();
             case RequestInterface::EXCHANGE_CONVERT_ACTION:
                 return new ExchangeConvertRules();
             case RequestInterface::EXCHANGE_FAST_CONVERT_ACTION:
