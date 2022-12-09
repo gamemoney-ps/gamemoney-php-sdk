@@ -40,8 +40,6 @@ interface RequestInterface
 
     const EXCHANGE_STATUS_ACTION = '/exchange/status';
 
-    const EXCHANGE_INFO_ACTION = '/exchange/info';
-
     const EXCHANGE_RATE_ACTION = '/exchange/rate';
 
     const STATISTICS_BALANCE_ACTION = '/statistics/balance';

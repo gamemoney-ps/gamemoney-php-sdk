@@ -68,7 +68,6 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::CARD_DELETE_ACTION:
                 return new CardDeleteRules();
             case RequestInterface::EXCHANGE_PREPARE_ACTION:
-            case RequestInterface::EXCHANGE_INFO_ACTION:
                 return new ExchangePrepareRules();
             case RequestInterface::EXCHANGE_RATE_ACTION:
                 return new ExchangeRateRules();
