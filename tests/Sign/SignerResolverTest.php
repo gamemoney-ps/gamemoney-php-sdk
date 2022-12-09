@@ -65,9 +65,6 @@ class SignerResolverTest extends TestCase
                 RequestInterface::EXCHANGE_PREPARE_ACTION,
             ],
             [
-                RequestInterface::EXCHANGE_INFO_ACTION,
-            ],
-            [
                 RequestInterface::EXCHANGE_RATE_ACTION,
             ],
             [

@@ -193,16 +193,6 @@ class RequestFactoryTest extends TestCase
                 ],
             ],
             [
-                'getExchangeInfo',
-                [
-                    'amount' => 100,
-                ],
-                RequestInterface::EXCHANGE_INFO_ACTION,
-                [
-                    'amount' => 100,
-                ],
-            ],
-            [
                 'getExchangeRate',
                 [
                     'from' => 'USD',
