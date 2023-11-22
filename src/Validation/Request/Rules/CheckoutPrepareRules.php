@@ -4,6 +4,7 @@ namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Optional;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -15,11 +16,24 @@ use Symfony\Component\Validator\Constraints\Type;
 final class CheckoutPrepareRules implements RulesInterface
 {
     /**
+     * @var array
+     */
+    private $data;
+
+    /**
+     * @param array $data
+     */
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getRules()
     {
-        return [
+        $rules = [
             'project' => [
                 new NotBlank(),
                 new Type('numeric'),
@@ -28,22 +42,40 @@ final class CheckoutPrepareRules implements RulesInterface
                 new NotBlank(),
                 new Length(['min' => 20]),
             ],
-            'amount' => [
-                new NotBlank(),
-                new Type('numeric'),
-            ],
             'type' => [
                 new NotBlank(),
                 new Type('string'),
             ],
-            'currency' => [
+            'currency' => new Optional([
                 new Type('string'),
                 new Length(['max' => 4]),
-            ],
-            'userCurrency' => [
-                new Type('string'),
-                new Length(['max' => 4]),
-            ],
+            ]),
         ];
+
+        if (isset($this->data['paid_amount'])) {
+            $rules = array_merge($rules, [
+                'paid_amount' => [
+                    new NotBlank(),
+                    new Type('numeric'),
+                ],
+                'userCurrency' => [
+                    new Type('string'),
+                    new Length(['max' => 4]),
+                ],
+            ]);
+        } else {
+            $rules = array_merge($rules, [
+                'amount' => [
+                    new NotBlank(),
+                    new Type('numeric'),
+                ],
+                'userCurrency' => new Optional([
+                    new Type('string'),
+                    new Length(['max' => 4]),
+                ]),
+            ]);
+        }
+
+        return $rules;
     }
 }
