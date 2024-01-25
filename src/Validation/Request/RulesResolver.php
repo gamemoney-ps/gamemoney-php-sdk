@@ -6,6 +6,7 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
 use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
 use Gamemoney\Validation\Request\Rules\ExchangeRateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceCardSessionCreateRules;
 use Gamemoney\Validation\Request\Rules\StoreOnlyCardData;
 use Gamemoney\Validation\Request\Rules\CheckoutListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
@@ -45,6 +46,8 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::INVOICE_STATUS_ACTION:
             case RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION:
                 return new InvoiceStatusRules($data);
+            case RequestInterface::INVOICE_CREATE_CARD_SESSION:
+                return new InvoiceCardSessionCreateRules();
             case RequestInterface::INVOICE_LIST_ACTION:
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:

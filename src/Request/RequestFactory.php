@@ -60,6 +60,20 @@ class RequestFactory
     }
 
     /**
+     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_add_token)
+     * @param int $project project id in Gamemoney system
+     * @param string $user user ID in a project
+     * @return Request
+     */
+    public function createInvoiceCardSession($project, $user)
+    {
+        return new Request(RequestInterface::INVOICE_CREATE_CARD_SESSION, [
+            'project' => $project,
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_session_status)
      * @param string $id invoice id in project system
      * @return Request
