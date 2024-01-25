@@ -305,4 +305,21 @@ class RequestFactoryTest extends TestCase
         $requestData = $request->getData();
         $this->assertEquals($requestData, $data);
     }
+
+    public function createInvoiceCardSessionTest()
+    {
+        $project = 10;
+        $user = 'test_user';
+
+        $data = [
+            'project' => $project,
+            'user' => $user,
+        ];
+
+        $request = (new RequestFactory())->createInvoiceCardSession($project, $user);
+
+        $this->assertInstanceOf(RequestInterface::class, $request);
+        $this->assertEquals(RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION, $request->getAction());
+        $this->assertEquals($data, $request->getData());
+    }
 }
