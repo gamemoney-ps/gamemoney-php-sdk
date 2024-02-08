@@ -44,7 +44,6 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::INVOICE_CREATE_ACTION:
                 return new InvoiceCreateRules();
             case RequestInterface::INVOICE_STATUS_ACTION:
-            case RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION:
                 return new InvoiceStatusRules($data);
             case RequestInterface::INVOICE_CREATE_CARD_SESSION:
                 return new InvoiceCardSessionCreateRules();

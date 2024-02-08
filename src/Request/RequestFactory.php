@@ -50,16 +50,6 @@ class RequestFactory
     }
 
     /**
-     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_session_status)
-     * @param int $id invoice id in Gamemoney system
-     * @return Request
-     */
-    public function getInvoiceCardSessionStatus($id)
-    {
-        return new Request(RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION, ['invoice' => $id]);
-    }
-
-    /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#invoice_add_token)
      * @param int $project project id in Gamemoney system
      * @param string $user user ID in a project
@@ -71,16 +61,6 @@ class RequestFactory
             'project' => $project,
             'user' => $user,
         ]);
-    }
-
-    /**
-     * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#card_session_status)
-     * @param string $id invoice id in project system
-     * @return Request
-     */
-    public function getInvoiceCardSessionStatusByExternalId($id)
-    {
-        return new Request(RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION, ['project_invoice' => $id]);
     }
 
     /**
