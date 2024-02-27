@@ -108,10 +108,25 @@ class SignerResolverTest extends TestCase
         $this->assertInstanceOf(HmacSigner::class, $signer);
     }
 
-    public function testRsaResolve()
+    public function resolveRsaDataProvider(): array
+    {
+        return [
+            [
+                RequestInterface::CHECKOUT_CREATE_ACTION,
+            ],
+            [
+                RequestInterface::CHECKOUT_CHECK_ACTION,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider resolveRsaDataProvider
+     */
+    public function testRsaResolve($action)
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
-        $signer = $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
+        $signer = $resolver->resolve($action);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(RsaSigner::class, $signer);
     }

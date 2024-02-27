@@ -44,7 +44,7 @@ class SignerResolver implements SignerResolverInterface
             return new EmptySigner();
         }
 
-        if ($action === RequestInterface::CHECKOUT_CREATE_ACTION) {
+        if (in_array($action, [RequestInterface::CHECKOUT_CREATE_ACTION, RequestInterface::CHECKOUT_CHECK_ACTION])) {
             return new RsaSigner($this->privateKey, $this->passphrase);
         }
 

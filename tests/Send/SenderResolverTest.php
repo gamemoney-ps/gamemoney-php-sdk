@@ -46,6 +46,9 @@ class SenderResolverTest extends TestCase
                 RequestInterface::CHECKOUT_CREATE_ACTION,
             ],
             [
+                RequestInterface::CHECKOUT_CHECK_ACTION,
+            ],
+            [
                 RequestInterface::CHECKOUT_CANCEL_ACTION,
             ],
             [

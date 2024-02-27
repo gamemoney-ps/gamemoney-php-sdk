@@ -22,6 +22,7 @@ class RulesResolverTest extends TestCase
             ['action' => RequestInterface::INVOICE_CREATE_CARD_SESSION],
             ['action' => RequestInterface::CHECKOUT_CANCEL_ACTION],
             ['action' => RequestInterface::CHECKOUT_CREATE_ACTION],
+            ['action' => RequestInterface::CHECKOUT_CHECK_ACTION],
             ['action' => RequestInterface::CHECKOUT_PREPARE_ACTION],
             ['action' => RequestInterface::CHECKOUT_STATUS_ACTION],
             ['action' => RequestInterface::CHECKOUT_LIST_ACTION],

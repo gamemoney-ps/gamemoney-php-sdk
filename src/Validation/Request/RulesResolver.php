@@ -50,6 +50,7 @@ final class RulesResolver implements RulesResolverInterface
             case RequestInterface::INVOICE_LIST_ACTION:
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
+            case RequestInterface::CHECKOUT_CHECK_ACTION:
                 return new CheckoutCreateRules();
             case RequestInterface::CHECKOUT_PREPARE_ACTION:
                 return new CheckoutPrepareRules($data);
