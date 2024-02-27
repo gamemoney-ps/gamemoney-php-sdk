@@ -74,6 +74,15 @@ class RequestFactory
     }
 
     /**
+     * @param array $data
+     * @return Request
+     */
+    public function checkCheckout(array $data = [])
+    {
+        return new Request(RequestInterface::CHECKOUT_CHECK_ACTION, $data);
+    }
+
+    /**
      * For more details and usage information see [docs](https://cp.gmpays.com/apidoc#checkout_prepare)
      * @param array $data
      * @return Request
