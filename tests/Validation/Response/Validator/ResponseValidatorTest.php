@@ -5,6 +5,7 @@ namespace tests\Validation\Response\Validator;
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Validation\Response\Validator\ResponseValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ResponseValidatorTest extends TestCase
@@ -12,7 +13,7 @@ class ResponseValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function successValidateProvider()
+    public static function successValidateProvider()
     {
         return [
             [
@@ -33,8 +34,8 @@ class ResponseValidatorTest extends TestCase
     /**
      * @param array $response
      * @param array $request
-     * @dataProvider successValidateProvider
      */
+    #[DataProvider('successValidateProvider')]
     public function testSuccessValidate(array $response, array $request)
     {
         $verifierMock = $this->createPartialMock(SignatureVerifierInterface::class, ['verify']);
@@ -51,7 +52,7 @@ class ResponseValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function failValidateProvider()
+    public static function failValidateProvider()
     {
         return [
             [
@@ -71,8 +72,8 @@ class ResponseValidatorTest extends TestCase
      * @param array $response
      * @param array $request
      * @param bool $verified
-     * @dataProvider failValidateProvider
      */
+    #[DataProvider('failValidateProvider')]
     public function testFailValidate(array $response, array $request, $verified)
     {
         $verifierMock = $this->createPartialMock(SignatureVerifierInterface::class, ['verify']);

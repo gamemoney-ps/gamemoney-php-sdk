@@ -26,7 +26,7 @@ final class CheckoutListRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'start' => [
                 new NotBlank(),

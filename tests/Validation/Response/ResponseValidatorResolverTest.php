@@ -9,6 +9,7 @@ use Gamemoney\Validation\Response\ResponseValidatorResolver;
 use Gamemoney\Validation\Response\ResponseValidatorResolverInterface;
 use Gamemoney\Validation\Response\Validator\ResponseValidator;
 use Gamemoney\Validation\Response\Validator\ResponseValidatorSecure;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ResponseValidatorResolverTest extends TestCase
@@ -24,7 +25,7 @@ class ResponseValidatorResolverTest extends TestCase
     /**
      * @return array
      */
-    public function resolveDataProvider()
+    public static function resolveDataProvider()
     {
         return [
             [
@@ -102,9 +103,7 @@ class ResponseValidatorResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider resolveDataProvider
-     */
+    #[DataProvider('resolveDataProvider')]
     public function testResolve($action)
     {
         $mockSignature = $this->getSignatureMock();
@@ -129,6 +128,7 @@ class ResponseValidatorResolverTest extends TestCase
     {
         return $this
             ->getMockBuilder(SignatureVerifierInterface::class)
-            ->getMock();
+            ->getMock()
+        ;
     }
 }

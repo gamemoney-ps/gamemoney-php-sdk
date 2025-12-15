@@ -1,8 +1,9 @@
 <?php
 
-namespace Validation\Request\Rules;
+namespace tests\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CheckoutPrepareRulesTest extends TestCase
@@ -10,7 +11,7 @@ class CheckoutPrepareRulesTest extends TestCase
     /**
     * @return array
     */
-    public function checkoutPrepareProvider()
+    public static function checkoutPrepareProvider()
     {
         return [
             [
@@ -29,8 +30,8 @@ class CheckoutPrepareRulesTest extends TestCase
     /**
      * @param array $check
      * @param array $data
-     * @dataProvider checkoutPrepareProvider
      */
+    #[DataProvider('checkoutPrepareProvider')]
     public function testCheckoutPrepare(array $checkField, array $data)
     {
         $invoice = new CheckoutPrepareRules($data);

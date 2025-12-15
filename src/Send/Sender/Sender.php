@@ -39,7 +39,7 @@ final class Sender implements SenderInterface
         try {
             $response = $this->client->post(
                 $request->getAction(),
-                ['form_params' => $request->getData()]
+                ['form_params' => $request->getData()],
             );
         } catch (GuzzleException $e) {
             throw new RequestException('Request Send Error', 0, $e);

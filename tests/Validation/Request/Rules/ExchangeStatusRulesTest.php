@@ -3,6 +3,7 @@
 namespace tests\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\Rules\ExchangeStatusRules;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ExchangeStatusRulesTest extends TestCase
@@ -10,7 +11,7 @@ class ExchangeStatusRulesTest extends TestCase
     /**
      * @return array
      */
-    public function exchangeStatusProvider()
+    public static function exchangeStatusProvider()
     {
         return [
             [
@@ -44,8 +45,8 @@ class ExchangeStatusRulesTest extends TestCase
     /**
      * @param array $check
      * @param array $data
-     * @dataProvider exchangeStatusProvider
      */
+    #[DataProvider('exchangeStatusProvider')]
     public function testExchangeStatus(array $checkField, array $data)
     {
         $exchange = new ExchangeStatusRules($data);

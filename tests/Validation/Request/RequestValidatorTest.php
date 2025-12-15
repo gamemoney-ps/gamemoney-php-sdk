@@ -3,6 +3,7 @@
 namespace tests\Validation\Request;
 
 use Gamemoney\Exception\RequestValidationException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Validation\Request\RequestValidator;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -15,7 +16,7 @@ class RequestValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function successValidateProvider()
+    public static function successValidateProvider()
     {
         return [
             ['rules' => [], 'data' => []],
@@ -34,8 +35,8 @@ class RequestValidatorTest extends TestCase
             [
                 'rules' => [
                     'param1' => [new Type('string'), new Length(4)],
-                    'param2' => [new Type('string'), new Length(['max' => 3])],
-                    'param3' => [new Type('string'), new Length(['min' => 5])],
+                    'param2' => [new Type('string'), new Length(max: 3)],
+                    'param3' => [new Type('string'), new Length(min: 5)],
                     'param4' => [new Type('string')],
                     'param5' => [new Length(4)],
                 ],
@@ -75,8 +76,8 @@ class RequestValidatorTest extends TestCase
     /**
      * @param array $rules
      * @param array $data
-     * @dataProvider successValidateProvider
      */
+    #[DataProvider('successValidateProvider')]
     public function testSuccessValidate(array $rules, array $data)
     {
         $validator = new RequestValidator();
@@ -86,7 +87,7 @@ class RequestValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function failValidateProvider()
+    public static function failValidateProvider()
     {
         return [
             [
@@ -112,8 +113,8 @@ class RequestValidatorTest extends TestCase
     /**
      * @param array $rules
      * @param array $data
-     * @dataProvider failValidateProvider
      */
+    #[DataProvider('failValidateProvider')]
     public function testFailValidate(array $rules, array $data)
     {
         $validator = new RequestValidator();

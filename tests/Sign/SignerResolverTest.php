@@ -3,6 +3,7 @@
 namespace tests\Sign;
 
 use Gamemoney\Sign\Signer\EmptySigner;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerResolver;
 use Gamemoney\Sign\SignerResolverInterface;
@@ -28,7 +29,7 @@ class SignerResolverTest extends TestCase
     /**
      * @return array
      */
-    public function resolveDataProvider()
+    public static function resolveDataProvider()
     {
         return [
             [
@@ -97,9 +98,7 @@ class SignerResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider resolveDataProvider
-     */
+    #[DataProvider('resolveDataProvider')]
     public function testHmacResolve($action)
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
@@ -108,7 +107,7 @@ class SignerResolverTest extends TestCase
         $this->assertInstanceOf(HmacSigner::class, $signer);
     }
 
-    public function resolveRsaDataProvider(): array
+    public static function resolveRsaDataProvider(): array
     {
         return [
             [
@@ -120,9 +119,7 @@ class SignerResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider resolveRsaDataProvider
-     */
+    #[DataProvider('resolveRsaDataProvider')]
     public function testRsaResolve($action)
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);

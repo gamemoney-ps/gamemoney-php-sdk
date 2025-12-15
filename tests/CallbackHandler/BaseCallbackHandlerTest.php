@@ -6,6 +6,7 @@ use Gamemoney\CallbackHandler\BaseCallbackHandler;
 use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Sign\SignerResolverInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class BaseCallbackHandlerTest extends TestCase
@@ -27,13 +28,13 @@ class BaseCallbackHandlerTest extends TestCase
             ->expects($this->once())
             ->method('setSignatureVerifier')
             ->with($this->isInstanceOf(SignatureVerifierInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
 
         $handler
             ->expects($this->once())
             ->method('setSignerResolver')
             ->with($this->isInstanceOf(SignerResolverInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
 
         $handler->__construct($this->getConfig());
     }
@@ -69,7 +70,7 @@ class BaseCallbackHandlerTest extends TestCase
     /**
      * @return array
      */
-    public function errorDataProvider()
+    public static function errorDataProvider()
     {
         return [
             [
@@ -84,10 +85,10 @@ class BaseCallbackHandlerTest extends TestCase
     }
 
     /**
-     * @dataProvider errorDataProvider
      * @param string|null $error
      * @param string $output
      */
+    #[DataProvider('errorDataProvider')]
     public function testErrorAnswer($error, $output)
     {
         $handler = new BaseCallbackHandler($this->getConfig());

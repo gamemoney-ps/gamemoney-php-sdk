@@ -29,7 +29,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
     {
         if ($this->invoiceNumber === null) {
             throw new ConfigException(
-                'Cannot create success answer for TransferCallbackHandler - invoice number not set.'
+                'Cannot create success answer for TransferCallbackHandler - invoice number not set.',
             );
         }
 
@@ -43,8 +43,8 @@ class TransferCallbackHandler extends BaseCallbackHandler
                 $data,
                 [
                     'signature' => $this->signerResolver->resolve()->getSignature($data),
-                ]
-            )
+                ],
+            ),
         );
     }
 
@@ -56,7 +56,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
     {
         $data = array_merge(
             ['state' => 'error'],
-            $error ? ['error' => $error] : []
+            $error ? ['error' => $error] : [],
         );
 
         return json_encode(
@@ -64,8 +64,8 @@ class TransferCallbackHandler extends BaseCallbackHandler
                 $data,
                 [
                     'signature' => $this->signerResolver->resolve()->getSignature($data),
-                ]
-            )
+                ],
+            ),
         );
     }
 }

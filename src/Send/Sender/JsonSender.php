@@ -44,7 +44,7 @@ final class JsonSender implements SenderInterface
                     'headers' => [
                         'Accept' => 'application/json',
                     ],
-                ]
+                ],
             );
         } catch (GuzzleException $e) {
             throw new RequestException('Request Send Error', 0, $e);

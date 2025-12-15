@@ -3,6 +3,7 @@
 namespace tests\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class InvoiceStatusRulesTest extends TestCase
@@ -10,7 +11,7 @@ class InvoiceStatusRulesTest extends TestCase
     /**
     * @return array
     */
-    public function invoiceStatusProvider()
+    public static function invoiceStatusProvider()
     {
         return [
             [
@@ -44,8 +45,8 @@ class InvoiceStatusRulesTest extends TestCase
     /**
      * @param array $check
      * @param array $data
-     * @dataProvider invoiceStatusProvider
      */
+    #[DataProvider('invoiceStatusProvider')]
     public function testInvoiceStatus(array $checkField, array $data)
     {
         $invoice = new InvoiceStatusRules($data);

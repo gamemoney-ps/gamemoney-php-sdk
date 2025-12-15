@@ -40,7 +40,7 @@ final class CheckoutPrepareRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'type' => [
                 new NotBlank(),
@@ -48,7 +48,7 @@ final class CheckoutPrepareRules implements RulesInterface
             ],
             'currency' => new Optional([
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ]),
         ];
 
@@ -60,7 +60,7 @@ final class CheckoutPrepareRules implements RulesInterface
                 ],
                 'userCurrency' => [
                     new Type('string'),
-                    new Length(['max' => 4]),
+                    new Length(max: 4),
                 ],
             ]);
         } else {
@@ -71,7 +71,7 @@ final class CheckoutPrepareRules implements RulesInterface
                 ],
                 'userCurrency' => new Optional([
                     new Type('string'),
-                    new Length(['max' => 4]),
+                    new Length(max: 4),
                 ]),
             ]);
         }

@@ -27,7 +27,7 @@ class BaseCallbackHandler
     {
         $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
         $this->setSignerResolver(
-            new SignerResolver($config->hmac(), $config->privateKey(), $config->privateKeyPassword())
+            new SignerResolver($config->hmac(), $config->privateKey(), $config->privateKeyPassword()),
         );
     }
 
@@ -79,8 +79,8 @@ class BaseCallbackHandler
         return json_encode(
             array_merge(
                 ['success' => 'error'],
-                $error ? ['error' => $error] : []
-            )
+                $error ? ['error' => $error] : [],
+            ),
         );
     }
 }

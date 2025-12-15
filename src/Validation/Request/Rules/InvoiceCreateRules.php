@@ -26,7 +26,7 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'user' => [
                 new NotBlank(),
@@ -42,21 +42,21 @@ final class InvoiceCreateRules implements RulesInterface
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'user_currency' => [
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'language' => [
                 new Type('string'),
-                new Length(['max' => 2]),
+                new Length(max: 2),
             ],
             'project_invoice' => [
                 new Type('string'),
             ],
             'ip' => [
-                new Ip(['version' => Ip::ALL]),
+                new Ip(version: Ip::ALL),
             ],
         ];
     }

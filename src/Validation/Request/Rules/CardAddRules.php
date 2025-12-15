@@ -25,7 +25,7 @@ final class CardAddRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'user' => [
                 new NotBlank(),

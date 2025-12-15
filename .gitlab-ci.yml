@@ -1,68 +1,63 @@
 stages:
     - test
 
+variables:
+    XDEBUG_MODE: coverage
+
 static:
     stage: test
-    image: php:7.3
+    image: php:8.5
     script:
-        - php73_prepare
+        - php_prepare
         - composer require --dev phpstan/phpstan
         - composer update -vv -o
         - ./vendor/bin/phpstan analyze src -l 5
 
-test-7.0:
+test-8.1:
     stage: test
-    image: php:7.0
+    image: php:8.1
     script:
         - php_prepare
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test-7.1:
+test-8.2:
     stage: test
-    image: php:7.1
+    image: php:8.2
     script:
         - php_prepare
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test-7.2:
+test-8.3:
     stage: test
-    image: php:7.2
+    image: php:8.3
     script:
         - php_prepare
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test-7.3:
+test-8.4:
     stage: test
-    image: php:7.3
+    image: php:8.4
     script:
-        - php73_prepare
+        - php_prepare
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test-7.4:
+test-8.5:
     stage: test
-    image: php:7.4
+    image: php:8.5
     script:
-        - php74_prepare
-        - composer update -vv -o
-        - ./vendor/bin/phpunit --coverage-text --colors=never
-
-test-8.0:
-    stage: test
-    image: php:8.0
-    script:
-        - php80_prepare
+        - php_prepare
         - composer update -vv -o
         - ./vendor/bin/phpunit --coverage-text --colors=never
 
 code_style:
     stage: test
-    image: php:7.3
+    image: php:8.5
     script:
-        - php73_prepare
+        - php_prepare
         - composer update -vv -o
         - ./vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
@@ -73,28 +68,7 @@ code_style:
     function php_prepare() {
         apt-get update && apt-get install -qqy --no-install-recommends git unzip \
         &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-        && pecl install xdebug-2.6.0 \
-        && docker-php-ext-enable xdebug
-    }
-
-    function php73_prepare() {
-        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
-        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-        && pecl install xdebug-2.7.0 \
-        && docker-php-ext-enable xdebug
-    }
-
-    function php74_prepare() {
-        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
-        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-        && pecl install xdebug-2.9.0 \
-        && docker-php-ext-enable xdebug
-    }
-
-    function php80_prepare() {
-        apt-get update && apt-get install -qqy --no-install-recommends git unzip \
-        &&  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-        && pecl install xdebug-3.0.0 \
+        && pecl install xdebug-3.5.0 \
         && docker-php-ext-enable xdebug
     }
 

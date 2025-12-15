@@ -20,7 +20,7 @@ final class RequestValidator implements RequestValidatorInterface
         $errors = [];
 
         foreach ($rules as $field => $rule) {
-            $value = isset($data[$field]) ? $data[$field] : null;
+            $value = $data[$field] ?? null;
             $violations = $validator->validate($value, $rule);
 
             foreach ($violations as $violation) {

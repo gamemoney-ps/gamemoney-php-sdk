@@ -8,6 +8,7 @@ use Gamemoney\Send\Sender\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Send\SenderResolver;
 use Gamemoney\Send\SenderResolverInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SenderResolverTest extends TestCase
@@ -27,7 +28,7 @@ class SenderResolverTest extends TestCase
     /**
      * @return array
      */
-    public function resolveDataProvider()
+    public static function resolveDataProvider()
     {
         return [
             [
@@ -102,9 +103,7 @@ class SenderResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider resolveDataProvider
-     */
+    #[DataProvider('resolveDataProvider')]
     public function testSenderResolve($action)
     {
         $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);

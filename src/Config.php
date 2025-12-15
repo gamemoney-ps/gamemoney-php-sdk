@@ -36,7 +36,7 @@ class Config
         $project,
         $hmac,
         $privateKey = null,
-        $privateKeyPassword = null
+        $privateKeyPassword = null,
     ) {
         $this->project = $project;
         $this->hmac = $hmac;
