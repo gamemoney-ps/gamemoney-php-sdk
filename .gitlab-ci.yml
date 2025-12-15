@@ -1,16 +1,6 @@
 stages:
     - test
 
-dependencies:
-    stage: test
-    allow_failure: true
-    image: php:7.3
-    script:
-        - php73_prepare
-        - curl -sS https://get.symfony.com/cli/installer | bash
-        - mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-        - symfony security:check
-
 static:
     stage: test
     image: php:7.3
@@ -70,9 +60,9 @@ test-8.0:
 
 code_style:
     stage: test
-    image: php:7.2
+    image: php:7.3
     script:
-        - php_prepare
+        - php73_prepare
         - composer update -vv -o
         - ./vendor/bin/php-cs-fixer fix --diff --dry-run -v
 
