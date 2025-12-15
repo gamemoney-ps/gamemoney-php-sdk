@@ -20,7 +20,7 @@ class RequestTest extends TestCase
         $request = new Request('/test');
         $this->assertInstanceOf(
             RequestInterface::class,
-            $request->setData(['data' => 1, 'rand' => 'test'])
+            $request->setData(['data' => 1, 'rand' => 'test']),
         );
         $this->assertEquals($request->getData(), ['data' => 1, 'rand' => 'test']);
     }
@@ -30,7 +30,7 @@ class RequestTest extends TestCase
         $request = new Request('/test');
         $this->assertInstanceOf(
             RequestInterface::class,
-            $request->setField('data', 1)
+            $request->setField('data', 1),
         );
         $this->assertEquals($request->getField('data'), 1);
     }

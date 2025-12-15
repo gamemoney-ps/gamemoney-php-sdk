@@ -26,7 +26,7 @@ final class CheckoutCreateRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'projectId' => [
                 new NotBlank(),
@@ -52,14 +52,14 @@ final class CheckoutCreateRules implements RulesInterface
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'userCurrency' => [
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'ip' => [
-                new Ip(['version' => Ip::ALL]),
+                new Ip(version: Ip::ALL),
             ],
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace tests\Request;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Request\RequestFactory;
@@ -11,7 +12,7 @@ class RequestFactoryTest extends TestCase
     /**
      * @return array
      */
-    public function methodDataProvider()
+    public static function methodDataProvider()
     {
         return [
             [
@@ -264,8 +265,8 @@ class RequestFactoryTest extends TestCase
      * @param $args
      * @param string $action
      * @param array $expectedData
-     * @dataProvider methodDataProvider
      */
+    #[DataProvider('methodDataProvider')]
     public function testMethods($method, $args, $action, array $expectedData)
     {
         $requestFactory = new RequestFactory();
@@ -313,7 +314,7 @@ class RequestFactoryTest extends TestCase
         $request = (new RequestFactory())->createInvoiceCardSession($project, $user);
 
         $this->assertInstanceOf(RequestInterface::class, $request);
-        $this->assertEquals(RequestInterface::INVOICE_CARD_SESSION_STATUS_ACTION, $request->getAction());
+        $this->assertEquals(RequestInterface::INVOICE_CREATE_CARD_SESSION, $request->getAction());
         $this->assertEquals($data, $request->getData());
     }
 }

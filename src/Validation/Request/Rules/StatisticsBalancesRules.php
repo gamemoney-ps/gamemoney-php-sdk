@@ -25,11 +25,11 @@ final class StatisticsBalancesRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'currency' => [
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
         ];
     }

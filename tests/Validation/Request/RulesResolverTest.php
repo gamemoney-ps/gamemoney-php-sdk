@@ -6,6 +6,7 @@ use Gamemoney\Validation\Request\Rules\DefaultRules;
 use Gamemoney\Validation\Request\RulesInterface;
 use Gamemoney\Validation\Request\RulesResolver;
 use Gamemoney\Request\RequestInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RulesResolverTest extends TestCase
@@ -13,7 +14,7 @@ class RulesResolverTest extends TestCase
     /**
      * @return array
      */
-    public function resolveProvider()
+    public static function resolveProvider()
     {
         return [
             ['action' => RequestInterface::INVOICE_CREATE_ACTION],
@@ -46,8 +47,8 @@ class RulesResolverTest extends TestCase
 
     /**
      * @param string $action
-     * @dataProvider resolveProvider
      */
+    #[DataProvider('resolveProvider')]
     public function testResolve($action)
     {
         $resolver = new RulesResolver();

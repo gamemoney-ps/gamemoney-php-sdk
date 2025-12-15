@@ -25,17 +25,17 @@ final class ExchangeFastConvertRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'from' => [
                 new NotBlank(),
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'to' => [
                 new NotBlank(),
                 new Type('string'),
-                new Length(['max' => 4]),
+                new Length(max: 4),
             ],
             'amount' => [
                 new NotBlank(),

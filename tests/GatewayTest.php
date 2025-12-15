@@ -40,13 +40,11 @@ class GatewayTest extends TestCase
         $mockRequest
             ->expects($this->once())
             ->method('setField')
-            ->withConsecutive(
-                ['project', $this->getConfig()->project()]
-            );
+            ->with('project', $this->getConfig()->project());
 
         $mockRules = $this
             ->getMockBuilder(RulesInterface::class)
-            ->setMethods(['getRules'])
+            ->onlyMethods(['getRules'])
             ->getMock();
 
         $rules = ['some rules'];
@@ -57,7 +55,7 @@ class GatewayTest extends TestCase
 
         $mockRulesResolver = $this
             ->getMockBuilder(RulesResolverInterface::class)
-            ->setMethods(['resolve'])
+            ->onlyMethods(['resolve'])
             ->getMock();
 
         $mockRulesResolver
@@ -67,7 +65,7 @@ class GatewayTest extends TestCase
 
         $mockSender = $this
             ->getMockBuilder(SenderInterface::class)
-            ->setMethods(['send'])
+            ->onlyMethods(['send'])
             ->getMock();
 
         $senderResult = ['success' => 'true'];
@@ -78,7 +76,7 @@ class GatewayTest extends TestCase
 
         $mockSenderResolver = $this
             ->getMockBuilder(SenderResolverInterface::class)
-            ->setMethods(['resolve'])
+            ->onlyMethods(['resolve'])
             ->getMock();
 
         $mockSenderResolver
@@ -88,7 +86,7 @@ class GatewayTest extends TestCase
 
         $mockRequestValidator = $this
             ->getMockBuilder(RequestValidatorInterface::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $mockRequestValidator
@@ -99,7 +97,7 @@ class GatewayTest extends TestCase
 
         $mockResponseValidator = $this
             ->getMockBuilder(ResponseValidatorInterface::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $mockResponseValidator
@@ -110,7 +108,7 @@ class GatewayTest extends TestCase
 
         $mockResponseValidatorResolver = $this
             ->getMockBuilder(ResponseValidatorResolverInterface::class)
-            ->setMethods(['resolve'])
+            ->onlyMethods(['resolve'])
             ->getMock();
 
         $mockResponseValidatorResolver
@@ -120,7 +118,7 @@ class GatewayTest extends TestCase
 
         $mockSigner = $this
             ->getMockBuilder(SignerInterface::class)
-            ->setMethods(['sign', 'getSignature'])
+            ->onlyMethods(['sign', 'getSignature'])
             ->getMock();
         $mockSigner
             ->expects($this->once())
@@ -129,7 +127,7 @@ class GatewayTest extends TestCase
 
         $mockSignerResolver = $this
             ->getMockBuilder(SignerResolverInterface::class)
-            ->setMethods(['resolve'])
+            ->onlyMethods(['resolve'])
             ->getMock();
 
         $mockSignerResolver
@@ -153,7 +151,7 @@ class GatewayTest extends TestCase
         $mockRequest = $this
             ->getMockBuilder(RequestInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getData', 'getAction', 'setData', 'setAction', 'getField', 'setField'])
+            ->onlyMethods(['getData', 'getAction', 'setData', 'getField', 'setField'])
             ->getMock();
 
         return $mockRequest;
@@ -173,27 +171,27 @@ class GatewayTest extends TestCase
             ->expects($this->once())
             ->method('setRequestValidator')
             ->with($this->isInstanceOf(RequestValidatorInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
         $gateway
             ->expects($this->once())
             ->method('setResponseValidatorResolver')
             ->with($this->isInstanceOf(ResponseValidatorResolverInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
         $gateway
             ->expects($this->once())
             ->method('setRulesResolver')
             ->with($this->isInstanceOf(RulesResolverInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
         $gateway
             ->expects($this->once())
             ->method('setSenderResolver')
             ->with($this->isInstanceOf(SenderResolverInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
         $gateway
             ->expects($this->once())
             ->method('setSignerResolver')
             ->with($this->isInstanceOf(SignerResolverInterface::class))
-            ->will($this->returnSelf());
+            ->willReturnSelf();
         $gateway->__construct($this->getConfig());
     }
 

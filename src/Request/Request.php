@@ -28,7 +28,7 @@ final class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->action;
     }

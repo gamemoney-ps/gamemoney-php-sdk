@@ -59,7 +59,7 @@ interface RequestInterface
     /**
      * @return string request uri
      */
-    public function getAction();
+    public function getAction(): string;
 
     /**
      * @return array request data fields

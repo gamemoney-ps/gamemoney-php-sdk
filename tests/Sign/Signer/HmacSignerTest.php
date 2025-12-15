@@ -2,6 +2,7 @@
 
 namespace tests\Sign\Signer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\HmacSigner;
@@ -19,7 +20,7 @@ class HmacSignerTest extends TestCase
     /**
      * @return array
      */
-    public function getSignatureDataProvider()
+    public static function getSignatureDataProvider()
     {
         return [
             [
@@ -47,8 +48,8 @@ class HmacSignerTest extends TestCase
     /**
      * @param array $data
      * @param string $fixture
-     * @dataProvider getSignatureDataProvider
      */
+    #[DataProvider('getSignatureDataProvider')]
     public function testHmacGetSignature(array $data, $fixture)
     {
         $signer = new HmacSigner($this::KEY);

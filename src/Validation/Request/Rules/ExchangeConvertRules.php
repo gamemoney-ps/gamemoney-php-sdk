@@ -25,7 +25,7 @@ final class ExchangeConvertRules implements RulesInterface
             ],
             'rand' => [
                 new NotBlank(),
-                new Length(['min' => 20]),
+                new Length(min: 20),
             ],
             'id' => [
                 new NotBlank(),

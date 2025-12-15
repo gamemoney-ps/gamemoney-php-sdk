@@ -22,7 +22,7 @@ class InvoiceCardSessionCreateRules implements RulesInterface
             'user' => [
                 new NotBlank(),
                 new Type('string'),
-                new Length(['max' => 50]),
+                new Length(max: 50),
             ],
         ];
     }

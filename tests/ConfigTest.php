@@ -32,7 +32,7 @@ class ConfigTest extends TestCase
 
         $result = $config->secureUrl();
 
-        $this->assertRegExp('/\/$/', $result);
+        $this->assertMatchesRegularExpression('/\/$/', $result);
         $this->assertEquals($url, $result);
     }
 

@@ -3,6 +3,7 @@
 namespace tests\Sign;
 
 use Gamemoney\Sign\SignatureVerifier;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SignatureVerifierTest extends TestCase
@@ -10,7 +11,7 @@ class SignatureVerifierTest extends TestCase
     /**
      * @return array
      */
-    public function verifyProvider()
+    public static function verifyProvider()
     {
         return [
             [
@@ -79,8 +80,8 @@ sQIDAQAB
      * @param array $data
      * @param string $key
      * @param bool $result
-     * @dataProvider verifyProvider
      */
+    #[DataProvider('verifyProvider')]
     public function testVerify(array $data, $key, $result)
     {
         $verifier = new SignatureVerifier($key);

@@ -54,17 +54,17 @@ class Gateway
         $signerResolver = new SignerResolver(
             $this->config->hmac(),
             $this->config->privateKey(),
-            $this->config->privateKeyPassword()
+            $this->config->privateKeyPassword(),
         );
 
         $senderResolver = new SenderResolver(
             $this->config->apiUrl(),
             $this->config->secureUrl(),
-            $clientConfig
+            $clientConfig,
         );
 
         $responseValidatorResolver = new ResponseValidatorResolver(
-            new SignatureVerifier($this->config->gmCertificate())
+            new SignatureVerifier($this->config->gmCertificate()),
         );
 
         $this

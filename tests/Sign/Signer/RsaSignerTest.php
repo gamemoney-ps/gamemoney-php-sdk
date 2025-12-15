@@ -3,6 +3,7 @@
 namespace tests\Sign\Signer;
 
 use Gamemoney\Exception\PrivateKeyException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\Signer\RsaSigner;
@@ -27,7 +28,7 @@ class RsaSignerTest extends TestCase
     /**
      * phpcs:disable Generic.Files.LineLength.TooLong
      */
-    public function getSignatureDataProvider()
+    public static function getSignatureDataProvider()
     {
         return [
             [
@@ -55,8 +56,8 @@ class RsaSignerTest extends TestCase
     /**
      * @param array $data
      * @param string $fixture
-     * @dataProvider getSignatureDataProvider
      */
+    #[DataProvider('getSignatureDataProvider')]
     public function testRsaGetSignature(array $data, $fixture)
     {
         $signer = new RsaSigner($this->getPrivateKey(), $this::PASSPHRASE);

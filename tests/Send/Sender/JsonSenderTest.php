@@ -21,7 +21,7 @@ class JsonSenderTest extends TestCase
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
-    public function testSend()
+    public function testSend(): void
     {
         $mockRequest = $this->getRequestMock();
 
@@ -58,7 +58,7 @@ class JsonSenderTest extends TestCase
         $mockRequest = $this
             ->getMockBuilder(RequestInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getData', 'getAction', 'setData', 'setAction', 'getField', 'setField'])
+            ->onlyMethods(['getData', 'getAction', 'setData', 'getField', 'setField'])
             ->getMock();
 
         $mockRequest

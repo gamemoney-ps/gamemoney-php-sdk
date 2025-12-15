@@ -18,7 +18,7 @@ try {
             'cardholder' => 'max payne',
             'cc_exp_month' => '07',
             'cc_exp_year' => '25',
-        ]
+        ],
     );
 
     $response = $gateway->send($request);

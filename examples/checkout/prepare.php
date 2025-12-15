@@ -13,7 +13,7 @@ try {
         [
             'amount' => 200.50,
             'type' => 'qiwi',
-        ]
+        ],
     );
     $response = $gateway->send($request);
 

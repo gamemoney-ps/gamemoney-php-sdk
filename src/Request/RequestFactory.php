@@ -254,7 +254,7 @@ class RequestFactory
     {
         return new Request(
             RequestInterface::STATISTICS_BALANCE_ACTION,
-            $currency ? ['currency' => $currency] : []
+            $currency ? ['currency' => $currency] : [],
         );
     }
 

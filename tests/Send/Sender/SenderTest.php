@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Send;
+namespace tests\Send\Sender;
 
 use Gamemoney\Send\Sender\Sender;
 use PHPUnit\Framework\TestCase;
@@ -56,7 +56,7 @@ class SenderTest extends TestCase
         $mockRequest = $this
             ->getMockBuilder(RequestInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getData', 'getAction', 'setData', 'setAction', 'getField', 'setField'])
+            ->onlyMethods(['getData', 'getAction', 'setData', 'getField', 'setField'])
             ->getMock();
 
         $mockRequest

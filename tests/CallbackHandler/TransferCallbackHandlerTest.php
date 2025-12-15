@@ -7,6 +7,7 @@ use Gamemoney\Config;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\SignerResolverInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TransferCallbackHandlerTest extends TestCase
@@ -58,7 +59,7 @@ class TransferCallbackHandlerTest extends TestCase
     /**
      * @return array
      */
-    public function errorDataProvider()
+    public static function errorDataProvider()
     {
         return [
             [
@@ -73,10 +74,10 @@ class TransferCallbackHandlerTest extends TestCase
     }
 
     /**
-     * @dataProvider errorDataProvider
      * @param string|null $error
      * @param string $output
      */
+    #[DataProvider('errorDataProvider')]
     public function testErrorAnswer($error, $output)
     {
         $sign = 'testSign';

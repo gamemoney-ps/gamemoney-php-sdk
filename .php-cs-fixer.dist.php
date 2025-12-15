@@ -1,11 +1,15 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    ->in(['examples', 'src', 'tests']);
+declare(strict_types=1);
 
-return PhpCsFixer\Config::create()
-    ->setRules(
-    [
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
+return (new Config())
+    ->setParallelConfig(ParallelConfigFactory::detect()) // @TODO 4.0 no need to call this manually
+    ->setRiskyAllowed(true)
+    ->setRules([
         '@PSR2' => true,
         'lowercase_static_reference' => true,
         'semicolon_after_instruction' => true,
@@ -19,7 +23,6 @@ return PhpCsFixer\Config::create()
         'single_quote' => true,
         'no_trailing_comma_in_list_call' => true,
         'no_whitespace_before_comma_in_array' => true,
-        'trailing_comma_in_multiline_array' => true,
         'single_blank_line_before_namespace' => true,
         'global_namespace_import' => true,
         'no_blank_lines_after_class_opening' => true,
@@ -35,14 +38,20 @@ return PhpCsFixer\Config::create()
         'no_singleline_whitespace_before_semicolons' => true,
         'no_leading_import_slash' => true,
         'class_attributes_separation' => true,
+        'trailing_comma_in_multiline' => [
+            'elements' => ['arguments', 'arrays', 'parameters'],
+        ],
         'array_syntax' =>
-        [
-            'syntax' => 'short'
-        ],
+            [
+                'syntax' => 'short'
+            ],
         'concat_space' =>
-        [
-            'spacing' => 'one'
-        ],
+            [
+                'spacing' => 'one'
+            ],
     ])
-    ->setFinder($finder)
+    ->setFinder(
+        (new PhpCsFixer\Finder())
+            ->in(['examples', 'src', 'tests']),
+    )
 ;
