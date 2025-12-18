@@ -15,7 +15,7 @@ class JsonSenderTest extends TestCase
 {
     const URL = 'url';
 
-    public function testInterface()
+    public function testInterface(): void
     {
         $sender = new JsonSender($this::URL, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
@@ -34,11 +34,10 @@ class JsonSenderTest extends TestCase
         $sender = new JsonSender($this::URL, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
-        $this->assertTrue(is_array($response));
         $this->assertEquals($response, ['1' => '2']);
     }
 
-    public function testSendException()
+    public function testSendException(): void
     {
         $this->expectException(RequestException::class);
         $mockRequest = $this->getRequestMock();
@@ -53,7 +52,7 @@ class JsonSenderTest extends TestCase
         $sender->send($mockRequest);
     }
 
-    private function getRequestMock()
+    private function getRequestMock(): RequestInterface
     {
         $mockRequest = $this
             ->getMockBuilder(RequestInterface::class)

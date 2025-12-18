@@ -7,26 +7,21 @@ use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Validation\Response\ResponseValidatorInterface;
 
 /**
- * Class ResponseValidator
  * @package Gamemoney\Validation\Response\Validator
  */
 class ResponseValidator implements ResponseValidatorInterface
 {
-    /** @var SignatureVerifierInterface */
-    private $signatureVerifier;
+    private SignatureVerifierInterface $signatureVerifier;
 
-    /**
-     * @param SignatureVerifierInterface $signatureVerifier
-     */
     public function __construct(SignatureVerifierInterface $signatureVerifier)
     {
         $this->signatureVerifier = $signatureVerifier;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function validate(array $response, array $request)
+    public function validate(array $response, array $request): void
     {
         if (!$this->signatureVerifier->verify($response)) {
             throw new ResponseValidationException('Signature mismatch');

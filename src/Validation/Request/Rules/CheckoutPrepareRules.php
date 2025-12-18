@@ -9,19 +9,15 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Class CheckoutPrepareRules
- *
  * @package Gamemoney\Validation\Request\Rules
  */
 final class CheckoutPrepareRules implements RulesInterface
 {
-    /**
-     * @var array
-     */
-    private $data;
+    /** @var array<mixed> */
+    private array $data;
 
     /**
-     * @param array $data
+     * @param array<mixed> $data
      */
     public function __construct(array $data)
     {
@@ -29,9 +25,9 @@ final class CheckoutPrepareRules implements RulesInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getRules()
+    public function getRules(): array
     {
         $rules = [
             'project' => [

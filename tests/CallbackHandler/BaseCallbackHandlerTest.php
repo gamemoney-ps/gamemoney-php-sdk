@@ -6,7 +6,6 @@ use Gamemoney\CallbackHandler\BaseCallbackHandler;
 use Gamemoney\Config;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Sign\SignerResolverInterface;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class BaseCallbackHandlerTest extends TestCase
@@ -17,7 +16,7 @@ class BaseCallbackHandlerTest extends TestCase
 
     const PRIVATE_KEY = '123';
 
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $handler = $this->createPartialMock(BaseCallbackHandler::class, [
             'setSignatureVerifier',
@@ -39,7 +38,7 @@ class BaseCallbackHandlerTest extends TestCase
         $handler->__construct($this->getConfig());
     }
 
-    public function testCheck()
+    public function testCheck(): void
     {
         $result = true;
         $data = [];
@@ -59,7 +58,7 @@ class BaseCallbackHandlerTest extends TestCase
         $this->assertEquals($result, $handler->check($data));
     }
 
-    public function testSuccessAnswer()
+    public function testSuccessAnswer(): void
     {
         $result = '{"success":"true"}';
 
@@ -67,35 +66,23 @@ class BaseCallbackHandlerTest extends TestCase
         $this->assertEquals($result, $handler->successAnswer());
     }
 
-    /**
-     * @return array
-     */
-    public static function errorDataProvider()
+    public function testErrorAnswer(): void
     {
-        return [
-            [
-                'error' => null,
-                'output' => '{"success":"error"}',
-            ],
-            [
-                'error' => 'message',
-                'output' => '{"success":"error","error":"message"}',
-            ],
-        ];
-    }
+        $result = '{"success":"error"}';
 
-    /**
-     * @param string|null $error
-     * @param string $output
-     */
-    #[DataProvider('errorDataProvider')]
-    public function testErrorAnswer($error, $output)
-    {
         $handler = new BaseCallbackHandler($this->getConfig());
-        $this->assertEquals($output, $handler->errorAnswer($error));
+        $this->assertEquals($result, $handler->errorAnswer());
     }
 
-    private function getConfig()
+    public function testErrorWithMessageAnswer(): void
+    {
+        $result = '{"success":"error","error":"message"}';
+
+        $handler = new BaseCallbackHandler($this->getConfig());
+        $this->assertEquals($result, $handler->errorAnswer('message'));
+    }
+
+    private function getConfig(): Config
     {
         return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY);
     }

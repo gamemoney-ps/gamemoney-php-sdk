@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraints\Type;
 class InvoiceCardSessionCreateRules implements RulesInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getRules()
+    public function getRules(): array
     {
         return [
             'project' => [

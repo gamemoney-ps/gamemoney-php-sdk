@@ -9,32 +9,27 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * Class JsonSender
  * @package Gamemoney\Send\Sender
  */
 final class JsonSender implements SenderInterface
 {
-    /** @var string */
-    private $secureUrl;
+    private string $secureUrl;
 
-    /** @var Client */
-    private $client;
+    private Client $client;
 
     /**
-     * Sender constructor.
-     * @param string $secureUrl
-     * @param array $clientConfig
+     * @param array<mixed> $clientConfig
      */
-    public function __construct($secureUrl, array $clientConfig)
+    public function __construct(string $secureUrl, array $clientConfig)
     {
         $this->secureUrl = $secureUrl;
         $this->client = $this->getClient($clientConfig);
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function send(RequestInterface $request)
+    public function send(RequestInterface $request): array
     {
         try {
             $response = $this->client->post(
@@ -56,10 +51,9 @@ final class JsonSender implements SenderInterface
     }
 
     /**
-     * @param array $clientConfig
-     * @return Client
+     * @param array<mixed> $clientConfig
      */
-    private function getClient(array $clientConfig)
+    private function getClient(array $clientConfig): Client
     {
         $defaultConfig = [
             'base_uri' => $this->secureUrl,

@@ -15,13 +15,13 @@ class SenderTest extends TestCase
 {
     const URL = 'url';
 
-    public function testInterface()
+    public function testInterface(): void
     {
         $sender = new Sender($this::URL, []);
         $this->assertInstanceOf(SenderInterface::class, $sender);
     }
 
-    public function testSend()
+    public function testSend(): void
     {
         $mockRequest = $this->getRequestMock();
 
@@ -33,11 +33,10 @@ class SenderTest extends TestCase
         $sender = new Sender($this::URL, ['handler' => $handler]);
 
         $response = $sender->send($mockRequest);
-        $this->assertTrue(is_array($response));
         $this->assertEquals($response, ['1' => '2']);
     }
 
-    public function testSendException()
+    public function testSendException(): void
     {
         $this->expectException(RequestException::class);
         $mockRequest = $this->getRequestMock();
@@ -51,7 +50,7 @@ class SenderTest extends TestCase
         $sender->send($mockRequest);
     }
 
-    private function getRequestMock()
+    private function getRequestMock(): RequestInterface
     {
         $mockRequest = $this
             ->getMockBuilder(RequestInterface::class)

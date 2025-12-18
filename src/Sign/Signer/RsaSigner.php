@@ -2,7 +2,6 @@
 
 namespace Gamemoney\Sign\Signer;
 
-use Gamemoney\Exception\ConfigException;
 use Gamemoney\Exception\PrivateKeyException;
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Sign\ArrayToStringTrait;
@@ -22,35 +21,21 @@ final class RsaSigner implements SignerInterface
 {
     use ArrayToStringTrait;
 
-    /** @var string */
-    private $privateKey;
+    private string $privateKey;
 
-    /** @var string */
-    private $passphrase;
+    private ?string $passPhrase;
 
-    /**
-     * RsaSigner constructor.
-     * @param string $privateKey
-     * @param string $passphrase
-     * @throws ConfigException
-     */
-    public function __construct($privateKey, $passphrase = '')
+    public function __construct(string $privateKey, ?string $passPhrase)
     {
-        if (empty($privateKey)) {
-            throw new ConfigException('privateKey is not set in config');
-        }
-
         $this->privateKey = $privateKey;
-        $this->passphrase = $passphrase;
+        $this->passPhrase = $passPhrase;
     }
 
     /**
      * Write signature
-     * @param RequestInterface $request
-     * @return RequestInterface $request
      * @throws PrivateKeyException
      */
-    public function sign(RequestInterface $request)
+    public function sign(RequestInterface $request): RequestInterface
     {
         $signature = $this->getSignature($request->getData());
 
@@ -60,14 +45,14 @@ final class RsaSigner implements SignerInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getSignature(array $data)
+    public function getSignature(array $data): string
     {
-        $privateKey = openssl_pkey_get_private($this->privateKey, $this->passphrase);
+        $privateKey = openssl_pkey_get_private($this->privateKey, $this->passPhrase);
 
         if ($privateKey === false) {
-            throw new PrivateKeyException(openssl_error_string());
+            throw new PrivateKeyException((string) openssl_error_string());
         }
 
         openssl_sign($this->arrayToString($data), $signature, $privateKey, 'sha256');

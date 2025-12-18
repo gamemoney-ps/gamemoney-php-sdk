@@ -8,19 +8,15 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Class ExchangeStatusRules
  * @package Gamemoney\Validation\Request\Rules
  */
 final class ExchangeStatusRules implements RulesInterface
 {
-    /**
-     * @var array
-     */
-    private $data;
+    /** @var array<mixed> */
+    private array $data;
 
     /**
-     * ExchangeStatusRules constructor.
-     * @param array $data
+     * @param array<mixed> $data
      */
     public function __construct(array $data)
     {
@@ -28,9 +24,9 @@ final class ExchangeStatusRules implements RulesInterface
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getRules()
+    public function getRules(): array
     {
         $rules = [
             'project' => [

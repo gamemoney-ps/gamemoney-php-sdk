@@ -9,21 +9,14 @@ use Gamemoney\Validation\Response\Validator\ResponseValidatorSecure;
 
 class ResponseValidatorResolver implements ResponseValidatorResolverInterface
 {
-    /** @var SignatureVerifierInterface */
-    private $signatureVerifier;
+    private SignatureVerifierInterface $signatureVerifier;
 
-    /**
-     * @param SignatureVerifierInterface $signatureVerifier
-     */
     public function __construct(SignatureVerifierInterface $signatureVerifier)
     {
         $this->signatureVerifier = $signatureVerifier;
     }
 
-    /**
-     * @inheritdocs
-     */
-    public function resolve($action)
+    public function resolve(string $action): ResponseValidatorInterface
     {
         if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
             return new ResponseValidatorSecure();

@@ -7,9 +7,9 @@ use Gamemoney\Validation\Response\ResponseValidatorInterface;
 class ResponseValidatorSecure implements ResponseValidatorInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function validate(array $response, array $request)
+    public function validate(array $response, array $request): void
     {
     }
 }

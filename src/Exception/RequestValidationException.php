@@ -5,21 +5,18 @@ namespace Gamemoney\Exception;
 use Exception;
 
 /**
- * Class RequestValidationException
  * RequestValidationException represents an exception caused by a validation error of request data
  * @package Gamemoney\Exception
  */
-class RequestValidationException extends Exception implements GamemoneyExceptionInterface
+class RequestValidationException extends Exception implements GameMoneyExceptionInterface
 {
-    /** @var array */
-    private $errors = [];
+    /** @var array<mixed> */
+    private array $errors = [];
 
     /**
-     * @param string $field
-     * @param array $errors
-     * @return self
+     * @param array<mixed> $errors
      */
-    public function addErrors($field, array $errors)
+    public function addErrors(string $field, array $errors): self
     {
         $this->errors[$field] = $errors;
 
@@ -27,10 +24,9 @@ class RequestValidationException extends Exception implements GamemoneyException
     }
 
     /**
-     * @param array $errors
-     * @return self
+     * @param array<mixed> $errors
      */
-    public function setErrors(array $errors)
+    public function setErrors(array $errors): self
     {
         $this->errors = $errors;
 
@@ -38,9 +34,9 @@ class RequestValidationException extends Exception implements GamemoneyException
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

@@ -56,31 +56,19 @@ interface RequestInterface
 
     const STORE_ONLY_CARD_DATA_REGEX = '/^v1\/sessions\/[\w]+\/input$/';
 
-    /**
-     * @return string request uri
-     */
     public function getAction(): string;
 
     /**
-     * @return array request data fields
+     * @return array<mixed>
      */
-    public function getData();
+    public function getData(): array;
 
     /**
-     * @param array $data
+     * @param array<mixed> $data
      */
-    public function setData(array $data);
+    public function setData(array $data): self;
 
-    /**
-     * @param string $field
-     * @param mixed $value
-     * @return self
-     */
-    public function setField($field, $value);
+    public function setField(string $field, mixed $value): self;
 
-    /**
-     * @param string $field
-     * @return mixed
-     */
-    public function getField($field);
+    public function getField(string $field): mixed;
 }

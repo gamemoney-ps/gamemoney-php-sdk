@@ -9,10 +9,7 @@ use Gamemoney\Request\RequestFactory;
 
 class RequestFactoryTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function methodDataProvider()
+    public static function methodDataProvider(): array
     {
         return [
             [
@@ -260,14 +257,8 @@ class RequestFactoryTest extends TestCase
         ];
     }
 
-    /**
-     * @param string $method
-     * @param $args
-     * @param string $action
-     * @param array $expectedData
-     */
     #[DataProvider('methodDataProvider')]
-    public function testMethods($method, $args, $action, array $expectedData)
+    public function testMethods(string $method, int|string|array $args, string $action, array $expectedData): void
     {
         $requestFactory = new RequestFactory();
         $request = $requestFactory->$method($args);
@@ -280,7 +271,7 @@ class RequestFactoryTest extends TestCase
         $this->assertEquals($requestData, $expectedData);
     }
 
-    public function storeOnlyCardDataTest()
+    public function storeOnlyCardDataTest(): void
     {
         $sessionToken = 'testToken';
         $url = 'v1/sessions/' . $sessionToken . '/input';
@@ -301,7 +292,7 @@ class RequestFactoryTest extends TestCase
         $this->assertEquals($requestData, $data);
     }
 
-    public function createInvoiceCardSessionTest()
+    public function createInvoiceCardSessionTest(): void
     {
         $project = 10;
         $user = 'test_user';

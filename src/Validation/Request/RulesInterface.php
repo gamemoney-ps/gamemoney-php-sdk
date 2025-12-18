@@ -3,13 +3,12 @@
 namespace Gamemoney\Validation\Request;
 
 /**
- * Interface RulesInterface
  * @package Gamemoney\Validation\Request
  */
 interface RulesInterface
 {
     /**
-     * @return array
+     * @return array<mixed>
      */
-    public function getRules();
+    public function getRules(): array;
 }

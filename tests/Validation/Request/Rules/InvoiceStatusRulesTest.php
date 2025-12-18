@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class InvoiceStatusRulesTest extends TestCase
 {
-    /**
-    * @return array
-    */
-    public static function invoiceStatusProvider()
+    public static function invoiceStatusProvider(): array
     {
         return [
             [
@@ -42,12 +39,8 @@ class InvoiceStatusRulesTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $check
-     * @param array $data
-     */
     #[DataProvider('invoiceStatusProvider')]
-    public function testInvoiceStatus(array $checkField, array $data)
+    public function testInvoiceStatus(array $checkField, array $data): void
     {
         $invoice = new InvoiceStatusRules($data);
 

@@ -7,19 +7,15 @@ use Gamemoney\Sign\SignerInterface;
 
 final class EmptySigner implements SignerInterface
 {
-    /**
-     * @param RequestInterface $request
-     * @return RequestInterface $request
-     */
-    public function sign(RequestInterface $request)
+    public function sign(RequestInterface $request): RequestInterface
     {
         return $request;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getSignature(array $data)
+    public function getSignature(array $data): string
     {
         return '';
     }

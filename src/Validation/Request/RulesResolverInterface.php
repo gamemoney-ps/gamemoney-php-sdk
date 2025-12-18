@@ -3,14 +3,12 @@
 namespace Gamemoney\Validation\Request;
 
 /**
- * Interface RulesResolverInterface
  * @package Gamemoney\Validation\Request
  */
 interface RulesResolverInterface
 {
     /**
-     * @param string $type
-     * @return RulesInterface
+     * @param array<mixed> $data
      */
-    public function resolve($type, $data);
+    public function resolve(string $action, array $data): RulesInterface;
 }

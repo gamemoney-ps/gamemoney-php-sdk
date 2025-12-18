@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseValidatorResolverTest extends TestCase
 {
-    public function testInterface()
+    public function testInterface(): void
     {
         $mockSignature = $this->getSignatureMock();
 
@@ -22,10 +22,7 @@ class ResponseValidatorResolverTest extends TestCase
         $this->assertInstanceOf(ResponseValidatorResolverInterface::class, $resolver);
     }
 
-    /**
-     * @return array
-     */
-    public static function resolveDataProvider()
+    public static function resolveDataProvider(): array
     {
         return [
             [
@@ -104,7 +101,7 @@ class ResponseValidatorResolverTest extends TestCase
     }
 
     #[DataProvider('resolveDataProvider')]
-    public function testResolve($action)
+    public function testResolve(string $action): void
     {
         $mockSignature = $this->getSignatureMock();
 
@@ -114,7 +111,7 @@ class ResponseValidatorResolverTest extends TestCase
         $this->assertInstanceOf(ResponseValidator::class, $validator);
     }
 
-    public function testStoreOnlyCardDataResolve()
+    public function testStoreOnlyCardDataResolve(): void
     {
         $mockSignature = $this->getSignatureMock();
 
@@ -124,11 +121,10 @@ class ResponseValidatorResolverTest extends TestCase
         $this->assertInstanceOf(ResponseValidatorSecure::class, $validator);
     }
 
-    private function getSignatureMock()
+    private function getSignatureMock(): SignatureVerifierInterface
     {
         return $this
             ->getMockBuilder(SignatureVerifierInterface::class)
-            ->getMock()
-        ;
+            ->getMock();
     }
 }

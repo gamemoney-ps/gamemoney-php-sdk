@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class SignatureVerifierTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function verifyProvider()
+    public static function verifyProvider(): array
     {
         return [
             [
@@ -76,13 +73,8 @@ sQIDAQAB
         ];
     }
 
-    /**
-     * @param array $data
-     * @param string $key
-     * @param bool $result
-     */
     #[DataProvider('verifyProvider')]
-    public function testVerify(array $data, $key, $result)
+    public function testVerify(array $data, string $key, bool $result): void
     {
         $verifier = new SignatureVerifier($key);
         $this->assertSame($result, $verifier->verify($data));

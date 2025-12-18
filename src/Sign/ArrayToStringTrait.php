@@ -8,10 +8,9 @@ namespace Gamemoney\Sign;
 trait ArrayToStringTrait
 {
     /**
-     * @param array $data
-     * @return string
+     * @param array<mixed> $data
      */
-    protected function arrayToString(array $data)
+    protected function arrayToString(array $data): string
     {
         $text = '';
         ksort($data);

@@ -13,10 +13,7 @@ use Symfony\Component\Validator\Constraints\Type;
 
 class RequestValidatorTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function successValidateProvider()
+    public static function successValidateProvider(): array
     {
         return [
             ['rules' => [], 'data' => []],
@@ -73,21 +70,14 @@ class RequestValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $rules
-     * @param array $data
-     */
     #[DataProvider('successValidateProvider')]
-    public function testSuccessValidate(array $rules, array $data)
+    public function testSuccessValidate(array $rules, array $data): void
     {
         $validator = new RequestValidator();
         $this->assertNull($validator->validate($rules, $data));
     }
 
-    /**
-     * @return array
-     */
-    public static function failValidateProvider()
+    public static function failValidateProvider(): array
     {
         return [
             [
@@ -110,12 +100,8 @@ class RequestValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $rules
-     * @param array $data
-     */
     #[DataProvider('failValidateProvider')]
-    public function testFailValidate(array $rules, array $data)
+    public function testFailValidate(array $rules, array $data): void
     {
         $validator = new RequestValidator();
         $this->expectException(RequestValidationException::class);

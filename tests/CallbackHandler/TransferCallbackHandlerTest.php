@@ -7,7 +7,6 @@ use Gamemoney\Config;
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\SignerResolverInterface;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class TransferCallbackHandlerTest extends TestCase
@@ -18,18 +17,18 @@ class TransferCallbackHandlerTest extends TestCase
 
     const PRIVATE_KEY = '123';
 
-    public function testSuccessAnswerInvoiceNull()
+    public function testSuccessAnswerInvoiceNull(): void
     {
         $this->expectException(ConfigException::class);
 
         $handler = new TransferCallbackHandler($this->getConfig());
+        $handler->setInvoiceNumber(null);
         $handler->successAnswer();
     }
 
-    public function testSuccessAnswer()
+    public function testSuccessAnswer(): void
     {
         $invoiceNumber = 1;
-        $sign = 'testSign';
 
         $result = '{"state":"success","invoice":1,"signature":"testSign"}';
         $data = [
@@ -42,7 +41,7 @@ class TransferCallbackHandlerTest extends TestCase
             ->expects($this->once())
             ->method('getSignature')
             ->with($data)
-            ->willReturn($sign);
+            ->willReturn('testSign');
 
         $mockResolver = $this->createPartialMock(SignerResolverInterface::class, ['resolve']);
         $mockResolver
@@ -56,37 +55,33 @@ class TransferCallbackHandlerTest extends TestCase
         $this->assertEquals($result, $handler->successAnswer());
     }
 
-    /**
-     * @return array
-     */
-    public static function errorDataProvider()
+    public function testErrorAnswer(): void
     {
-        return [
-            [
-                'error' => null,
-                'output' => '{"state":"error","signature":"testSign"}',
-            ],
-            [
-                'error' => 'message',
-                'output' => '{"state":"error","error":"message","signature":"testSign"}',
-            ],
-        ];
+        $handler = new TransferCallbackHandler($this->getConfig());
+        $handler->setSignerResolver($this->getMock());
+
+        $expect = '{"state":"error","signature":"testSign"}';
+
+        $this->assertEquals($expect, $handler->errorAnswer());
     }
 
-    /**
-     * @param string|null $error
-     * @param string $output
-     */
-    #[DataProvider('errorDataProvider')]
-    public function testErrorAnswer($error, $output)
+    public function testErrorWithMessageAnswer(): void
     {
-        $sign = 'testSign';
+        $handler = new TransferCallbackHandler($this->getConfig());
+        $handler->setSignerResolver($this->getMock());
 
+        $expect = '{"state":"error","error":"message","signature":"testSign"}';
+
+        $this->assertEquals($expect, $handler->errorAnswer('message'));
+    }
+
+    private function getMock(): SignerResolverInterface
+    {
         $mockSigner = $this->createPartialMock(SignerInterface::class, ['sign', 'getSignature']);
         $mockSigner
             ->expects($this->once())
             ->method('getSignature')
-            ->willReturn($sign);
+            ->willReturn('testSign');
 
         $mockResolver = $this->createPartialMock(SignerResolverInterface::class, ['resolve']);
         $mockResolver
@@ -94,13 +89,10 @@ class TransferCallbackHandlerTest extends TestCase
             ->method('resolve')
             ->willReturn($mockSigner);
 
-        $handler = new TransferCallbackHandler($this->getConfig());
-        $handler->setSignerResolver($mockResolver);
-
-        $this->assertEquals($output, $handler->errorAnswer($error));
+        return $mockResolver;
     }
 
-    private function getConfig()
+    private function getConfig(): Config
     {
         return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY);
     }

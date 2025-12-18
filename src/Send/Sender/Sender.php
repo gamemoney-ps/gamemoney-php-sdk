@@ -9,32 +9,27 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
 
 /**
- * Class Sender
  * @package Gamemoney\Send\Sender
  */
 final class Sender implements SenderInterface
 {
-    /** @var string */
-    private $apiUrl;
+    private string $apiUrl;
 
-    /** @var Client */
-    private $client;
+    private Client $client;
 
     /**
-     * Sender constructor.
-     * @param string $apiUrl
-     * @param array $clientConfig
+     * @param array<mixed> $clientConfig
      */
-    public function __construct($apiUrl, array $clientConfig)
+    public function __construct(string $apiUrl, array $clientConfig)
     {
         $this->apiUrl = $apiUrl;
         $this->client = $this->getClient($clientConfig);
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function send(RequestInterface $request)
+    public function send(RequestInterface $request): array
     {
         try {
             $response = $this->client->post(
@@ -51,10 +46,9 @@ final class Sender implements SenderInterface
     }
 
     /**
-     * @param array $clientConfig
-     * @return Client
+     * @param array<mixed> $clientConfig
      */
-    private function getClient(array $clientConfig)
+    private function getClient(array $clientConfig): Client
     {
         $defaultConfig = [
             'base_uri' => $this->apiUrl,

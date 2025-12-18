@@ -11,16 +11,13 @@ class HmacSignerTest extends TestCase
 {
     const KEY = 'hmac_key';
 
-    public function testInterface()
+    public function testInterface(): void
     {
         $signer = new HmacSigner($this::KEY);
         $this->assertInstanceOf(SignerInterface::class, $signer);
     }
 
-    /**
-     * @return array
-     */
-    public static function getSignatureDataProvider()
+    public static function getSignatureDataProvider(): array
     {
         return [
             [
@@ -45,12 +42,8 @@ class HmacSignerTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $data
-     * @param string $fixture
-     */
     #[DataProvider('getSignatureDataProvider')]
-    public function testHmacGetSignature(array $data, $fixture)
+    public function testHmacGetSignature(array $data, string $fixture): void
     {
         $signer = new HmacSigner($this::KEY);
         $signature = $signer->getSignature($data);

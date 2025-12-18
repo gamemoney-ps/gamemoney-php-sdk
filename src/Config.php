@@ -3,7 +3,6 @@
 namespace Gamemoney;
 
 /**
- * Class Config
  * Contains configuration options for the Gateway
  * @package Gamemoney
  */
@@ -13,89 +12,57 @@ class Config
 
     const SECURE_URL = 'https://secure.gamemoney.com/api/';
 
-    /** @var int */
-    private $project;
+    private int $project;
 
-    /** @var string */
-    private $hmac;
+    private string $hmac;
 
-    /** @var string|null */
-    private $privateKey;
+    private ?string $privateKey;
 
-    /** @var string */
-    private $privateKeyPassword;
+    private ?string $privateKeyPassword;
 
-    /**
-     * Config constructor
-     * @param int $project
-     * @param string $hmac
-     * @param string|null $privateKey
-     * @param string|null $privateKeyPassword
-     */
     public function __construct(
-        $project,
-        $hmac,
-        $privateKey = null,
-        $privateKeyPassword = null,
+        int $project,
+        string $hmac,
+        ?string $privateKey = null,
+        ?string $privateKeyPassword = null,
     ) {
         $this->project = $project;
         $this->hmac = $hmac;
         $this->privateKey = $privateKey;
-        $this->privateKeyPassword = $privateKeyPassword ?: '';
+        $this->privateKeyPassword = $privateKeyPassword;
     }
 
-    /**
-     * @return int
-     */
-    public function project()
+    public function project(): int
     {
         return $this->project;
     }
 
-    /**
-     * @return string
-     */
-    public function hmac()
+    public function hmac(): string
     {
         return $this->hmac;
     }
 
-    /**
-     * @return string|null
-     */
-    public function privateKey()
+    public function privateKey(): ?string
     {
         return $this->privateKey;
     }
 
-    /**
-     * @return string
-     */
-    public function privateKeyPassword()
+    public function privateKeyPassword(): ?string
     {
         return $this->privateKeyPassword;
     }
 
-    /**
-     * @return string
-     */
-    public function apiUrl()
+    public function apiUrl(): string
     {
         return self::API_URL;
     }
 
-    /**
-     * @return string
-     */
-    public function secureUrl()
+    public function secureUrl(): string
     {
         return self::SECURE_URL;
     }
 
-    /**
-     * @return string
-     */
-    public function gmCertificate()
+    public function gmCertificate(): string
     {
         return 'file://' . __DIR__ . '/../crt/gm.crt';
     }
