@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CheckoutPrepareRulesTest extends TestCase
 {
-    /**
-    * @return array
-    */
-    public static function checkoutPrepareProvider()
+    public static function checkoutPrepareProvider(): array
     {
         return [
             [
@@ -27,12 +24,8 @@ class CheckoutPrepareRulesTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $check
-     * @param array $data
-     */
     #[DataProvider('checkoutPrepareProvider')]
-    public function testCheckoutPrepare(array $checkField, array $data)
+    public function testCheckoutPrepare(array $checkField, array $data): void
     {
         $invoice = new CheckoutPrepareRules($data);
 

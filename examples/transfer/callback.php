@@ -16,6 +16,6 @@ try {
     } else {
         echo $handler->errorAnswer();
     }
-} catch (\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
+} catch (\Gamemoney\Exception\GameMoneyExceptionInterface $e) {
     var_dump($e->getMessage());
 }

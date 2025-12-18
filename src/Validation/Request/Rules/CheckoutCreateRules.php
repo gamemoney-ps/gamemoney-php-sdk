@@ -9,15 +9,14 @@ use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Ip;
 
 /**
- * Class CheckoutCreateRules
  * @package Gamemoney\Validation\Request\Rules
  */
 final class CheckoutCreateRules implements RulesInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getRules()
+    public function getRules(): array
     {
         return [
             'project' => [

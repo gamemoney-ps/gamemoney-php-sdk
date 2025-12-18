@@ -3,26 +3,21 @@
 namespace Gamemoney\CallbackHandler;
 
 use Gamemoney\Config;
+use Gamemoney\Exception\GameMoneyException;
 use Gamemoney\Sign\SignatureVerifier;
 use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Sign\SignerResolver;
 use Gamemoney\Sign\SignerResolverInterface;
 
 /**
- * Class BaseCallbackHandler
  * @package Gamemoney
  */
 class BaseCallbackHandler
 {
-    /** @var SignatureVerifierInterface */
-    protected $signatureVerifier;
+    protected SignatureVerifierInterface $signatureVerifier;
 
-    /** @var SignerResolverInterface */
-    protected $signerResolver;
+    protected SignerResolverInterface $signerResolver;
 
-    /**
-     * @param Config $config
-     */
     public function __construct(Config $config)
     {
         $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
@@ -31,56 +26,49 @@ class BaseCallbackHandler
         );
     }
 
-    /**
-     * @param SignatureVerifierInterface $signatureVerifier
-     * @return self
-     */
-    public function setSignatureVerifier(SignatureVerifierInterface $signatureVerifier)
+    public function setSignatureVerifier(SignatureVerifierInterface $signatureVerifier): self
     {
         $this->signatureVerifier = $signatureVerifier;
-
         return $this;
     }
 
-    /**
-     * @param SignerResolverInterface $signerResolver
-     * @return self
-     */
-    public function setSignerResolver(SignerResolverInterface $signerResolver)
+    public function setSignerResolver(SignerResolverInterface $signerResolver): self
     {
         $this->signerResolver = $signerResolver;
-
         return $this;
     }
 
     /**
-     * @param array $data
-     * @return bool
+     * @param array<mixed> $data
      */
-    public function check(array $data)
+    public function check(array $data): bool
     {
         return $this->signatureVerifier->verify($data);
     }
 
-    /**
-     * @return string
-     */
-    public function successAnswer()
+    public function successAnswer(): string
     {
-        return json_encode(['success' => 'true']);
+        $result = json_encode(['success' => 'true']);
+        if ($result === false) {
+            throw new GameMoneyException('Error within json_encode');
+        }
+
+        return $result;
     }
 
-    /**
-     * @param string|null $error
-     * @return string
-     */
-    public function errorAnswer($error = null)
+    public function errorAnswer(?string $error = null): string
     {
-        return json_encode(
+        $result = json_encode(
             array_merge(
                 ['success' => 'error'],
                 $error ? ['error' => $error] : [],
             ),
         );
+
+        if ($result === false) {
+            throw new GameMoneyException('Error within json_encode');
+        }
+
+        return $result;
     }
 }

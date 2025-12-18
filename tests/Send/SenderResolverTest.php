@@ -19,16 +19,13 @@ class SenderResolverTest extends TestCase
 
     const CLIENT_CONFIG = ['test' => '123'];
 
-    public function testInterface()
+    public function testInterface(): void
     {
         $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $this->assertInstanceOf(SenderResolverInterface::class, $resolver);
     }
 
-    /**
-     * @return array
-     */
-    public static function resolveDataProvider()
+    public static function resolveDataProvider(): array
     {
         return [
             [
@@ -104,7 +101,7 @@ class SenderResolverTest extends TestCase
     }
 
     #[DataProvider('resolveDataProvider')]
-    public function testSenderResolve($action)
+    public function testSenderResolve(string $action): void
     {
         $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $sender = $resolver->resolve($action);
@@ -112,7 +109,7 @@ class SenderResolverTest extends TestCase
         $this->assertInstanceOf(Sender::class, $sender);
     }
 
-    public function testSenderSecureResolve()
+    public function testSenderSecureResolve(): void
     {
         $resolver = new SenderResolver($this::API_URL, $this::SECURE_URL, $this::CLIENT_CONFIG);
         $sender = $resolver->resolve('v1/sessions/testToken/input');

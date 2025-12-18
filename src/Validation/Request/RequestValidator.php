@@ -6,15 +6,14 @@ use Symfony\Component\Validator\Validation;
 use Gamemoney\Exception\RequestValidationException;
 
 /**
- * Class RequestValidator
  * @package Gamemoney\Validation\Request
  */
 final class RequestValidator implements RequestValidatorInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function validate(array $rules, array $data)
+    public function validate(array $rules, array $data): void
     {
         $validator = Validation::createValidator();
         $errors = [];

@@ -6,15 +6,13 @@ use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
 
 /**
- * Interface SenderInterface
  * @package Gamemoney\Send
  */
 interface SenderInterface
 {
     /**
-     * @param RequestInterface $request
-     * @return array
+     * @return array<mixed>
      * @throws RequestException
      */
-    public function send(RequestInterface $request);
+    public function send(RequestInterface $request): array;
 }

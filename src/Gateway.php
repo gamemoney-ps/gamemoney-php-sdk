@@ -17,34 +17,25 @@ use Gamemoney\Validation\Response\ResponseValidatorResolver;
 use Gamemoney\Validation\Response\ResponseValidatorResolverInterface;
 
 /**
- * Class Gateway
  * See using examples in examples folder
  * @package Gamemoney
  */
 class Gateway
 {
-    /** @var Config */
-    private $config;
+    private Config $config;
 
-    /** @var RequestValidatorInterface */
-    private $requestValidator;
+    private RequestValidatorInterface $requestValidator;
 
-    /** @var RulesResolverInterface */
-    private $rulesResolver;
+    private RulesResolverInterface $rulesResolver;
 
-    /** @var SignerResolverInterface */
-    private $signerResolver;
+    private SignerResolverInterface $signerResolver;
 
-    /** @var SenderResolverInterface */
-    private $senderResolver;
+    private SenderResolverInterface $senderResolver;
 
-    /** @var ResponseValidatorResolverInterface */
-    private $responseValidatorResolver;
+    private ResponseValidatorResolverInterface $responseValidatorResolver;
 
     /**
-     * Gateway constructor.
-     * @param Config $gatewayConfig
-     * @param array $clientConfig
+     * @param array<mixed> $clientConfig
      * @throws ConfigException
      */
     public function __construct(Config $gatewayConfig, array $clientConfig = [])
@@ -75,64 +66,43 @@ class Gateway
             ->setResponseValidatorResolver($responseValidatorResolver);
     }
 
-    /**
-     * @param RequestValidatorInterface $validator
-     * @return self
-     */
-    public function setRequestValidator(RequestValidatorInterface $validator)
+    public function setRequestValidator(RequestValidatorInterface $validator): self
     {
         $this->requestValidator = $validator;
         return $this;
     }
 
-    /**
-     * @param RulesResolverInterface $rulesResolver
-     * @return self
-     */
-    public function setRulesResolver(RulesResolverInterface $rulesResolver)
+    public function setRulesResolver(RulesResolverInterface $rulesResolver): self
     {
         $this->rulesResolver = $rulesResolver;
         return $this;
     }
 
-    /**
-     * @param SignerResolverInterface $signerResolver
-     * @return self
-     */
-    public function setSignerResolver(SignerResolverInterface $signerResolver)
+    public function setSignerResolver(SignerResolverInterface $signerResolver): self
     {
         $this->signerResolver = $signerResolver;
         return $this;
     }
 
-    /**
-     * @param SenderResolverInterface $senderResolver
-     * @return self
-     */
-    public function setSenderResolver(SenderResolverInterface $senderResolver)
+    public function setSenderResolver(SenderResolverInterface $senderResolver): self
     {
         $this->senderResolver = $senderResolver;
         return $this;
     }
 
-    /**
-     * @param ResponseValidatorResolverInterface $resolver
-     * @return self
-     */
-    public function setResponseValidatorResolver(ResponseValidatorResolverInterface $resolver)
+    public function setResponseValidatorResolver(ResponseValidatorResolverInterface $resolver): self
     {
         $this->responseValidatorResolver = $resolver;
         return $this;
     }
 
     /**
-     * @param RequestInterface $request
-     * @return array
+     * @return array<mixed>
      * @throws \Gamemoney\Exception\RequestException
      * @throws \Gamemoney\Exception\ResponseValidationException
      * @throws \Gamemoney\Exception\RequestValidationException
      */
-    public function send(RequestInterface $request)
+    public function send(RequestInterface $request): array
     {
         if (!preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $request->getAction())) {
             if (empty($request->getData()['rand'])) {

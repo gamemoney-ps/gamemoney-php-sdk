@@ -10,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseValidatorTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function successValidateProvider()
+    public static function successValidateProvider(): array
     {
         return [
             [
@@ -31,12 +28,8 @@ class ResponseValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $response
-     * @param array $request
-     */
     #[DataProvider('successValidateProvider')]
-    public function testSuccessValidate(array $response, array $request)
+    public function testSuccessValidate(array $response, array $request): void
     {
         $verifierMock = $this->createPartialMock(SignatureVerifierInterface::class, ['verify']);
         $verifierMock
@@ -49,10 +42,7 @@ class ResponseValidatorTest extends TestCase
         $validator->validate($response, $request);
     }
 
-    /**
-     * @return array
-     */
-    public static function failValidateProvider()
+    public static function failValidateProvider(): array
     {
         return [
             [
@@ -68,13 +58,8 @@ class ResponseValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $response
-     * @param array $request
-     * @param bool $verified
-     */
     #[DataProvider('failValidateProvider')]
-    public function testFailValidate(array $response, array $request, $verified)
+    public function testFailValidate(array $response, array $request, bool $verified): void
     {
         $verifierMock = $this->createPartialMock(SignatureVerifierInterface::class, ['verify']);
         $verifierMock

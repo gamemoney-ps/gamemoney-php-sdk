@@ -10,15 +10,14 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Class StoreOnlyCardData
  * @package Gamemoney\Validation\Request\Rules
  */
 final class StoreOnlyCardData implements RulesInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getRules()
+    public function getRules(): array
     {
         return [
             'card_number' => [

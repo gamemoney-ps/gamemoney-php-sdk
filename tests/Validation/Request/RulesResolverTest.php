@@ -11,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class RulesResolverTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function resolveProvider()
+    public static function resolveProvider(): array
     {
         return [
             ['action' => RequestInterface::INVOICE_CREATE_ACTION],
@@ -45,11 +42,8 @@ class RulesResolverTest extends TestCase
         ];
     }
 
-    /**
-     * @param string $action
-     */
     #[DataProvider('resolveProvider')]
-    public function testResolve($action)
+    public function testResolve(string $action): void
     {
         $resolver = new RulesResolver();
         $rules = $resolver->resolve($action, []);
@@ -58,7 +52,7 @@ class RulesResolverTest extends TestCase
         $this->assertTrue(is_array($rules->getRules()));
     }
 
-    public function testWrongActionResolve()
+    public function testWrongActionResolve(): void
     {
         $resolver = new RulesResolver();
         $this->assertInstanceOf(DefaultRules::class, $resolver->resolve('wrong action', []));

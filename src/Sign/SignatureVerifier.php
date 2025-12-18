@@ -2,6 +2,7 @@
 
 namespace Gamemoney\Sign;
 
+use Gamemoney\Exception\GameMoneyException;
 use Gamemoney\Exception\SignatureVerificationException;
 
 /**
@@ -21,22 +22,17 @@ final class SignatureVerifier implements SignatureVerifierInterface
 {
     use ArrayToStringTrait;
 
-    /** @var string */
-    private $key;
+    private string $key;
 
-    /**
-     * SignatureVerifier constructor.
-     * @param string $publicKey
-     */
-    public function __construct($publicKey)
+    public function __construct(string $publicKey)
     {
         $this->key = $publicKey;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function verify(array $data)
+    public function verify(array $data): bool
     {
         if (empty($data['signature'])) {
             return false;
@@ -47,11 +43,14 @@ final class SignatureVerifier implements SignatureVerifierInterface
 
         $text = $this->arrayToString($data);
         $pubKey = openssl_pkey_get_public($this->key);
+        if ($pubKey === false) {
+            throw new GameMoneyException((string) openssl_error_string());
+        }
 
         $signatureVerification = openssl_verify($text, $signature, $pubKey, 'sha256');
 
         if ($signatureVerification === -1) {
-            throw new SignatureVerificationException(openssl_error_string());
+            throw new SignatureVerificationException((string) openssl_error_string());
         }
 
         return (bool) $signatureVerification;

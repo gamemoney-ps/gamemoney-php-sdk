@@ -26,15 +26,14 @@ use Gamemoney\Validation\Request\Rules\StatisticsDaysBalancesRules;
 use Gamemoney\Validation\Request\Rules\DefaultRules;
 
 /**
- * Class RulesResolver
  * @package Gamemoney\Validation\Request
  */
 final class RulesResolver implements RulesResolverInterface
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function resolve($action, $data)
+    public function resolve(string $action, array $data): RulesInterface
     {
         if (preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $action)) {
             $action = RequestInterface::STORE_ONLY_CARD_DATA;

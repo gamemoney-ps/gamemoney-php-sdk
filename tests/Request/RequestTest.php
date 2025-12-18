@@ -8,14 +8,14 @@ use Gamemoney\Request\RequestInterface;
 
 class RequestTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $request = new Request('/test', ['data' => 1, 'rand' => 'test']);
         $this->assertEquals($request->getAction(), '/test');
         $this->assertEquals($request->getData(), ['data' => 1, 'rand' => 'test']);
     }
 
-    public function testSetData()
+    public function testSetData(): void
     {
         $request = new Request('/test');
         $this->assertInstanceOf(
@@ -25,7 +25,7 @@ class RequestTest extends TestCase
         $this->assertEquals($request->getData(), ['data' => 1, 'rand' => 'test']);
     }
 
-    public function testField()
+    public function testField(): void
     {
         $request = new Request('/test');
         $this->assertInstanceOf(

@@ -3,29 +3,22 @@
 namespace Gamemoney\CallbackHandler;
 
 use Gamemoney\Exception\ConfigException;
+use Gamemoney\Exception\GameMoneyException;
 
 /**
- * Class TransferCallbackHandler
  * See basic usage example in examples/transfer/callback.php
  * @package Gamemoney
  */
 class TransferCallbackHandler extends BaseCallbackHandler
 {
-    /** @var int|null */
-    private $invoiceNumber;
+    private ?int $invoiceNumber;
 
-    /**
-     * @param int|null $invoiceNumber
-     */
-    public function setInvoiceNumber($invoiceNumber)
+    public function setInvoiceNumber(?int $invoiceNumber): void
     {
         $this->invoiceNumber = $invoiceNumber;
     }
 
-    /**
-     * @return string
-     */
-    public function successAnswer()
+    public function successAnswer(): string
     {
         if ($this->invoiceNumber === null) {
             throw new ConfigException(
@@ -38,34 +31,31 @@ class TransferCallbackHandler extends BaseCallbackHandler
             'invoice' => $this->invoiceNumber,
         ];
 
-        return json_encode(
-            array_merge(
-                $data,
-                [
-                    'signature' => $this->signerResolver->resolve()->getSignature($data),
-                ],
-            ),
-        );
+        $data['signature'] = $this->signerResolver->resolve()->getSignature($data);
+
+        $result = json_encode($data);
+        if ($result === false) {
+            throw new GameMoneyException('Error within json_encode');
+        }
+
+        return $result;
     }
 
-    /**
-     * @param string|null $error
-     * @return string
-     */
-    public function errorAnswer($error = null)
+    public function errorAnswer(?string $error = null): string
     {
-        $data = array_merge(
-            ['state' => 'error'],
-            $error ? ['error' => $error] : [],
-        );
+        $data['state'] = 'error';
 
-        return json_encode(
-            array_merge(
-                $data,
-                [
-                    'signature' => $this->signerResolver->resolve()->getSignature($data),
-                ],
-            ),
-        );
+        if (!is_null($error)) {
+            $data['error'] = $error;
+        }
+
+        $data['signature'] = $this->signerResolver->resolve()->getSignature($data);
+
+        $result = json_encode($data);
+        if ($result === false) {
+            throw new GameMoneyException('Error within json_encode');
+        }
+
+        return $result;
     }
 }

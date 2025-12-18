@@ -26,9 +26,13 @@ class GatewayTest extends TestCase
 
     const PRIVATE_KEY_PASSWORD = '123';
 
-    public function testSend()
+    public function testSend(): void
     {
-        $mockRequest = $this->getRequestMock();
+        $mockRequest = $this
+            ->getMockBuilder(RequestInterface::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['getData', 'getAction', 'setData', 'getField', 'setField'])
+            ->getMock();
 
         $data = ['data' => ['test' => 1], 'rand' => 'test'];
 
@@ -92,8 +96,7 @@ class GatewayTest extends TestCase
         $mockRequestValidator
             ->expects($this->once())
             ->method('validate')
-            ->with($rules, $data)
-            ->willReturn(null);
+            ->with($rules, $data);
 
         $mockResponseValidator = $this
             ->getMockBuilder(ResponseValidatorInterface::class)
@@ -103,8 +106,7 @@ class GatewayTest extends TestCase
         $mockResponseValidator
             ->expects($this->once())
             ->method('validate')
-            ->with($senderResult, $data)
-            ->willReturn(null);
+            ->with($senderResult, $data);
 
         $mockResponseValidatorResolver = $this
             ->getMockBuilder(ResponseValidatorResolverInterface::class)
@@ -146,18 +148,7 @@ class GatewayTest extends TestCase
         $this->assertEquals($senderResult, $response);
     }
 
-    private function getRequestMock()
-    {
-        $mockRequest = $this
-            ->getMockBuilder(RequestInterface::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getData', 'getAction', 'setData', 'getField', 'setField'])
-            ->getMock();
-
-        return $mockRequest;
-    }
-
-    public function testConstructMethod()
+    public function testConstructMethod(): void
     {
         $gateway = $this->createPartialMock(Gateway::class, [
             'setRequestValidator',
@@ -195,7 +186,7 @@ class GatewayTest extends TestCase
         $gateway->__construct($this->getConfig());
     }
 
-    private function getConfig()
+    private function getConfig(): Config
     {
         return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY, $this::PRIVATE_KEY_PASSWORD);
     }

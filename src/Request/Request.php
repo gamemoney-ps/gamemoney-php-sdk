@@ -3,68 +3,54 @@
 namespace Gamemoney\Request;
 
 /**
- * Class Request
  * @package Gamemoney\Request
  */
 final class Request implements RequestInterface
 {
-    /** @var string */
-    private $action;
+    private string $action;
 
-    /** @var array */
-    private $data;
+    /** @var array<mixed> */
+    private array $data;
 
     /**
-     * Request constructor.
      * @param string $action URI
-     * @param array $data request data array
+     * @param array<mixed> $data request data array
      */
-    public function __construct($action, array $data = [])
+    public function __construct(string $action, array $data = [])
     {
         $this->action = $action;
         $this->data = $data;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAction(): string
     {
         return $this->action;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function setData(array $data)
+    public function setData(array $data): self
     {
         $this->data = $data;
-
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setField($field, $value)
+    public function setField(string $field, mixed $value): self
     {
         $this->data[$field] = $value;
-
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getField($field)
+    public function getField(string $field): mixed
     {
         return $this->data[$field];
     }

@@ -5,8 +5,7 @@ namespace Gamemoney\Sign;
 interface SignatureVerifierInterface
 {
     /**
-     * @param array $data
-     * @return bool
+     * @param array<mixed> $data
      */
-    public function verify(array $data);
+    public function verify(array $data): bool;
 }

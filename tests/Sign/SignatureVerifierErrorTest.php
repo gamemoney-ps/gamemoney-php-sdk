@@ -11,7 +11,7 @@ class SignatureVerifierErrorTest extends TestCase
 {
     use PHPMock;
 
-    public function testVerificationError()
+    public function testVerificationError(): void
     {
         $key = '-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq/P7DCmQkzfJDs9014in

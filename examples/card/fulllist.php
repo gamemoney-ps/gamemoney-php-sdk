@@ -15,6 +15,6 @@ try {
     var_dump($response);
 } catch (\Gamemoney\Exception\RequestValidationException $e) {
     var_dump($e->getMessage(), $e->getErrors());
-} catch (\Gamemoney\Exception\GamemoneyExceptionInterface $e) {
+} catch (\Gamemoney\Exception\GameMoneyExceptionInterface $e) {
     var_dump($e->getMessage());
 }

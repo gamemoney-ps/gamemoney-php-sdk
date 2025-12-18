@@ -9,9 +9,8 @@ static:
     image: php:8.5
     script:
         - php_prepare
-        - composer require --dev phpstan/phpstan
         - composer update -vv -o
-        - ./vendor/bin/phpstan analyze src -l 5
+        - ./vendor/bin/phpstan analyze src -l 8
 
 test-8.1:
     stage: test

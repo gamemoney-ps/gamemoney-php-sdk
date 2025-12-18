@@ -2,6 +2,7 @@
 
 namespace tests\Sign;
 
+use Gamemoney\Exception\ConfigException;
 use Gamemoney\Sign\Signer\EmptySigner;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -20,16 +21,13 @@ class SignerResolverTest extends TestCase
 
     const PASSPHRASE = '123';
 
-    public function testInterface()
+    public function testInterface(): void
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $this->assertInstanceOf(SignerResolverInterface::class, $resolver);
     }
 
-    /**
-     * @return array
-     */
-    public static function resolveDataProvider()
+    public static function resolveDataProvider(): array
     {
         return [
             [
@@ -99,7 +97,7 @@ class SignerResolverTest extends TestCase
     }
 
     #[DataProvider('resolveDataProvider')]
-    public function testHmacResolve($action)
+    public function testHmacResolve(string $action): void
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $signer = $resolver->resolve($action);
@@ -120,7 +118,7 @@ class SignerResolverTest extends TestCase
     }
 
     #[DataProvider('resolveRsaDataProvider')]
-    public function testRsaResolve($action)
+    public function testRsaResolve(string $action): void
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $signer = $resolver->resolve($action);
@@ -128,11 +126,19 @@ class SignerResolverTest extends TestCase
         $this->assertInstanceOf(RsaSigner::class, $signer);
     }
 
-    public function testEmptySignerResolve()
+    public function testEmptySignerResolve(): void
     {
         $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
         $signer = $resolver->resolve('v1/sessions/testToken/input');
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(EmptySigner::class, $signer);
+    }
+
+    public function testPrivateKeyNotSet(): void
+    {
+        $this->expectException(ConfigException::class);
+
+        $resolver = new SignerResolver($this::HMAC_KEY, null, $this::PASSPHRASE);
+        $resolver->resolve(RequestInterface::CHECKOUT_CREATE_ACTION);
     }
 }

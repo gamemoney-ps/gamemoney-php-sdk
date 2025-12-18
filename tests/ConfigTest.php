@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
-    public function testOptions()
+    public function testOptions(): void
     {
         $project = 1;
         $hmacKey = 'test';
@@ -22,7 +22,7 @@ class ConfigTest extends TestCase
         $this->assertSame($privateKeyPassword, $config->privateKeyPassword());
     }
 
-    public function testSecureUrl()
+    public function testSecureUrl(): void
     {
         $project = 1;
         $hmacKey = 'test';
@@ -36,7 +36,7 @@ class ConfigTest extends TestCase
         $this->assertEquals($url, $result);
     }
 
-    public function testGmCertificate()
+    public function testGmCertificate(): void
     {
         $project = 1;
         $hmacKey = 'test';

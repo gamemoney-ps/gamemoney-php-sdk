@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class ExchangeStatusRulesTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public static function exchangeStatusProvider()
+    public static function exchangeStatusProvider(): array
     {
         return [
             [
@@ -42,12 +39,8 @@ class ExchangeStatusRulesTest extends TestCase
         ];
     }
 
-    /**
-     * @param array $check
-     * @param array $data
-     */
     #[DataProvider('exchangeStatusProvider')]
-    public function testExchangeStatus(array $checkField, array $data)
+    public function testExchangeStatus(array $checkField, array $data): void
     {
         $exchange = new ExchangeStatusRules($data);
 
