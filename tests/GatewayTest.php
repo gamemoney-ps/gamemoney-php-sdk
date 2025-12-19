@@ -22,6 +22,8 @@ class GatewayTest extends TestCase
 
     const HMAC_KEY = 'test';
 
+    const CERTIFICATE = 'test_certificate';
+
     const PRIVATE_KEY = '123';
 
     const PRIVATE_KEY_PASSWORD = '123';
@@ -188,6 +190,12 @@ class GatewayTest extends TestCase
 
     private function getConfig(): Config
     {
-        return new Config($this::PROJECT, $this::HMAC_KEY, $this::PRIVATE_KEY, $this::PRIVATE_KEY_PASSWORD);
+        return new Config(
+            self::PROJECT,
+            self::HMAC_KEY,
+            self::CERTIFICATE,
+            self::PRIVATE_KEY,
+            self::PRIVATE_KEY_PASSWORD,
+        );
     }
 }

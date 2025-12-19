@@ -20,7 +20,7 @@ class BaseCallbackHandler
 
     public function __construct(Config $config)
     {
-        $this->setSignatureVerifier(new SignatureVerifier($config->gmCertificate()));
+        $this->setSignatureVerifier(new SignatureVerifier($config->getCertificate()));
         $this->setSignerResolver(
             new SignerResolver($config->hmac(), $config->privateKey(), $config->privateKeyPassword()),
         );

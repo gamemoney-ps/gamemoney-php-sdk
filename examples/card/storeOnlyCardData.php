@@ -6,8 +6,12 @@ $project = 123456;
 $hmacKey = 'test';
 $sessionToken = 'testToken';
 
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey);
+    $config = new \Gamemoney\Config($project, $hmacKey, $certificate);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
 

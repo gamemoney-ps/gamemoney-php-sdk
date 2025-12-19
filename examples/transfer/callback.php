@@ -5,9 +5,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $project = 123456;
 $hmacKey = 'test';
 $invoiceNumber = 123456;
+
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 try {
     $response = $_POST;
-    $config = new \Gamemoney\Config($project, $hmacKey);
+    $config = new \Gamemoney\Config($project, $hmacKey, $certificate);
     $handler = new \Gamemoney\CallbackHandler\TransferCallbackHandler($config);
     if ($handler->check($response)) {
         // create invoice and get back an invoice number $invoiceNumber

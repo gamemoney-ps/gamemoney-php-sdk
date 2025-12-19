@@ -4,13 +4,19 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $project = 123456;
 $hmacKey = 'test';
+
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 ...
 -----END ENCRYPTED PRIVATE KEY-----';
+
 $privateKeyPassword = 'keypassword';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPassword);
+    $config = new \Gamemoney\Config($project, $hmacKey, $certificate, $privateKey, $privateKeyPassword);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->checkCheckout([
