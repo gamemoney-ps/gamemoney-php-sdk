@@ -25,8 +25,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $project = 123456;
 $hmacKey = 'test';
 
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey);
+    $config = new \Gamemoney\Config($project, $hmacKey, $certificate);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory;
     $request = $requestFactory->getInvoiceStatus(1);
@@ -51,10 +55,15 @@ $pathToPrivateKeyFile = '/keys/gamemoney/project1/priv.key';
 
 $project = 123456;
 $hmacKey = 'test';
+
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 $privateKey = file_get_contents($pathToPrivateKeyFile);
 $privateKeyPass = 'password';
 
-$config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPass);
+$config = new \Gamemoney\Config($project, $hmacKey, $certificate, $privateKey, $privateKeyPass);
 ```
 #### Using path in format `file://`
 
@@ -65,10 +74,15 @@ $config = new \Gamemoney\Config($project, $hmacKey, $privateKey, $privateKeyPass
 
 $project = 123456;
 $hmacKey = 'test';
+
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 $pathToPrivateKeyFile = 'file:///keys/gamemoney/project1/priv.key';
 $privateKeyPass = 'password';
 
-$config = new \Gamemoney\Config($project, $hmacKey, $pathToPrivateKeyFile, $privateKeyPass);
+$config = new \Gamemoney\Config($project, $hmacKey, $certificate, $pathToPrivateKeyFile, $privateKeyPass);
 ```
 
 ### Using key as string
@@ -77,12 +91,18 @@ $config = new \Gamemoney\Config($project, $hmacKey, $pathToPrivateKeyFile, $priv
 
 $project = 123456;
 $hmacKey = 'test';
+
+$certificate = '-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----';
+
 $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 ...
 -----END ENCRYPTED PRIVATE KEY-----';
+
 $privateKeyPass = 'password';
 
-$config = new \Gamemoney\Config($project, $hmacKey);
+$config = new \Gamemoney\Config($project, $hmacKey, $certificate);
 ```
 ## Full Documentation
 

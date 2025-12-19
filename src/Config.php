@@ -16,6 +16,8 @@ class Config
 
     private string $hmac;
 
+    private string $certificate;
+
     private ?string $privateKey;
 
     private ?string $privateKeyPassword;
@@ -23,11 +25,13 @@ class Config
     public function __construct(
         int $project,
         string $hmac,
+        string $certificate,
         ?string $privateKey = null,
         ?string $privateKeyPassword = null,
     ) {
         $this->project = $project;
         $this->hmac = $hmac;
+        $this->certificate = $certificate;
         $this->privateKey = $privateKey;
         $this->privateKeyPassword = $privateKeyPassword;
     }
@@ -62,8 +66,8 @@ class Config
         return self::SECURE_URL;
     }
 
-    public function gmCertificate(): string
+    public function getCertificate(): string
     {
-        return 'file://' . __DIR__ . '/../crt/gm.crt';
+        return $this->certificate;
     }
 }

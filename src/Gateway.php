@@ -55,7 +55,7 @@ class Gateway
         );
 
         $responseValidatorResolver = new ResponseValidatorResolver(
-            new SignatureVerifier($this->config->gmCertificate()),
+            new SignatureVerifier($this->config->getCertificate()),
         );
 
         $this
