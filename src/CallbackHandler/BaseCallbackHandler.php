@@ -19,7 +19,7 @@ class BaseCallbackHandler
     {
         $this->setSignatureVerifier(new SignatureVerifier($config->getCertificate()));
         $this->setSignerResolver(
-            new SignerResolver($config->hmac(), $config->privateKey(), $config->privateKeyPassword()),
+            new SignerResolver($config->getHmac(), $config->getPrivateKey(), $config->getPrivateKeyPassword()),
         );
     }
 
@@ -45,7 +45,7 @@ class BaseCallbackHandler
         return $this->signatureVerifier->verify($data);
     }
 
-    public function successAnswer(): string
+    public function getSuccessAnswer(): string
     {
         $result = json_encode(['success' => 'true']);
         if (false === $result) {
@@ -55,7 +55,7 @@ class BaseCallbackHandler
         return $result;
     }
 
-    public function errorAnswer(?string $error = null): string
+    public function getErrorAnswer(?string $error = null): string
     {
         $result = json_encode(
             array_merge(

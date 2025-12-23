@@ -35,27 +35,27 @@ class Config
         $this->privateKeyPassword = $privateKeyPassword;
     }
 
-    public function project(): int
+    public function getProject(): int
     {
         return $this->project;
     }
 
-    public function hmac(): string
+    public function getHmac(): string
     {
         return $this->hmac;
     }
 
-    public function privateKey(): ?string
+    public function getPrivateKey(): ?string
     {
         return $this->privateKey;
     }
 
-    public function privateKeyPassword(): ?string
+    public function getPrivateKeyPassword(): ?string
     {
         return $this->privateKeyPassword;
     }
 
-    public function apiUrl(): string
+    public function getApiUrl(): string
     {
         return $this->apiUrl;
     }

@@ -57,7 +57,7 @@ class BaseCallbackHandlerTest extends TestCase
         $result = '{"success":"true"}';
 
         $handler = new BaseCallbackHandler($this->getConfig());
-        $this->assertEquals($result, $handler->successAnswer());
+        $this->assertEquals($result, $handler->getSuccessAnswer());
     }
 
     public function testErrorAnswer(): void
@@ -65,7 +65,7 @@ class BaseCallbackHandlerTest extends TestCase
         $result = '{"success":"error"}';
 
         $handler = new BaseCallbackHandler($this->getConfig());
-        $this->assertEquals($result, $handler->errorAnswer());
+        $this->assertEquals($result, $handler->getErrorAnswer());
     }
 
     public function testErrorWithMessageAnswer(): void
@@ -73,7 +73,7 @@ class BaseCallbackHandlerTest extends TestCase
         $result = '{"success":"error","error":"message"}';
 
         $handler = new BaseCallbackHandler($this->getConfig());
-        $this->assertEquals($result, $handler->errorAnswer('message'));
+        $this->assertEquals($result, $handler->getErrorAnswer('message'));
     }
 
     private function getConfig(): Config

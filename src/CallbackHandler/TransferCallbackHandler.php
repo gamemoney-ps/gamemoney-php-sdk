@@ -17,7 +17,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         $this->invoiceNumber = $invoiceNumber;
     }
 
-    public function successAnswer(): string
+    public function getSuccessAnswer(): string
     {
         if (null === $this->invoiceNumber) {
             throw new ConfigException('Cannot create success answer for TransferCallbackHandler - invoice number not set.');
@@ -38,7 +38,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         return $result;
     }
 
-    public function errorAnswer(?string $error = null): string
+    public function getErrorAnswer(?string $error = null): string
     {
         $data['state'] = 'error';
 

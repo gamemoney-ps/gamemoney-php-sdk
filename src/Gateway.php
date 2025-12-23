@@ -43,9 +43,9 @@ class Gateway
         $this->config = $gatewayConfig;
 
         $signerResolver = new SignerResolver(
-            $this->config->hmac(),
-            $this->config->privateKey(),
-            $this->config->privateKeyPassword(),
+            $this->config->getHmac(),
+            $this->config->getPrivateKey(),
+            $this->config->getPrivateKeyPassword(),
         );
 
         $this
@@ -53,7 +53,7 @@ class Gateway
             ->setRulesResolver(new RulesResolver())
             ->setSignerResolver($signerResolver)
             ->setSender(
-                new Sender($this->config->apiUrl(), $clientConfig),
+                new Sender($this->config->getApiUrl(), $clientConfig),
             )
             ->setResponseValidator(
                 new ResponseValidator(
@@ -110,7 +110,7 @@ class Gateway
             $request->setField('rand', bin2hex(openssl_random_pseudo_bytes(10)));
         }
 
-        $request->setField('project', $this->config->project());
+        $request->setField('project', $this->config->getProject());
 
         $rules = $this->rulesResolver->resolve($request->getAction(), $request->getData())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
