@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class SenderTest extends TestCase
 {
-    const URL = 'url';
+    public const URL = 'url';
 
     public function testSend(): void
     {

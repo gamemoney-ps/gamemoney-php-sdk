@@ -2,10 +2,10 @@
 
 namespace tests\Validation\Request;
 
+use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\DefaultRules;
 use Gamemoney\Validation\Request\RulesInterface;
 use Gamemoney\Validation\Request\RulesResolver;
-use Gamemoney\Request\RequestInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

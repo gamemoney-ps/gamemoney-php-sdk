@@ -2,16 +2,14 @@
 
 namespace Gamemoney\Send;
 
-use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
+use Gamemoney\Request\RequestInterface;
 
-/**
- * @package Gamemoney\Send
- */
 interface SenderInterface
 {
     /**
      * @return array<mixed>
+     *
      * @throws RequestException
      */
     public function send(RequestInterface $request): array;

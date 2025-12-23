@@ -3,8 +3,7 @@
 namespace Gamemoney;
 
 /**
- * Contains configuration options for the Gateway
- * @package Gamemoney
+ * Contains configuration options for the Gateway.
  */
 class Config
 {

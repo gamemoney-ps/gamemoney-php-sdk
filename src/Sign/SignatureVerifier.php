@@ -6,7 +6,7 @@ use Gamemoney\Exception\GameMoneyException;
 use Gamemoney\Exception\SignatureVerificationException;
 
 /**
- * Class SignatureVerifier provides an ability to verify signature of data array
+ * Class SignatureVerifier provides an ability to verify signature of data array.
  *
  * Basic usage is the following:
  *
@@ -29,9 +29,6 @@ final class SignatureVerifier implements SignatureVerifierInterface
         $this->key = $publicKey;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function verify(array $data): bool
     {
         if (empty($data['signature'])) {
@@ -43,13 +40,13 @@ final class SignatureVerifier implements SignatureVerifierInterface
 
         $text = $this->arrayToString($data);
         $pubKey = openssl_pkey_get_public($this->key);
-        if ($pubKey === false) {
+        if (false === $pubKey) {
             throw new GameMoneyException((string) openssl_error_string());
         }
 
         $signatureVerification = openssl_verify($text, $signature, $pubKey, 'sha256');
 
-        if ($signatureVerification === -1) {
+        if (-1 === $signatureVerification) {
             throw new SignatureVerificationException((string) openssl_error_string());
         }
 

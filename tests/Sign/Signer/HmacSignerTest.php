@@ -2,14 +2,14 @@
 
 namespace tests\Sign\Signer;
 
+use Gamemoney\Sign\Signer\HmacSigner;
+use Gamemoney\Sign\SignerInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Sign\Signer\HmacSigner;
 
 class HmacSignerTest extends TestCase
 {
-    const KEY = 'hmac_key';
+    public const KEY = 'hmac_key';
 
     public function testInterface(): void
     {

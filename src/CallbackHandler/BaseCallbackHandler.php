@@ -9,9 +9,6 @@ use Gamemoney\Sign\SignatureVerifierInterface;
 use Gamemoney\Sign\SignerResolver;
 use Gamemoney\Sign\SignerResolverInterface;
 
-/**
- * @package Gamemoney
- */
 class BaseCallbackHandler
 {
     protected SignatureVerifierInterface $signatureVerifier;
@@ -29,12 +26,14 @@ class BaseCallbackHandler
     public function setSignatureVerifier(SignatureVerifierInterface $signatureVerifier): self
     {
         $this->signatureVerifier = $signatureVerifier;
+
         return $this;
     }
 
     public function setSignerResolver(SignerResolverInterface $signerResolver): self
     {
         $this->signerResolver = $signerResolver;
+
         return $this;
     }
 
@@ -49,7 +48,7 @@ class BaseCallbackHandler
     public function successAnswer(): string
     {
         $result = json_encode(['success' => 'true']);
-        if ($result === false) {
+        if (false === $result) {
             throw new GameMoneyException('Error within json_encode');
         }
 
@@ -65,7 +64,7 @@ class BaseCallbackHandler
             ),
         );
 
-        if ($result === false) {
+        if (false === $result) {
             throw new GameMoneyException('Error within json_encode');
         }
 

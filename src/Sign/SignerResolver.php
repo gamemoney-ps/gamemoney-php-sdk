@@ -4,12 +4,9 @@ namespace Gamemoney\Sign;
 
 use Gamemoney\Exception\ConfigException;
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Sign\Signer\RsaSigner;
 use Gamemoney\Sign\Signer\HmacSigner;
+use Gamemoney\Sign\Signer\RsaSigner;
 
-/**
- * @package Gamemoney\Sign
- */
 class SignerResolver implements SignerResolverInterface
 {
     private string $hmacKey;

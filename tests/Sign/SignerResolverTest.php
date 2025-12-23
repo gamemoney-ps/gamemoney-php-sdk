@@ -3,22 +3,22 @@
 namespace tests\Sign;
 
 use Gamemoney\Exception\ConfigException;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
-use Gamemoney\Sign\SignerResolver;
-use Gamemoney\Sign\SignerResolverInterface;
-use Gamemoney\Sign\SignerInterface;
+use Gamemoney\Request\RequestInterface;
 use Gamemoney\Sign\Signer\HmacSigner;
 use Gamemoney\Sign\Signer\RsaSigner;
-use Gamemoney\Request\RequestInterface;
+use Gamemoney\Sign\SignerInterface;
+use Gamemoney\Sign\SignerResolver;
+use Gamemoney\Sign\SignerResolverInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 class SignerResolverTest extends TestCase
 {
-    const HMAC_KEY = '123';
+    public const HMAC_KEY = '123';
 
-    const PRIVATE_KEY = '--1233--';
+    public const PRIVATE_KEY = '--1233--';
 
-    const PASSPHRASE = '123';
+    public const PASSPHRASE = '123';
 
     public function testInterface(): void
     {

@@ -4,9 +4,6 @@ namespace Gamemoney\Sign;
 
 use Gamemoney\Request\RequestInterface;
 
-/**
- * @package Gamemoney\Sign
- */
 interface SignerInterface
 {
     public function sign(RequestInterface $request): RequestInterface;

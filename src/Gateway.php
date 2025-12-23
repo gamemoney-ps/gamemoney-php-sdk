@@ -17,8 +17,7 @@ use Gamemoney\Validation\Response\ResponseValidator;
 use Gamemoney\Validation\Response\ResponseValidatorInterface;
 
 /**
- * See using examples in examples folder
- * @package Gamemoney
+ * See using examples in examples folder.
  */
 class Gateway
 {
@@ -36,6 +35,7 @@ class Gateway
 
     /**
      * @param array<mixed> $clientConfig
+     *
      * @throws ConfigException
      */
     public function __construct(Config $gatewayConfig, array $clientConfig = [])
@@ -65,38 +65,44 @@ class Gateway
     public function setRequestValidator(RequestValidatorInterface $validator): self
     {
         $this->requestValidator = $validator;
+
         return $this;
     }
 
     public function setRulesResolver(RulesResolverInterface $rulesResolver): self
     {
         $this->rulesResolver = $rulesResolver;
+
         return $this;
     }
 
     public function setSignerResolver(SignerResolverInterface $signerResolver): self
     {
         $this->signerResolver = $signerResolver;
+
         return $this;
     }
 
     public function setSender(SenderInterface $sender): self
     {
         $this->sender = $sender;
+
         return $this;
     }
 
     public function setResponseValidator(ResponseValidatorInterface $responseValidator): self
     {
         $this->responseValidator = $responseValidator;
+
         return $this;
     }
 
     /**
      * @return array<mixed>
-     * @throws \Gamemoney\Exception\RequestException
-     * @throws \Gamemoney\Exception\ResponseValidationException
-     * @throws \Gamemoney\Exception\RequestValidationException
+     *
+     * @throws Exception\RequestException
+     * @throws Exception\ResponseValidationException
+     * @throws Exception\RequestValidationException
      */
     public function send(RequestInterface $request): array
     {

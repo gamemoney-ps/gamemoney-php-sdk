@@ -3,14 +3,14 @@
 namespace tests\Sign\Signer;
 
 use Gamemoney\Exception\PrivateKeyException;
+use Gamemoney\Sign\Signer\RsaSigner;
+use Gamemoney\Sign\SignerInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Sign\SignerInterface;
-use Gamemoney\Sign\Signer\RsaSigner;
 
 class RsaSignerTest extends TestCase
 {
-    const PASSPHRASE = '123';
+    public const PASSPHRASE = '123';
 
     public function testInterface(): void
     {
@@ -19,7 +19,7 @@ class RsaSignerTest extends TestCase
     }
 
     /**
-     * phpcs:disable Generic.Files.LineLength.TooLong
+     * phpcs:disable Generic.Files.LineLength.TooLong.
      */
     public static function getSignatureDataProvider(): array
     {
@@ -67,7 +67,7 @@ class RsaSignerTest extends TestCase
     {
         $data = ['data' => ''];
         $signature = 'i/iI9c8w9ZdxjNSj0z7QlFw1RVlu/9Vm/llCE5n6yEH+AfZBRb9ttxWaCUZTNlH3S+v7hfxiZCBRk4JJfsTtzooFFH1T8c2YiLAj+sPn1XYE8Jx1MYxoZe9ImCo3p0F1NK1BSRJCuJ+gVcMjmIIDNNHNBVN30Jl+z1tXT5Q13T32npEkOxzfFqBnEVSRHVM5rMtH2rfnfZLYGOGTreCgEWc2zO7WzxfsQAGjhs8XnAZECDLHhetvfmecSiulMx+DW91zxhsNSVdIB6GFXKSDBAP/aXUhdkJGx8tj01dLKw/fRcKF1ftj/Pj4/BDRk0SPMd9NyJ0pdShXeS7OucCGOQ==';
-        $privateKeyStream = 'file://' . __DIR__ . '/../../_data/private_key';
+        $privateKeyStream = 'file://'.__DIR__.'/../../_data/private_key';
 
         $signer = new RsaSigner($privateKeyStream, $this::PASSPHRASE);
         $this->assertEquals($signature, $signer->getSignature($data));

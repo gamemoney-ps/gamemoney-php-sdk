@@ -7,9 +7,6 @@ use Gamemoney\Request\RequestInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-/**
- * @package Gamemoney\Send
- */
 final class Sender implements SenderInterface
 {
     private string $apiUrl;
@@ -25,9 +22,6 @@ final class Sender implements SenderInterface
         $this->client = $this->getClient($clientConfig);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function send(RequestInterface $request): array
     {
         try {

@@ -6,8 +6,7 @@ use Gamemoney\Exception\ConfigException;
 use Gamemoney\Exception\GameMoneyException;
 
 /**
- * See basic usage example in examples/transfer/callback.php
- * @package Gamemoney
+ * See basic usage example in examples/transfer/callback.php.
  */
 class TransferCallbackHandler extends BaseCallbackHandler
 {
@@ -20,10 +19,8 @@ class TransferCallbackHandler extends BaseCallbackHandler
 
     public function successAnswer(): string
     {
-        if ($this->invoiceNumber === null) {
-            throw new ConfigException(
-                'Cannot create success answer for TransferCallbackHandler - invoice number not set.',
-            );
+        if (null === $this->invoiceNumber) {
+            throw new ConfigException('Cannot create success answer for TransferCallbackHandler - invoice number not set.');
         }
 
         $data = [
@@ -34,7 +31,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         $data['signature'] = $this->signerResolver->resolve()->getSignature($data);
 
         $result = json_encode($data);
-        if ($result === false) {
+        if (false === $result) {
             throw new GameMoneyException('Error within json_encode');
         }
 
@@ -52,7 +49,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         $data['signature'] = $this->signerResolver->resolve()->getSignature($data);
 
         $result = json_encode($data);
-        if ($result === false) {
+        if (false === $result) {
             throw new GameMoneyException('Error within json_encode');
         }
 

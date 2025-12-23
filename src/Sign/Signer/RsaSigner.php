@@ -8,14 +8,13 @@ use Gamemoney\Sign\ArrayToStringTrait;
 use Gamemoney\Sign\SignerInterface;
 
 /**
- * Class RsaSigner provides an ability to get signature of data array using RSA private key
+ * Class RsaSigner provides an ability to get signature of data array using RSA private key.
  *
  *  * Basic usage is the following:
  *
  * ```php
  * echo (new RsaSigner($privateKey))->getSignature($array);
  * ```
- * @package Gamemoney\Sign\Signer
  */
 final class RsaSigner implements SignerInterface
 {
@@ -32,7 +31,6 @@ final class RsaSigner implements SignerInterface
     }
 
     /**
-     * Write signature
      * @throws PrivateKeyException
      */
     public function sign(RequestInterface $request): RequestInterface
@@ -44,14 +42,11 @@ final class RsaSigner implements SignerInterface
         return $request;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getSignature(array $data): string
     {
         $privateKey = openssl_pkey_get_private($this->privateKey, $this->passPhrase);
 
-        if ($privateKey === false) {
+        if (false === $privateKey) {
             throw new PrivateKeyException((string) openssl_error_string());
         }
 
