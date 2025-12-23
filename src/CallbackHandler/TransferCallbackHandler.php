@@ -18,7 +18,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         $this->invoiceNumber = $invoiceNumber;
     }
 
-    public function successAnswer(): string
+    public function getSuccessAnswer(): string
     {
         if ($this->invoiceNumber === null) {
             throw new ConfigException(
@@ -41,7 +41,7 @@ class TransferCallbackHandler extends BaseCallbackHandler
         return $result;
     }
 
-    public function errorAnswer(?string $error = null): string
+    public function getErrorAnswer(?string $error = null): string
     {
         $data['state'] = 'error';
 

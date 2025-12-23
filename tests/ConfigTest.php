@@ -10,7 +10,7 @@ class ConfigTest extends TestCase
     public function testOptions(): void
     {
         $apiUrl = 'test_url';
-        $project = 123;
+        $projectId = 123;
         $certificate = 'test_certificate';
         $hmac = 'test_hmac';
         $privateKey = '123';
@@ -18,18 +18,18 @@ class ConfigTest extends TestCase
 
         $config = new Config(
             $apiUrl,
-            $project,
+            $projectId,
             $hmac,
             $certificate,
             $privateKey,
             $privateKeyPassword,
         );
 
-        $this->assertSame($apiUrl, $config->apiUrl());
-        $this->assertSame($project, $config->project());
+        $this->assertSame($apiUrl, $config->getApiUrl());
+        $this->assertSame($projectId, $config->getProject());
         $this->assertSame($certificate, $config->getCertificate());
-        $this->assertSame($hmac, $config->hmac());
-        $this->assertSame($privateKey, $config->privateKey());
-        $this->assertSame($privateKeyPassword, $config->privateKeyPassword());
+        $this->assertSame($hmac, $config->getHmac());
+        $this->assertSame($privateKey, $config->getPrivateKey());
+        $this->assertSame($privateKeyPassword, $config->getPrivateKeyPassword());
     }
 }

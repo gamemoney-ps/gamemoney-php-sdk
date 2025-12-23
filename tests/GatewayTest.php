@@ -36,7 +36,7 @@ class GatewayTest extends TestCase
         $mockRequest
             ->expects($this->once())
             ->method('setField')
-            ->with('project', $this->getConfig()->project());
+            ->with('project', $this->getConfig()->getProject());
 
         $mockRules = $this
             ->getMockBuilder(RulesInterface::class)

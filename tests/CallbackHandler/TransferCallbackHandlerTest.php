@@ -17,7 +17,7 @@ class TransferCallbackHandlerTest extends TestCase
 
         $handler = new TransferCallbackHandler($this->getConfig());
         $handler->setInvoiceNumber(null);
-        $handler->successAnswer();
+        $handler->getSuccessAnswer();
     }
 
     public function testSuccessAnswer(): void
@@ -46,7 +46,7 @@ class TransferCallbackHandlerTest extends TestCase
         $handler = new TransferCallbackHandler($this->getConfig());
         $handler->setInvoiceNumber($invoiceNumber);
         $handler->setSignerResolver($mockResolver);
-        $this->assertEquals($result, $handler->successAnswer());
+        $this->assertEquals($result, $handler->getSuccessAnswer());
     }
 
     public function testErrorAnswer(): void
@@ -56,7 +56,7 @@ class TransferCallbackHandlerTest extends TestCase
 
         $expect = '{"state":"error","signature":"testSign"}';
 
-        $this->assertEquals($expect, $handler->errorAnswer());
+        $this->assertEquals($expect, $handler->getErrorAnswer());
     }
 
     public function testErrorWithMessageAnswer(): void
@@ -66,7 +66,7 @@ class TransferCallbackHandlerTest extends TestCase
 
         $expect = '{"state":"error","error":"message","signature":"testSign"}';
 
-        $this->assertEquals($expect, $handler->errorAnswer('message'));
+        $this->assertEquals($expect, $handler->getErrorAnswer('message'));
     }
 
     private function getMock(): SignerResolverInterface
