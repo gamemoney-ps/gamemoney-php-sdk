@@ -11,14 +11,6 @@ use PHPUnit\Framework\TestCase;
 
 class TransferCallbackHandlerTest extends TestCase
 {
-    const PROJECT = 1;
-
-    const HMAC_KEY = 'test';
-
-    const CERTIFICATE = 'test_certificate';
-
-    const PRIVATE_KEY = '123';
-
     public function testSuccessAnswerInvoiceNull(): void
     {
         $this->expectException(ConfigException::class);
@@ -97,10 +89,12 @@ class TransferCallbackHandlerTest extends TestCase
     private function getConfig(): Config
     {
         return new Config(
-            self::PROJECT,
-            self::HMAC_KEY,
-            self::CERTIFICATE,
-            self::PRIVATE_KEY,
+            'test_api_url',
+            123,
+            'test_certificate',
+            'test_hmac',
+            'test_private_key',
+            'test_public_key',
         );
     }
 }

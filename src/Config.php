@@ -8,9 +8,7 @@ namespace Gamemoney;
  */
 class Config
 {
-    const API_URL = 'https://paygate.gamemoney.com';
-
-    const SECURE_URL = 'https://secure.gamemoney.com/api/';
+    private string $apiUrl;
 
     private int $project;
 
@@ -23,12 +21,14 @@ class Config
     private ?string $privateKeyPassword;
 
     public function __construct(
+        string $apiUrl,
         int $project,
         string $hmac,
         string $certificate,
         ?string $privateKey = null,
         ?string $privateKeyPassword = null,
     ) {
+        $this->apiUrl = $apiUrl;
         $this->project = $project;
         $this->hmac = $hmac;
         $this->certificate = $certificate;
@@ -58,12 +58,7 @@ class Config
 
     public function apiUrl(): string
     {
-        return self::API_URL;
-    }
-
-    public function secureUrl(): string
-    {
-        return self::SECURE_URL;
+        return $this->apiUrl;
     }
 
     public function getCertificate(): string

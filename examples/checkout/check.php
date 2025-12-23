@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$apiUrl = 'https://example.com';
 $project = 123456;
 $hmacKey = 'test';
 
@@ -16,7 +17,7 @@ $privateKey = '-----BEGIN ENCRYPTED PRIVATE KEY-----
 $privateKeyPassword = 'keypassword';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $certificate, $privateKey, $privateKeyPassword);
+    $config = new \Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate, $privateKey, $privateKeyPassword);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->checkCheckout([

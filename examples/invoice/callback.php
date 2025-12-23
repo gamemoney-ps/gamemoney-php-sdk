@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$apiUrl = 'https://example.com';
 $project = 123456;
 $hmacKey = 'test';
 
@@ -11,7 +12,7 @@ $certificate = '-----BEGIN CERTIFICATE-----
 
 try {
     $response = $_POST;
-    $config = new \Gamemoney\Config($project, $hmacKey, $certificate);
+    $config = new \Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate);
     $handler = new \Gamemoney\CallbackHandler\InvoiceCallbackHandler($config);
     if ($handler->check($response)) {
         // your invoice processing

@@ -10,14 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class BaseCallbackHandlerTest extends TestCase
 {
-    const PROJECT = 1;
-
-    const HMAC_KEY = 'test';
-
-    const CERTIFICATE = 'test_certificate';
-
-    const PRIVATE_KEY = '123';
-
     public function testConstruct(): void
     {
         $handler = $this->createPartialMock(BaseCallbackHandler::class, [
@@ -87,10 +79,12 @@ class BaseCallbackHandlerTest extends TestCase
     private function getConfig(): Config
     {
         return new Config(
-            self::PROJECT,
-            self::HMAC_KEY,
-            self::CERTIFICATE,
-            self::PRIVATE_KEY,
+            'test_api_url',
+            123,
+            'test_certificate',
+            'test_hmac',
+            'test_private_key',
+            'test_public_key',
         );
     }
 }

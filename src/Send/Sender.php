@@ -1,28 +1,27 @@
 <?php
 
-namespace Gamemoney\Send\Sender;
+namespace Gamemoney\Send;
 
 use Gamemoney\Exception\RequestException;
 use Gamemoney\Request\RequestInterface;
-use Gamemoney\Send\SenderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * @package Gamemoney\Send\Sender
+ * @package Gamemoney\Send
  */
-final class JsonSender implements SenderInterface
+final class Sender implements SenderInterface
 {
-    private string $secureUrl;
+    private string $apiUrl;
 
     private Client $client;
 
     /**
      * @param array<mixed> $clientConfig
      */
-    public function __construct(string $secureUrl, array $clientConfig)
+    public function __construct(string $apiUrl, array $clientConfig)
     {
-        $this->secureUrl = $secureUrl;
+        $this->apiUrl = $apiUrl;
         $this->client = $this->getClient($clientConfig);
     }
 
@@ -34,12 +33,7 @@ final class JsonSender implements SenderInterface
         try {
             $response = $this->client->post(
                 $request->getAction(),
-                [
-                    'json' => $request->getData(),
-                    'headers' => [
-                        'Accept' => 'application/json',
-                    ],
-                ],
+                ['form_params' => $request->getData()],
             );
         } catch (GuzzleException $e) {
             throw new RequestException('Request Send Error', 0, $e);
@@ -56,7 +50,7 @@ final class JsonSender implements SenderInterface
     private function getClient(array $clientConfig): Client
     {
         $defaultConfig = [
-            'base_uri' => $this->secureUrl,
+            'base_uri' => $this->apiUrl,
         ];
 
         return new Client(array_merge($defaultConfig, $clientConfig));

@@ -121,16 +121,6 @@ class RequestFactory
     /**
      * @param array<mixed> $data
      */
-    public function storeOnlyCardData(string $sessionToken, array $data = []): Request
-    {
-        $url = sprintf(RequestInterface::STORE_ONLY_CARD_DATA, $sessionToken);
-
-        return new Request($url, $data);
-    }
-
-    /**
-     * @param array<mixed> $data
-     */
     public function prepareExchange(array $data = []): Request
     {
         return new Request(RequestInterface::EXCHANGE_PREPARE_ACTION, $data);

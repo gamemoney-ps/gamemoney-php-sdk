@@ -3,7 +3,6 @@
 namespace tests\Sign;
 
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Sign\Signer\EmptySigner;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Gamemoney\Sign\SignerResolver;
@@ -99,7 +98,7 @@ class SignerResolverTest extends TestCase
     #[DataProvider('resolveDataProvider')]
     public function testHmacResolve(string $action): void
     {
-        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
+        $resolver = new SignerResolver(self::HMAC_KEY, null, null);
         $signer = $resolver->resolve($action);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(HmacSigner::class, $signer);
@@ -120,18 +119,10 @@ class SignerResolverTest extends TestCase
     #[DataProvider('resolveRsaDataProvider')]
     public function testRsaResolve(string $action): void
     {
-        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
+        $resolver = new SignerResolver(self::HMAC_KEY, self::PRIVATE_KEY, self::PASSPHRASE);
         $signer = $resolver->resolve($action);
         $this->assertInstanceOf(SignerInterface::class, $signer);
         $this->assertInstanceOf(RsaSigner::class, $signer);
-    }
-
-    public function testEmptySignerResolve(): void
-    {
-        $resolver = new SignerResolver($this::HMAC_KEY, $this::PRIVATE_KEY, $this::PASSPHRASE);
-        $signer = $resolver->resolve('v1/sessions/testToken/input');
-        $this->assertInstanceOf(SignerInterface::class, $signer);
-        $this->assertInstanceOf(EmptySigner::class, $signer);
     }
 
     public function testPrivateKeyNotSet(): void

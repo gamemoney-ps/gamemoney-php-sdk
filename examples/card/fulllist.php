@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$apiUrl = 'https://example.com';
 $project = 123456;
 $hmacKey = 'test';
 
@@ -10,7 +11,7 @@ $certificate = '-----BEGIN CERTIFICATE-----
 -----END CERTIFICATE-----';
 
 try {
-    $config = new \Gamemoney\Config($project, $hmacKey, $certificate);
+    $config = new \Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate);
     $gateway = new \Gamemoney\Gateway($config);
     $requestFactory = new \Gamemoney\Request\RequestFactory();
     $request = $requestFactory->getCardFulllist('1');

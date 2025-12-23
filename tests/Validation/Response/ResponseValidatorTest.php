@@ -1,10 +1,10 @@
 <?php
 
-namespace tests\Validation\Response\Validator;
+namespace Validation\Response;
 
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
-use Gamemoney\Validation\Response\Validator\ResponseValidator;
+use Gamemoney\Validation\Response\ResponseValidator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

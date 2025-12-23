@@ -2,19 +2,19 @@
 
 namespace Gamemoney;
 
-use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\ConfigException;
-use Gamemoney\Send\SenderResolver;
-use Gamemoney\Send\SenderResolverInterface;
+use Gamemoney\Request\RequestInterface;
+use Gamemoney\Send\Sender;
+use Gamemoney\Send\SenderInterface;
 use Gamemoney\Sign\SignatureVerifier;
+use Gamemoney\Sign\SignerResolver;
 use Gamemoney\Sign\SignerResolverInterface;
 use Gamemoney\Validation\Request\RequestValidator;
 use Gamemoney\Validation\Request\RequestValidatorInterface;
 use Gamemoney\Validation\Request\RulesResolver;
 use Gamemoney\Validation\Request\RulesResolverInterface;
-use Gamemoney\Sign\SignerResolver;
-use Gamemoney\Validation\Response\ResponseValidatorResolver;
-use Gamemoney\Validation\Response\ResponseValidatorResolverInterface;
+use Gamemoney\Validation\Response\ResponseValidator;
+use Gamemoney\Validation\Response\ResponseValidatorInterface;
 
 /**
  * See using examples in examples folder
@@ -30,9 +30,9 @@ class Gateway
 
     private SignerResolverInterface $signerResolver;
 
-    private SenderResolverInterface $senderResolver;
+    private SenderInterface $sender;
 
-    private ResponseValidatorResolverInterface $responseValidatorResolver;
+    private ResponseValidatorInterface $responseValidator;
 
     /**
      * @param array<mixed> $clientConfig
@@ -48,22 +48,18 @@ class Gateway
             $this->config->privateKeyPassword(),
         );
 
-        $senderResolver = new SenderResolver(
-            $this->config->apiUrl(),
-            $this->config->secureUrl(),
-            $clientConfig,
-        );
-
-        $responseValidatorResolver = new ResponseValidatorResolver(
-            new SignatureVerifier($this->config->getCertificate()),
-        );
-
         $this
             ->setRequestValidator(new RequestValidator())
             ->setRulesResolver(new RulesResolver())
             ->setSignerResolver($signerResolver)
-            ->setSenderResolver($senderResolver)
-            ->setResponseValidatorResolver($responseValidatorResolver);
+            ->setSender(
+                new Sender($this->config->apiUrl(), $clientConfig),
+            )
+            ->setResponseValidator(
+                new ResponseValidator(
+                    new SignatureVerifier($this->config->getCertificate()),
+                ),
+            );
     }
 
     public function setRequestValidator(RequestValidatorInterface $validator): self
@@ -84,15 +80,15 @@ class Gateway
         return $this;
     }
 
-    public function setSenderResolver(SenderResolverInterface $senderResolver): self
+    public function setSender(SenderInterface $sender): self
     {
-        $this->senderResolver = $senderResolver;
+        $this->sender = $sender;
         return $this;
     }
 
-    public function setResponseValidatorResolver(ResponseValidatorResolverInterface $resolver): self
+    public function setResponseValidator(ResponseValidatorInterface $responseValidator): self
     {
-        $this->responseValidatorResolver = $resolver;
+        $this->responseValidator = $responseValidator;
         return $this;
     }
 
@@ -104,13 +100,11 @@ class Gateway
      */
     public function send(RequestInterface $request): array
     {
-        if (!preg_match(RequestInterface::STORE_ONLY_CARD_DATA_REGEX, $request->getAction())) {
-            if (empty($request->getData()['rand'])) {
-                $request->setField('rand', bin2hex(openssl_random_pseudo_bytes(10)));
-            }
-
-            $request->setField('project', $this->config->project());
+        if (empty($request->getData()['rand'])) {
+            $request->setField('rand', bin2hex(openssl_random_pseudo_bytes(10)));
         }
+
+        $request->setField('project', $this->config->project());
 
         $rules = $this->rulesResolver->resolve($request->getAction(), $request->getData())->getRules();
         $this->requestValidator->validate($rules, $request->getData());
@@ -120,15 +114,9 @@ class Gateway
             ->resolve($request->getAction())
             ->sign($request);
 
-        $response = $this
-            ->senderResolver
-            ->resolve($request->getAction())
-            ->send($request);
+        $response = $this->sender->send($request);
 
-        $this
-            ->responseValidatorResolver
-            ->resolve($request->getAction())
-            ->validate($response, $request->getData());
+        $this->responseValidator->validate($response, $request->getData());
 
         return $response;
     }
