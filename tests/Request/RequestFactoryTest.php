@@ -271,27 +271,6 @@ class RequestFactoryTest extends TestCase
         $this->assertEquals($requestData, $expectedData);
     }
 
-    public function storeOnlyCardDataTest(): void
-    {
-        $sessionToken = 'testToken';
-        $url = 'v1/sessions/' . $sessionToken . '/input';
-
-        $data = [
-            'card_number' => '4000000000000002',
-            'cardholder' => 'max payne',
-            'cc_exp_month' => '07',
-            'cc_exp_year' => '25',
-        ];
-
-        $request = (new RequestFactory())->storeOnlyCardData($sessionToken, $data);
-
-        $this->assertInstanceOf(RequestInterface::class, $request);
-        $this->assertEquals($request->getAction(), $url);
-
-        $requestData = $request->getData();
-        $this->assertEquals($requestData, $data);
-    }
-
     public function createInvoiceCardSessionTest(): void
     {
         $project = 10;

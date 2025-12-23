@@ -37,7 +37,6 @@ class RulesResolverTest extends TestCase
             ['action' => RequestInterface::STATISTICS_BALANCE_ACTION],
             ['action' => RequestInterface::STATISTICS_DAYS_BALANCE_ACTION],
             ['action' => RequestInterface::STATISTICS_PAY_TYPES_ACTION],
-            ['action' => 'v1/sessions/testToken/input'],
             ['action' => 'wrong action'],
         ];
     }

@@ -52,10 +52,6 @@ interface RequestInterface
 
     const TERMINAL_CREATE_ACTION = '/terminal/create';
 
-    const STORE_ONLY_CARD_DATA = 'v1/sessions/%s/input';
-
-    const STORE_ONLY_CARD_DATA_REGEX = '/^v1\/sessions\/[\w]+\/input$/';
-
     public function getAction(): string;
 
     /**

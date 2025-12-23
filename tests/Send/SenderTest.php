@@ -1,25 +1,18 @@
 <?php
 
-namespace tests\Send\Sender;
+namespace Send;
 
-use Gamemoney\Send\Sender\Sender;
-use PHPUnit\Framework\TestCase;
-use Gamemoney\Send\SenderInterface;
-use Gamemoney\Request\RequestInterface;
 use Gamemoney\Exception\RequestException;
+use Gamemoney\Request\RequestInterface;
+use Gamemoney\Send\Sender;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
 class SenderTest extends TestCase
 {
     const URL = 'url';
-
-    public function testInterface(): void
-    {
-        $sender = new Sender($this::URL, []);
-        $this->assertInstanceOf(SenderInterface::class, $sender);
-    }
 
     public function testSend(): void
     {

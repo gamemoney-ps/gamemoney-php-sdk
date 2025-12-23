@@ -1,10 +1,9 @@
 <?php
 
-namespace Gamemoney\Validation\Response\Validator;
+namespace Gamemoney\Validation\Response;
 
 use Gamemoney\Exception\ResponseValidationException;
 use Gamemoney\Sign\SignatureVerifierInterface;
-use Gamemoney\Validation\Response\ResponseValidatorInterface;
 
 /**
  * @package Gamemoney\Validation\Response\Validator

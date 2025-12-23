@@ -7,37 +7,29 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {
-    const PROJECT = 1;
-
-    const HMAC_KEY = 'test';
-
-    const CERTIFICATE = 'test_certificate';
-
-    const PRIVATE_KEY = '123';
-
     public function testOptions(): void
     {
+        $apiUrl = 'test_url';
+        $project = 123;
+        $certificate = 'test_certificate';
+        $hmac = 'test_hmac';
         $privateKey = '123';
         $privateKeyPassword = '123';
 
-        $config = new Config(self::PROJECT, self::HMAC_KEY, self::CERTIFICATE, $privateKey, $privateKeyPassword);
+        $config = new Config(
+            $apiUrl,
+            $project,
+            $hmac,
+            $certificate,
+            $privateKey,
+            $privateKeyPassword,
+        );
 
-        $this->assertSame(self::PROJECT, $config->project());
-        $this->assertSame(self::HMAC_KEY, $config->hmac());
-        $this->assertSame(self::CERTIFICATE, $config->getCertificate());
+        $this->assertSame($apiUrl, $config->apiUrl());
+        $this->assertSame($project, $config->project());
+        $this->assertSame($certificate, $config->getCertificate());
+        $this->assertSame($hmac, $config->hmac());
         $this->assertSame($privateKey, $config->privateKey());
         $this->assertSame($privateKeyPassword, $config->privateKeyPassword());
-    }
-
-    public function testSecureUrl(): void
-    {
-        $url = Config::SECURE_URL;
-
-        $config = new Config(self::PROJECT, self::HMAC_KEY, self::CERTIFICATE);
-
-        $result = $config->secureUrl();
-
-        $this->assertMatchesRegularExpression('/\/$/', $result);
-        $this->assertEquals($url, $result);
     }
 }
