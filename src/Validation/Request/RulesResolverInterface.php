@@ -2,9 +2,6 @@
 
 namespace Gamemoney\Validation\Request;
 
-/**
- * @package Gamemoney\Validation\Request
- */
 interface RulesResolverInterface
 {
     /**

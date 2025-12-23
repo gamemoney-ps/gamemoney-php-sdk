@@ -3,15 +3,12 @@
 namespace Gamemoney\Validation\Request\Rules;
 
 use Gamemoney\Validation\Request\RulesInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 class InvoiceCardSessionCreateRules implements RulesInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getRules(): array
     {
         return [

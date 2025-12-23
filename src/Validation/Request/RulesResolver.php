@@ -3,35 +3,29 @@
 namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
+use Gamemoney\Validation\Request\Rules\CardAddRules;
 use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
-use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
-use Gamemoney\Validation\Request\Rules\ExchangeRateRules;
-use Gamemoney\Validation\Request\Rules\InvoiceCardSessionCreateRules;
-use Gamemoney\Validation\Request\Rules\CheckoutListRules;
-use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
-use Gamemoney\Validation\Request\Rules\InvoiceListRules;
-use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
+use Gamemoney\Validation\Request\Rules\CardDeleteRules;
+use Gamemoney\Validation\Request\Rules\CardListRules;
 use Gamemoney\Validation\Request\Rules\CheckoutCreateRules;
 use Gamemoney\Validation\Request\Rules\CheckoutDefaultRules;
-use Gamemoney\Validation\Request\Rules\CardAddRules;
-use Gamemoney\Validation\Request\Rules\CardListRules;
-use Gamemoney\Validation\Request\Rules\CardDeleteRules;
+use Gamemoney\Validation\Request\Rules\CheckoutListRules;
+use Gamemoney\Validation\Request\Rules\CheckoutPrepareRules;
+use Gamemoney\Validation\Request\Rules\DefaultRules;
 use Gamemoney\Validation\Request\Rules\ExchangeConvertRules;
 use Gamemoney\Validation\Request\Rules\ExchangeFastConvertRules;
 use Gamemoney\Validation\Request\Rules\ExchangePrepareRules;
+use Gamemoney\Validation\Request\Rules\ExchangeRateRules;
 use Gamemoney\Validation\Request\Rules\ExchangeStatusRules;
+use Gamemoney\Validation\Request\Rules\InvoiceCardSessionCreateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceListRules;
+use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
 use Gamemoney\Validation\Request\Rules\StatisticsBalancesRules;
 use Gamemoney\Validation\Request\Rules\StatisticsDaysBalancesRules;
-use Gamemoney\Validation\Request\Rules\DefaultRules;
 
-/**
- * @package Gamemoney\Validation\Request
- */
 final class RulesResolver implements RulesResolverInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function resolve(string $action, array $data): RulesInterface
     {
         switch ($action) {

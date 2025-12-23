@@ -2,10 +2,10 @@
 
 namespace tests\Request;
 
+use Gamemoney\Request\RequestFactory;
+use Gamemoney\Request\RequestInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Request\RequestInterface;
-use Gamemoney\Request\RequestFactory;
 
 class RequestFactoryTest extends TestCase
 {

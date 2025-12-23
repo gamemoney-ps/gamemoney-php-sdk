@@ -2,9 +2,6 @@
 
 namespace Gamemoney\Sign;
 
-/**
- * @package Gamemoney\Sign
- */
 trait ArrayToStringTrait
 {
     /**
@@ -20,7 +17,7 @@ trait ArrayToStringTrait
                 $value = $this->arrayToString($value);
             }
 
-            $text .= $key . ':' . $value . ';';
+            $text .= $key.':'.$value.';';
         }
 
         return $text;

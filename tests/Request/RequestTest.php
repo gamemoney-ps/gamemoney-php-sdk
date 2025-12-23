@@ -2,9 +2,9 @@
 
 namespace tests\Request;
 
-use PHPUnit\Framework\TestCase;
 use Gamemoney\Request\Request;
 use Gamemoney\Request\RequestInterface;
+use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {

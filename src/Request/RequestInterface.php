@@ -4,53 +4,53 @@ namespace Gamemoney\Request;
 
 interface RequestInterface
 {
-    const INVOICE_CREATE_ACTION = '/invoice/';
+    public const INVOICE_CREATE_ACTION = '/invoice/';
 
-    const INVOICE_STATUS_ACTION = '/invoice/status';
+    public const INVOICE_STATUS_ACTION = '/invoice/status';
 
-    const INVOICE_LIST_ACTION = '/invoice/list';
+    public const INVOICE_LIST_ACTION = '/invoice/list';
 
-    const INVOICE_CREATE_CARD_SESSION = '/invoice/addtoken';
+    public const INVOICE_CREATE_CARD_SESSION = '/invoice/addtoken';
 
-    const CHECKOUT_CREATE_ACTION = '/checkout/insert';
+    public const CHECKOUT_CREATE_ACTION = '/checkout/insert';
 
-    const CHECKOUT_CHECK_ACTION = '/checkout/check';
+    public const CHECKOUT_CHECK_ACTION = '/checkout/check';
 
-    const CHECKOUT_PREPARE_ACTION = '/checkout/prepare';
+    public const CHECKOUT_PREPARE_ACTION = '/checkout/prepare';
 
-    const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
+    public const CHECKOUT_CANCEL_ACTION = '/checkout/cancel';
 
-    const CHECKOUT_STATUS_ACTION = '/checkout/status';
+    public const CHECKOUT_STATUS_ACTION = '/checkout/status';
 
-    const CHECKOUT_LIST_ACTION = '/checkout/list';
+    public const CHECKOUT_LIST_ACTION = '/checkout/list';
 
-    const CARD_ADD_ACTION = '/card/add';
+    public const CARD_ADD_ACTION = '/card/add';
 
-    const CARD_ADDTOKEN_ACTION = '/card/addtoken';
+    public const CARD_ADDTOKEN_ACTION = '/card/addtoken';
 
-    const CARD_LIST_ACTION = '/card/list';
+    public const CARD_LIST_ACTION = '/card/list';
 
-    const CARD_FULLLIST_ACTION = '/card/fulllist';
+    public const CARD_FULLLIST_ACTION = '/card/fulllist';
 
-    const CARD_DELETE_ACTION = '/card/delete';
+    public const CARD_DELETE_ACTION = '/card/delete';
 
-    const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
+    public const EXCHANGE_PREPARE_ACTION = '/exchange/prepare';
 
-    const EXCHANGE_CONVERT_ACTION = '/exchange/convert';
+    public const EXCHANGE_CONVERT_ACTION = '/exchange/convert';
 
-    const EXCHANGE_FAST_CONVERT_ACTION = '/exchange/fastconvert';
+    public const EXCHANGE_FAST_CONVERT_ACTION = '/exchange/fastconvert';
 
-    const EXCHANGE_STATUS_ACTION = '/exchange/status';
+    public const EXCHANGE_STATUS_ACTION = '/exchange/status';
 
-    const EXCHANGE_RATE_ACTION = '/exchange/rate';
+    public const EXCHANGE_RATE_ACTION = '/exchange/rate';
 
-    const STATISTICS_BALANCE_ACTION = '/statistics/balance';
+    public const STATISTICS_BALANCE_ACTION = '/statistics/balance';
 
-    const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
+    public const STATISTICS_DAYS_BALANCE_ACTION = '/statistics/days_balance_project';
 
-    const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
+    public const STATISTICS_PAY_TYPES_ACTION = '/statistics/paytypes';
 
-    const TERMINAL_CREATE_ACTION = '/terminal/create';
+    public const TERMINAL_CREATE_ACTION = '/terminal/create';
 
     public function getAction(): string;
 

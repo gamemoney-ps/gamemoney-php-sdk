@@ -2,13 +2,10 @@
 
 namespace Gamemoney\Exception;
 
-use Exception;
-
 /**
- * RequestValidationException represents an exception caused by a validation error of request data
- * @package Gamemoney\Exception
+ * RequestValidationException represents an exception caused by a validation error of request data.
  */
-class RequestValidationException extends Exception implements GameMoneyExceptionInterface
+class RequestValidationException extends \Exception implements GameMoneyExceptionInterface
 {
     /** @var array<mixed> */
     private array $errors = [];

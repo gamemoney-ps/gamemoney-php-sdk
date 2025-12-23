@@ -3,18 +3,18 @@
 namespace tests;
 
 use Gamemoney\Config;
+use Gamemoney\Gateway;
+use Gamemoney\Request\RequestInterface;
 use Gamemoney\Send\Sender;
 use Gamemoney\Send\SenderInterface;
 use Gamemoney\Sign\SignerInterface;
 use Gamemoney\Sign\SignerResolverInterface;
+use Gamemoney\Validation\Request\RequestValidatorInterface;
 use Gamemoney\Validation\Request\RulesInterface;
+use Gamemoney\Validation\Request\RulesResolverInterface;
 use Gamemoney\Validation\Response\ResponseValidator;
 use Gamemoney\Validation\Response\ResponseValidatorInterface;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Gateway;
-use Gamemoney\Request\RequestInterface;
-use Gamemoney\Validation\Request\RequestValidatorInterface;
-use Gamemoney\Validation\Request\RulesResolverInterface;
 
 class GatewayTest extends TestCase
 {

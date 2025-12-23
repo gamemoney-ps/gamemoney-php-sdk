@@ -3,8 +3,7 @@
 namespace Gamemoney\Request;
 
 /**
- * Create Request object with needed params
- * @package Gamemoney\Request
+ * Create Request object with needed params.
  */
 class RequestFactory
 {

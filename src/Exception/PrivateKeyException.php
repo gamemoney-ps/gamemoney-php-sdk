@@ -2,12 +2,9 @@
 
 namespace Gamemoney\Exception;
 
-use Exception;
-
 /**
  * PrivateKeyException represents an exception caused by an error during reading the private key.
- * @package Gamemoney\Exception
  */
-class PrivateKeyException extends Exception implements GameMoneyExceptionInterface
+class PrivateKeyException extends \Exception implements GameMoneyExceptionInterface
 {
 }

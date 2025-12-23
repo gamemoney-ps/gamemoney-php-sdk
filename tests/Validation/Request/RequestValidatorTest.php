@@ -3,9 +3,9 @@
 namespace tests\Validation\Request;
 
 use Gamemoney\Exception\RequestValidationException;
+use Gamemoney\Validation\Request\RequestValidator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Gamemoney\Validation\Request\RequestValidator;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;

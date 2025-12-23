@@ -2,17 +2,11 @@
 
 namespace Gamemoney\Validation\Request;
 
-use Symfony\Component\Validator\Validation;
 use Gamemoney\Exception\RequestValidationException;
+use Symfony\Component\Validator\Validation;
 
-/**
- * @package Gamemoney\Validation\Request
- */
 final class RequestValidator implements RequestValidatorInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function validate(array $rules, array $data): void
     {
         $validator = Validation::createValidator();
