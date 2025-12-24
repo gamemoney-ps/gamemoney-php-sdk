@@ -33,9 +33,9 @@ class RequestFactory
         return new Request(RequestInterface::INVOICE_LIST_ACTION, $data);
     }
 
-    public function createInvoiceCardSession(int $project, string $user): Request
+    public function addTokenInvoice(int $project, string $user): Request
     {
-        return new Request(RequestInterface::INVOICE_CREATE_CARD_SESSION, [
+        return new Request(RequestInterface::INVOICE_ADD_TOKEN_ACTION, [
             'project' => $project,
             'user' => $user,
         ]);
@@ -98,7 +98,7 @@ class RequestFactory
 
     public function getCardFullList(string $userId): Request
     {
-        return new Request(RequestInterface::CARD_FULLLIST_ACTION, ['user' => $userId]);
+        return new Request(RequestInterface::CARD_FULL_LIST_ACTION, ['user' => $userId]);
     }
 
     /**
@@ -114,7 +114,7 @@ class RequestFactory
      */
     public function addTokenCard(array $data = []): Request
     {
-        return new Request(RequestInterface::CARD_ADDTOKEN_ACTION, $data);
+        return new Request(RequestInterface::CARD_ADD_TOKEN_ACTION, $data);
     }
 
     /**

@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
-final class CardAddtokenRules implements RulesInterface
+class InvoiceAddTokenRules implements RulesInterface
 {
     public function getRules(): array
     {
@@ -16,13 +16,10 @@ final class CardAddtokenRules implements RulesInterface
                 new NotBlank(),
                 new Type('numeric'),
             ],
-            'rand' => [
-                new NotBlank(),
-                new Length(min: 20),
-            ],
             'user' => [
                 new NotBlank(),
                 new Type('string'),
+                new Length(max: 50),
             ],
         ];
     }

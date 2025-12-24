@@ -129,7 +129,7 @@ class RequestFactoryTest extends TestCase
             [
                 'getCardFulllist',
                 1,
-                RequestInterface::CARD_FULLLIST_ACTION,
+                RequestInterface::CARD_FULL_LIST_ACTION,
                 [
                     'user' => 1,
                 ],
@@ -149,7 +149,7 @@ class RequestFactoryTest extends TestCase
                 [
                     'user' => 1,
                 ],
-                RequestInterface::CARD_ADDTOKEN_ACTION,
+                RequestInterface::CARD_ADD_TOKEN_ACTION,
                 [
                     'user' => 1,
                 ],
@@ -281,10 +281,10 @@ class RequestFactoryTest extends TestCase
             'user' => $user,
         ];
 
-        $request = (new RequestFactory())->createInvoiceCardSession($project, $user);
+        $request = (new RequestFactory())->addTokenInvoice($project, $user);
 
         $this->assertInstanceOf(RequestInterface::class, $request);
-        $this->assertEquals(RequestInterface::INVOICE_CREATE_CARD_SESSION, $request->getAction());
+        $this->assertEquals(RequestInterface::INVOICE_ADD_TOKEN_ACTION, $request->getAction());
         $this->assertEquals($data, $request->getData());
     }
 }
