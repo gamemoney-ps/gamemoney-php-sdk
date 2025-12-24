@@ -39,7 +39,7 @@ class SignerResolverTest extends TestCase
                 RequestInterface::INVOICE_LIST_ACTION,
             ],
             [
-                RequestInterface::INVOICE_CREATE_CARD_SESSION,
+                RequestInterface::INVOICE_ADD_TOKEN_ACTION,
             ],
             [
                 RequestInterface::CHECKOUT_CANCEL_ACTION,
@@ -54,7 +54,7 @@ class SignerResolverTest extends TestCase
                 RequestInterface::CARD_ADD_ACTION,
             ],
             [
-                RequestInterface::CARD_ADDTOKEN_ACTION,
+                RequestInterface::CARD_ADD_TOKEN_ACTION,
             ],
             [
                 RequestInterface::CARD_LIST_ACTION,

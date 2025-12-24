@@ -15,7 +15,7 @@ try {
     $config = new Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate);
     $gateway = new Gamemoney\Gateway($config);
     $requestFactory = new Gamemoney\Request\RequestFactory();
-    $request = $requestFactory->createInvoiceCardSession($project, $user);
+    $request = $requestFactory->addTokenInvoice($project, $user);
     $response = $gateway->send($request);
 
     var_dump($response);

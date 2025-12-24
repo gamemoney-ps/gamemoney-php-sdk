@@ -10,7 +10,7 @@ interface RequestInterface
 
     public const INVOICE_LIST_ACTION = '/invoice/list';
 
-    public const INVOICE_CREATE_CARD_SESSION = '/invoice/addtoken';
+    public const INVOICE_ADD_TOKEN_ACTION = '/invoice/addtoken';
 
     public const CHECKOUT_CREATE_ACTION = '/checkout/insert';
 
@@ -26,11 +26,11 @@ interface RequestInterface
 
     public const CARD_ADD_ACTION = '/card/add';
 
-    public const CARD_ADDTOKEN_ACTION = '/card/addtoken';
+    public const CARD_ADD_TOKEN_ACTION = '/card/addtoken';
 
     public const CARD_LIST_ACTION = '/card/list';
 
-    public const CARD_FULLLIST_ACTION = '/card/fulllist';
+    public const CARD_FULL_LIST_ACTION = '/card/fulllist';
 
     public const CARD_DELETE_ACTION = '/card/delete';
 

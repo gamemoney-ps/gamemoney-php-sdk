@@ -4,7 +4,7 @@ namespace Gamemoney\Validation\Request;
 
 use Gamemoney\Request\RequestInterface;
 use Gamemoney\Validation\Request\Rules\CardAddRules;
-use Gamemoney\Validation\Request\Rules\CardAddtokenRules;
+use Gamemoney\Validation\Request\Rules\CardAddTokenRules;
 use Gamemoney\Validation\Request\Rules\CardDeleteRules;
 use Gamemoney\Validation\Request\Rules\CardListRules;
 use Gamemoney\Validation\Request\Rules\CheckoutCreateRules;
@@ -17,7 +17,7 @@ use Gamemoney\Validation\Request\Rules\ExchangeFastConvertRules;
 use Gamemoney\Validation\Request\Rules\ExchangePrepareRules;
 use Gamemoney\Validation\Request\Rules\ExchangeRateRules;
 use Gamemoney\Validation\Request\Rules\ExchangeStatusRules;
-use Gamemoney\Validation\Request\Rules\InvoiceCardSessionCreateRules;
+use Gamemoney\Validation\Request\Rules\InvoiceAddTokenRules;
 use Gamemoney\Validation\Request\Rules\InvoiceCreateRules;
 use Gamemoney\Validation\Request\Rules\InvoiceListRules;
 use Gamemoney\Validation\Request\Rules\InvoiceStatusRules;
@@ -33,8 +33,8 @@ final class RulesResolver implements RulesResolverInterface
                 return new InvoiceCreateRules();
             case RequestInterface::INVOICE_STATUS_ACTION:
                 return new InvoiceStatusRules($data);
-            case RequestInterface::INVOICE_CREATE_CARD_SESSION:
-                return new InvoiceCardSessionCreateRules();
+            case RequestInterface::INVOICE_ADD_TOKEN_ACTION:
+                return new InvoiceAddTokenRules();
             case RequestInterface::INVOICE_LIST_ACTION:
                 return new InvoiceListRules();
             case RequestInterface::CHECKOUT_CREATE_ACTION:
@@ -49,10 +49,10 @@ final class RulesResolver implements RulesResolverInterface
                 return new CheckoutListRules();
             case RequestInterface::CARD_ADD_ACTION:
                 return new CardAddRules();
-            case RequestInterface::CARD_ADDTOKEN_ACTION:
-                return new CardAddtokenRules();
+            case RequestInterface::CARD_ADD_TOKEN_ACTION:
+                return new CardAddTokenRules();
             case RequestInterface::CARD_LIST_ACTION:
-            case RequestInterface::CARD_FULLLIST_ACTION:
+            case RequestInterface::CARD_FULL_LIST_ACTION:
                 return new CardListRules();
             case RequestInterface::CARD_DELETE_ACTION:
                 return new CardDeleteRules();

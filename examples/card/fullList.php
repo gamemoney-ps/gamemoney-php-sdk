@@ -14,9 +14,7 @@ try {
     $config = new Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate);
     $gateway = new Gamemoney\Gateway($config);
     $requestFactory = new Gamemoney\Request\RequestFactory();
-    $request = $requestFactory->addtokenCard([
-        'user' => '1',
-    ]);
+    $request = $requestFactory->getCardFullList('1');
     $response = $gateway->send($request);
 
     var_dump($response);
