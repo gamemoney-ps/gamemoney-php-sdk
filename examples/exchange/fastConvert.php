@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 123456;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 
 $certificate = '-----BEGIN CERTIFICATE-----
 ...
@@ -15,7 +15,6 @@ try {
     $gateway = new Gamemoney\Gateway($config);
     $requestFactory = new Gamemoney\Request\RequestFactory();
     $request = $requestFactory->fastConvertExchange([
-        'externalId' => uniqid(),
         'amount' => 1000,
         'from' => 'RUB',
         'to' => 'USD',

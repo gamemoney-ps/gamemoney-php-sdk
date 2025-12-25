@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 123456;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 
 $certificate = '-----BEGIN CERTIFICATE-----
 ...

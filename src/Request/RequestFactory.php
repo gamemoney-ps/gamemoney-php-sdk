@@ -15,14 +15,12 @@ class RequestFactory
         return new Request(RequestInterface::INVOICE_CREATE_ACTION, $data);
     }
 
-    public function getInvoiceStatus(int $id): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getInvoiceStatus(array $data = []): Request
     {
-        return new Request(RequestInterface::INVOICE_STATUS_ACTION, ['invoice' => $id]);
-    }
-
-    public function getInvoiceStatusByExternalId(string $id): Request
-    {
-        return new Request(RequestInterface::INVOICE_STATUS_ACTION, ['project_invoice' => $id]);
+        return new Request(RequestInterface::INVOICE_STATUS_ACTION, $data);
     }
 
     /**
@@ -33,12 +31,12 @@ class RequestFactory
         return new Request(RequestInterface::INVOICE_LIST_ACTION, $data);
     }
 
-    public function addTokenInvoice(int $project, string $user): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function addTokenInvoice(array $data = []): Request
     {
-        return new Request(RequestInterface::INVOICE_ADD_TOKEN_ACTION, [
-            'project' => $project,
-            'user' => $user,
-        ]);
+        return new Request(RequestInterface::INVOICE_ADD_TOKEN_ACTION, $data);
     }
 
     /**
@@ -65,14 +63,20 @@ class RequestFactory
         return new Request(RequestInterface::CHECKOUT_PREPARE_ACTION, $data);
     }
 
-    public function cancelCheckout(string $id): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function cancelCheckout(array $data = []): Request
     {
-        return new Request(RequestInterface::CHECKOUT_CANCEL_ACTION, ['projectId' => $id]);
+        return new Request(RequestInterface::CHECKOUT_CANCEL_ACTION, $data);
     }
 
-    public function getCheckoutStatus(string $id): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getCheckoutStatus(array $data = []): Request
     {
-        return new Request(RequestInterface::CHECKOUT_STATUS_ACTION, ['projectId' => $id]);
+        return new Request(RequestInterface::CHECKOUT_STATUS_ACTION, $data);
     }
 
     /**
@@ -91,14 +95,20 @@ class RequestFactory
         return new Request(RequestInterface::CARD_ADD_ACTION, $data);
     }
 
-    public function getCardList(string $userId): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getCardList(array $data = []): Request
     {
-        return new Request(RequestInterface::CARD_LIST_ACTION, ['user' => $userId]);
+        return new Request(RequestInterface::CARD_LIST_ACTION, $data);
     }
 
-    public function getCardFullList(string $userId): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getCardFullList(array $data = []): Request
     {
-        return new Request(RequestInterface::CARD_FULL_LIST_ACTION, ['user' => $userId]);
+        return new Request(RequestInterface::CARD_FULL_LIST_ACTION, $data);
     }
 
     /**
@@ -149,22 +159,20 @@ class RequestFactory
         return new Request(RequestInterface::EXCHANGE_RATE_ACTION, $data);
     }
 
-    public function getExchangeStatus(int $id): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getExchangeStatus(array $data = []): Request
     {
-        return new Request(RequestInterface::EXCHANGE_STATUS_ACTION, ['id' => $id]);
+        return new Request(RequestInterface::EXCHANGE_STATUS_ACTION, $data);
     }
 
-    public function getExchangeStatusByExternalId(string $id): Request
+    /**
+     * @param array<mixed> $data
+     */
+    public function getBalanceStatistics(array $data = []): Request
     {
-        return new Request(RequestInterface::EXCHANGE_STATUS_ACTION, ['externalId' => $id]);
-    }
-
-    public function getBalanceStatistics(?string $currency = null): Request
-    {
-        return new Request(
-            RequestInterface::STATISTICS_BALANCE_ACTION,
-            $currency ? ['currency' => $currency] : [],
-        );
+        return new Request(RequestInterface::STATISTICS_BALANCE_ACTION, $data);
     }
 
     /**
