@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 123456;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 
 $certificate = '-----BEGIN CERTIFICATE-----
 ...
@@ -14,12 +14,10 @@ try {
     $config = new Gamemoney\Config($apiUrl, $project, $hmacKey, $certificate);
     $gateway = new Gamemoney\Gateway($config);
     $requestFactory = new Gamemoney\Request\RequestFactory();
-    $request = $requestFactory->prepareCheckout(
-        [
-            'amount' => 200.50,
-            'type' => 'qiwi',
-        ],
-    );
+    $request = $requestFactory->prepareCheckout([
+        'amount' => 200.50,
+        'type' => 'applepay',
+    ]);
     $response = $gateway->send($request);
 
     var_dump($response);

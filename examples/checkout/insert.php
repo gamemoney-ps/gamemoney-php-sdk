@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 123456;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 
 $certificate = '-----BEGIN CERTIFICATE-----
 ...
@@ -26,7 +26,7 @@ try {
         'ip' => '72.14.192.0',
         'amount' => 200.50,
         'wallet' => '89123456789',
-        'type' => 'qiwi',
+        'type' => 'applepay',
         'description' => 'Payout for user account 250115125',
         'add_some_field' => 'some value',
     ]);

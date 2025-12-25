@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 1;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 
 $certificate = '-----BEGIN CERTIFICATE-----
 ...
@@ -17,7 +17,7 @@ try {
     $request = $requestFactory->createInvoice([
         'user' => '1',
         'amount' => 200.50,
-        'type' => 'qiwi',
+        'type' => 'applepay',
         'wallet' => '89123456789',
         'project_invoice' => uniqid(),
         'ip' => '72.14.192.0',

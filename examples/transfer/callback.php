@@ -4,7 +4,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 
 $apiUrl = 'https://example.com';
 $project = 123456;
-$hmacKey = 'test';
+$hmacKey = 'test_key';
 $invoiceNumber = 123456;
 
 $certificate = '-----BEGIN CERTIFICATE-----
@@ -18,9 +18,9 @@ try {
     if ($handler->check($response)) {
         // create invoice and get back an invoice number $invoiceNumber
         $handler->setInvoiceNumber($invoiceNumber);
-        echo $handler->successAnswer();
+        echo $handler->getSuccessAnswer();
     } else {
-        echo $handler->errorAnswer();
+        echo $handler->getErrorAnswer();
     }
 } catch (Gamemoney\Exception\GameMoneyExceptionInterface $e) {
     var_dump($e->getMessage());
